@@ -13,7 +13,7 @@ if(isset($_POST['id']) && isset($_POST['password']))
 		if($res->num_rows > 0)
 		{
 			$_SESSION['id_admin'] = $id_admin;
-			header("Location:../pages/admin.php");
+			header("Location:../production/index.php");
 			exit;
 		}
 		else
