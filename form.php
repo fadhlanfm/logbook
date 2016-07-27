@@ -63,6 +63,16 @@ if (!$result)
         });
       }
 
+      var _counter=0;
+
+      function addSomething()
+      {
+        _counter++;
+        var oClone = document.getElementById("template").cloneNode(true);
+        oClone.id += ("-"+_counter);
+        document.getElementById("placeholder").appendChild(oClone);
+      }
+
       window.liveSettings = {
         api_key: "a0b49b34b93844c38eaee15690d86413",
         picker: "bottom-right",
@@ -189,11 +199,13 @@ if (!$result)
 
         <table class="striped">
         <tbody>
-        <tr>
+        <div id="placeholder">
+        <div >
+        <tr id="template">
           <td>Memberikan Nilai Tambah Bagi Perusahaan</td>
           <td>
             <label>Aktifitas</label>
-            <select class="browser-default" name="aktifitas1" required>
+            <select class="browser-default" name="aktifitas[]" required>
               <option value="" disabled selected>Choose your option</option>
               <option value="Percepatan Proses"><a href="#modal1">Percepatan Proses</a></option>
               <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Menjaga Reputasi/Image Perusahaan</a></option>
@@ -209,12 +221,12 @@ if (!$result)
           <td>
             <div class="input-field col s6">
             <label for="target1">Target</label>
-            <input type="text" id="target1" name="target1">
+            <input type="text" id="target[]" name="target1">
             </div>
           </td>
           <td>
             <label>Satuan Target</label>
-            <select class="browser-default" name="satuan1" required>
+            <select class="browser-default" name="satuan[]" required>
             <option value="" disabled selected>Choose your option</option>
               <option value="Percepatan Proses"><a href="#modal1">Uang (Rupiah)</a></option>
               <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Waktu (Hari)</a></option>
@@ -224,154 +236,16 @@ if (!$result)
             </select>
           </td>
         </tr>
-
+        </div>
+        </div>
         <tr>
-          <td>Memberikan Nilai Tambah Bagi Perusahaan</td>
-          <td>
-            <label>Aktifitas</label>
-            <select class="browser-default" name="aktifitas2" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Percepatan Proses</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Menjaga Reputasi/Image Perusahaan</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Penurunan Error Rate</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Peningkatan Produktivitas Pegawai</a></option>
-              <option value="Terpenuhinya SLA"><a href="#modal5">Terpenuhinya SLA</a></option>
-              <option value="Meminimalkan Kerugian Finansial"><a href="#modal6">Meminimalkan Kerugian Finansial</a></option>
-              <option value="Meningkatkan Layanan Kualitas"><a href="#modal7">Meningkatkan Layanan Kualitas</a></option>
-              <option value="Efisiensi"><a href="#modal8">Efisiensi</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-          <td>
-            <div class="input-field col s6">
-            <label for="target1">Target</label>
-            <input type="text" id="target1" name="target2">
-            </div>
-          </td>
-          <td>
-            <label>Satuan Target</label>
-            <select class="browser-default" name="aktifitas2" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Uang (Rupiah)</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Waktu (Hari)</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Presentasi (%)</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Jumlah (Kali)</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
+        <td colspan="4">
+        <button id="buttonadd" type="button" class="right btn waves-effect waves-light" onclick="addSomething()">Add new item</button>
+        </td>
         </tr>
-
-        <tr>
-          <td>Memberikan Nilai Tambah Bagi Perusahaan</td>
-          <td>
-            <label>Aktifitas</label>
-            <select class="browser-default" name="aktifitas3" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Percepatan Proses</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Menjaga Reputasi/Image Perusahaan</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Penurunan Error Rate</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Peningkatan Produktivitas Pegawai</a></option>
-              <option value="Terpenuhinya SLA"><a href="#modal5">Terpenuhinya SLA</a></option>
-              <option value="Meminimalkan Kerugian Finansial"><a href="#modal6">Meminimalkan Kerugian Finansial</a></option>
-              <option value="Meningkatkan Layanan Kualitas"><a href="#modal7">Meningkatkan Layanan Kualitas</a></option>
-              <option value="Efisiensi"><a href="#modal8">Efisiensi</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-         <td>
-            <div class="input-field col s6">
-            <label for="target1">Target</label>
-            <input type="text" id="target1" name="target3">
-            </div>
-          </td>
-          <td>
-            <label>Satuan Target</label>
-            <select class="browser-default" name="aktifitas3" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Uang (Rupiah)</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Waktu (Hari)</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Presentasi (%)</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Jumlah (Kali)</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-        </tr>
-
-        <tr>
-          <td>Memberikan Nilai Tambah Bagi Perusahaan</td>
-          <td>
-            <label>Aktifitas</label>
-            <select class="browser-default" name="aktifitas4" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Percepatan Proses</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Menjaga Reputasi/Image Perusahaan</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Penurunan Error Rate</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Peningkatan Produktivitas Pegawai</a></option>
-              <option value="Terpenuhinya SLA"><a href="#modal5">Terpenuhinya SLA</a></option>
-              <option value="Meminimalkan Kerugian Finansial"><a href="#modal6">Meminimalkan Kerugian Finansial</a></option>
-              <option value="Meningkatkan Layanan Kualitas"><a href"#modal7">Meningkatkan Layanan Kualitas</a></option>
-              <option value="Efisiensi"><a href="#modal8">Efisiensi</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-          <td>
-            <div class="input-field col s6">
-            <label for="target1">Target</label>
-            <input type="text" id="target1" name="target4">
-            </div>
-          </td>
-          <td>
-            <label>Satuan Target</label>
-            <select class="browser-default" name="satuan4" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Uang (Rupiah)</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Waktu (Hari)</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Presentasi (%)</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Jumlah (Kali)</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-        </tr>
-
-        <tr>
-          <td>Memberikan Nilai Tambah Bagi Perusahaan</td>
-          <td>
-            <label>Aktifitas</label>
-            <select class="browser-default" name="aktifitas5" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Percepatan Proses</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Menjaga Reputasi/Image Perusahaan</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Penurunan Error Rate</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Peningkatan Produktivitas Pegawai</a></option>
-              <option value="Terpenuhinya SLA"><a href="#modal5">Terpenuhinya SLA</a></option>
-              <option value="Meminimalkan Kerugian Finansial"><a href="#modal6">Meminimalkan Kerugian Finansial</a></option>
-              <option value="Meningkatkan Layanan Kualitas"><a href"#modal7">Meningkatkan Layanan Kualitas</a></option>
-              <option value="Efisiensi"><a href="#modal8">Efisiensi</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-          <td>
-            <div class="input-field col s6">
-            <label for="target1">Target</label>
-            <input type="text" id="target1" name="target5">
-            </div>
-          </td>
-          <td>
-            <label>Satuan Target</label>
-            <select class="browser-default" name="satuan5" required>
-              <option value="" disabled selected>Choose your option</option>
-              <option value="Percepatan Proses"><a href="#modal1">Uang (Rupiah)</a></option>
-              <option value="Menjaga Reputasi/Image Perusahaan"><a href="#modal2">Waktu (Hari)</a></option>
-              <option value="Penurunan Error Rate"><a href="#modal3">Presentasi (%)</a></option>
-              <option value="Peningkatan Produktivitas Pegawai"><a href="#modal4">Jumlah (Kali)</a></option>
-              <option value="Others (...)"><a href="#modal9">Others (...)</a></option>
-            </select>
-          </td>
-        </tr>
-
         <tr>
           <td>Mendorong Tercapainya Kinerja Terbaik</td>
-          <td>
+          <td colspan="3">
             <p>
               <input name="kinerja[]" type="checkbox" class="filled-in" id="financial" value="Financial" required>
               <label for="financial">Financial</label>
@@ -389,7 +263,6 @@ if (!$result)
               <label for="learning">Learning & Growth</label>
             </p>
           </td>
-          <td></td>
         </tr>
       </tbody>
     </table>
