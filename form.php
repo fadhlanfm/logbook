@@ -39,6 +39,31 @@ if (!$result)
 	  <script src="/pickadate.js-3.5.6/lib/picker.time.js"></script>
     <script src="materialize/js/addInput.js" language="Javascript" type="text/javascript"></script>
 	  <script>
+      //function for dependent dropdown option
+      function getSecond(val)
+      {
+        $.ajax({
+          type: "POST",
+          url: "get_second.php",
+          data: 'kode='+val,
+          success: function(data) {
+            $("#second-choice").html(data);
+          }
+        });
+      }
+
+      function getThird(val)
+      {
+        $.ajax({
+          type: "POST",
+          url: "get_third.php",
+          data: 'kode='+val,
+          success: function(data) {
+            $("#third-choice").html(data);
+          }
+        });
+      }
+
       window.liveSettings = {
         api_key: "a0b49b34b93844c38eaee15690d86413",
         picker: "bottom-right",
@@ -51,18 +76,52 @@ if (!$result)
     <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
   </head>
   <body>
+  <div class="container">
   <h1 align="center">Culture Monitoring LogBook</h1>
-  <hr>
-  <hr>
-  <h4 align="center">Program</h4>
+  <div class="divider"></div> <br>
+  <h4 align="center">Program</h4> <br>
   <div class="row">
+<<<<<<< HEAD
     <form class="col s12" action="review_form.php" method="POST" enctype="multipart/form-data">
+=======
+    <form class="col s12" action="post_form.php" method="POST" enctype="multipart/form-data">
+    <div class="row">
+          <form class="col s12" action="post_form.php" method="POST">
+            <div class="row">
+              <div class="col s4">
+                <select class="browser-default" id="first-choice" onchange="getSecond(this.value);">
+                  <option value="" disabled selected>Pilih Direktorat</option>
+
+                  <?php 
+                    $query = " SELECT * FROM direktorat ";
+                    //execute the query
+                    $result = $db->query( $query );
+                    if (!$result)
+                    {
+                      die("could not query the database: <br />".$db->error);
+                    }
+                    $i = 1;
+                    while ($row = $result->fetch_object())
+                    {
+                      echo '<option value="'.$row->kode.'">'.$row->kode.'</option>';
+                    }
+                  ?>
+                </select>
+              </div>
+              <div class="col s4">
+                <select class="browser-default" id="second-choice" onchange="getThird(this.value);">
+                  <option value="" disabled selected>Pilih Unit</option>
+                </select>
+              </div>
+              <div class="col s4">
+                <select class="browser-default" id="third-choice">
+                  <option value="" disabled selected>Pilih Cabang</option>
+                </select>
+              </div>
+            </div>
+>>>>>>> 54b40dab8c9e20f954840721c9114f614ffe5b2f
       <div class="row">
-        <div class="input-field col s6">
-          <input id="kode_unit" type="text" class="validate" name="kode_unit" required>
-          <label for="kode_unit">Kode Unit</label>
-        </div>
-        <div class="input-field col s6">
+        <div class="input-field col s12">
           <input id="nama_program" type="text" class="validate" name="nama_program" required>
           <label for="nama_program">Nama Program</label>
         </div>
@@ -79,20 +138,19 @@ if (!$result)
           <input id="start_date" name="start_date" type="date" class="datepicker" placeholder="Tanggal" class="section scrollspy" required>
           <script type="text/javascript">$("#start_date").pickadate({formatSubmit: 'yyyy-mm-dd', hiddenName: true, selectMonths: true,selectYears: 15});</script>
         </div>
-      </div>
-      <div class="row">
         <div class="input-field col s6">
           <p>End Date</p>
           <input id="end_date" name="end_date" type="date" class="datepicker" placeholder="Tanggal" class="section scrollspy" required>
           <script type="text/javascript">$('#end_date').pickadate({formatSubmit: 'yyyy-mm-dd',hiddenName: true, selectMonths: true,selectYears: 15});</script>
         </div>
       </div>
-      <div class="row">
+      
+  </div>
+  <div class="divider"></div>
+  <div class="row">
         <table border="0" cellspacing="0" cellpadding="2">
         </table>
-      </div>
-  </div>
-  <hr>
+      </div><br>
   <h4 align="center">Tujuan & Target Program</h4>
   <div class="row">
     <table class="striped">
@@ -131,7 +189,11 @@ if (!$result)
           </td>
           <td></td>
         </tr>
-        
+        </tbody>
+        </table><br>
+
+        <table class="striped">
+        <tbody>
         <tr>
           <td>Memberikan Nilai Tambah Bagi Perusahaan</td>
           <td>
@@ -336,7 +398,11 @@ if (!$result)
         </tr>
       </tbody>
     </table>
-
+<div class="divider"></div>
+  <div class="row">
+        <table border="0" cellspacing="0" cellpadding="2">
+        </table>
+      </div><br>
   <h4 align="center">Metode Monitoring & Reinforcement</h4>
     <div class="row">
       <div class="input-field col s12">
@@ -389,6 +455,11 @@ if (!$result)
         </select>
       </div>  
     </div>
+    <div class="divider"></div>
+  <div class="row">
+        <table border="0" cellspacing="0" cellpadding="2">
+        </table>
+      </div><br>
   <h4 align="center">Change Agent Team</h4>
     <table  class="striped">
       <thead>
@@ -459,12 +530,15 @@ if (!$result)
           <td><input id="nama_standar" type="text" class="validate" name="nama_standar" required></td>
           <td><input id="email_standar" type="text" class="validate" name="email_standar" required></td>
         </tr>
-
+        <tr>
+          <td>Attachment</td>
+          <td colspan="2"><input type="file" name="file" /></td>
+        </tr>
       </tbody>
     </table>
-    <input type="file" name="file" />
-    
-    <button type="submit" value="Submit" class="btn waves-effect waves-light">Submit</button>
+    <br>
+    <button type="submit" value="Submit" class="right btn waves-effect waves-light">Submit</button>
   </form>
+  </div>
   </body>
 </html>

@@ -14,12 +14,32 @@
 <html>
 <head>
 	<title>Lihat LogBook</title>
+	<meta charset="UTF-8">
+	  <!--Import Google Icon Font-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/googlefont.css"  media="screen,projection"/>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="materialize/js/jquery-3.0.0.min.js"></script>
+    
+    <!-- Compiled and minified CSS -->
+	  <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+	  <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	  <script src="/pickadate.js-3.5.6/lib/picker.js"></script>
+	  <script src="/pickadate.js-3.5.6/lib/picker.date.js"></script>
+	  <script src="/pickadate.js-3.5.6/lib/picker.time.js"></script>
 </head>
 <body>
-
-	<table border="1">
+	<div class="container">
+	<div class="row">
+		<h1 class="center"> Detail Logbook</h1>
+	</div>
+	<table class="striped">
 		<tr>
-			<th colspan="3">Log Book</th>
+			<th colspan="2" class="center"><h4>Log Book</h4></th>
 		</tr>
 		<tr>
 			<th>Kode Unik Log Book</th>
@@ -49,9 +69,9 @@
 
 	<br><br><br>
 
-	<table border="1">
+	<table class="striped">
 		<tr>
-			<th colspan="3">Tujuan & Target Program</th>
+			<th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
 		</tr>
 		<tr>
 			<th>Tujuan Merubah Perilaku</th>
@@ -81,9 +101,9 @@
 
 	<br><br><br>
 
-	<table border="1">
+	<table class="striped">
 		<tr>
-			<th colspan="3">Metode Monitoring & Reinforcement</th>
+			<th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
 		</tr>
 		<tr>
 			<th>Metode Monitoring</th>
@@ -101,9 +121,9 @@
 
 	<br><br><br>
 
-	<table border="1">
+	<table class="striped">
 		<tr>
-			<th colspan="3">Change Agent Team</th>
+			<th colspan="3" class="center"><h4>Change Agent Team</h4></th>
 		</tr>
 		<tr>
 			<th rowspan="2">Ketua</th>
@@ -188,9 +208,14 @@
 
 	<form action="post_komentar_logbook.php" method="POST"><br>
 		<input type="text" readonly name="id" value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>"></input>
-		<input type="text" name="komentar" value="Isi Komentar"></input>
+		<div class="row">
+        <div class="input-field col s12">
+          <textarea id="deskripsi" class="materialize-textarea" name="deskripsi" required></textarea>
+          <label for="deskripsi">Tambahkan Komentar</label>
+        </div>
+      </div>
     <button type="submit" value="Submit" class="btn waves-effect waves-light">Submit</button>
 	</form>
-
+</div>
 </body>
 </html>
