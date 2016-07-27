@@ -65,13 +65,20 @@ if (!$result)
       }
 
       var _counter=0;
+      window.actionEnabled = true;
 
       function addSomething()
       {
-        _counter++;
-        var oClone = document.getElementById("template").cloneNode(true);
-        oClone.id += ("-"+_counter);
-        document.getElementById("placeholder").appendChild(oClone);
+        if (window.actionEnabled)
+        {
+          _counter++;
+          var oClone = document.getElementById("template").cloneNode(true);
+          oClone.id += ("-"+_counter);
+          document.getElementById("placeholder").appendChild(oClone);
+          if (_counter == 4) {
+            window.actionEnabled = false;
+          }
+        }
       }
 
       window.liveSettings = {
@@ -91,9 +98,8 @@ if (!$result)
   <div class="divider"></div> <br>
   <h4 align="center">Program</h4> <br>
   <div class="row">
-<<<<<<< HEAD
     <form class="col s12" action="review_form.php" method="POST" enctype="multipart/form-data">
-=======
+
     <form class="col s12" action="post_form.php" method="POST" enctype="multipart/form-data">
     <div class="row">
           <form class="col s12" action="post_form.php" method="POST">
@@ -129,7 +135,6 @@ if (!$result)
                 </select>
               </div>
             </div>
->>>>>>> 54b40dab8c9e20f954840721c9114f614ffe5b2f
       <div class="row">
         <div class="input-field col s12">
           <input id="nama_program" type="text" class="validate" name="nama_program" required>
