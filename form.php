@@ -37,6 +37,7 @@ if (!$result)
 	  <script src="/pickadate.js-3.5.6/lib/picker.js"></script>
 	  <script src="/pickadate.js-3.5.6/lib/picker.date.js"></script>
 	  <script src="/pickadate.js-3.5.6/lib/picker.time.js"></script>
+    <script src="materialize/js/addInput.js" language="Javascript" type="text/javascript"></script>
 	  <script>
       window.liveSettings = {
         api_key: "a0b49b34b93844c38eaee15690d86413",
@@ -55,7 +56,7 @@ if (!$result)
   <hr>
   <h4 align="center">Program</h4>
   <div class="row">
-    <form class="col s12" action="post_form.php" method="POST" enctype="multipart/form-data">
+    <form class="col s12" action="review_form.php" method="POST" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s6">
           <input id="kode_unit" type="text" class="validate" name="kode_unit" required>
