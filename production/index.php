@@ -1,11 +1,22 @@
-<!-- <?php
-  // include 'dbconn.php';
-  // session_start();
-
-  // if ($_SESSION["username"]==null){
-  //   header('Location: login.php');
-  // } 
-?> -->
+<?php
+  session_start();
+   if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
+   {
+      
+   } else if ($_SESSION['role'] == 1) {
+    echo 'You are not logged in as Administrator <br>';
+    echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
+    echo'<a href="../pages/survey.php">BACK</a>';
+    exit;
+   }
+   else
+   {
+    echo 'You are not logged In <br>';
+     echo'<a href="../index.php">LOGIN</a>';
+     exit;
+    
+   }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

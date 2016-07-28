@@ -15,7 +15,7 @@ if(isset($_POST['id']) && isset($_POST['password']))
 		{
 			$_SESSION['id'] = $id_admin;
 			$_SESSION['role'] = $row->role;
-			header("Location:../pages/admin.php");
+			header("Location:../production/index.php");
 			exit;
 		}
 		else
