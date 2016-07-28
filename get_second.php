@@ -8,13 +8,13 @@ $query="SELECT * FROM unit WHERE kode_dir='".$_POST["kode"]."'";
 $result=$db->query($query);
 ?>
 
-<option>Pilih Unit</option>
+<option disabled>Pilih Unit</option>
 <?php
 
-    while($rs=$result->fetch_assoc())
-    { ?>
-        <option value="<?php echo $rs["kode"]; ?>"> <?php echo $rs["kode"]; ?> </option>
-    <?php
+    while($rs=$result->fetch_object())
+    {
+        echo '<option value="'.$rs->kode.'">'.$rs->kode.' - '.$rs->nama.'</option>';
+    
     }
 
 ?>
