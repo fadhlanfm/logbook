@@ -47,6 +47,8 @@ else
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
+  <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
+  <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
@@ -98,7 +100,7 @@ else
                 </li>
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                  <li><a href="show_form.php">Daftar Logbook</a></li>
+                    <li><a href="show_form.php">Daftar Logbook</a></li>
                     <li><a href="form_advanced.html">Advanced Components</a></li>
                     <li><a href="form_validation.html">Form Validation</a></li>
                     <li><a href="form_wizards.html">Form Wizard</a></li>
@@ -311,59 +313,77 @@ else
 
           <!-- page content -->
           <div class="right_col" role="main">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Logbook</h2>
-              <div class="clearfix">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Logbook</h2>
+                <div class="clearfix">
+                </div>
               </div>
-              </div>
-            <div class="x_content">
-              <table class="table table-hover">
-                <tr>
-                  <th>Nomor</th>
-                  <th>Kode Unit</th>
-                  <th>Nama Unit</th>
-                  <th>Nama Program</th>
-                  <th>Mulai Program</th>
-                  <th>Berakhir Program</th>
-                  <th>Status</th>
-                  <th colspan="3" class="center">Aksi</th>
-                  <th colspan="3">Ubah Status</th>      
-                </tr>
-                <?php
-                $i = 1;
-                while($row = $result->fetch_object())
-                {
-                  $status = $row->status;
-                  if($status == 0){
-                    $status = 'Belum Diverifikasi';
-                  }else{
-                    $status = 'Sudah Diverifikasi';
-                  }
-                  echo'<tr>';
-                  echo'<td>'.$i.'</td>';
-                  echo'<td>'.$row->kode_unit.'</td>';
-                  echo'<td>'.$row->nama.'</td>';
-                  echo'<td>'.$row->nama_program.'</td>';
-                  echo'<td>'.$row->start.'</td>';
-                  echo'<td>'.$row->end.'</td>';
-                  echo'<td>'.$status.'</td>';
-                  echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
-                  echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Komentar</a></td>';
-                  echo'<td><a href="verif_logbook.php ?id='.$row->id.'">Verifikasi</a></td>';
-                  echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
-                  echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
-                  echo'</tr>';
-                  $i++;
-                }
-                echo'<br> <br>';
+              <?php
+              $db = new mysqli($db_host,$db_username, $db_password, $db_database);
+              if ($db->connect_errno)
+              {
+                die("Could not connect to teh database: <br />".$db->connect_error);
+              }
+    //asign a query
+              $query = "SELECT * FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
+    //execute the query
+              $result = $db->query( $query );
+              if (!$result)
+              {
+                die("could not query the database: <br />".$db->error);
+              }
+              ?> 
+              <div class="x_content">
+                <table class="table table-hover" id="table1">
+                  <thead>
+                    <tr>
+                      <th>Nomor</th>
+                      <th>Kode Unit</th>
+                      <th>Nama Unit</th>
+                      <th>Nama Program</th>
+                      <th>Mulai Program</th>
+                      <th>Berakhir Program</th>
+                      <th>Status</th>
+                      <th colspan="2" class="center">Aksi</th>
+                      <th colspan="2">Ubah Status</th>      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $i = 1;
+                    while($row = $result->fetch_object())
+                    {
+                      $status = $row->status;
+                      if($status == 0){
+                        $status = 'Belum Diverifikasi';
+                      }else{
+                        $status = 'Sudah Diverifikasi';
+                      }
+                      echo'<tr>';
+                      echo'<td>'.$i.'</td>';
+                      echo'<td>'.$row->kode_unit.'</td>';
+                      echo'<td>'.$row->nama.'</td>';
+                      echo'<td>'.$row->nama_program.'</td>';
+                      echo'<td>'.$row->start.'</td>';
+                      echo'<td>'.$row->end.'</td>';
+                      echo'<td>'.$status.'</td>';
+                      echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
+                      echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Komentar</a></td>';
+                      echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
+                      echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
+                      echo'</tr>';
+                      $i++;
+                    }
+                    echo'<br> <br>';
       // echo'Total Rows = '.$result->num_rows;
-                $result->free();
-                $db->close();
-                ?>
-              </table>
+                    $result->free();
+                    $db->close();
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
           </div>
           <!-- /page content -->
 
@@ -419,7 +439,25 @@ else
       <!-- Custom Theme Scripts -->
       <script src="../build/js/custom.min.js"></script>
 
-      <!-- /JQVMap -->
+      <!-- filterplgin -->
+
+      <script data-config>
+        var filtersConfig = {
+          base_path: 'tablefilter/',
+          grid_layout: true,
+          grid_width: '100%',
+          rows_counter: true,
+          col_0: 'none',
+          col_7: 'none',
+          col_8: 'none',
+          col_9: 'none',
+          col_1: 'select'
+        };
+
+        var tf = new TableFilter('table1', filtersConfig);
+        tf.init();
+
+      </script>
 
       <!-- Skycons -->
       <script>

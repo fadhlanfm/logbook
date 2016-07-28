@@ -54,13 +54,14 @@ else
   <!-- QUERIES -->
   <?php
   include_once('../connect_db.php');
-  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
-  //execute the query
-  $result = $db->query( $query );
+  $id = $_GET['id'];
+  $query = "SELECT * FROM logbook WHERE id = '$id'";
+  $result = $db->query($query);
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
+  $row = $result->fetch_object();
   ?>
   <div class="container body">
     <div class="main_container">
@@ -98,7 +99,7 @@ else
                 </li>
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                  <li><a href="show_form.php">Daftar Logbook</a></li>
+                    <li><a href="show_form.php">Daftar Logbook</a></li>
                     <li><a href="form_advanced.html">Advanced Components</a></li>
                     <li><a href="form_validation.html">Form Validation</a></li>
                     <li><a href="form_wizards.html">Form Wizard</a></li>
@@ -311,59 +312,45 @@ else
 
           <!-- page content -->
           <div class="right_col" role="main">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Logbook</h2>
-              <div class="clearfix">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Logbook</h2>
+                <div class="clearfix">
+                </div>
               </div>
+              <div class="x_content">
+                <form action="post_komentar_logbook.php" method="POST">
+                <table class="table table-hover">
+                    <tr>
+                      <td>ID LogBook</td>
+                      <td>: </td>
+                      <td> <input type="text" name="id" readonly value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Kode Unit</td>
+                      <td>: </td>
+                      <td> <input type="text" name="kode_unit" disabled value="<?php if (isset($row->kode_unit)) {echo $row->kode_unit;} else {echo '';}?>"></td>
+                    </tr>
+
+                    <tr>
+                      <td>Nama Program</td>
+                      <td>: </td>
+                      <td> <input type="text" name="nama_program" disabled value="<?php if (isset($row->nama_program)) {echo $row->nama_program;} else {echo '';}?>"></td>
+                    </tr>
+
+                    <tr>
+                      <td>Komentar</td>
+                      <td>: </td>
+                      <td> <input type="text" name="komentar" value="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>"></td>
+                    </tr>
+
+                  </table>
+                  <input type="submit" value="Submit">
+                </form>
               </div>
-            <div class="x_content">
-              <table class="table table-hover">
-                <tr>
-                  <th>Nomor</th>
-                  <th>Kode Unit</th>
-                  <th>Nama Unit</th>
-                  <th>Nama Program</th>
-                  <th>Mulai Program</th>
-                  <th>Berakhir Program</th>
-                  <th>Status</th>
-                  <th colspan="3" class="center">Aksi</th>
-                  <th colspan="3">Ubah Status</th>      
-                </tr>
-                <?php
-                $i = 1;
-                while($row = $result->fetch_object())
-                {
-                  $status = $row->status;
-                  if($status == 0){
-                    $status = 'Belum Diverifikasi';
-                  }else{
-                    $status = 'Sudah Diverifikasi';
-                  }
-                  echo'<tr>';
-                  echo'<td>'.$i.'</td>';
-                  echo'<td>'.$row->kode_unit.'</td>';
-                  echo'<td>'.$row->nama.'</td>';
-                  echo'<td>'.$row->nama_program.'</td>';
-                  echo'<td>'.$row->start.'</td>';
-                  echo'<td>'.$row->end.'</td>';
-                  echo'<td>'.$status.'</td>';
-                  echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
-                  echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Komentar</a></td>';
-                  echo'<td><a href="verif_logbook.php ?id='.$row->id.'">Verifikasi</a></td>';
-                  echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
-                  echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
-                  echo'</tr>';
-                  $i++;
-                }
-                echo'<br> <br>';
-      // echo'Total Rows = '.$result->num_rows;
-                $result->free();
-                $db->close();
-                ?>
-              </table>
             </div>
-          </div>
           </div>
           <!-- /page content -->
 
