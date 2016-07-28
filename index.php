@@ -1,9 +1,12 @@
 <?php
-    if(isset($_SESSION['id_admin']))
+    session_start();
+    //connect database
+    include('/process/connect_db.php');
+    if(isset($_SESSION['role']) && $_SESSION['role'] = -1)
     {
-    header("Location:./production/index.php");
+    header("Location:/garuda/pages/admin.php");
     exit;
-    } else if (isset($_SESSION['id_resp']))
+    } else if (isset($_SESSION['role']) && $_SESSION['role'] = 1)
     {
     header("Location:/garuda/pages/survey.php");
     exit;
@@ -25,7 +28,7 @@
   	<div class="form">
     	<h1><a href="pages/login_responden.php">Login Responden</a></h1>
     	<hr>
-    	<h1><a href="../pages/login_admin.php">Login Admin</a></h1>
+    	<h1><a href="pages/login_admin.php">Login Admin</a></h1>
   	</div>
 	</div>
 </body>

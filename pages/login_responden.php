@@ -8,11 +8,11 @@ if ($db->connect_errno)
 		die("Could not connect to teh database: <br />".$db->connect_error);
 	}
 
-    if(isset($_SESSION['id_admin']))
+    if(isset($_SESSION['role']) && $_SESSION['role'] = -1)
     {
     header("Location:/garuda/pages/admin.php");
     exit;
-    } else if (isset($_SESSION['id_admin']))
+    } else if (isset($_SESSION['role']) && $_SESSION['role'] = 1)
     {
     header("Location:/garuda/pages/survey.php");
     exit;
