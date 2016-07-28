@@ -8,13 +8,13 @@ $query="SELECT * FROM branch WHERE kode_unit='".$_POST["kode"]."'";
 $result=$db->query($query);
 ?>
 
-<option>Pilih Cabang</option>
+<option disabled>Pilih Cabang</option>
 <?php
 
-    while($rs=$result->fetch_assoc())
-    { ?>
-        <option value="<?php echo $rs["kode"]; ?>"> <?php echo $rs["kode"]; ?> </option>
-    <?php
+    while($rs=$result->fetch_object())
+    {
+        echo '<option value="'.$rs->kode.'">'.$rs->kode.' - '.$rs->nama.'</option>';
+    
     }
 
 ?>
