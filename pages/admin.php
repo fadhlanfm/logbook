@@ -1,14 +1,20 @@
 <?php 
    session_start();
-	 if(isset($_SESSION['id_admin']))
+	 if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 	 {
 		  
-	 } 
+	 } else if ($_SESSION['role'] == 1) {
+     echo 'You are not logged in as Administrator <br>';
+    echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
+    echo'<a href="../pages/survey.php">BACK</a>';
+    exit;
+   }
 	 else
 	 {
-	 	echo 'You are not logged In <br>';
-		echo'<a href="../index.php">LOGIN</a>';
-		exit;
+    echo 'You are not logged In <br>';
+     echo'<a href="../index.php">LOGIN</a>';
+     exit;
+	 	
 	 }
 
 	 //connect database
@@ -54,6 +60,11 @@
   </head>
 
   <body class="nav-md">
+  <?php
+    echo "<h3> PHP List All Session Variables</h3>";
+    foreach ($_SESSION as $key=>$val)
+    echo $key." ".$val."<br/>";
+?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
