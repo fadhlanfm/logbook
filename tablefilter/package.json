@@ -1,0 +1,86 @@
+{
+  "name": "tablefilter",
+  "version": "0.2.44",
+  "description": "A Javascript library making HTML tables filterable and a bit more",
+  "license": "MIT",
+  "author": {
+    "name": "Max Guglielmi",
+    "url": "https://github.com/koalyptus"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koalyptus/TableFilter.git"
+  },
+  "keywords": [
+    "filter",
+    "table",
+    "javascript",
+    "filterable",
+    "grid",
+    "datagrid",
+    "sort",
+    "pagination"
+  ],
+  "scripts": {
+    "test": "grunt test"
+  },
+  "publishConfig": {
+    "tag": "next"
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-eslint": "6.1.2",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-plugin-transform-es2015-classes": "^6.9.0",
+    "clean-webpack-plugin": "^0.1.9",
+    "grunt": "^1.0.1",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-qunit": "^1.1.0",
+    "grunt-contrib-stylus": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-esdoc": "^0.0.3",
+    "grunt-eslint": "19.0.0",
+    "grunt-gh-pages": "^1.0.0",
+    "grunt-string-replace": "^1.2.1",
+    "grunt-webpack": "^1.0.8",
+    "script-loader": "^0.7.0",
+    "string-replace-webpack-plugin": "^0.0.3",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "dependencies": {},
+  "bugs": {
+    "url": "https://github.com/koalyptus/TableFilter/issues"
+  },
+  "homepage": "http://koalyptus.github.io/TableFilter",
+  "gitHead": "82046dcbeeb42086c28efd7a2b98f63078399c6a",
+  "_id": "tablefilter@0.2.44",
+  "_shasum": "3846fd427d5ab6391c207bc8379e2ba871aa2e3a",
+  "_from": "tablefilter@latest",
+  "_npmVersion": "3.10.3",
+  "_nodeVersion": "6.3.0",
+  "_npmUser": {
+    "name": "koalyptus",
+    "email": "maxgug@hotmail.com"
+  },
+  "dist": {
+    "shasum": "3846fd427d5ab6391c207bc8379e2ba871aa2e3a",
+    "tarball": "https://registry.npmjs.org/tablefilter/-/tablefilter-0.2.44.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "koalyptus",
+      "email": "maxgug@hotmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/tablefilter-0.2.44.tgz_1469266061974_0.904763693921268"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/tablefilter/-/tablefilter-0.2.44.tgz"
+}
