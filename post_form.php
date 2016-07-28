@@ -1,26 +1,27 @@
 <?php
 	include 'connect_db.php';
-	$kode_unit = (isset($_POST['kode_unit']) ? $_POST['kode_unit'] : '');
+	$unit = (isset($_POST['unit']) ? $_POST['unit'] : '');
+	$branch = (isset($_POST['branch']) ? $_POST['branch'] : '');
 	$nama_program = (isset($_POST['nama_program']) ? $_POST['nama_program'] : '');
 	$deskripsi = (isset($_POST['deskripsi']) ? $_POST['deskripsi'] : '');
 	$start_date = (isset($_POST['start_date']) ? $_POST['start_date'] : '');
 	$end_date = (isset($_POST['end_date']) ? $_POST['end_date'] : '');
 	$perilaku = (isset($_POST['perilaku']) ? $_POST['perilaku'] : '');
-	$aktifitas1 = (isset($_POST['aktifitas1']) ? $_POST['aktifitas1'] : '');
-	$target1 = (isset($_POST['target1']) ? $_POST['target1'] : '');
-	$satuan1 = (isset($_POST['satuan1']) ? $_POST['satuan1'] : '');
-	$aktifitas2 = (isset($_POST['aktifitas2']) ? $_POST['aktifitas2'] : '');
-	$target2 = (isset($_POST['target2']) ? $_POST['target2'] : '');
-	$satuan2 = (isset($_POST['satuan2']) ? $_POST['satuan2'] : '');
-	$aktifitas3 = (isset($_POST['aktifitas3']) ? $_POST['aktifitas3'] : '');
-	$target3 = (isset($_POST['target3']) ? $_POST['target3'] : '');
-	$satuan3 = (isset($_POST['satuan3']) ? $_POST['satuan3'] : '');
-	$aktifitas4 = (isset($_POST['aktifitas4']) ? $_POST['aktifitas4'] : '');
-	$target4 = (isset($_POST['target4']) ? $_POST['target4'] : '');
-	$satuan4 = (isset($_POST['satuan4']) ? $_POST['satuan4'] : '');
-	$aktifitas5 = (isset($_POST['aktifitas5']) ? $_POST['aktifitas5'] : '');
-	$target5 = (isset($_POST['target5']) ? $_POST['target5'] : '');
-	$satuan5 = (isset($_POST['satuan5']) ? $_POST['satuan5'] : '');
+	$aktifitas0 = (isset($_POST['aktifitas'][0]) ? $_POST['aktifitas'][0] : '');
+	$target0 = (isset($_POST['target'][0]) ? $_POST['target'][0] : '');
+	$satuan0 = (isset($_POST['satuan'][0]) ? $_POST['satuan'][0] : '');
+	$aktifitas1 = (isset($_POST['aktifitas'][1]) ? $_POST['aktifitas'][1] : '');
+	$target1 = (isset($_POST['target'][1]) ? $_POST['target'][1] : '');
+	$satuan1 = (isset($_POST['satuan'][1]) ? $_POST['satuan'][1] : '');
+	$aktifitas2 = (isset($_POST['aktifitas'][2]) ? $_POST['aktifitas'][2] : '');
+	$target2 = (isset($_POST['target'][2]) ? $_POST['target'][2] : '');
+	$satuan2 = (isset($_POST['satuan'][2]) ? $_POST['satuan'][2] : '');
+	$aktifitas3 = (isset($_POST['aktifitas'][3]) ? $_POST['aktifitas'][3] : '');
+	$target3 = (isset($_POST['target'][3]) ? $_POST['target'][3] : '');
+	$satuan3 = (isset($_POST['satuan'][3]) ? $_POST['satuan'][3] : '');
+	$aktifitas4 = (isset($_POST['aktifitas'][4]) ? $_POST['aktifitas'][4] : '');
+	$target4 = (isset($_POST['target'][4]) ? $_POST['target'][4] : '');
+	$satuan4 = (isset($_POST['satuan'][4]) ? $_POST['satuan'][4] : '');
 	$kinerja0 = (isset($_POST['kinerja'][0]) ? $_POST['kinerja'][0] : '');
 	$kinerja1 = (isset($_POST['kinerja'][1]) ? $_POST['kinerja'][1] : '');
 	$kinerja2 = (isset($_POST['kinerja'][2]) ? $_POST['kinerja'][2] : '');
@@ -64,16 +65,20 @@
 	// make file name in lower case
 	
 	$final_file=str_replace(' ','-',$new_file_name);
-	
+	 echo "".$_POST['aktifitas'][0]."";
 
 		if(move_uploaded_file($file_loc,$folder.$final_file))
 		{
-		$query = "INSERT into logbook(kode_unit, 
+		$query = "INSERT into logbook(kode_unit,
+									kode_branch, 
 									nama_program, 
 									deskripsi_program, 
 									start, 
 									end, 
 									tujuan_merubah_perilaku, 
+									aktifitas0,
+									target0,
+									satuan0,
 									aktifitas1,
 									target1,
 									satuan1,
@@ -86,9 +91,6 @@
 									aktifitas4,
 									target4,
 									satuan4,
-									aktifitas5,
-									target5,
-									satuan5,
 									tujuan_capai_kinerja_0,
 									tujuan_capai_kinerja_1,
 									tujuan_capai_kinerja_2,
@@ -120,12 +122,16 @@
 									type,
 									size) 
 
-									values ('$kode_unit', 
+									values ('$unit',
+									'$branch', 
 									'$nama_program', 
 									'$deskripsi', 
 									'$start_date', 
 									'$end_date', 
 									'$perilaku', 
+									'$aktifitas0',
+									'$target0',
+									'$satuan0',
 									'$aktifitas1',
 									'$target1',
 									'$satuan1',
@@ -138,9 +144,6 @@
 									'$aktifitas4',
 									'$target4',
 									'$satuan4',
-									'$aktifitas5',
-									'$target5',
-									'$satuan5',
 									'$kinerja0', 
 									'$kinerja1', 
 									'$kinerja2', 
@@ -154,7 +157,7 @@
 									'$email_sekre', 
 									'$nama_pdd', 
 									'$email_pdd',
-									'nama_corp', 
+									'$nama_corp', 
 									'$email_corp', 
 									'$nama_rating', 
 									'$email_rating', 
