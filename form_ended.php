@@ -1,5 +1,18 @@
 <?php
 	include 'connect_db.php';
+	$db = new mysqli($db_host,$db_username, $db_password, $db_database);
+	if ($db->connect_errno)
+	{
+		die("Could not connect to teh database: <br />".$db->connect_error);
+	}
+	//asign a query
+	$query = "SELECT * FROM logbook INNER JOIN unit WHERE end < curdate() and unit.kode=logbook.kode_unit";
+	//execute the query
+	$result = $db->query( $query );
+	if (!$result)
+	{
+		die("could not query the database: <br />".$db->error);
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,31 +48,13 @@
     </script>
     <script type="text/javascript" src="materialize/js/live.js"></script>
     <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
-    <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
-    
 </head>
 <body>
 <div class="container">
 <div class="center">
-	<h1>Logbook</h1>
+	<h1>Ended Program</h1>
 </div>
-    <?php
-    	$db = new mysqli($db_host,$db_username, $db_password, $db_database);
-		if ($db->connect_errno)
-		{
-			die("Could not connect to teh database: <br />".$db->connect_error);
-		}
-		//asign a query
-		$query = "SELECT * FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
-		//execute the query
-		$result = $db->query( $query );
-		if (!$result)
-		{
-			die("could not query the database: <br />".$db->error);
-		}
-    ?> 
-	<table class="striped" id="table1">
-		<thead>
+	<table class="striped">
 		<tr>
 			<th>Nomor</th>
 			<th>Kode Unit</th>
@@ -71,17 +66,15 @@
 			<th colspan="3" class="center">Aksi</th>
 			<th colspan="3">Ubah Status</th>			
 		</tr>
-		</thead>
-		<tbody>
 		<?php
 			$i = 1;
 			while($row = $result->fetch_object())
 			{
 			$status = $row->status;
 			if($status == 0){
-				$status = 'Verified';
+				$status = 'Belum Diverifikasi';
 			}else{
-				$status = 'Unverified';
+				$status = 'Sudah Diverifikasi';
 			}
 				echo'<tr>';
 				echo'<td>'.$i.'</td>';
@@ -94,31 +87,17 @@
 				echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
 				echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Komentar</a></td>';
 				echo'<td><a href="verif_logbook.php ?id='.$row->id.'">Verifikasi</a></td>';
-				echo'<td><a class="btn-floating" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
-				echo'<td><a class="btn-floating red lighten-2" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
+				echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
+				echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
 				echo'</tr>';
 				$i++;
 			}
+			echo'<br> <br>';
+			// echo'Total Rows = '.$result->num_rows;
 			$result->free();
 			$db->close();
 		?>
-		</tbody>
-		</table>
+	</table>
 	</div><br>
-	<script data-config>
-    var filtersConfig = {
-        base_path: 'tablefilter/',
-        rows_counter: true,
-        btn_reset: true,
-        popup_filters: true,
-        auto_filter: true,
-        col_0: 'checklist',
-        col_1: 'select',
-    };
-
-    var tf = new TableFilter('table1', filtersConfig);
-    tf.init();
-
-</script>
 </body>
 </html>

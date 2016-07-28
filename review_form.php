@@ -63,6 +63,7 @@
 	</title>
 </head>
 <body>
+	<a href="javascript:window.print()">
 	<h1>Apakah Anda yakin untuk submit form ini?</h1>
 	<table>
 		<tr>
@@ -93,5 +94,6 @@
 			<td><input disabled value="<?php echo ''.$end_date.''; ?>" id="disabled" type="text" class="validate"></td>
 		</tr>
 	</table>
+	</a>
 </body>
 </html>

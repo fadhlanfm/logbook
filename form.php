@@ -159,13 +159,7 @@ if (!$result)
           <script type="text/javascript">$('#end_date').pickadate({formatSubmit: 'yyyy-mm-dd',hiddenName: true, selectMonths: true,selectYears: 15});</script>
         </div>
       </div>
-      
-  </div>
-  <div class="divider"></div>
-  <div class="row">
-        <table border="0" cellspacing="0" cellpadding="2">
-        </table>
-      </div><br>
+  </div><div class="divider"></div>
   <h4 align="center">Tujuan & Target Program</h4>
   <div class="row">
     <table class="striped">
@@ -231,7 +225,7 @@ if (!$result)
           <td>
             <div class="input-field col s6">
             <label for="target1">Target</label>
-            <input type="text" id="target[]" name="target1">
+            <input type="text" id="target" name="target[]">
             </div>
           </td>
           <td>
