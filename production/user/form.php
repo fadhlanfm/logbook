@@ -30,6 +30,10 @@
 
     <!-- Bootstrap -->
     <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- bootstrap-wysiwyg -->
+    <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -346,6 +350,11 @@
     <script src="../js/moment/moment.min.js"></script>
     <script src="../js/datepicker/daterangepicker.js"></script>
 
+    <!-- bootstrap-wysiwyg -->
+    <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="../vendors/jquery.hotkeys/jquery.hotkeys.js"></script>
+    <script src="../vendors/google-code-prettify/src/prettify.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="../../build/js/custom.min.js"></script>
 
@@ -575,6 +584,19 @@
 
     <!-- /bootstrap-daterangepicker -->
 
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
+        $('#birthday').daterangepicker({
+          singleDatePicker: true,
+          calender_style: "picker_4"
+        }, function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+        });
+      });
+    </script>
+    <!-- /bootstrap-daterangepicker -->
+    
     <!-- gauge.js -->
     <script>
       var opts = {
