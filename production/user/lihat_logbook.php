@@ -1,10 +1,10 @@
 <?php
 session_start();
-if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
+if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
 {
 
-} else if ($_SESSION['role'] == 1) {
-  echo 'You are not logged in as Administrator <br>';
+} else if ($_SESSION['role'] == -1) {
+  echo 'You are not logged in as User <br>';
   echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
   echo'<a href="../pages/survey.php">BACK</a>';
   exit;
@@ -31,37 +31,39 @@ else
   <title>simulasi</title>
 
   <!-- Bootstrap -->
-  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- NProgress -->
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+  <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
-  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
   <!-- bootstrap-progressbar -->
-  <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+  <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
   <!-- JQVMap -->
-  <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+  <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
-  <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+  <link rel="stylesheet" type="text/css" href="../../css/print.css" media="print" />
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../../build/css/custom.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
   <!-- QUERIES -->
   <?php
-  include_once('../connect_db.php');
+  include_once('../../connect_db.php');
   $id = $_GET['id'];
   $query = "SELECT * FROM logbook WHERE id = '$id'";
-  $result = $db->query($query);
+  //execute the query
+  $result = $db->query( $query );
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
   $row = $result->fetch_object();
+
   $coba = $_SESSION['id'];
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
     //execute the query
@@ -90,14 +92,15 @@ else
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.php">Dashboard</a></li>
+                    <li><a href="index.php">Halaman Utama</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="show_form.php">Daftar Logbook</a></li>
+                  <li><a href="programs.php">Corporate Culture Program</a></li>
                   </ul>
                 </li>
+              </ul>
             </div>
 
             </div>
@@ -117,7 +120,7 @@ else
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo''.$row2->name.''; ?>
+                    <img src="../images/img.jpg" alt=""><?php echo''.$row2->name.''; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -197,7 +200,11 @@ else
                     </li>
                   </ul>
                 </li>
-                
+                <li role="presentation">
+                  <a href="javascript:window.print()">
+                    <i class="fa fa-print"></i>
+                  </a>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -206,49 +213,192 @@ else
 
           <!-- page content -->
           <div class="right_col" role="main">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Logbook</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                      <li><a href="show_form.php"><button class="btn btn-primary">Kembali</button></a>
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Detail Logbook </h2>
+              <ul class="nav navbar-right panel_toolbox">
+                      <li><a href="programs.php"><button class="btn btn-primary">Kembali</button></a>
                       </li>
                     </ul>
-                <div class="clearfix">
-                </div>
+              <div class="clearfix">
               </div>
-              <div class="x_content">
-                <form action="post_komentar_logbook.php" method="POST">
-                <table class="table table-hover">
-                    <tr>
-                      <td>ID LogBook</td>
-                      <td>: </td>
-                      <td> <input type="text" name="id" readonly value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>">
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>Kode Unit</td>
-                      <td>: </td>
-                      <td> <input type="text" name="kode_unit" disabled value="<?php if (isset($row->kode_unit)) {echo $row->kode_unit;} else {echo '';}?>"></td>
-                    </tr>
-
-                    <tr>
-                      <td>Nama Program</td>
-                      <td>: </td>
-                      <td> <input type="text" name="nama_program" disabled value="<?php if (isset($row->nama_program)) {echo $row->nama_program;} else {echo '';}?>"></td>
-                    </tr>
-
-                    <tr>
-                      <td>Evaluasi</td>
-                      <td>: </td>
-                      <td> <input type="text" name="komentar" value="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>"></td>
-                    </tr>
-
-                  </table>
-                  <input type="submit" value="Submit">
-                </form>
               </div>
+            <div class="x_content">
+              <table class="table table-hover">
+    <tr>
+      <th colspan="2" class="center"><h4>Log Book</h4></th>
+    </tr>
+    <tr>
+      <th>Kode Unik Log Book</th>
+      <td><?php echo''.$row->id.'';?></td>
+    </tr>
+    <tr>
+      <th>Kode Unit</th>
+      <td><?php echo''.$row->kode_unit.'';?></td>
+    </tr>
+    <tr>
+      <th>Nama Program</th>
+      <td><?php echo''.$row->nama_program.'';?></td>
+    </tr>
+    <tr>
+      <th>Deskripsi Program</th>
+      <td><?php echo''.$row->deskripsi_program.'';?></td>
+    </tr>
+    <tr>
+      <th>Start</th>
+      <td><?php echo''.$row->start.'';?></td>
+    </tr>   
+    <tr>
+      <th>End</th>
+      <td><?php echo''.$row->end.'';?></td>
+    </tr>
+  </table>
+
+  <br>
+
+  <table class="table table-hover">
+    <tr>
+      <th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
+    </tr>
+    <tr>
+      <th>Tujuan Merubah Perilaku</th>
+      <td><?php echo''.$row->tujuan_merubah_perilaku.'';?></td>
+    </tr>
+    <tr>
+      <th>Target Merubah Perilaku</th>
+      <td><?php echo''.$row->target_merubah_perilaku.'';?></td>
+    </tr>
+    <tr>
+      <th>Tujuan Nilai Tambah</th>
+      <td><?php echo''.$row->tujuan_nilai_tambah.'';?></td>
+    </tr>
+    <tr>
+      <th>Target Nilai Tambah</th>
+      <td><?php echo''.$row->target_nilai_tambah.'';?></td>
+    </tr>   
+    <tr>
+      <th>Tujuan Capai Kinerja</th>
+      <td><?php echo''.$row->tujuan_capai_kinerja_0.','.$row->tujuan_capai_kinerja_1.','.$row->tujuan_capai_kinerja_2.','.$row->tujuan_capai_kinerja_3.'';?></td>
+    </tr>
+    <tr>
+      <th>Target Capai Kinerja</th>
+      <td><?php echo''.$row->target_capai_kinerja.'';?></td>
+    </tr>
+  </table>
+
+  <br>
+  
+  <table class="table table-hover">
+    <tr>
+      <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
+    </tr>
+    <tr>
+      <th>Metode Monitoring</th>
+      <td><?php echo''.$row->metode_monitoring.'';?></td>
+    </tr>
+    <tr>
+      <th>Metode Enforcement Positif</th>
+      <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
+    </tr>
+    <tr>
+      <th>Metode Enforcement Negatif</th>
+      <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
+    </tr>
+  </table>
+
+  <br>
+
+  <table class="table table-hover">
+    <tr>
+      <th colspan="3" class="center"><h4>Change Agent Team</h4></th>
+    </tr>
+    <tr>
+      <th rowspan="2">Ketua</th>
+      <td><?php echo''.$row->nama_ketua.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_ketua.'';?></td>
+      </tr>
+    </tr>
+    <tr>
+      <th rowspan="2">Sekretaris & Bendahara</th>
+      <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
+      </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Dokumentasi & Publikasi</th>
+      <td><?php echo''.$row->nama_dok_pub.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_dok_pub.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Corporate Program</th>
+      <td><?php echo''.$row->nama_corp_prog.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_corp_prog.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic Rating</th>
+      <td><?php echo''.$row->nama_pic_rate.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_rate.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic I-Dare</th>
+      <td><?php echo''.$row->nama_pic_dare.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_dare.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Program Pendukung</th>
+      <td><?php echo''.$row->nama_prog_dukung.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_prog_dukung.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic Sharing Session</th>
+      <td><?php echo''.$row->nama_pic_share.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_share.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic One Team One Spirit One Goal Program</th>
+      <td><?php echo''.$row->nama_pic_team.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_team.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic Standar Layanan</th>
+      <td><?php echo''.$row->nama_pic_standar.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_standar.'';?></td>
+      </tr>
+    </tr>
+  </table>
+
+  <br>
+        <label for="deskripsi">Evaluasi Logbook</label>
+        <div class="input-field col s12">
+          <textarea id="deskripsi" class="form-control" readonly placeholder="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>" name="komentar" ></textarea>
+        </div>
+        
             </div>
+          </div>
           </div>
           <!-- /page content -->
 
@@ -264,45 +414,45 @@ else
       </div>
 
       <!-- jQuery -->
-      <script src="../vendors/jquery/dist/jquery.min.js"></script>
+      <script src="../../vendors/jquery/dist/jquery.min.js"></script>
       <!-- Bootstrap -->
-      <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
       <!-- FastClick -->
-      <script src="../vendors/fastclick/lib/fastclick.js"></script>
+      <script src="../../vendors/fastclick/lib/fastclick.js"></script>
       <!-- NProgress -->
-      <script src="../vendors/nprogress/nprogress.js"></script>
+      <script src="../../vendors/nprogress/nprogress.js"></script>
       <!-- Chart.js -->
-      <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+      <script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
       <!-- gauge.js -->
-      <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+      <script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
       <!-- bootstrap-progressbar -->
-      <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+      <script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
       <!-- iCheck -->
-      <script src="../vendors/iCheck/icheck.min.js"></script>
+      <script src="../../vendors/iCheck/icheck.min.js"></script>
       <!-- Skycons -->
-      <script src="../vendors/skycons/skycons.js"></script>
+      <script src="../../vendors/skycons/skycons.js"></script>
       <!-- Flot -->
-      <script src="../vendors/Flot/jquery.flot.js"></script>
-      <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-      <script src="../vendors/Flot/jquery.flot.time.js"></script>
-      <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-      <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+      <script src="../../vendors/Flot/jquery.flot.js"></script>
+      <script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+      <script src="../../vendors/Flot/jquery.flot.time.js"></script>
+      <script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+      <script src="../../vendors/Flot/jquery.flot.resize.js"></script>
       <!-- Flot plugins -->
-      <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-      <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-      <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+      <script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+      <script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+      <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
       <!-- DateJS -->
-      <script src="../vendors/DateJS/build/date.js"></script>
+      <script src="../../vendors/DateJS/build/date.js"></script>
       <!-- JQVMap -->
-      <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-      <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-      <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+      <script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+      <script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+      <script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
       <!-- bootstrap-daterangepicker -->
-      <script src="js/moment/moment.min.js"></script>
-      <script src="js/datepicker/daterangepicker.js"></script>
+      <script src="../js/moment/moment.min.js"></script>
+      <script src="../js/datepicker/daterangepicker.js"></script>
 
       <!-- Custom Theme Scripts -->
-      <script src="../build/js/custom.min.js"></script>
+      <script src="../../build/js/custom.min.js"></script>
 
       <!-- /JQVMap -->
 
