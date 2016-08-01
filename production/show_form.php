@@ -82,6 +82,7 @@ else
           <div class="navbar nav_title" style="border: 0;">
             <a href="index.html" class="site_title"><span>Garuda Indonesia</span></a>
           </div>
+          <h5 style="text-indent:12px;">Admin Page</h5>
 
           <div class="clearfix"></div>
 

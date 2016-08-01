@@ -67,9 +67,9 @@ else
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Garuda Indonesia</span></a>
+            <a href="index.html" class="site_title"><span>Garuda Indonesia</span></a>
           </div>
-
+          <h5 style="text-indent:12px;">Admin Page</h5>
           <div class="clearfix"></div>
 
           
