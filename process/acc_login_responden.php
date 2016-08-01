@@ -15,7 +15,7 @@ if(isset($_POST['id']) && isset($_POST['password']))
 		{
 			$_SESSION['id'] = $id_resp;
 			$_SESSION['role'] = $row->role;
-			header("Location:../pages/survey.php");
+			header("Location:../production/user/index.php");
 			exit;
 		}
 		else

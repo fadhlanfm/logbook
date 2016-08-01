@@ -1,18 +1,18 @@
 <?php
   session_start();
-   if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
+   if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
    {
       
-   } else if ($_SESSION['role'] == 1) {
-    echo 'You are not logged in as Administrator <br>';
-    echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
-    echo'<a href="../pages/survey.php">BACK</a>';
+   } else if ($_SESSION['role'] == -1) {
+    echo 'You are not logged in as User <br>';
+    echo'<a href="../acc_logout.php">LOGOUT</a><br>';
+    echo'<a href="../index.php">BACK</a>';
     exit;
    }
    else
    {
     echo 'You are not logged In <br>';
-     echo'<a href="../index.php">LOGIN</a>';
+     echo'<a href="../../index.php">LOGIN</a>';
      exit;
     
    }
@@ -29,30 +29,106 @@
     <title>simulasi</title>
 
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
-    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-      
-    <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+    <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    <link href="../../build/css/custom.min.css" rel="stylesheet">
   </head>
 
   <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
       
       <!-- QUERIES -->
       <?php
-        include_once('Connection/dbconn.php');
+        include_once('../Connection/dbconn.php');
         
+        // penjualan tahun ini
+        $total1 = mysql_query("SELECT EXTRACT(MONTH FROM date) as nomor, SUM(m_passenger) as total FROM passenger GROUP BY EXTRACT(MONTH FROM date) ORDER BY nomor DESC  limit 0,1");
+        $less1=mysql_fetch_array($total1);
+        $cek1="$less1[total]";
+
+        $total2 = mysql_query("SELECT EXTRACT(MONTH FROM date) as nomor, SUM(m_passenger) as total FROM passenger GROUP BY EXTRACT(MONTH FROM date) ORDER BY nomor DESC limit 1,1");
+        $less2=mysql_fetch_array($total2);
+        $cek2="$less1[total]";
+        //echo $n;
+        
+        $total3 = mysql_query("SELECT EXTRACT(MONTH FROM date) as nomor, SUM(m_passenger) as total FROM passenger GROUP BY EXTRACT(MONTH FROM date) ORDER BY nomor DESC limit 2,1");
+        $less3=mysql_fetch_array($total3);
+        $cek3="$less1[total]";
+        //echo $n;
+        
+        $thisweek=mysql_query("SELECT SUM(m_passenger)+SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
+        $result=mysql_fetch_array($thisweek);
+        $thisweek_totalpass="$result[sum]";
+      
+        $lastweek=mysql_query("SELECT SUM(m_passenger)+SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
+        $result=mysql_fetch_array($lastweek);
+        $lastweek_totalpass="$result[sum]";
+      
+        $thisweek_m=mysql_query("SELECT SUM(m_passenger) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
+        $result=mysql_fetch_array($thisweek_m);
+        $thisweek_mpass="$result[sum]";
+      
+        $lastweek_m=mysql_query("SELECT SUM(m_passenger) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
+        $result=mysql_fetch_array($lastweek_m);
+        $lastweek_mpass="$result[sum]";
+      
+        $thisweek_f=mysql_query("SELECT SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
+        $result=mysql_fetch_array($thisweek_f);
+        $thisweek_fpass="$result[sum]";
+      
+        $lastweek_f=mysql_query("SELECT SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
+        $result=mysql_fetch_array($lastweek_f);
+        $lastweek_fpass="$result[sum]";
+      
+        $thisweek_fc=mysql_query("SELECT SUM(fc) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
+        $result=mysql_fetch_array($thisweek_fc);
+        $thisweek_fc="$result[sum]";
+      
+        $lastweek_fc=mysql_query("SELECT SUM(fc) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
+        $result=mysql_fetch_array($lastweek_fc);
+        $lastweek_fc="$result[sum]";
+      
+        $thisweek_bc=mysql_query("SELECT SUM(bc) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
+        $result=mysql_fetch_array($thisweek_bc);
+        $thisweek_bc="$result[sum]";
+      
+        $lastweek_bc=mysql_query("SELECT SUM(bc) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
+        $result=mysql_fetch_array($lastweek_bc);
+        $lastweek_bc="$result[sum]";
+        
+        $thisweek_ec=mysql_query("SELECT SUM(ec) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
+        $result=mysql_fetch_array($thisweek_ec);
+        $thisweek_ec="$result[sum]";
+      
+        $lastweek_ec=mysql_query("SELECT SUM(ec) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
+        $result=mysql_fetch_array($lastweek_ec);
+        $lastweek_ec="$result[sum]";
+      
+        $total_perc = round(abs($thisweek_totalpass-$lastweek_totalpass)/$lastweek_totalpass*100);
+        $m_perc = round((abs($thisweek_mpass-$lastweek_mpass)/$lastweek_mpass)*100);
+        $f_perc = round((abs($thisweek_fpass-$lastweek_fpass)/$lastweek_fpass)*100);
+        $fc_perc = round((abs($thisweek_fc-$lastweek_fc)/$lastweek_fc)*100);
+        $bc_perc = round((abs($thisweek_bc-$lastweek_bc)/$lastweek_bc)*100);
+        $ec_perc = round((abs($thisweek_ec-$lastweek_ec)/$lastweek_ec)*100);
+      
+        if ($thisweek_totalpass < $lastweek_totalpass) {$total = 1;} else {$total=0;}
+        if ($thisweek_mpass < $lastweek_mpass) {$mpass = 1; } else {$mpass=0;}
+        if ($thisweek_fpass < $lastweek_fpass) {$fpass = 1; } else {$fpass=0;}
+        if ($thisweek_fc < $lastweek_fc) {$fc = 1; } else {$fc=0;}
+        if ($thisweek_bc < $lastweek_bc) {$bc = 1; } else {$bc=0;}
+        if ($thisweek_ec < $lastweek_ec) {$ec = 1; } else {$ec=0;}
+        
+        $thisweek_totalsuite = $thisweek_fc + $thisweek_bc + $thisweek_ec;
       ?>
     <div class="container body">
       <div class="main_container">
@@ -67,7 +143,7 @@
 <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <img src="../images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
@@ -85,12 +161,12 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php">Dashboard</a></li>
+                      <li><a href="index.php">Halaman Utama</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-edit"></i> CC Programs <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="show_form.php">Daftar Logbook</a></li>
+                      <li><a href="form.php">Corporate Culture Program</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -130,7 +206,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="../images/img.jpg" alt="">John Doe
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -142,7 +218,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -154,7 +230,7 @@
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -166,7 +242,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -178,7 +254,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -190,7 +266,7 @@
                     </li>
                     <li>
                       <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -999,45 +1075,45 @@
     </div>
 
     <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <script src="../../vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
+    <script src="../../vendors/nprogress/nprogress.js"></script>
     <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+    <script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
     <!-- gauge.js -->
-    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+    <script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
     <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
+    <script src="../../vendors/iCheck/icheck.min.js"></script>
     <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
+    <script src="../../vendors/skycons/skycons.js"></script>
     <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
-    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../vendors/Flot/jquery.flot.resize.js"></script>
     <!-- Flot plugins -->
-    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+    <script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
     <!-- DateJS -->
-    <script src="../vendors/DateJS/build/date.js"></script>
+    <script src="../../vendors/DateJS/build/date.js"></script>
     <!-- JQVMap -->
-    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <script src="../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
-    <script src="js/moment/moment.min.js"></script>
-    <script src="js/datepicker/daterangepicker.js"></script>
+    <script src="../js/moment/moment.min.js"></script>
+    <script src="../js/datepicker/daterangepicker.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+    <script src="../../build/js/custom.min.js"></script>
 
     <!-- Flot -->
     <script>

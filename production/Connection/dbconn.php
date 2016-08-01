@@ -1,13 +1,11 @@
 <?php
-//Koneksi ke Database
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpass = "";
-$dbname = "test2";
-// Create connection
-$con = mysql_connect($dbhost, $dbuser, $dbpass);
-
-if (!$con) die('Could not connect: ' . mysql_error());
-$db_selected = mysql_select_db($dbname, $con);
-
+    $db_host ="localhost";
+    $db_username ="root";
+    $db_database ="culture_monitoring";
+    $db_password ='';
+    $conn = new mysqli($db_host, $db_username, $db_password, $db_database);
+        $db = new mysqli($db_host, $db_username, $db_password, $db_database); 
+            if ($db->connect_errno){
+                die ("Could not connect to the databse: <br />". $db-> connect_error);
+            }
 ?>
