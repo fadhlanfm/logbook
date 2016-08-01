@@ -100,7 +100,7 @@ else
                     <li><a href="show_form.php">Daftar Logbook</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Program <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="form_running.php">Program sedang berjalan</a></li>
                     <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
@@ -247,8 +247,8 @@ else
       <th>Mulai Program</th>
       <th>Berakhir Program</th>
       <th>Status</th>
-      <th colspan="3" class="center">Aksi</th>
-      <th colspan="3">Ubah Status</th>      
+      <th colspan="2" class="center">Aksi</th>
+      <th colspan="2">Ubah Status</th>      
     </tr>
     <?php
       $i = 1;
@@ -268,9 +268,8 @@ else
         echo'<td>'.$row->start.'</td>';
         echo'<td>'.$row->end.'</td>';
         echo'<td>'.$status.'</td>';
-        echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
-        echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Komentar</a></td>';
-        echo'<td><a href="verif_logbook.php ?id='.$row->id.'">Verifikasi</a></td>';
+        echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary" >Lihat</button></a></td>';
+        echo'<td><a href="beri_komentar.php ?id='.$row->id.'"><button class="btn btn-primary" >Beri Evaluasi</button> </a></td>';
         echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
         echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
         echo'</tr>';

@@ -100,7 +100,7 @@ else
                   <li><a href="show_form.php">Daftar Logbook</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Program <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="form_running.php">Program sedang berjalan</a></li>
                     <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
@@ -225,6 +225,8 @@ else
               <h2>Detail Logbook <?php echo''.$row->id.''; ?> </h2>
               <ul class="nav navbar-right panel_toolbox">
                       <li><a href="show_form.php"><button class="btn btn-primary">Kembali</button></a>
+                      </li>
+                      <li><a href="edit_form.php"><button class="btn btn-success">Edit Form</button></a>
                       </li>
                     </ul>
               <div class="clearfix">

@@ -100,7 +100,7 @@ else
                     <li><a href="show_form.php">Daftar Logbook</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Program <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="form_running.php">Program sedang berjalan</a></li>
                     <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
