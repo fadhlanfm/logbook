@@ -54,13 +54,15 @@ else
   <!-- QUERIES -->
   <?php
   include_once('../connect_db.php');
-  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
+  $id = $_GET['id'];
+  $query = "SELECT * FROM logbook WHERE id = '$id'";
   //execute the query
   $result = $db->query( $query );
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
+  $row = $result->fetch_object();
   ?>
   <div class="container body">
     <div class="main_container">
@@ -99,91 +101,10 @@ else
                 <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                   <li><a href="show_form.php">Daftar Logbook</a></li>
-                    <li><a href="form_advanced.html">Advanced Components</a></li>
-                    <li><a href="form_validation.html">Form Validation</a></li>
-                    <li><a href="form_wizards.html">Form Wizard</a></li>
-                    <li><a href="form_upload.html">Form Upload</a></li>
-                    <li><a href="form_buttons.html">Form Buttons</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="general_elements.html">General Elements</a></li>
-                    <li><a href="media_gallery.html">Media Gallery</a></li>
-                    <li><a href="typography.html">Typography</a></li>
-                    <li><a href="icons.html">Icons</a></li>
-                    <li><a href="glyphicons.html">Glyphicons</a></li>
-                    <li><a href="widgets.html">Widgets</a></li>
-                    <li><a href="invoice.html">Invoice</a></li>
-                    <li><a href="inbox.html">Inbox</a></li>
-                    <li><a href="calendar.html">Calendar</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="tables.html">Tables</a></li>
-                    <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="chartjs.html">Chart JS</a></li>
-                    <li><a href="chartjs2.html">Chart JS2</a></li>
-                    <li><a href="morisjs.html">Moris JS</a></li>
-                    <li><a href="echarts.html">ECharts</a></li>
-                    <li><a href="other_charts.html">Other Charts</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                    <li><a href="fixed_footer.html">Fixed Footer</a></li>
                   </ul>
                 </li>
               </ul>
             </div>
-            <div class="menu_section">
-              <h3>Live On</h3>
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="e_commerce.html">E-commerce</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="project_detail.html">Project Detail</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                    <li><a href="profile.html">Profile</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="page_403.html">403 Error</a></li>
-                    <li><a href="page_404.html">404 Error</a></li>
-                    <li><a href="page_500.html">500 Error</a></li>
-                    <li><a href="plain_page.html">Plain Page</a></li>
-                    <li><a href="login.php">Login Page</a></li>
-                    <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="#level1_1">Level One</a>
-                      <li><a>Level One<span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                          <li class="sub_menu"><a href="level2.html">Level Two</a>
-                          </li>
-                          <li><a href="#level2_1">Level Two</a>
-                          </li>
-                          <li><a href="#level2_2">Level Two</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a href="#level1_2">Level One</a>
-                      </li>
-                    </ul>
-                  </li>                  
-                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-                </ul>
-              </div>
 
             </div>
             <!-- /sidebar menu -->
@@ -231,7 +152,7 @@ else
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -313,55 +234,188 @@ else
           <div class="right_col" role="main">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Logbook</h2>
+              <h2>Detail Logbook <?php echo '$id'; ?> </h2>
               <div class="clearfix">
               </div>
               </div>
             <div class="x_content">
               <table class="table table-hover">
-                <tr>
-                  <th>Nomor</th>
-                  <th>Kode Unit</th>
-                  <th>Nama Unit</th>
-                  <th>Nama Program</th>
-                  <th>Mulai Program</th>
-                  <th>Berakhir Program</th>
-                  <th>Status</th>
-                  <th colspan="3" class="center">Aksi</th>
-                  <th colspan="3">Ubah Status</th>      
-                </tr>
-                <?php
-                $i = 1;
-                while($row = $result->fetch_object())
-                {
-                  $status = $row->status;
-                  if($status == 0){
-                    $status = 'Belum Diverifikasi';
-                  }else{
-                    $status = 'Sudah Diverifikasi';
-                  }
-                  echo'<tr>';
-                  echo'<td>'.$i.'</td>';
-                  echo'<td>'.$row->kode_unit.'</td>';
-                  echo'<td>'.$row->nama.'</td>';
-                  echo'<td>'.$row->nama_program.'</td>';
-                  echo'<td>'.$row->start.'</td>';
-                  echo'<td>'.$row->end.'</td>';
-                  echo'<td>'.$status.'</td>';
-                  echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
-                  echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Komentar</a></td>';
-                  echo'<td><a href="verif_logbook.php ?id='.$row->id.'">Verifikasi</a></td>';
-                  echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
-                  echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
-                  echo'</tr>';
-                  $i++;
-                }
-                echo'<br> <br>';
-      // echo'Total Rows = '.$result->num_rows;
-                $result->free();
-                $db->close();
-                ?>
-              </table>
+    <tr>
+      <th colspan="2" class="center"><h4>Log Book</h4></th>
+    </tr>
+    <tr>
+      <th>Kode Unik Log Book</th>
+      <td><?php echo''.$row->id.'';?></td>
+    </tr>
+    <tr>
+      <th>Kode Unit</th>
+      <td><?php echo''.$row->kode_unit.'';?></td>
+    </tr>
+    <tr>
+      <th>Nama Program</th>
+      <td><?php echo''.$row->nama_program.'';?></td>
+    </tr>
+    <tr>
+      <th>Deskripsi Program</th>
+      <td><?php echo''.$row->deskripsi_program.'';?></td>
+    </tr>
+    <tr>
+      <th>Start</th>
+      <td><?php echo''.$row->start.'';?></td>
+    </tr>   
+    <tr>
+      <th>End</th>
+      <td><?php echo''.$row->end.'';?></td>
+    </tr>
+  </table>
+
+  <br><br><br>
+
+  <table class="table table-hover">
+    <tr>
+      <th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
+    </tr>
+    <tr>
+      <th>Tujuan Merubah Perilaku</th>
+      <td><?php echo''.$row->tujuan_merubah_perilaku.'';?></td>
+    </tr>
+    <tr>
+      <th>Target Merubah Perilaku</th>
+      <td><?php echo''.$row->target_merubah_perilaku.'';?></td>
+    </tr>
+    <tr>
+      <th>Tujuan Nilai Tambah</th>
+      <td><?php echo''.$row->tujuan_nilai_tambah.'';?></td>
+    </tr>
+    <tr>
+      <th>Target Nilai Tambah</th>
+      <td><?php echo''.$row->target_nilai_tambah.'';?></td>
+    </tr>   
+    <tr>
+      <th>Tujuan Capai Kinerja</th>
+      <td><?php echo''.$row->tujuan_capai_kinerja_0.','.$row->tujuan_capai_kinerja_1.','.$row->tujuan_capai_kinerja_2.','.$row->tujuan_capai_kinerja_3.'';?></td>
+    </tr>
+    <tr>
+      <th>Target Capai Kinerja</th>
+      <td><?php echo''.$row->target_capai_kinerja.'';?></td>
+    </tr>
+  </table>
+
+  <br><br><br>
+
+  <table class="table table-hover">
+    <tr>
+      <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
+    </tr>
+    <tr>
+      <th>Metode Monitoring</th>
+      <td><?php echo''.$row->metode_monitoring.'';?></td>
+    </tr>
+    <tr>
+      <th>Metode Enforcement Positif</th>
+      <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
+    </tr>
+    <tr>
+      <th>Metode Enforcement Negatif</th>
+      <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
+    </tr>
+  </table>
+
+  <br><br><br>
+
+  <table class="table table-hover">
+    <tr>
+      <th colspan="3" class="center"><h4>Change Agent Team</h4></th>
+    </tr>
+    <tr>
+      <th rowspan="2">Ketua</th>
+      <td><?php echo''.$row->nama_ketua.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_ketua.'';?></td>
+      </tr>
+    </tr>
+    <tr>
+      <th rowspan="2">Sekretaris & Bendahara</th>
+      <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
+      </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Dokumentasi & Publikasi</th>
+      <td><?php echo''.$row->nama_dok_pub.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_dok_pub.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Corporate Program</th>
+      <td><?php echo''.$row->nama_corp_prog.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_corp_prog.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic Rating</th>
+      <td><?php echo''.$row->nama_pic_rate.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_rate.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic I-Dare</th>
+      <td><?php echo''.$row->nama_pic_dare.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_dare.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Program Pendukung</th>
+      <td><?php echo''.$row->nama_prog_dukung.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_prog_dukung.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic Sharing Session</th>
+      <td><?php echo''.$row->nama_pic_share.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_share.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic One Team One Spirit One Goal Program</th>
+      <td><?php echo''.$row->nama_pic_team.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_team.'';?></td>
+      </tr>
+    </tr>
+    </tr>
+      <tr>
+      <th rowspan="2">Pic Standar Layanan</th>
+      <td><?php echo''.$row->nama_pic_standar.'';?></td>
+      <tr>
+      <td><?php echo''.$row->email_pic_standar.'';?></td>
+      </tr>
+    </tr>
+  </table>
+
+  <br><br>
+
+  <form action="post_komentar_logbook.php" method="POST"><br>
+    <input class="form-control" type="text" readonly name="id" value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>"></input>
+        <div class="input-field col s12">
+          <textarea id="deskripsi" class="form-control" name="komentar" required></textarea>
+          <label for="deskripsi">Evaluasi Logbook</label>
+        </div>
+    <button type="submit" value="Submit" class="btn waves-effect waves-light">Submit</button>
+  </form>
             </div>
           </div>
           </div>
