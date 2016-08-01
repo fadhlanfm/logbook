@@ -51,113 +51,33 @@
       <?php
         include_once('../Connection/dbconn.php');
         
-        // penjualan tahun ini
-        $total1 = mysql_query("SELECT EXTRACT(MONTH FROM date) as nomor, SUM(m_passenger) as total FROM passenger GROUP BY EXTRACT(MONTH FROM date) ORDER BY nomor DESC  limit 0,1");
-        $less1=mysql_fetch_array($total1);
-        $cek1="$less1[total]";
-
-        $total2 = mysql_query("SELECT EXTRACT(MONTH FROM date) as nomor, SUM(m_passenger) as total FROM passenger GROUP BY EXTRACT(MONTH FROM date) ORDER BY nomor DESC limit 1,1");
-        $less2=mysql_fetch_array($total2);
-        $cek2="$less1[total]";
-        //echo $n;
-        
-        $total3 = mysql_query("SELECT EXTRACT(MONTH FROM date) as nomor, SUM(m_passenger) as total FROM passenger GROUP BY EXTRACT(MONTH FROM date) ORDER BY nomor DESC limit 2,1");
-        $less3=mysql_fetch_array($total3);
-        $cek3="$less1[total]";
-        //echo $n;
-        
-        $thisweek=mysql_query("SELECT SUM(m_passenger)+SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
-        $result=mysql_fetch_array($thisweek);
-        $thisweek_totalpass="$result[sum]";
-      
-        $lastweek=mysql_query("SELECT SUM(m_passenger)+SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
-        $result=mysql_fetch_array($lastweek);
-        $lastweek_totalpass="$result[sum]";
-      
-        $thisweek_m=mysql_query("SELECT SUM(m_passenger) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
-        $result=mysql_fetch_array($thisweek_m);
-        $thisweek_mpass="$result[sum]";
-      
-        $lastweek_m=mysql_query("SELECT SUM(m_passenger) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
-        $result=mysql_fetch_array($lastweek_m);
-        $lastweek_mpass="$result[sum]";
-      
-        $thisweek_f=mysql_query("SELECT SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
-        $result=mysql_fetch_array($thisweek_f);
-        $thisweek_fpass="$result[sum]";
-      
-        $lastweek_f=mysql_query("SELECT SUM(f_passenger) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
-        $result=mysql_fetch_array($lastweek_f);
-        $lastweek_fpass="$result[sum]";
-      
-        $thisweek_fc=mysql_query("SELECT SUM(fc) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
-        $result=mysql_fetch_array($thisweek_fc);
-        $thisweek_fc="$result[sum]";
-      
-        $lastweek_fc=mysql_query("SELECT SUM(fc) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
-        $result=mysql_fetch_array($lastweek_fc);
-        $lastweek_fc="$result[sum]";
-      
-        $thisweek_bc=mysql_query("SELECT SUM(bc) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
-        $result=mysql_fetch_array($thisweek_bc);
-        $thisweek_bc="$result[sum]";
-      
-        $lastweek_bc=mysql_query("SELECT SUM(bc) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
-        $result=mysql_fetch_array($lastweek_bc);
-        $lastweek_bc="$result[sum]";
-        
-        $thisweek_ec=mysql_query("SELECT SUM(ec) AS sum FROM (SELECT * FROM passenger where id between'173' and '179') AS c");
-        $result=mysql_fetch_array($thisweek_ec);
-        $thisweek_ec="$result[sum]";
-      
-        $lastweek_ec=mysql_query("SELECT SUM(ec) AS sum FROM (SELECT * FROM passenger where id between'166' and '172') AS c");
-        $result=mysql_fetch_array($lastweek_ec);
-        $lastweek_ec="$result[sum]";
-      
-        $total_perc = round(abs($thisweek_totalpass-$lastweek_totalpass)/$lastweek_totalpass*100);
-        $m_perc = round((abs($thisweek_mpass-$lastweek_mpass)/$lastweek_mpass)*100);
-        $f_perc = round((abs($thisweek_fpass-$lastweek_fpass)/$lastweek_fpass)*100);
-        $fc_perc = round((abs($thisweek_fc-$lastweek_fc)/$lastweek_fc)*100);
-        $bc_perc = round((abs($thisweek_bc-$lastweek_bc)/$lastweek_bc)*100);
-        $ec_perc = round((abs($thisweek_ec-$lastweek_ec)/$lastweek_ec)*100);
-      
-        if ($thisweek_totalpass < $lastweek_totalpass) {$total = 1;} else {$total=0;}
-        if ($thisweek_mpass < $lastweek_mpass) {$mpass = 1; } else {$mpass=0;}
-        if ($thisweek_fpass < $lastweek_fpass) {$fpass = 1; } else {$fpass=0;}
-        if ($thisweek_fc < $lastweek_fc) {$fc = 1; } else {$fc=0;}
-        if ($thisweek_bc < $lastweek_bc) {$bc = 1; } else {$bc=0;}
-        if ($thisweek_ec < $lastweek_ec) {$ec = 1; } else {$ec=0;}
-        
-        $thisweek_totalsuite = $thisweek_fc + $thisweek_bc + $thisweek_ec;
+        $coba = $_SESSION['id'];
+        $query2 = "SELECT * FROM user WHERE username = '$coba'";
+        //execute the query
+        $result2 = $db->query( $query2 );
+        if (!$result2)
+        {
+          die("could not query the database: <br />".$db->error);
+        }
+        $row2 = $result2->fetch_object();
       ?>
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Garuda Indonesia</span></a>
+              <a href="index.html" class="site_title"> <span>Garuda Indonesia</span></a>
             </div>
 
             <div class="clearfix"></div>
     
 <!-- menu profile quick info -->
-            <div class="profile">
-              <div class="profile_pic">
-                <img src="../images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
-              </div>
-            </div>
-            <!-- /menu profile quick info -->
-
-            <br />
+            
 
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -166,7 +86,7 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> CC Programs <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.php">Corporate Culture Program</a></li>
+                      <li><a href="programs.php">Corporate Culture Program</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -206,7 +126,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="../images/img.jpg" alt="">John Doe
+                    <img src="../images/img.jpg" alt=""><?php echo''.$row2->name.''; ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -290,6 +210,7 @@
                   <a href="javascript:window.print()">
                     <i class="fa fa-print"></i>
                   </a>
+                  </li>
               </ul>
             </nav>
           </div>
@@ -1066,7 +987,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Simulasi Dashboard Panel - GA <a href="https://colorlib.com">Colorlib</a>
+            Corporate Culture Information Systems - GA
           </div>
           <div class="clearfix"></div>
         </footer>

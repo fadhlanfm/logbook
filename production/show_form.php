@@ -63,6 +63,17 @@ else
   {
     die("could not query the database: <br />".$db->error);
   }
+
+  $coba = $_SESSION['id'];
+  include_once('Connection/dbconn.php');
+  $query2 = "SELECT * FROM user WHERE username = '$coba'";
+    //execute the query
+  $result2 = $db->query( $query2 );
+  if (!$result2)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+  $row2 = $result2->fetch_object();
   ?>
   <div class="container body">
     <div class="main_container">
@@ -74,24 +85,10 @@ else
 
           <div class="clearfix"></div>
 
-          <!-- menu profile quick info -->
-          <div class="profile">
-            <div class="profile_pic">
-              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-            </div>
-            <div class="profile_info">
-              <span>Welcome,</span>
-              <h2>John Doe</h2>
-            </div>
-          </div>
-          <!-- /menu profile quick info -->
-
-          <br />
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>General</h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
@@ -141,7 +138,7 @@ else
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt="">John Doe
+                  <img src="images/img.jpg" alt=""><?php echo''.$row2->name.''; ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -221,10 +218,7 @@ else
                   </li>
                 </ul>
               </li>
-              <li role="presentation">
-                <a href="javascript:window.print()">
-                  <i class="fa fa-print"></i>
-                </a>
+              
               </ul>
             </nav>
           </div>
@@ -255,7 +249,7 @@ else
             }
             ?> 
             <div class="x_content">
-              <table class="table table-hover centered" id="table1">
+              <table class="table table-hover" id="table1">
                 <thead>
                   <tr>
                     <th>Nomor</th>
@@ -288,8 +282,8 @@ else
                     echo'<td>'.$row->start.'</td>';
                     echo'<td>'.$row->end.'</td>';
                     echo'<td>'.$status.'</td>';
-                    echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">Lihat</a></td>';
-                    echo'<td><a href="beri_komentar.php ?id='.$row->id.'">Beri Evaluasi</a></td>';
+                    echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary">Lihat</button></a></td>';
+                    echo'<td><a href="beri_komentar.php ?id='.$row->id.'"><button class="btn btn-primary">Beri Evaluasi</button></a></td>';
                     echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
                     echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
                     echo'</tr>';
@@ -310,7 +304,7 @@ else
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Simulasi Dashboard Panel - GA <a href="https://colorlib.com">Colorlib</a>
+            Corporate Culture Information Systems - GA
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -375,7 +369,7 @@ else
         col_widths: [
         '50px', '70px', '100px',
         '70px', '70px', '70px',
-        '80px', '60px', '60px', '60px'
+        '150px', '70px', '130px', '60px'
         ],
       };
 
