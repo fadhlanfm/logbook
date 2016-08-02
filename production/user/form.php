@@ -28,7 +28,10 @@ else
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Form Program Baru </title>
-
+  
+  <!-- DATEPICKER -->
+  
+  
   <!-- Bootstrap -->
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
@@ -314,7 +317,7 @@ else
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Direktorat <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input class="form-control"  disabled="disabled" type="text" name="direktorat" id="direktorat" value="<?php echo $row2->dir; ?>">
+                          <input readonly class="form-control" type="text" name="direktorat" id="direktorat" value="<?php echo $row2->dir; ?>">
                               
                             </div>
                           </div>
@@ -322,7 +325,7 @@ else
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Unit <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input disabled="disabled" class="form-control type="text" name="unit" id="unit" value="<?php echo $row2->unit; ?>">
+                              <input readonly class="form-control type="text" name="unit" id="unit" value="<?php echo $row2->unit; ?>">
                               
                             </div>
                           </div>
@@ -330,7 +333,7 @@ else
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Cabang<span class="required"></span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input disabled="disabled" class="form-control" type="text" name="branch" id="branch" value="<?php echo $row2->branch; ?>">
+                              <input readonly class="form-control" type="text" name="branch" id="branch" value="<?php echo $row2->branch; ?>">
                               
                             </div>
                           </div>
@@ -469,7 +472,7 @@ else
                                   <td>Mendorong Tercapainya Kinerja Terbaik</td>
                                   <td colspan="2">
                                     <p>
-                                      <input name="kinerja[]" type="checkbox" class="filled-in" id="financial" value="Financial" required="required">
+                                      <input name="kinerja[]" type="checkbox" class="filled-in" id="financial" value="Financial">
                                       <label for="financial">Financial</label>
                                     </p>
                                     <p>

@@ -1,12 +1,17 @@
 <?php
 	include '../../connect_db.php';
+
 	$direktorat = (isset($_POST['direktorat']) ? $_POST['direktorat'] : '');
 	$unit = (isset($_POST['unit']) ? $_POST['unit'] : '');
 	$branch = (isset($_POST['branch']) ? $_POST['branch'] : '');
 	$nama_program = (isset($_POST['nama_program']) ? $_POST['nama_program'] : '');
 	$deskripsi = (isset($_POST['deskripsi']) ? $_POST['deskripsi'] : '');
-	$start_date = (isset($_POST['start_date']) ? $_POST['start_date'] : '');
-	$end_date = (isset($_POST['end_date']) ? $_POST['end_date'] : '');
+	$startdate = (isset($_POST['start_date']) ? $_POST['start_date'] : '');
+	$start_date = DateTime::createFromFormat('m/d/Y', $startdate);
+	$start_date = $start_date->format('Y-m-d');
+	$enddate = (isset($_POST['end_date']) ? $_POST['end_date'] : '');
+	$end_date = DateTime::createFromFormat('m/d/Y', $enddate);
+	$end_date = $end_date->format('Y-m-d');
 	$perilaku = (isset($_POST['perilaku']) ? $_POST['perilaku'] : '');
 	$aktifitas0 = (isset($_POST['aktifitas'][0]) ? $_POST['aktifitas'][0] : '');
 	$target0 = (isset($_POST['target'][0]) ? $_POST['target'][0] : '');
@@ -56,7 +61,6 @@
 	$file_size = $_FILES['file']['size'];
 	$file_type = $_FILES['file']['type'];
 	$folder="uploads/";
-	
 	// new file size in KB
 	$new_size = $file_size/1024;  
 	// new file size in KB

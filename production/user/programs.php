@@ -244,7 +244,7 @@
                     echo'<td>'.$row->end.'</td>';
                     echo'<td>'.$status.'</td>';
                     echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary">Lihat Evaluasi</button></a></td>';
-                    echo'<td><a href="isi_logbook.php ?id='.$row->id.'"><button class="btn btn-success">Isi Logbook</button></a></td>';
+                    echo'<td><a href="input_hasil.php ?id='.$row->id.'"><button class="btn btn-success">Input Hasil</button></a></td>';
                     echo'</tr>';
                     $i++;
                   }

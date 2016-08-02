@@ -108,7 +108,11 @@ else
                     <li><a href="form_ended.php">Program telah terlaksana</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-user"></i> User Management <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="kelola_akun/user_management.php">User list</a></li>
               </ul>
+              </li>
             </div>
 
           </div>
