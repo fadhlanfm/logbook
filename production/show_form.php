@@ -254,8 +254,8 @@ else
                     <th>Mulai Program</th>
                     <th>Berakhir Program</th>
                     <th>Status</th>
-                    <th colspan="2" class="center"><center>Aksi</center></th>
-                    <th colspan="2">Ubah Status</th>      
+                    <th><center>Aksi</center></th>
+                    <th>Ubah Status</th>      
                   </tr>
                 </thead>
                 <tbody>
@@ -277,10 +277,10 @@ else
                     echo'<td>'.$row->start.'</td>';
                     echo'<td>'.$row->end.'</td>';
                     echo'<td>'.$status.'</td>';
-                    echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary">Lihat</button></a></td>';
-                    echo'<td><a href="beri_komentar.php ?id='.$row->id.'"><button class="btn btn-primary">Beri Evaluasi</button></a></td>';
-                    echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"><i class="material-icons">done</i></a></td>';
-                    echo'<td><a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><i class="material-icons">clear</i></a></td>';
+                    echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">Lihat</button></a>';
+                    echo'<a href="beri_komentar.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">Beri Evaluasi</button></a></td>';
+                    echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"> <button class="btn btn-primary btn-xs"> <i class="material-icons" style="font-size:0.7em;">done</i></button></a>';
+                    echo'<a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><button class="btn btn-danger btn-xs"><i class="material-icons" style="font-size:0.7em;">clear</i></button></a></td>';
                     echo'</tr>';
                     $i++;
                   }
@@ -364,7 +364,7 @@ else
         col_widths: [
         '50px', '80px', '140px',
         '140px', '90px', '90px',
-        '150px', '70px', '130px', '60px'
+        '150px', '150px', '100px'
         ],
       };
 
