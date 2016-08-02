@@ -32,7 +32,7 @@
 				<th>Direktorat</th>
 				<th>Unit</th>
 				<th>Branch</th>
-				<th colspan="2">Action</th>
+				<th colspan="3">Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -62,6 +62,7 @@
 					echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
 					echo'<td>'.$row->unit.' - '.$row2->nama.'</td>';
 					echo'<td>-</td>';
+					echo'<td><a href="edit_username.php?iduser='.$row->iduser.'">Edit Username</a></td>';
 					echo'<td><a href="edit_password.php?iduser='.$row->iduser.'">Edit Password</a></td>';
 					echo'<td><a href="delete_account.php?iduser='.$row->iduser.'">Delete User</a></td>';
 					$i++;
@@ -73,6 +74,7 @@
 					echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
 					echo'<td>'.$row->unit.' - '.$row2->nama.'</td>';
 					echo'<td>'.$row->branch.' - '.$row3->nama.'</td>';
+					echo'<td><a href="edit_username.php?iduser='.$row->iduser.'">Edit Username</a></td>';
 					echo'<td><a href="edit_password.php?iduser='.$row->iduser.'">Edit Password</a></td>';
 					echo'<td><a href="delete_account.php?iduser='.$row->iduser.'">Delete User</a></td>';
 					$i++;
