@@ -206,17 +206,17 @@ else
 
           <!-- start of running program achievement -->
           <div class="col-md-8 col-sm-8 col-xs-12">
-            <div class="x_panel tile fixed_height_320">
+            <div class="x_panel tile">
               <div class="x_title">
                 <h2>Current Program</h2>
 
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                <h4>Achievement percentage</h4>
+              <h4>PROGRAM A</h4>
                 <div class="widget_summary">
                   <div class="w_left w_25">
-                    <span>F</span>
+                    <span>Penurunan Error Rate</span>
                   </div>
                   <div class="w_center w_55">
                     <div class="progress">
@@ -233,7 +233,7 @@ else
 
                 <div class="widget_summary">
                   <div class="w_left w_25">
-                    <span>L</span>
+                    <span>Menjaga Reputasi</span>
                   </div>
                   <div class="w_center w_55">
                     <div class="progress">
