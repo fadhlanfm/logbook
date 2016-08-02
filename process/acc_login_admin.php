@@ -6,7 +6,7 @@ if(isset($_POST['id']) && isset($_POST['password']))
 	$id_admin = secure($_POST['id'], $mysqli);
 	$pass_admin =  secure($_POST['password'], $mysqli);
 	
-	$q = "SELECT * FROM user WHERE username = '$id_admin' AND password = '$pass_admin' AND role = -1";
+	$q = "SELECT * FROM user WHERE BINARY username = '$id_admin' AND BINARY password = '$pass_admin' AND role = -1";
 	$result = $db->query($q);
 	$row = $result->fetch_object();
 	if($res = $mysqli->query($q))
