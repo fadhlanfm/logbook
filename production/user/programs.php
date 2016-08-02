@@ -223,7 +223,7 @@
                     <th>Mulai Program</th>
                     <th>Berakhir Program</th>
                     <th>Status</th>
-                    <th>Aksi</th>      
+                    <th colspan="2">Aksi</th>      
                   </tr>
                 </thead>
                 <tbody>
@@ -244,6 +244,7 @@
                     echo'<td>'.$row->end.'</td>';
                     echo'<td>'.$status.'</td>';
                     echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary">Lihat Evaluasi</button></a></td>';
+                    echo'<td><a href="isi_logbook.php ?id='.$row->id.'"><button class="btn btn-success">Isi Logbook</button></a></td>';
                     echo'</tr>';
                     $i++;
                   }
