@@ -116,525 +116,525 @@ else
               </ul>
             </div>
 
-            </div>
-            <!-- /sidebar menu -->
-
           </div>
-        </div>
+          <!-- /sidebar menu -->
 
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-                <li role="presentation">
-                  <a href="javascript:window.print()">
-                    <i class="fa fa-print"></i>
-                  </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-          <!-- /top navigation -->
-
-          <!-- page content -->
-          <div class="right_col" role="main">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Detail Logbook <?php echo''.$row->id.''; ?> </h2>
-              <ul class="nav navbar-right panel_toolbox">
-                      <li><a href="show_form.php"><button class="btn btn-primary">Kembali</button></a>
-                      </li>
-                      <li><a href="edit_form.php"><button class="btn btn-success">Edit Form</button></a>
-                      </li>
-                    </ul>
-              <div class="clearfix">
-              </div>
-              </div>
-            <div class="x_content">
-              <table class="table table-hover">
-    <tr>
-      <th colspan="2" class="center"><h4>Log Book</h4></th>
-    </tr>
-    <tr>
-      <th>Kode Unik Log Book</th>
-      <td><?php echo''.$row->id.'';?></td>
-    </tr>
-    <tr>
-      <th>Kode Unit</th>
-      <td><?php echo''.$row->kode_unit.'';?></td>
-    </tr>
-    <tr>
-      <th>Nama Program</th>
-      <td><?php echo''.$row->nama_program.'';?></td>
-    </tr>
-    <tr>
-      <th>Deskripsi Program</th>
-      <td><?php echo''.$row->deskripsi_program.'';?></td>
-    </tr>
-    <tr>
-      <th>Start</th>
-      <td><?php echo''.$row->start.'';?></td>
-    </tr>   
-    <tr>
-      <th>End</th>
-      <td><?php echo''.$row->end.'';?></td>
-    </tr>
-  </table>
-
-  <br><br><br>
-
-  <table class="table table-hover">
-    <tr>
-      <th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
-    </tr>
-    <tr>
-      <th>Tujuan Merubah Perilaku</th>
-      <td><?php echo''.$row->tujuan_merubah_perilaku.'';?></td>
-    </tr>
-    <tr>
-      <th>Target Merubah Perilaku</th>
-      <td><?php echo''.$row->target_merubah_perilaku.'';?></td>
-    </tr>
-    <tr>
-      <th>Tujuan Nilai Tambah</th>
-      <td><?php echo''.$row->tujuan_nilai_tambah.'';?></td>
-    </tr>
-    <tr>
-      <th>Target Nilai Tambah</th>
-      <td><?php echo''.$row->target_nilai_tambah.'';?></td>
-    </tr>   
-    <tr>
-      <th>Tujuan Capai Kinerja</th>
-      <td><?php echo''.$row->tujuan_capai_kinerja_0.','.$row->tujuan_capai_kinerja_1.','.$row->tujuan_capai_kinerja_2.','.$row->tujuan_capai_kinerja_3.'';?></td>
-    </tr>
-    <tr>
-      <th>Target Capai Kinerja</th>
-      <td><?php echo''.$row->target_capai_kinerja.'';?></td>
-    </tr>
-  </table>
-
-  <br><br><br>
-
-  <table class="table table-hover">
-    <tr>
-      <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
-    </tr>
-    <tr>
-      <th>Metode Monitoring</th>
-      <td><?php echo''.$row->metode_monitoring.'';?></td>
-    </tr>
-    <tr>
-      <th>Metode Enforcement Positif</th>
-      <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
-    </tr>
-    <tr>
-      <th>Metode Enforcement Negatif</th>
-      <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
-    </tr>
-  </table>
-
-  <br><br><br>
-
-  <table class="table table-hover">
-    <tr>
-      <th colspan="3" class="center"><h4>Change Agent Team</h4></th>
-    </tr>
-    <tr>
-      <th rowspan="2">Ketua</th>
-      <td><?php echo''.$row->nama_ketua.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_ketua.'';?></td>
-      </tr>
-    </tr>
-    <tr>
-      <th rowspan="2">Sekretaris & Bendahara</th>
-      <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
-      </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Dokumentasi & Publikasi</th>
-      <td><?php echo''.$row->nama_dok_pub.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_dok_pub.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Corporate Program</th>
-      <td><?php echo''.$row->nama_corp_prog.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_corp_prog.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Pic Rating</th>
-      <td><?php echo''.$row->nama_pic_rate.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_pic_rate.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Pic I-Dare</th>
-      <td><?php echo''.$row->nama_pic_dare.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_pic_dare.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Program Pendukung</th>
-      <td><?php echo''.$row->nama_prog_dukung.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_prog_dukung.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Pic Sharing Session</th>
-      <td><?php echo''.$row->nama_pic_share.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_pic_share.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Pic One Team One Spirit One Goal Program</th>
-      <td><?php echo''.$row->nama_pic_team.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_pic_team.'';?></td>
-      </tr>
-    </tr>
-    </tr>
-      <tr>
-      <th rowspan="2">Pic Standar Layanan</th>
-      <td><?php echo''.$row->nama_pic_standar.'';?></td>
-      <tr>
-      <td><?php echo''.$row->email_pic_standar.'';?></td>
-      </tr>
-    </tr>
-  </table>
-
-  <br><br>
-
-  <form action="post_komentar_logbook.php" method="POST"><br>
-    <input class="form-control" type="text" readonly name="id" value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>"></input>
-        <div class="input-field col s12">
-          <textarea id="deskripsi" class="form-control" name="komentar" required></textarea>
-          <label for="deskripsi">Evaluasi Logbook</label>
-        </div>
-    <button type="submit" value="Submit" class="btn waves-effect waves-light">Submit</button>
-  </form>
-            </div>
-          </div>
-          </div>
-          <!-- /page content -->
-
-          <!-- footer content -->
-          <footer>
-            <div class="pull-right">
-              Corporate Culture Information Systems - GA
-            </div>
-            <div class="clearfix"></div>
-          </footer>
-          <!-- /footer content -->
         </div>
       </div>
 
-      <!-- jQuery -->
-      <script src="../vendors/jquery/dist/jquery.min.js"></script>
-      <!-- Bootstrap -->
-      <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-      <!-- FastClick -->
-      <script src="../vendors/fastclick/lib/fastclick.js"></script>
-      <!-- NProgress -->
-      <script src="../vendors/nprogress/nprogress.js"></script>
-      <!-- Chart.js -->
-      <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-      <!-- gauge.js -->
-      <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-      <!-- bootstrap-progressbar -->
-      <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-      <!-- iCheck -->
-      <script src="../vendors/iCheck/icheck.min.js"></script>
-      <!-- Skycons -->
-      <script src="../vendors/skycons/skycons.js"></script>
-      <!-- Flot -->
-      <script src="../vendors/Flot/jquery.flot.js"></script>
-      <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-      <script src="../vendors/Flot/jquery.flot.time.js"></script>
-      <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-      <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-      <!-- Flot plugins -->
-      <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-      <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-      <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-      <!-- DateJS -->
-      <script src="../vendors/DateJS/build/date.js"></script>
-      <!-- JQVMap -->
-      <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-      <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-      <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-      <!-- bootstrap-daterangepicker -->
-      <script src="js/moment/moment.min.js"></script>
-      <script src="js/datepicker/daterangepicker.js"></script>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-      <!-- Custom Theme Scripts -->
-      <script src="../build/js/custom.min.js"></script>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="javascript:;"> Profile</a></li>
+                  <li>
+                    <a href="javascript:;">
+                      <span class="badge bg-red pull-right">50%</span>
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li><a href="javascript:;">Help</a></li>
+                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
 
-      <!-- /JQVMap -->
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li role="presentation">
+                <a href="javascript:window.print()">
+                  <i class="fa fa-print"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
 
-      <!-- Skycons -->
-      <script>
-        $(document).ready(function() {
-          var icons = new Skycons({
-            "color": "#73879C"
-          }),
-          list = [
-          "clear-day", "clear-night", "partly-cloudy-day",
-          "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-          "fog"
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Detail Logbook <?php echo''.$row->id.''; ?> </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a href="show_form.php"><button class="btn btn-primary btn-xs">Kembali</button></a>
+              </li>
+              <li><a href="edit_form.php"><button class="btn btn-success btn-xs">Edit Form</button></a>
+              </li>
+            </ul>
+            <div class="clearfix">
+            </div>
+          </div>
+          <div class="x_content">
+            <table class="table table-hover">
+              <tr>
+                <th colspan="2" class="center"><h4>Log Book</h4></th>
+              </tr>
+              <tr>
+                <th>Kode Unik Log Book</th>
+                <td><?php echo''.$row->id.'';?></td>
+              </tr>
+              <tr>
+                <th>Kode Unit</th>
+                <td><?php echo''.$row->kode_unit.'';?></td>
+              </tr>
+              <tr>
+                <th>Nama Program</th>
+                <td><?php echo''.$row->nama_program.'';?></td>
+              </tr>
+              <tr>
+                <th>Deskripsi Program</th>
+                <td><?php echo''.$row->deskripsi_program.'';?></td>
+              </tr>
+              <tr>
+                <th>Start</th>
+                <td><?php echo''.$row->start.'';?></td>
+              </tr>   
+              <tr>
+                <th>End</th>
+                <td><?php echo''.$row->end.'';?></td>
+              </tr>
+            </table>
+
+            <br><br><br>
+
+            <table class="table table-hover">
+              <tr>
+                <th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
+              </tr>
+              <tr>
+                <th>Tujuan Merubah Perilaku</th>
+                <td><?php echo''.$row->tujuan_merubah_perilaku.'';?></td>
+              </tr>
+              <tr>
+                <th>Target Merubah Perilaku</th>
+                <td><?php echo''.$row->target_merubah_perilaku.'';?></td>
+              </tr>
+              <tr>
+                <th>Tujuan Nilai Tambah</th>
+                <td><?php echo''.$row->tujuan_nilai_tambah.'';?></td>
+              </tr>
+              <tr>
+                <th>Target Nilai Tambah</th>
+                <td><?php echo''.$row->target_nilai_tambah.'';?></td>
+              </tr>   
+              <tr>
+                <th>Tujuan Capai Kinerja</th>
+                <td><?php echo''.$row->tujuan_capai_kinerja_0.','.$row->tujuan_capai_kinerja_1.','.$row->tujuan_capai_kinerja_2.','.$row->tujuan_capai_kinerja_3.'';?></td>
+              </tr>
+              <tr>
+                <th>Target Capai Kinerja</th>
+                <td><?php echo''.$row->target_capai_kinerja.'';?></td>
+              </tr>
+            </table>
+
+            <br><br><br>
+
+            <table class="table table-hover">
+              <tr>
+                <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
+              </tr>
+              <tr>
+                <th>Metode Monitoring</th>
+                <td><?php echo''.$row->metode_monitoring.'';?></td>
+              </tr>
+              <tr>
+                <th>Metode Enforcement Positif</th>
+                <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
+              </tr>
+              <tr>
+                <th>Metode Enforcement Negatif</th>
+                <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
+              </tr>
+            </table>
+
+            <br><br><br>
+
+            <table class="table table-hover">
+              <tr>
+                <th colspan="3" class="center"><h4>Change Agent Team</h4></th>
+              </tr>
+              <tr>
+                <th rowspan="2">Ketua</th>
+                <td><?php echo''.$row->nama_ketua.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_ketua.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2">Sekretaris & Bendahara</th>
+                <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2">Dokumentasi & Publikasi</th>
+                <td><?php echo''.$row->nama_dok_pub.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_dok_pub.'';?></td>
+                </tr>
+              </tr>
+            </tr>
+            <tr>
+              <th rowspan="2">Corporate Program</th>
+              <td><?php echo''.$row->nama_corp_prog.'';?></td>
+              <tr>
+                <td><?php echo''.$row->email_corp_prog.'';?></td>
+              </tr>
+            </tr>
+          </tr>
+          <tr>
+            <th rowspan="2">Pic Rating</th>
+            <td><?php echo''.$row->nama_pic_rate.'';?></td>
+            <tr>
+              <td><?php echo''.$row->email_pic_rate.'';?></td>
+            </tr>
+          </tr>
+        </tr>
+        <tr>
+          <th rowspan="2">Pic I-Dare</th>
+          <td><?php echo''.$row->nama_pic_dare.'';?></td>
+          <tr>
+            <td><?php echo''.$row->email_pic_dare.'';?></td>
+          </tr>
+        </tr>
+      </tr>
+      <tr>
+        <th rowspan="2">Program Pendukung</th>
+        <td><?php echo''.$row->nama_prog_dukung.'';?></td>
+        <tr>
+          <td><?php echo''.$row->email_prog_dukung.'';?></td>
+        </tr>
+      </tr>
+    </tr>
+    <tr>
+      <th rowspan="2">Pic Sharing Session</th>
+      <td><?php echo''.$row->nama_pic_share.'';?></td>
+      <tr>
+        <td><?php echo''.$row->email_pic_share.'';?></td>
+      </tr>
+    </tr>
+  </tr>
+  <tr>
+    <th rowspan="2">Pic One Team One Spirit One Goal Program</th>
+    <td><?php echo''.$row->nama_pic_team.'';?></td>
+    <tr>
+      <td><?php echo''.$row->email_pic_team.'';?></td>
+    </tr>
+  </tr>
+</tr>
+<tr>
+  <th rowspan="2">Pic Standar Layanan</th>
+  <td><?php echo''.$row->nama_pic_standar.'';?></td>
+  <tr>
+    <td><?php echo''.$row->email_pic_standar.'';?></td>
+  </tr>
+</tr>
+</table>
+
+<br><br>
+
+<form action="post_komentar_logbook.php" method="POST"><br>
+  <input class="form-control" type="text" readonly name="id" value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>"></input>
+  <div class="input-field col s12">
+    <textarea id="deskripsi" class="form-control" name="komentar" required></textarea>
+    <label for="deskripsi">Evaluasi Logbook</label>
+  </div>
+  <button type="submit" value="Submit" class="btn waves-effect waves-light">Submit</button>
+</form>
+</div>
+</div>
+</div>
+<!-- /page content -->
+
+<!-- footer content -->
+<footer>
+  <div class="pull-right">
+    Corporate Culture Information Systems - GA
+  </div>
+  <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+</div>
+</div>
+
+<!-- jQuery -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap -->
+<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="../vendors/fastclick/lib/fastclick.js"></script>
+<!-- NProgress -->
+<script src="../vendors/nprogress/nprogress.js"></script>
+<!-- Chart.js -->
+<script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+<!-- gauge.js -->
+<script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+<!-- bootstrap-progressbar -->
+<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<!-- iCheck -->
+<script src="../vendors/iCheck/icheck.min.js"></script>
+<!-- Skycons -->
+<script src="../vendors/skycons/skycons.js"></script>
+<!-- Flot -->
+<script src="../vendors/Flot/jquery.flot.js"></script>
+<script src="../vendors/Flot/jquery.flot.pie.js"></script>
+<script src="../vendors/Flot/jquery.flot.time.js"></script>
+<script src="../vendors/Flot/jquery.flot.stack.js"></script>
+<script src="../vendors/Flot/jquery.flot.resize.js"></script>
+<!-- Flot plugins -->
+<script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+<!-- DateJS -->
+<script src="../vendors/DateJS/build/date.js"></script>
+<!-- JQVMap -->
+<script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+<script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<!-- bootstrap-daterangepicker -->
+<script src="js/moment/moment.min.js"></script>
+<script src="js/datepicker/daterangepicker.js"></script>
+
+<!-- Custom Theme Scripts -->
+<script src="../build/js/custom.min.js"></script>
+
+<!-- /JQVMap -->
+
+<!-- Skycons -->
+<script>
+  $(document).ready(function() {
+    var icons = new Skycons({
+      "color": "#73879C"
+    }),
+    list = [
+    "clear-day", "clear-night", "partly-cloudy-day",
+    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+    "fog"
+    ],
+    i;
+
+    for (i = list.length; i--;)
+      icons.set(list[i], list[i]);
+
+    icons.play();
+  });
+</script>
+<!-- /Skycons -->
+
+<!-- Doughnut Chart -->
+<script>
+  $(document).ready(function(){
+    var options = {
+      legend: false,
+      responsive: false
+    };
+
+    new Chart(document.getElementById("canvas1"), {
+      type: 'doughnut',
+      tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+      data: {
+        labels: [
+        "Economy Class",
+        "Business Class",
+        "First Class"
+        ],
+        datasets: [{
+          data: [3412, 768, 475],
+          backgroundColor: [
+          "#9B59B6",
+          "#26B99A",
+          "#3498DB"
           ],
-          i;
+          hoverBackgroundColor: [
+          "#B370CF",
+          "#36CAAB",
+          "#49A9EA"
+          ]
+        }]
+      },
+      options: options
+    });
+  });
+</script>
+<!-- /Doughnut Chart -->
 
-          for (i = list.length; i--;)
-            icons.set(list[i], list[i]);
+<!-- bootstrap-daterangepicker -->
+<script>
+  $(document).ready(function() {
 
-          icons.play();
-        });
-      </script>
-      <!-- /Skycons -->
+    var cb = function(start, end, label) {
+      console.log(start.toISOString(), end.toISOString(), label);
+      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    };
 
-      <!-- Doughnut Chart -->
-      <script>
-        $(document).ready(function(){
-          var options = {
-            legend: false,
-            responsive: false
-          };
+    var optionSet1 = {
+      startDate: moment().subtract(29, 'days'),
+      endDate: moment(),
+      minDate: '01/01/2012',
+      maxDate: '12/31/2015',
+      dateLimit: {
+        days: 60
+      },
+      showDropdowns: true,
+      showWeekNumbers: true,
+      timePicker: false,
+      timePickerIncrement: 1,
+      timePicker12Hour: true,
+      ranges: {
+        'Today': [moment(), moment()],
+        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+        'This Month': [moment().startOf('month'), moment().endOf('month')],
+        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+      },
+      opens: 'left',
+      buttonClasses: ['btn btn-default'],
+      applyClass: 'btn-small btn-primary',
+      cancelClass: 'btn-small',
+      format: 'MM/DD/YYYY',
+      separator: ' to ',
+      locale: {
+        applyLabel: 'Submit',
+        cancelLabel: 'Clear',
+        fromLabel: 'From',
+        toLabel: 'To',
+        customRangeLabel: 'Custom',
+        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        firstDay: 1
+      }
+    };
+    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+    $('#reportrange').daterangepicker(optionSet1, cb);
+    $('#reportrange').on('show.daterangepicker', function() {
+      console.log("show event fired");
+    });
+    $('#reportrange').on('hide.daterangepicker', function() {
+      console.log("hide event fired");
+    });
+    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+    });
+    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+      console.log("cancel event fired");
+    });
+    $('#options1').click(function() {
+      $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+    });
+    $('#options2').click(function() {
+      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+    });
+    $('#destroy').click(function() {
+      $('#reportrange').data('daterangepicker').remove();
+    });
+  });
+</script>
+<!-- /bootstrap-daterangepicker -->
 
-          new Chart(document.getElementById("canvas1"), {
-            type: 'doughnut',
-            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-            data: {
-              labels: [
-              "Economy Class",
-              "Business Class",
-              "First Class"
-              ],
-              datasets: [{
-                data: [3412, 768, 475],
-                backgroundColor: [
-                "#9B59B6",
-                "#26B99A",
-                "#3498DB"
-                ],
-                hoverBackgroundColor: [
-                "#B370CF",
-                "#36CAAB",
-                "#49A9EA"
-                ]
-              }]
-            },
-            options: options
-          });
-        });
-      </script>
-      <!-- /Doughnut Chart -->
+<!-- gauge.js -->
+<script>
+  var opts = {
+    lines: 12,
+    angle: 0,
+    lineWidth: 0.4,
+    pointer: {
+      length: 0.75,
+      strokeWidth: 0.042,
+      color: '#1D212A'
+    },
+    limitMax: 'false',
+    colorStart: '#1ABC9C',
+    colorStop: '#1ABC9C',
+    strokeColor: '#F0F3F3',
+    generateGradient: true
+  };
+  var target = document.getElementById('foo'),
+  gauge = new Gauge(target).setOptions(opts);
 
-      <!-- bootstrap-daterangepicker -->
-      <script>
-        $(document).ready(function() {
+  gauge.maxValue = 6000;
+  gauge.animationSpeed = 32;
+  gauge.set(3200);
+  gauge.setTextField(document.getElementById("gauge-text"));
+</script>
+<!-- /gauge.js -->
 
-          var cb = function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-          };
-
-          var optionSet1 = {
-            startDate: moment().subtract(29, 'days'),
-            endDate: moment(),
-            minDate: '01/01/2012',
-            maxDate: '12/31/2015',
-            dateLimit: {
-              days: 60
-            },
-            showDropdowns: true,
-            showWeekNumbers: true,
-            timePicker: false,
-            timePickerIncrement: 1,
-            timePicker12Hour: true,
-            ranges: {
-              'Today': [moment(), moment()],
-              'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-              'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-              'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-              'This Month': [moment().startOf('month'), moment().endOf('month')],
-              'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-            },
-            opens: 'left',
-            buttonClasses: ['btn btn-default'],
-            applyClass: 'btn-small btn-primary',
-            cancelClass: 'btn-small',
-            format: 'MM/DD/YYYY',
-            separator: ' to ',
-            locale: {
-              applyLabel: 'Submit',
-              cancelLabel: 'Clear',
-              fromLabel: 'From',
-              toLabel: 'To',
-              customRangeLabel: 'Custom',
-              daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-              monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-              firstDay: 1
-            }
-          };
-          $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-          $('#reportrange').daterangepicker(optionSet1, cb);
-          $('#reportrange').on('show.daterangepicker', function() {
-            console.log("show event fired");
-          });
-          $('#reportrange').on('hide.daterangepicker', function() {
-            console.log("hide event fired");
-          });
-          $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-            console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-          });
-          $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-            console.log("cancel event fired");
-          });
-          $('#options1').click(function() {
-            $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-          });
-          $('#options2').click(function() {
-            $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-          });
-          $('#destroy').click(function() {
-            $('#reportrange').data('daterangepicker').remove();
-          });
-        });
-      </script>
-      <!-- /bootstrap-daterangepicker -->
-
-      <!-- gauge.js -->
-      <script>
-        var opts = {
-          lines: 12,
-          angle: 0,
-          lineWidth: 0.4,
-          pointer: {
-            length: 0.75,
-            strokeWidth: 0.042,
-            color: '#1D212A'
-          },
-          limitMax: 'false',
-          colorStart: '#1ABC9C',
-          colorStop: '#1ABC9C',
-          strokeColor: '#F0F3F3',
-          generateGradient: true
-        };
-        var target = document.getElementById('foo'),
-        gauge = new Gauge(target).setOptions(opts);
-
-        gauge.maxValue = 6000;
-        gauge.animationSpeed = 32;
-        gauge.set(3200);
-        gauge.setTextField(document.getElementById("gauge-text"));
-      </script>
-      <!-- /gauge.js -->
-
-      <script type="text/javascript">
+<script type="text/javascript">
     //set timezone
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
     //buat object date berdasarkan waktu di server

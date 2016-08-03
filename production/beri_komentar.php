@@ -223,7 +223,7 @@ else
               <div class="x_title">
                 <h2>Logbook</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                      <li><a href="show_form.php"><button class="btn btn-primary">Kembali</button></a>
+                      <li><a href="show_form.php"><button class="btn btn-primary btn-xs">Kembali</button></a>
                       </li>
                     </ul>
                 <div class="clearfix">

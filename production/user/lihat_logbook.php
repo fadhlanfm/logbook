@@ -100,7 +100,7 @@ else
                     <li><a href="programs.php">Corporate Culture Program</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="edit_username.php">Ubah Username</a></li>
                     <li><a href="edit_password.php">Ubah Password</a></li>
@@ -223,7 +223,7 @@ else
             <div class="x_title">
               <h2>Detail Logbook </h2>
               <ul class="nav navbar-right panel_toolbox">
-                      <li><a href="programs.php"><button class="btn btn-primary">Kembali</button></a>
+                      <li><a href="programs.php"><button class="btn btn-primary btn-xs">Kembali</button></a>
                       </li>
                     </ul>
               <div class="clearfix">

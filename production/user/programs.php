@@ -96,7 +96,7 @@ else
                     <li><a href="programs.php">Corporate Culture Program</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="edit_username.php">Ubah Username</a></li>
                     <li><a href="edit_password.php">Ubah Password</a></li>
@@ -243,9 +243,19 @@ else
                     }else{
                       $status = 'Sudah Diverifikasi';
                     }
+                    $date1 = $row->end;
+                    $date3 = $row->start;
+                    $date2 = date("Y-m-d");
+                    if ($date1 < $date2) {
+                      $status2 = ' <span class="badge bg-green">Finished</span></td>';
+                    } else if ($date3 < $date2 && $date2 < $date1) {
+                      $status2 = ' <span class="badge bg-blue">Running</span></td>';
+                    } else if ($date3 > $date2) {
+                      $status2 = ' <span class="badge bg-white">Planned</span></td>';
+                    }
                     echo'<tr>';
                     echo'<td>'.$i.'</td>';
-                    echo'<td>'.$row->nama_program.'</td>';
+                    echo'<td>'.$row->nama_program.$status2;
                     echo'<td>'.$row->start.'</td>';
                     echo'<td>'.$row->end.'</td>';
                     echo'<td>'.$status.'</td>';
