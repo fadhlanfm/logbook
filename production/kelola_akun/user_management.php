@@ -49,6 +49,23 @@ else
   <?php
   //connect database
   include('../connect_db.php');
+  $id = $_SESSION['id'];
+  $query = "SELECT * FROM logbook WHERE id = '$id'";
+  $result = $db->query($query);
+  if (!$result)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+  $row = $result->fetch_object();
+  $coba = $_SESSION['id'];
+  $query2 = "SELECT * FROM user WHERE username = '$coba'";
+    //execute the query
+  $result2 = $db->query( $query2 );
+  if (!$result2)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+  $row2 = $result2->fetch_object();
   $db = new mysqli($db_host,$db_username, $db_password, $db_database);
   if ($db->connect_errno)
   {
@@ -83,7 +100,7 @@ else
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              
+
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
@@ -227,12 +244,78 @@ else
             <div class="x_panel tile">
               <div class="x_title">
                 <h2>Daftar User</h2>
-                <!-- sini sini -->
+                <ul class="nav navbar-right panel_toolbox">
+                      <li><a href="create_user.php"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New User</button></a>
+                      </li>
+                    </ul>
+                <table class="table table-striped" id="table1">
+                  <thead>
+                    <tr>
+                      <th>Nomor</th>
+                      <th>Username</th>
+                      <th>Password</th>
+                      <th>Direktorat</th>
+                      <th>Unit</th>
+                      <th>Branch</th>
+                      <th colspan="3"> <center>Action</center></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $i = 1;
+                    while($row = $result->fetch_object())
+                    { 
+                      $query1 = " SELECT * FROM direktorat WHERE kode='$row->dir'";
+                      $query2 = " SELECT * FROM unit WHERE kode='$row->unit'";
+                      $query3 = " SELECT * FROM branch WHERE kode='$row->branch'";
+        //execute the query
+                      $result1 = $db->query( $query1 );
+                      $result2 = $db->query( $query2 );
+                      $result3 = $db->query( $query3 );
+                      if (!$result1)
+                      {
+                        die("could not query the database: <br />".$db->error);
+                      }
+                      $row1 = $result1->fetch_object();
+                      $row2 = $result2->fetch_object();
+                      $row3 = $result3->fetch_object();
+                      if(!$row3){
+                        echo'<tr>';
+                        echo'<td>'.$i.'</td>';
+                        echo'<td>'.$row->username.'</td>';
+                        echo'<td>'.$row->password.'</td>';
+                        echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
+                        echo'<td>'.$row->unit.' - '.$row2->nama.'</td>';
+                        echo'<td>-</td>';
+                        echo'<td><a href="edit_username.php?iduser='.$row->iduser.'"><button class="btn btn-primary btn-xs">Edit Username</button></a></td>';
+                        echo'<td><a href="edit_password.php?iduser='.$row->iduser.'"><button class="btn btn-xs">Edit Password</button></a></td>';
+                        echo'<td><a href="delete_account.php?iduser='.$row->iduser.'"><button class="btn btn-danger btn-xs">Delete User</button></a></td>';
+                        $i++;
+                      }else{
+                        echo'<tr>';
+                        echo'<td>'.$i.'</td>';
+                        echo'<td>'.$row->username.'</td>';
+                        echo'<td>'.$row->password.'</td>';
+                        echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
+                        echo'<td>'.$row->unit.' - '.$row2->nama.'</td>';
+                        echo'<td>'.$row->branch.' - '.$row3->nama.'</td>';
+                        echo'<td><a href="edit_username.php?iduser='.$row->iduser.'"><button class="btn btn-primary btn-xs">Edit Username</button></a></td>';
+                        echo'<td><a href="edit_password.php?iduser='.$row->iduser.'"><button class="btn btn-xs">Edit Password</button></a></td>';
+                        echo'<td><a href="delete_account.php?iduser='.$row->iduser.'"><button class="btn btn-danger btn-xs">Delete User</button></a></td>';
+                        $i++;
+                      }
+
+                    }
+                    $result->free();
+                    $db->close();
+                    ?>
+                  </tbody>
+                </table>
                 
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-                
+
               </div>
             </div>
           </div>
