@@ -91,7 +91,7 @@ else
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="index.php">Dashboard</a></li>
                   </ul>
@@ -108,9 +108,9 @@ else
                     <li><a href="form_ended.php">Program telah terlaksana</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-user"></i> User Management <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="kelola_akun/user_management.php">User list</a></li>
+                    <li><a href="kelola_akun/user_management.php">Daftar User</a></li>
                   </ul>
                 </li>
               </ul>
