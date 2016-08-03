@@ -1,6 +1,6 @@
 <?php
 //connect database
-include('../connect_db.php');
+include('../../connect_db.php');
 $db = new mysqli($db_host,$db_username, $db_password, $db_database);
 if ($db->connect_errno)
 	{
@@ -13,7 +13,7 @@ if ($db->connect_errno)
   <head>
     <title>Create Account</title>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="../materialize/js/jquery-3.0.0.min.js"></script>
+    <script src="../../vendors/jquery/dist/jquery.min.js"></script>
 	  <script>
       //function for dependent dropdown option
       function getSecond(val)
