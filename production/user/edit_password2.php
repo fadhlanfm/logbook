@@ -62,13 +62,13 @@ else
   $row2 = $result2->fetch_object();
   $unit2 = $row2->unit;
 
-  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit = unit.kode AND logbook.kode_unit='$unit2'";
-        //execute the query
-  $result = $db->query( $query );
-  if (!$result)
+  $query = "SELECT * FROM user WHERE iduser='$coba'";
+  $result = $db->query($query);
+  if(!$result)
   {
-    die("could not query the database: <br />".$db->error);
+    die("Could not query the database: <br />". $db->error);
   }
+  $row=$result->fetch_object();
   ?>
   <div class="container body">
     <div class="main_container">
@@ -215,61 +215,22 @@ else
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel tile">
             <div class="x_title">
-              <h2>Corporate Culture Programs</h2>
+              <h2>Ubah Password</h2>
 
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <a href="form.php"><button class="btn btn-primary">Buat Program Baru</button></a>
-              <table class="table table-hover centered" id="table1">
-                <thead>
-                  <tr>
-                    <th>Nomor</th>
-                    <th>Nama Program</th>
-                    <th>Mulai Program</th>
-                    <th>Berakhir Program</th>
-                    <th>Status</th>
-                    <th style="width:20%;"><center>Aksi</center></th>      
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php
-                  $i = 1;
-                  while($row = $result->fetch_object())
-                  {
-                    $status = $row->status;
-                    if($status == 0){
-                      $status = 'Belum Diverifikasi';
-                    }else{
-                      $status = 'Sudah Diverifikasi';
-                    }
-                    $date1 = $row->end;
-                    $date3 = $row->start;
-                    $date2 = date("Y-m-d");
-                    if ($date1 < $date2) {
-                      $status2 = ' <span class="badge bg-green">Finished</span></td>';
-                    } else if ($date3 < $date2 && $date2 < $date1) {
-                      $status2 = ' <span class="badge bg-blue">Running</span></td>';
-                    } else if ($date3 > $date2) {
-                      $status2 = ' <span class="badge bg-white">Planned</span></td>';
-                    }
-                    echo'<tr>';
-                    echo'<td>'.$i.'</td>';
-                    echo'<td>'.$row->nama_program.$status2;
-                    echo'<td>'.$row->start.'</td>';
-                    echo'<td>'.$row->end.'</td>';
-                    echo'<td>'.$status.'</td>';
-                    echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button style="width:48%;" class="btn btn-primary btn-xs">Lihat Evaluasi</button></a>';
-                    echo'<a href="input_hasil.php ?id='.$row->id.'"><button style="width:45%;" class="btn btn-success btn-xs">Input Hasil</button></a></td>';
-                    echo'</tr>';
-                    $i++;
-                  }
-      // echo'Total Rows = '.$result->num_rows;
-                  $result->free();
-                  $db->close();
-                  ?>
-                </tbody>
-              </table>
+              <!-- insert content here -->
+              
+              <form method="POST" action="acc_edit_password.php">
+                <label for="iduser">Unique ID : </label>
+                <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php echo''.$row2->iduser.''; ?>"></input><br>
+                <label for="iduser">Old Password : </label>
+                <input class="form-control" type="text" readonly id="oldpass" value="<?php echo''.$row2->password.''; ?>"></input><br>
+                <label for="newpass">New Password : </label>
+                <input class="form-control" type="password" id="newpass" placeholder="newpass" name="newpass"></input><br>
+                <input class="btn btn-primary" type="submit" value="Submit"></input>
+              </form>
 
             </div>
           </div>

@@ -49,7 +49,7 @@ else
 
   <!-- QUERIES -->
   <?php
-  include_once('../Connection/dbconn.php');
+  include('../Connection/dbconn.php');
 
   $coba = $_SESSION['id'];
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
@@ -61,6 +61,7 @@ else
   }
   $row2 = $result2->fetch_object();
   ?>
+
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
@@ -91,8 +92,8 @@ else
                 </li>
                 <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="edit_username.php">Ubah Username</a></li>
-                    <li><a href="edit_password.php">Ubah Password</a></li>
+                    <li><a href="edit_username2.php">Ubah Username</a></li>
+                    <li><a href="edit_password2.php">Ubah Password</a></li>
                   </ul>
                 </li>
               </ul>
@@ -115,7 +116,10 @@ else
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <img src="../images/img.jpg" alt=""><?php
+
+                  echo''.$row2->username.'';
+                  ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -219,7 +223,7 @@ else
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
-              <h4>PROGRAM A</h4>
+                <h4>PROGRAM A</h4>
                 <div class="widget_summary">
                   <div class="w_left w_25">
                     <span>Penurunan Error Rate</span>

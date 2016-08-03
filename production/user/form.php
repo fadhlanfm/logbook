@@ -187,11 +187,11 @@ else
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="edit_username.php">Ubah Username</a></li>
-                      <li><a href="edit_password.php">Ubah Password</a></li>
-                    </ul>
-                  </li>
+                  <ul class="nav child_menu">
+                    <li><a href="edit_username2.php">Ubah Username</a></li>
+                    <li><a href="edit_password2.php">Ubah Password</a></li>
+                  </ul>
+                </li>
                 </ul>
               </div>
 
