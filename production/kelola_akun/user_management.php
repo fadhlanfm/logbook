@@ -1,18 +1,19 @@
 <?php
+// session checker
 session_start();
-if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
+if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 {
 
-} else if ($_SESSION['role'] == -1) {
-  echo 'You are not logged in as User <br>';
-  echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
-  echo'<a href="../pages/survey.php">BACK</a>';
+} else if ($_SESSION['role'] == 1) {
+  echo 'You are not logged in as Admin <br>';
+  echo'<a href="../acc_logout.php">LOGOUT</a><br>';
+  echo'<a href="../index.php">BACK</a>';
   exit;
 }
 else
 {
   echo 'You are not logged In <br>';
-  echo'<a href="../index.php">LOGIN</a>';
+  echo'<a href="../../index.php">LOGIN</a>';
   exit;
 
 }
@@ -20,8 +21,6 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
@@ -43,67 +42,69 @@ else
   <!-- JQVMap -->
   <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
-  <link rel="stylesheet" type="text/css" href="../../css/print.css" media="print" />
-
   <!-- Custom Theme Style -->
   <link href="../../build/css/custom.min.css" rel="stylesheet">
-</head>
-
-<body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
   <!-- QUERIES -->
   <?php
-  include_once('../../connect_db.php');
-  $id = $_GET['id'];
-  $query = "SELECT * FROM logbook WHERE id = '$id'";
+  //connect database
+  include('../connect_db.php');
+  $db = new mysqli($db_host,$db_username, $db_password, $db_database);
+  if ($db->connect_errno)
+  {
+    die("Could not connect to the database: <br />".$db->connect_error);
+  }
+  //asign a query
+  $query = " SELECT * FROM user WHERE role=1";
   //execute the query
   $result = $db->query( $query );
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
-  $row = $result->fetch_object();
-
-  $coba = $_SESSION['id'];
-  $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
-  $result2 = $db->query( $query2 );
-  if (!$result2)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row2 = $result2->fetch_object();
   ?>
+</head>
+
+<body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
+
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.php" class="site_title"><span>Garuda Indonesia</span></a>
+            <a href="../index.php" class="site_title"> <span>Garuda Indonesia</span></a>
           </div>
 
           <div class="clearfix"></div>
 
-          
+          <!-- menu profile quick info -->
+
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
+              
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.php">Halaman Utama</a></li>
+                    <li><a href="../index.php">Dashboard</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> CC Program <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Logbook <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="programs.php">Corporate Culture Program</a></li>
+                    <li><a href="../show_form.php">Daftar Logbook</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="edit_username2.php">Ubah Username</a></li>
-                    <li><a href="edit_password2.php">Ubah Password</a></li>
+                    <li><a href="../form_running.php">Program sedang berjalan</a></li>
+                    <li><a href="../form_unstarted.php">Program akan dilaksanakan</a></li>
+                    <li><a href="../form_ended.php">Program telah terlaksana</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="user_management.php">Daftar User</a></li>
                   </ul>
                 </li>
               </ul>
@@ -111,7 +112,7 @@ else
 
           </div>
           <!-- /sidebar menu -->
-          
+
         </div>
       </div>
 
@@ -127,7 +128,7 @@ else
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <img src="../images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-                  <span class=" fa fa-angle-down"></span>
+                  <span class="fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li><a href="javascript:;"> Profile</a></li>
@@ -138,7 +139,7 @@ else
                     </a>
                   </li>
                   <li><a href="javascript:;">Help</a></li>
-                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
 
@@ -150,7 +151,7 @@ else
                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                   <li>
                     <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                       <span>
                         <span>John Smith</span>
                         <span class="time">3 mins ago</span>
@@ -162,7 +163,7 @@ else
                   </li>
                   <li>
                     <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                       <span>
                         <span>John Smith</span>
                         <span class="time">3 mins ago</span>
@@ -174,7 +175,7 @@ else
                   </li>
                   <li>
                     <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                       <span>
                         <span>John Smith</span>
                         <span class="time">3 mins ago</span>
@@ -186,7 +187,7 @@ else
                   </li>
                   <li>
                     <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
                       <span>
                         <span>John Smith</span>
                         <span class="time">3 mins ago</span>
@@ -219,192 +220,30 @@ else
 
       <!-- page content -->
       <div class="right_col" role="main">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Detail Logbook </h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a href="programs.php"><button class="btn btn-primary btn-xs">Kembali</button></a>
-              </li>
-            </ul>
-            <div class="clearfix">
+        <div class="row">
+
+          <!-- start of running program achievement -->
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile">
+              <div class="x_title">
+                <h2>Daftar User</h2>
+                <!-- sini sini -->
+                
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                
+              </div>
             </div>
           </div>
-          <div class="x_content">
-            <table class="table table-hover">
-              <tr>
-                <th colspan="2" class="center"><h4>Log Book</h4></th>
-              </tr>
-              <tr>
-                <th>Kode Unik Log Book</th>
-                <td><?php echo''.$row->id.'';?></td>
-              </tr>
-              <tr>
-                <th>Kode Unit</th>
-                <td><?php echo''.$row->kode_unit.'';?></td>
-              </tr>
-              <tr>
-                <th>Nama Program</th>
-                <td><?php echo''.$row->nama_program.'';?></td>
-              </tr>
-              <tr>
-                <th>Deskripsi Program</th>
-                <td><?php echo''.$row->deskripsi_program.'';?></td>
-              </tr>
-              <tr>
-                <th>Start</th>
-                <td><?php echo''.$row->start.'';?></td>
-              </tr>   
-              <tr>
-                <th>End</th>
-                <td><?php echo''.$row->end.'';?></td>
-              </tr>
-            </table>
+          <!-- end of running program achievement -->
 
-            <br>
+          
 
-            <table class="table table-hover">
-              <tr>
-                <th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
-              </tr>
-              <tr>
-                <th>Tujuan Merubah Perilaku</th>
-                <td><?php echo''.$row->tujuan_merubah_perilaku.'';?></td>
-              </tr>
-              <tr>
-                <th>Target Merubah Perilaku</th>
-                <td><?php echo''.$row->target_merubah_perilaku.'';?></td>
-              </tr>
-              <tr>
-                <th>Tujuan Nilai Tambah</th>
-                <td><?php echo''.$row->tujuan_nilai_tambah.'';?></td>
-              </tr>
-              <tr>
-                <th>Target Nilai Tambah</th>
-                <td><?php echo''.$row->target_nilai_tambah.'';?></td>
-              </tr>   
-              <tr>
-                <th>Tujuan Capai Kinerja</th>
-                <td><?php echo''.$row->tujuan_capai_kinerja_0.','.$row->tujuan_capai_kinerja_1.','.$row->tujuan_capai_kinerja_2.','.$row->tujuan_capai_kinerja_3.'';?></td>
-              </tr>
-              <tr>
-                <th>Target Capai Kinerja</th>
-                <td><?php echo''.$row->target_capai_kinerja.'';?></td>
-              </tr>
-            </table>
-
-            <br>
-            
-            <table class="table table-hover">
-              <tr>
-                <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
-              </tr>
-              <tr>
-                <th>Metode Monitoring</th>
-                <td><?php echo''.$row->metode_monitoring.'';?></td>
-              </tr>
-              <tr>
-                <th>Metode Enforcement Positif</th>
-                <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
-              </tr>
-              <tr>
-                <th>Metode Enforcement Negatif</th>
-                <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
-              </tr>
-            </table>
-
-            <br>
-
-            <table class="table table-hover">
-              <tr>
-                <th colspan="3" class="center"><h4>Change Agent Team</h4></th>
-              </tr>
-              <tr>
-                <th rowspan="2">Ketua</th>
-                <td><?php echo''.$row->nama_ketua.'';?></td>
-                <tr>
-                  <td><?php echo''.$row->email_ketua.'';?></td>
-                </tr>
-              </tr>
-              <tr>
-                <th rowspan="2">Sekretaris & Bendahara</th>
-                <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
-                <tr>
-                  <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
-                </tr>
-              </tr>
-              <tr>
-                <th rowspan="2">Dokumentasi & Publikasi</th>
-                <td><?php echo''.$row->nama_dok_pub.'';?></td>
-                <tr>
-                  <td><?php echo''.$row->email_dok_pub.'';?></td>
-                </tr>
-              </tr>
-            </tr>
-            <tr>
-              <th rowspan="2">Corporate Program</th>
-              <td><?php echo''.$row->nama_corp_prog.'';?></td>
-              <tr>
-                <td><?php echo''.$row->email_corp_prog.'';?></td>
-              </tr>
-            </tr>
-          </tr>
-          <tr>
-            <th rowspan="2">Pic Rating</th>
-            <td><?php echo''.$row->nama_pic_rate.'';?></td>
-            <tr>
-              <td><?php echo''.$row->email_pic_rate.'';?></td>
-            </tr>
-          </tr>
-        </tr>
-        <tr>
-          <th rowspan="2">Pic I-Dare</th>
-          <td><?php echo''.$row->nama_pic_dare.'';?></td>
-          <tr>
-            <td><?php echo''.$row->email_pic_dare.'';?></td>
-          </tr>
-        </tr>
-      </tr>
-      <tr>
-        <th rowspan="2">Program Pendukung</th>
-        <td><?php echo''.$row->nama_prog_dukung.'';?></td>
-        <tr>
-          <td><?php echo''.$row->email_prog_dukung.'';?></td>
-        </tr>
-      </tr>
-    </tr>
-    <tr>
-      <th rowspan="2">Pic Sharing Session</th>
-      <td><?php echo''.$row->nama_pic_share.'';?></td>
-      <tr>
-        <td><?php echo''.$row->email_pic_share.'';?></td>
-      </tr>
-    </tr>
-  </tr>
-  <tr>
-    <th rowspan="2">Pic One Team One Spirit One Goal Program</th>
-    <td><?php echo''.$row->nama_pic_team.'';?></td>
-    <tr>
-      <td><?php echo''.$row->email_pic_team.'';?></td>
-    </tr>
-  </tr>
-</tr>
-<tr>
-  <th rowspan="2">Pic Standar Layanan</th>
-  <td><?php echo''.$row->nama_pic_standar.'';?></td>
-  <tr>
-    <td><?php echo''.$row->email_pic_standar.'';?></td>
-  </tr>
-</tr>
-</table>
-
-<br>
-<label for="deskripsi">Evaluasi Logbook</label>
-<div class="input-field col s12">
-  <textarea id="deskripsi" class="form-control" readonly placeholder="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>" name="komentar" ></textarea>
-</div>
-
-</div>
-</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- /page content -->
 
@@ -460,6 +299,97 @@ else
 <!-- Custom Theme Scripts -->
 <script src="../../build/js/custom.min.js"></script>
 
+<!-- Flot -->
+<script>
+  $(document).ready(function() {
+    var data1 = [
+    [gd(2012, 1, 1), <?php echo $cek1;?>],
+    [gd(2012, 2, 2), <?php echo $cek2;?>],
+    [gd(2012, 3, 3), <?php echo $cek3;?>],
+    [gd(2012, 4, 4), 65530],
+    [gd(2012, 5, 5), 43356],
+    [gd(2012, 6, 6), 54689]
+    ];
+
+    var data2 = [
+    [gd(2012, 1, 1), 10000],
+    [gd(2012, 2, 2), 30000],
+    [gd(2012, 3, 3), 50000],
+    [gd(2012, 4, 4), 35000],
+    [gd(2012, 5, 5), 20000],
+    [gd(2012, 6, 6), 60000]
+    ];
+    $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+      data1, data2
+      ], {
+        series: {
+          lines: {
+            show: false,
+            fill: true
+          },
+          splines: {
+            show: true,
+            tension: 0.4,
+            lineWidth: 1,
+            fill: 0.4
+          },
+          points: {
+            radius: 0,
+            show: true
+          },
+          shadowSize: 2
+        },
+        grid: {
+          verticalLines: true,
+          hoverable: true,
+          clickable: true,
+          tickColor: "#d5d5d5",
+          borderWidth: 1,
+          color: '#fff'
+        },
+        colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+        xaxis: {
+          tickColor: "rgba(51, 51, 51, 0.06)",
+          mode: "time",
+          tickSize: [1, "month"],
+            //tickLength: 10,
+            axisLabel: "Date",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Verdana, Arial',
+            axisLabelPadding: 10
+          },
+          yaxis: {
+            ticks: 8,
+            tickColor: "rgba(51, 51, 51, 0.06)",
+          },
+          tooltip: false
+        });
+
+    function gd(year, month, day) {
+      return new Date(year, month - 1, day).getTime();
+    }
+  });
+</script>
+<!-- /Flot -->
+
+<!-- JQVMap -->
+<script>
+  $(document).ready(function(){
+    $('#world-map-gdp').vectorMap({
+      map: 'world_en',
+      backgroundColor: null,
+      color: '#ffffff',
+      hoverOpacity: 0.7,
+      selectedColor: '#666666',
+      enableZoom: true,
+      showTooltip: true,
+      values: sample_data,
+      scaleColors: ['#E6F2F0', '#149B7E'],
+      normalizeFunction: 'polynomial'
+    });
+  });
+</script>
 <!-- /JQVMap -->
 
 <!-- Skycons -->
