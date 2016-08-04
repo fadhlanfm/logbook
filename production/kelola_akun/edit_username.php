@@ -91,6 +91,9 @@ else
   }
   ?>
   <script>
+    function goBack() {
+      window.history.back();
+    }
     //function for dependent dropdown option
     function getSecond(val)
     {
@@ -127,6 +130,7 @@ else
           <div class="navbar nav_title" style="border: 0;">
             <a href="../index.php" class="site_title"> <span>Garuda Indonesia</span></a>
           </div>
+          <h5 style="text-indent:12px;">Admin Page</h5>
 
           <div class="clearfix"></div>
 
@@ -273,23 +277,37 @@ else
 
       <!-- page content -->
       <div class="right_col" role="main">
-        <div class="row">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Edit Username</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
+              </li>
 
-          <!-- start of running program achievement -->
-          <form method="POST" action="acc_edit_username.php">
-            <div class="form-group">
-            <label for="iduser">Unique ID : </label>
-            <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php if (isset($row->iduser)) {echo $row->iduser;} else {echo '';}?>"></input><br>
-            <label for="iduser">Old Username : </label>
-            <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->username)) {echo $row->username;} else {echo '';}?>"></input>
-            <br>
-            <label for="newpass">New Username : </label>
-            <input type="text" class="form-control" id="newpass" placeholder="new username" name="username"></input><br>
-            <input class="btn btn-success" type="submit" value="Submit"></input>
+            </ul>
+            <div class="clearfix">
             </div>
-          </form>
-          <!-- end of running program achievement -->
+          </div>
 
+          <div class="x_content">
+            <div class="row">
+
+              <!-- start of running program achievement -->
+              <form method="POST" action="acc_edit_username.php">
+                <div class="form-group">
+                  <label for="iduser">Unique ID : </label>
+                  <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php if (isset($row->iduser)) {echo $row->iduser;} else {echo '';}?>"></input><br>
+                  <label for="iduser">Old Username : </label>
+                  <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->username)) {echo $row->username;} else {echo '';}?>"></input>
+                  <br>
+                  <label for="newpass">New Username : </label>
+                  <input type="text" class="form-control" id="newpass" placeholder="new username" name="username"></input><br>
+                  <input class="btn btn-success" type="submit" value="Submit"></input>
+                </div>
+              </form>
+              <!-- end of running program achievement -->
+            </div>
+          </div>
           
 
         </div>

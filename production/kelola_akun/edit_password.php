@@ -92,6 +92,9 @@ else
   }
   ?>
   <script>
+    function goBack() {
+      window.history.back();
+    }
     //function for dependent dropdown option
     function getSecond(val)
     {
@@ -128,6 +131,7 @@ else
           <div class="navbar nav_title" style="border: 0;">
             <a href="../index.php" class="site_title"> <span>Garuda Indonesia</span></a>
           </div>
+          <h5 style="text-indent:12px;">Admin Page</h5>
 
           <div class="clearfix"></div>
 
@@ -274,8 +278,19 @@ else
 
       <!-- page content -->
       <div class="right_col" role="main">
-        <div class="row">
+        <div class="x_panel">
+            <div class="x_title">
+              <h2>Edit Password</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
+                </li>
 
+              </ul>
+              <div class="clearfix">
+              </div>
+            </div>
+
+          <div class="x_content">
           <!-- start of running program achievement -->
           <form method="POST" action="acc_edit_password.php">
             <label for="iduser">Unique ID : </label>
@@ -287,6 +302,8 @@ else
             <input class="btn btn-success" type="submit" value="Submit"></input>
           </form>
           <!-- end of running program achievement -->
+          </div>
+          </div>
 
           
 
