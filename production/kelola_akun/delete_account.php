@@ -9,7 +9,7 @@
 		}else
 		{
 			echo 'Data Updated. </br>';
-			echo '<a href="	read_account.php">Lihat</a>';
+			echo '<a href="	user_management.php">Lihat</a>';
 			$db->close();
 			exit;
 		}	

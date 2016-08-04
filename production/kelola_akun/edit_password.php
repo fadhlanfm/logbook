@@ -72,6 +72,7 @@ else
   {
     die("Could not connect to the database: <br />".$db->connect_error);
   }
+
   if (isset($_GET['iduser']))
   {
     $iduser=$_GET['iduser'];
@@ -276,17 +277,14 @@ else
         <div class="row">
 
           <!-- start of running program achievement -->
-          <form method="POST" action="acc_edit_username.php">
-            <div class="form-group">
+          <form method="POST" action="acc_edit_password.php">
             <label for="iduser">Unique ID : </label>
             <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php if (isset($row->iduser)) {echo $row->iduser;} else {echo '';}?>"></input><br>
-            <label for="iduser">Old Username : </label>
-            <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->username)) {echo $row->username;} else {echo '';}?>"></input>
-            <br>
-            <label for="newpass">New Username : </label>
-            <input type="text" class="form-control" id="newpass" placeholder="new username" name="username"></input><br>
+            <label for="iduser">Old Password : </label>
+            <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->password)) {echo $row->password;} else {echo '';}?>"></input><br>
+            <label for="newpass">New Password : </label>
+            <input class="form-control" type="text" id="newpass" placeholder="newpass" name="newpass"></input><br>
             <input class="btn btn-success" type="submit" value="Submit"></input>
-            </div>
           </form>
           <!-- end of running program achievement -->
 
