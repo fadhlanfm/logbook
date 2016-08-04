@@ -13,21 +13,84 @@
 	$end_date = DateTime::createFromFormat('m/d/Y', $enddate);
 	$end_date = $end_date->format('Y-m-d');
 	$perilaku = (isset($_POST['perilaku']) ? $_POST['perilaku'] : '');
-	$aktifitas0 = (isset($_POST['aktifitas'][0]) ? $_POST['aktifitas'][0] : '');
-	$target0 = (isset($_POST['target'][0]) ? $_POST['target'][0] : '');
-	$satuan0 = (isset($_POST['satuan'][0]) ? $_POST['satuan'][0] : '');
-	$aktifitas1 = (isset($_POST['aktifitas'][1]) ? $_POST['aktifitas'][1] : '');
-	$target1 = (isset($_POST['target'][1]) ? $_POST['target'][1] : '');
-	$satuan1 = (isset($_POST['satuan'][1]) ? $_POST['satuan'][1] : '');
-	$aktifitas2 = (isset($_POST['aktifitas'][2]) ? $_POST['aktifitas'][2] : '');
-	$target2 = (isset($_POST['target'][2]) ? $_POST['target'][2] : '');
-	$satuan2 = (isset($_POST['satuan'][2]) ? $_POST['satuan'][2] : '');
-	$aktifitas3 = (isset($_POST['aktifitas'][3]) ? $_POST['aktifitas'][3] : '');
-	$target3 = (isset($_POST['target'][3]) ? $_POST['target'][3] : '');
-	$satuan3 = (isset($_POST['satuan'][3]) ? $_POST['satuan'][3] : '');
-	$aktifitas4 = (isset($_POST['aktifitas'][4]) ? $_POST['aktifitas'][4] : '');
-	$target4 = (isset($_POST['target'][4]) ? $_POST['target'][4] : '');
-	$satuan4 = (isset($_POST['satuan'][4]) ? $_POST['satuan'][4] : '');
+	if (isset($_POST['aktifitas'][0])) {
+		$aktifitas0 = $_POST['aktifitas'][0];
+	} else {
+		$aktifitas0 = null;
+	}
+	if (isset($_POST['target'][0])) {
+		$target0 = $_POST['target'][0];
+	} else {
+		$target0 = null;
+	}
+	if (isset($_POST['satuan'][0])) {
+		$satuan0 = $_POST['satuan'][0];
+	} else {
+		$satuan0 = null;
+	}
+
+	if (isset($_POST['aktifitas'][1])) {
+		$aktifitas1 = $_POST['aktifitas'][1];
+	} else {
+		$aktifitas1 = null;
+	}
+	if (isset($_POST['target'][1])) {
+		$target1 = $_POST['target'][1];
+	} else {
+		$target1 = null;
+	}
+	if (isset($_POST['satuan'][1])) {
+		$satuan1 = $_POST['satuan'][1];
+	} else {
+		$satuan1 = null;
+	}
+
+	if (isset($_POST['aktifitas'][2])) {
+		$aktifitas2 = $_POST['aktifitas'][2];
+	} else {
+		$aktifitas2 = null;
+	}
+	if (isset($_POST['target'][2])) {
+		$target2 = $_POST['target'][2];
+	} else {
+		$target2 = null;
+	}
+	if (isset($_POST['satuan'][2])) {
+		$satuan2 = $_POST['satuan'][2];
+	} else {
+		$satuan2 = null;
+	}
+	if (isset($_POST['aktifitas'][3])) {
+		$aktifitas3 = $_POST['aktifitas'][3];
+	} else {
+		$aktifitas3 = null;
+	}
+	if (isset($_POST['target'][3])) {
+		$target3 = $_POST['target'][3];
+	} else {
+		$target3 = null;
+	}
+	if (isset($_POST['satuan'][3])) {
+		$satuan3 = $_POST['satuan'][3];
+	} else {
+		$satuan3 = null;
+	}
+	if (isset($_POST['aktifitas'][4])) {
+		$aktifitas4 = $_POST['aktifitas'][4];
+	} else {
+		$aktifitas4 = null;
+	}
+	if (isset($_POST['target'][4])) {
+		$target4 = $_POST['target'][4];
+	} else {
+		$target4 = null;
+	}
+	if (isset($_POST['satuan'][4])) {
+		$satuan4 = $_POST['satuan'][4];
+	} else {
+		$satuan4 = null;
+	}
+
 	$kinerja0 = (isset($_POST['kinerja'][0]) ? $_POST['kinerja'][0] : '');
 	$kinerja1 = (isset($_POST['kinerja'][1]) ? $_POST['kinerja'][1] : '');
 	$kinerja2 = (isset($_POST['kinerja'][2]) ? $_POST['kinerja'][2] : '');

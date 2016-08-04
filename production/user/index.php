@@ -60,6 +60,24 @@ else
     die("could not query the database: <br />".$db->error);
   }
   $row2 = $result2->fetch_object();
+  $unit2 = $row2->unit;
+
+  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit = unit.kode AND logbook.kode_unit='$unit2'";
+        //execute the query
+  $result = $db->query( $query );
+  if (!$result)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+
+  $query3 = "SELECT * FROM logbook INNER JOIN unit WHERE start <= curdate() and end >= curdate() and unit.kode=logbook.kode_unit AND logbook.kode_unit='$unit2'";
+  //execute the query
+  $result3 = $db->query( $query3 );
+  if (!$result)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+  $row3 = $result3->fetch_object();
   ?>
 
   <div class="container body">

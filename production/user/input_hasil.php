@@ -268,7 +268,7 @@ else
               } 
 
               // aktivitas1
-              if (is_null($row->aktifitas1)) {
+              if (is_null($row->aktifitas1) || $row->aktifitas1 == '') {
               } else {
                 ?>
                 <div class="row">
@@ -298,7 +298,7 @@ else
               } 
 
               // aktivitas2
-              if (is_null($row->aktifitas2)) {
+              if (is_null($row->aktifitas2) || $row->aktifitas2 == '') {
               } else {
                 ?>
                 <div class="row">
@@ -328,7 +328,7 @@ else
               } 
 
               // aktivitas3
-              if (is_null($row->aktifitas3)) {
+              if (is_null($row->aktifitas3) || $row->aktifitas3 == '') {
               } else {
                 ?>
                 <div class="row">
@@ -358,7 +358,7 @@ else
               } 
 
               // aktivitas4
-              if (is_null($row->aktifitas4)) {
+              if (is_null($row->aktifitas4) || $row->aktifitas4 == '') {
               } else {
                 ?>
                 <div class="row">
