@@ -275,7 +275,6 @@ else
                   echo'<td>'.$row->end.'</td>';
                   echo'<td>'.$status.'</td>';
                   echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">Lihat</button></a>';
-                  echo'<a href="beri_komentar.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">Beri Evaluasi</button></a></td>';
                   echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"> <button class="btn btn-primary btn-xs"> <i class="material-icons" style="font-size:0.7em;">done</i></button></a>';
                   echo'<a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><button class="btn btn-danger btn-xs"><i class="material-icons" style="font-size:0.7em;">clear</i></button></a></td>';
                   echo'</tr>';
@@ -360,7 +359,7 @@ else
         col_widths: [
         '50px', '80px', '140px',
         '140px', '90px', '90px',
-        '150px', '150px', '100px'
+        '150px', '40px', '100px'
         ],
       };
 
