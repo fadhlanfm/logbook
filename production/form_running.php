@@ -6,7 +6,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 } else if ($_SESSION['role'] == 1) {
   echo 'You are not logged in as Administrator <br>';
   echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
-  echo'<a href="../pages/survey.php">BACK</a>';
+  echo'<a href="user/index.php">BACK</a>';
   exit;
 }
 else
