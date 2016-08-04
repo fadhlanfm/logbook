@@ -1,18 +1,18 @@
 <?php
 session_start();
-if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
+if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 {
 
-} else if ($_SESSION['role'] == -1) {
-  echo 'You are not logged in as User <br>';
-  echo'<a href="../acc_logout.php">LOGOUT</a><br>';
-  echo'<a href="../index.php">BACK</a>';
+} else if ($_SESSION['role'] == 1) {
+  echo 'You are not logged in as Administrator <br>';
+  echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
+  echo'<a href="user/index.php">BACK</a>';
   exit;
 }
 else
 {
   echo 'You are not logged In <br>';
-  echo'<a href="../../index.php">LOGIN</a>';
+  echo'<a href="../index.php">LOGIN</a>';
   exit;
 
 }
@@ -33,28 +33,28 @@ else
   
   
   <!-- Bootstrap -->
-  <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- NProgress -->
-  <link href="../../vendors/nprogress/nprogress.css" rel="stylesheet">
+  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
   <!-- iCheck -->
-  <link href="../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
   <!-- bootstrap-wysiwyg -->
-  <link href="../../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
+  <link href="../vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
   <!-- Select2 -->
-  <link href="../../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+  <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
   <!-- Switchery -->
-  <link href="../../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
+  <link href="../vendors/switchery/dist/switchery.min.css" rel="stylesheet">
   <!-- starrr -->
-  <link href="../../vendors/starrr/dist/starrr.css" rel="stylesheet">
+  <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
 
   <!-- Custom Theme Style -->
-  <link href="../../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.min.css" rel="stylesheet">
 
   <!-- QUERIES -->
   <?php
-  include_once('../Connection/dbconn.php');
+  include_once('../connect_db.php');
 
   $coba = $_SESSION['id'];
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
