@@ -1,7 +1,41 @@
+<!-- QUERIES -->
 <?php
 session_start();
+include_once('../../connect_db.php');
+$id = $_GET['id'];
+$query = "SELECT * FROM logbook WHERE id = '$id'";
+  //execute the query
+$result = $db->query( $query );
+if (!$result)
+{
+  die("could not query the database: <br />".$db->error);
+}
+$row = $result->fetch_object();
+
+$coba = $_SESSION['id'];
+$query2 = "SELECT * FROM user WHERE username = '$coba'";
+    //execute the query
+$result2 = $db->query( $query2 );
+if (!$result2)
+{
+  die("could not query the database: <br />".$db->error);
+}
+$row2 = $result2->fetch_object();
+?>
+
+<?php
+
 if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
 {
+  if (isset($_SESSION['unit']) && $_SESSION['unit'] == $row->kode_unit)
+  {
+
+  }
+  else
+  {
+    echo 'tetottt';
+    exit;
+  }
 
 } else if ($_SESSION['role'] == -1) {
   echo 'You are not logged in as User <br>';
@@ -51,29 +85,7 @@ else
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
-  <!-- QUERIES -->
-  <?php
-  include_once('../../connect_db.php');
-  $id = $_GET['id'];
-  $query = "SELECT * FROM logbook WHERE id = '$id'";
-  //execute the query
-  $result = $db->query( $query );
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row = $result->fetch_object();
 
-  $coba = $_SESSION['id'];
-  $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
-  $result2 = $db->query( $query2 );
-  if (!$result2)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row2 = $result2->fetch_object();
-  ?>
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
@@ -231,39 +243,39 @@ else
           </div>
           <div class="x_content">
             <form action="post_hasil_logbook.php" method="POST"><br>
-            <div class="row">
-              <div class="col-md-1 col-sm-1 col-xs-12">
-              <input readonly class="form-control" type="text" name="id" id="id" value="<?php echo $row->id ?>">
-              </div> 
-            </div> <br/>
+              <div class="row">
+                <div class="col-md-1 col-sm-1 col-xs-12">
+                  <input readonly class="form-control" type="text" name="id" id="id" value="<?php echo $row->id ?>">
+                </div> 
+              </div> <br/>
               <?php
               // aktivitas0
               if (is_null($row->aktifitas0)) {
               } else {
                 ?>
                 <div class="row">
-                <div class="col-sm-4 col-md-4 col-xs-12">
-                  <label>Aktivitas</label>
-                  <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas0;?>">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Aktivitas</label>
+                    <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas0;?>">
 
-                </div>
-                <div class="col-sm-2 col-md-2 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="target1">Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->target0; ?>" class="form-control">
                   </div>
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <label>Satuan Target</label>
-                  <input readonly type="text" id="target" value="<?php echo $row->satuan0;?>" class="form-control">
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="hasil1">Hasil</label>
-                    <input type="text" id="target" name="hasil1" class="form-control" value="<?php echo $row->hasil0; ?>">
+                  <div class="col-sm-2 col-md-2 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="target1">Target</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target0; ?>" class="form-control">
+                    </div>
                   </div>
-                </div>
-              </div><br>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <label>Satuan Target</label>
+                    <input readonly type="text" id="target" value="<?php echo $row->satuan0;?>" class="form-control">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="hasil1">Hasil</label>
+                      <input type="text" id="target" name="hasil1" class="form-control" value="<?php echo $row->hasil0; ?>">
+                    </div>
+                  </div>
+                </div><br>
                 <?php 
               } 
 
@@ -272,28 +284,28 @@ else
               } else {
                 ?>
                 <div class="row">
-                <div class="col-sm-4 col-md-4 col-xs-12">
-                  <label>Aktivitas</label>
-                  <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas1;?>">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Aktivitas</label>
+                    <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas1;?>">
 
-                </div>
-                <div class="col-sm-2 col-md-2 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="target1">Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->target1;?>" class="form-control">
                   </div>
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <label>Satuan Target</label>
-                  <input readonly type="text" id="target" value="<?php echo $row->satuan1;?>" class="form-control">
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="hasil2">Hasil</label>
-                    <input type="text" id="target" name="hasil2" class="form-control" value="<?php echo $row->hasil1; ?>">
+                  <div class="col-sm-2 col-md-2 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="target1">Target</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target1;?>" class="form-control">
+                    </div>
                   </div>
-                </div>
-              </div> <br>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <label>Satuan Target</label>
+                    <input readonly type="text" id="target" value="<?php echo $row->satuan1;?>" class="form-control">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="hasil2">Hasil</label>
+                      <input type="text" id="target" name="hasil2" class="form-control" value="<?php echo $row->hasil1; ?>">
+                    </div>
+                  </div>
+                </div> <br>
                 <?php  
               } 
 
@@ -302,28 +314,28 @@ else
               } else {
                 ?>
                 <div class="row">
-                <div class="col-sm-4 col-md-4 col-xs-12">
-                  <label>Aktivitas</label>
-                  <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas2;?>">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Aktivitas</label>
+                    <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas2;?>">
 
-                </div>
-                <div class="col-sm-2 col-md-2 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="target1">Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->target2;?>" class="form-control">
                   </div>
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <label>Satuan Target</label>
-                  <input readonly type="text" id="target" value="<?php echo $row->satuan2;?>" class="form-control">
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="hasil3">Hasil</label>
-                    <input type="text" id="target" name="hasil3" class="form-control" value="<?php echo $row->hasil2; ?>">
+                  <div class="col-sm-2 col-md-2 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="target1">Target</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target2;?>" class="form-control">
+                    </div>
                   </div>
-                </div>
-              </div> <br>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <label>Satuan Target</label>
+                    <input readonly type="text" id="target" value="<?php echo $row->satuan2;?>" class="form-control">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="hasil3">Hasil</label>
+                      <input type="text" id="target" name="hasil3" class="form-control" value="<?php echo $row->hasil2; ?>">
+                    </div>
+                  </div>
+                </div> <br>
                 <?php  
               } 
 
@@ -332,28 +344,28 @@ else
               } else {
                 ?>
                 <div class="row">
-                <div class="col-sm-4 col-md-4 col-xs-12">
-                  <label>Aktivitas</label>
-                  <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas3;?>">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Aktivitas</label>
+                    <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas3;?>">
 
-                </div>
-                <div class="col-sm-2 col-md-2 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="target1">Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->target3;?>" class="form-control">
                   </div>
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <label>Satuan Target</label>
-                  <input readonly type="text" id="target" value="<?php echo $row->satuan3;?>" class="form-control">
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="hasil4">Hasil</label>
-                    <input type="text" id="target" name="hasil4" class="form-control" value="<?php echo $row->hasil3; ?>">
+                  <div class="col-sm-2 col-md-2 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="target1">Target</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target3;?>" class="form-control">
+                    </div>
                   </div>
-                </div>
-              </div> <br>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <label>Satuan Target</label>
+                    <input readonly type="text" id="target" value="<?php echo $row->satuan3;?>" class="form-control">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="hasil4">Hasil</label>
+                      <input type="text" id="target" name="hasil4" class="form-control" value="<?php echo $row->hasil3; ?>">
+                    </div>
+                  </div>
+                </div> <br>
                 <?php 
               } 
 
@@ -362,35 +374,35 @@ else
               } else {
                 ?>
                 <div class="row">
-                <div class="col-sm-4 col-md-4 col-xs-12">
-                  <label>Aktivitas</label>
-                  <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas4;?>">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Aktivitas</label>
+                    <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas4;?>">
 
-                </div>
-                <div class="col-sm-2 col-md-2 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="target1">Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->target4;?>" class="form-control">
                   </div>
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <label>Satuan Target</label>
-                  <input readonly type="text" id="target" value="<?php echo $row->satuan4;?>" class="form-control">
-                </div>
-                <div class="col-sm-3 col-md-3 col-xs-12">
-                  <div class="input-field col s6">
-                    <label for="hasil5">Hasil</label>
-                    <input type="text" id="target" name="hasil5" class="form-control" value="<?php echo $row->hasil4; ?>">
+                  <div class="col-sm-2 col-md-2 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="target1">Target</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target4;?>" class="form-control">
+                    </div>
                   </div>
-                </div>
-              </div> <br>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <label>Satuan Target</label>
+                    <input readonly type="text" id="target" value="<?php echo $row->satuan4;?>" class="form-control">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6">
+                      <label for="hasil5">Hasil</label>
+                      <input type="text" id="target" name="hasil5" class="form-control" value="<?php echo $row->hasil4; ?>">
+                    </div>
+                  </div>
+                </div> <br>
                 <?php  
               } 
               ?>
 
               <div class="row">
-              <div class="col-sm-4 col-md-4 col-xs-12">
-                <button type="submit" value="Submit" class="btn btn-success">Submit</button>
+                <div class="col-sm-4 col-md-4 col-xs-12">
+                  <button type="submit" value="Submit" class="btn btn-success">Submit</button>
                 </div>
               </div>
             </form>
