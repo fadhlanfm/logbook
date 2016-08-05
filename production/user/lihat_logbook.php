@@ -236,7 +236,7 @@ else
             <ul class="nav navbar-right panel_toolbox">
               <li><a><button class="btn btn-primary btn-xs" id="clickme">Lihat Evaluasi</button></a>
               </li>
-              <li><a href="programs.php"><button class="btn btn-primary btn-xs">Kembali</button></a>
+              <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
               </li>
 
             </ul>
@@ -478,6 +478,10 @@ else
 
 <!-- Skycons -->
 <script>
+  function goBack() {
+    window.history.back();
+  }
+
   $(document).ready(function() {
     var icons = new Skycons({
       "color": "#73879C"

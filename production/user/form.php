@@ -78,6 +78,24 @@ else
   ?>
 
   <script>
+      // function for checkbox checker
+      $(function(){
+
+        var requiredCheckboxes = $(':checkbox[required]');
+
+        requiredCheckboxes.change(function(){
+
+          if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+          }
+
+          else {
+            requiredCheckboxes.attr('required', 'required');
+          }
+        });
+
+      });
+      
       //function for dependent dropdown option
       function getSecond(val)
       {
@@ -188,11 +206,11 @@ else
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="edit_username2.php">Ubah Username</a></li>
-                    <li><a href="edit_password2.php">Ubah Password</a></li>
-                  </ul>
-                </li>
+                    <ul class="nav child_menu">
+                      <li><a href="edit_username2.php">Ubah Username</a></li>
+                      <li><a href="edit_password2.php">Ubah Password</a></li>
+                    </ul>
+                  </li>
                 </ul>
               </div>
 
@@ -433,9 +451,10 @@ else
                           <tbody>
                             <div id="placeholder">
                               <tr>
+                                <div class="ln_solid"></div>
                                 <div class="row clone"> 
                                   <br />
-                                  <div class="col-sm-3 col-md-3 col-xs-12">Memberikan Nilai Tambah Bagi Perusahaan</div>
+                                  <div class="col-sm-3 col-md-3 col-xs-12"><h4>Memberikan Nilai Tambah Bagi Perusahaan</h4></div>
                                   <div class="col-sm-3 col-md-3 col-xs-12">
                                     <label>Aktifitas</label>
                                     <select class="form-control" name="aktifitas[]" required="required">
@@ -458,7 +477,7 @@ else
                                       <input type="text" id="target" name="target[]" class="form-control">
                                     </div>
                                   </div>
-                                  <div class="col-sm-2 col-md-2 col-xs-12">
+                                  <div class="col-sm-3 col-md-3 col-xs-12">
                                     <label>Satuan Target</label>
                                     <select class="form-control" name="satuan[]" required="required">
                                       <option value="" disabled selected>Choose your option</option>
@@ -468,8 +487,11 @@ else
                                       <option value="Peningkatan Produktivitas Pegawai">Jumlah (Kali)</option>
                                       <option value="Others (...)">Others (...)</option>
                                     </select>
+
                                   </div>
+
                                 </div>
+
 
                               </div>
                               <div class="row"></div>
@@ -477,26 +499,27 @@ else
                               <a href="#" class="add" rel=".clone">
                                 <button id="buttonadd" type="button" class="right btn waves-effect waves-light">Tambah item baru</button></a>
                               </div>
+
                             </tr>
                             <tr>
                               <td>Mendorong Tercapainya Kinerja Terbaik</td>
-                              <td colspan="2">
-                                <p>
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="financial" value="Financial">
+                              <td>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="financial" value="Financial" required="required">
                                   <label for="financial">Financial</label>
-                                </p>
-                                <p>
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="customer" value="Customer">
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-12">
+                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="customer" value="Customer" required="required">
                                   <label for="customer">Customer</label>
-                                </p>
-                                <p>
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="internal" value="Internal Business Process">
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-12">
+                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="internal" value="Internal Business Process" required="required">
                                   <label for="internal">Internal Business Process</label>
-                                </p>
-                                <p>
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="learning" value="Learning & Growth">
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-12">
+                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="learning" value="Learning & Growth" required="required">
                                   <label for="learning">Learning & Growth</label>
-                                </p>
+                                </div>
                               </td>
                             </tr>
                           </tbody>
@@ -576,34 +599,34 @@ else
                       <h4>Change Agent Team</h4>
                       <div class="form-group">
                         <div class="row clone2">
-                        <div class="ln_solid"></div>
+                          <div class="ln_solid"></div>
                           <div class="row">
-                          <div class="col-sm-10 col-md-10 col-xs-12">
-                            <label>Posisi</label>
-                            <select class="form-control" name="posisi[]" required="required">
-                              <option value="" disabled selected>Choose your option</option>
-                              <option value="Ketua">Ketua</option>
-                              <option value="Sekretaris & Bendahara">Sekretaris & Bendahara</option>
-                              <option value="Dokumentasi & Publikasi">Dokumentasi & Publikasi</option>
-                              <option value="Corporate Program">Corporate Program</option>
-                              <option value="PIC Rating">PIC Rating</option>
-                              <option value="PIC I-Dare">PIC I-Dare</option>
-                              <option value="Program Pendukung">Program Pendukung</option>
-                              <option value="PIC Sharing Session">PIC Sharing Session</option>
-                              <option value="PIC One Team One Spirit One Goal Program">PIC One Team One Spirit One Goal Program</option>
-                              <option value="PIC Standar Layanan">PIC Standar Layanan</option>
-                            </select>
-                          </div>
+                            <div class="col-sm-10 col-md-10 col-xs-12">
+                              <label>Posisi</label>
+                              <select class="form-control" name="posisi[]" required="required">
+                                <option value="" disabled selected>Choose your option</option>
+                                <option value="Ketua">Ketua</option>
+                                <option value="Sekretaris & Bendahara">Sekretaris & Bendahara</option>
+                                <option value="Dokumentasi & Publikasi">Dokumentasi & Publikasi</option>
+                                <option value="Corporate Program">Corporate Program</option>
+                                <option value="PIC Rating">PIC Rating</option>
+                                <option value="PIC I-Dare">PIC I-Dare</option>
+                                <option value="Program Pendukung">Program Pendukung</option>
+                                <option value="PIC Sharing Session">PIC Sharing Session</option>
+                                <option value="PIC One Team One Spirit One Goal Program">PIC One Team One Spirit One Goal Program</option>
+                                <option value="PIC Standar Layanan">PIC Standar Layanan</option>
+                              </select>
+                            </div>
                           </div>
                           <div class="row">
-                          <div class="col-sm-5 col-md-5 col-xs-12">
-                            <label>Nama</label>
-                            <input id="nama_[]" type="text" class="validate form-control" name="nama_[]" required="required">
-                          </div>
-                          <div class="col-sm-5 col-md-5 col-xs-12">
-                            <label>Email</label>
-                            <input id="email_[]" type="text" class="validate form-control" name="email_[]" required="required">
-                          </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12">
+                              <label>Nama</label>
+                              <input id="nama_[]" type="text" class="validate form-control" name="nama_[]" required="required">
+                            </div>
+                            <div class="col-sm-5 col-md-5 col-xs-12">
+                              <label>Email</label>
+                              <input id="email_[]" type="text" class="validate form-control" name="email_[]" required="required">
+                            </div>
                           </div>
                           
                         </div>
