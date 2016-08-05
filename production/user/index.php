@@ -62,22 +62,25 @@ else
   $row2 = $result2->fetch_object();
   $unit2 = $row2->unit;
 
-  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit = unit.kode AND logbook.kode_unit='$unit2'";
+  $query = "SELECT * FROM logbook JOIN unit WHERE start <= curdate() and end >= curdate() and unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
         //execute the query
   $result = $db->query( $query );
+  $row = $result->fetch_object();
+  // echo $row->nama_program;
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
 
-  $query3 = "SELECT * FROM logbook INNER JOIN unit WHERE start <= curdate() and end >= curdate() and unit.kode=logbook.kode_unit AND logbook.kode_unit='$unit2'";
-  //execute the query
-  $result3 = $db->query( $query3 );
-  if (!$result)
+  $query5 = "SELECT * FROM logbook JOIN unit WHERE unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
+        //execute the query
+  $result5 = $db->query( $query5 );
+
+  if (!$result5)
   {
     die("could not query the database: <br />".$db->error);
   }
-  $row3 = $result3->fetch_object();
+  
   ?>
 
   <div class="container body">
@@ -234,102 +237,220 @@ else
 
           <!-- start of running program achievement -->
           <div class="col-md-8 col-sm-8 col-xs-12">
-            <div class="x_panel tile">
-              <div class="x_title">
-                <h2>Current Program</h2>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel tile">
+                <div class="x_title">
+                  <h2>Current Program</h2>
 
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <h4>PROGRAM A</h4>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>Penurunan Error Rate</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>123k</span>
-                  </div>
                   <div class="clearfix"></div>
                 </div>
+                <div class="x_content">
+                  <h4><?php echo $row->nama_program;?></h4>
+                  <!-- sini inininin -->
+                  <?php
+              // aktivitas0
+                  if (is_null($row->aktifitas0)) {
+                  } else {
+                    ?>
+                    <div class="row">
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Aktivitas</label>
+                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas0;?>">
 
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>Menjaga Reputasi</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                        <span class="sr-only">60% Complete</span>
                       </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>53k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>Y</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                        <span class="sr-only">60% Complete</span>
+                      <div class="col-sm-2 col-md-2 col-xs-12">
+                        <div class="input-field col s6">
+                          <label for="target1">Target</label>
+                          <input readonly type="text" id="target" value="<?php echo $row->target0; ?>" class="form-control">
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>23k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>H</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                        <span class="sr-only">60% Complete</span>
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Satuan Target</label>
+                        <input readonly type="text" id="target" value="<?php echo $row->satuan0;?>" class="form-control">
                       </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>3k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="widget_summary">
-                  <div class="w_left w_25">
-                    <span>I</span>
-                  </div>
-                  <div class="w_center w_55">
-                    <div class="progress">
-                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                        <span class="sr-only">60% Complete</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w_right w_20">
-                    <span>1k</span>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
 
+                    </div><br>
+                    <?php 
+                  } 
+
+              // aktivitas1
+                  if (is_null($row->aktifitas1) || $row->aktifitas1 == '') {
+                  } else {
+                    ?>
+                    <div class="row">
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Aktivitas</label>
+                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas1;?>">
+
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-xs-12">
+                        <div class="input-field col s6">
+                          <label for="target1">Target</label>
+                          <input readonly type="text" id="target" value="<?php echo $row->target1;?>" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Satuan Target</label>
+                        <input readonly type="text" id="target" value="<?php echo $row->satuan1;?>" class="form-control">
+                      </div>
+
+                    </div> <br>
+                    <?php  
+                  } 
+
+              // aktivitas2
+                  if (is_null($row->aktifitas2) || $row->aktifitas2 == '') {
+                  } else {
+                    ?>
+                    <div class="row">
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Aktivitas</label>
+                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas2;?>">
+
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-xs-12">
+                        <div class="input-field col s6">
+                          <label for="target1">Target</label>
+                          <input readonly type="text" id="target" value="<?php echo $row->target2;?>" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Satuan Target</label>
+                        <input readonly type="text" id="target" value="<?php echo $row->satuan2;?>" class="form-control">
+                      </div>
+
+                    </div> <br>
+                    <?php  
+                  } 
+
+              // aktivitas3
+                  if (is_null($row->aktifitas3) || $row->aktifitas3 == '') {
+                  } else {
+                    ?>
+                    <div class="row">
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Aktivitas</label>
+                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas3;?>">
+
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-xs-12">
+                        <div class="input-field col s6">
+                          <label for="target1">Target</label>
+                          <input readonly type="text" id="target" value="<?php echo $row->target3;?>" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Satuan Target</label>
+                        <input readonly type="text" id="target" value="<?php echo $row->satuan3;?>" class="form-control">
+                      </div>
+
+                    </div> <br>
+                    <?php 
+                  } 
+
+              // aktivitas4
+                  if (is_null($row->aktifitas4) || $row->aktifitas4 == '') {
+                  } else {
+                    ?>
+                    <div class="row">
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Aktivitas</label>
+                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas4;?>">
+
+                      </div>
+                      <div class="col-sm-2 col-md-2 col-xs-12">
+                        <div class="input-field col s6">
+                          <label for="target1">Target</label>
+                          <input readonly type="text" id="target" value="<?php echo $row->target4;?>" class="form-control">
+                        </div>
+                      </div>
+                      <div class="col-sm-5 col-md-5 col-xs-12">
+                        <label>Satuan Target</label>
+                        <input readonly type="text" id="target" value="<?php echo $row->satuan4;?>" class="form-control">
+                      </div>
+
+                    </div> <br>
+                    <?php  
+                  } 
+                  ?>
+
+                </div>
               </div>
             </div>
+
+            <!-- start of recent evaluation -->
+            <?php
+            $query3 = "SELECT * FROM logbook WHERE id = '$row->id'";
+            //execute the query
+            $result3 = $db->query( $query3 );
+            if (!$result3)
+            {
+              die("could not query the database: <br />".$db->error);
+            }
+            $row3 = $result3->fetch_object();
+            ?>
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Recent Evaluation <small>Sessions</small></h2>
+
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <div class="dashboard-widget-content">
+
+                    <ul class="list-unstyled timeline widget">
+                      <?php
+                      while ($row5 = $result5->fetch_object())
+                      {
+                        if (is_null($row5->komentar) || $row5->komentar == '') {
+                        } else {
+                          ?>
+                          <li>
+                            <div class="block">
+                              <div class="block_content">
+                                <h2 class="title">
+                                <a href="lihat_logbook.php%20?id=<?php echo $row5->id ?>"><?php echo $row5->nama_program ?></a>
+                                </h2>
+                                <div class="byline">
+                                  by <a>Admin</a>
+                                </div>
+                                <p class="excerpt">
+                                <?php echo $row5->komentar ?>
+                                </p>
+                              </div>
+                            </div>
+                          </li>
+                          <?php
+                        }
+                        
+                      }
+
+                      ?>
+                      
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of recent evaluation -->
           </div>
           <!-- end of running program achievement -->
 
           <!-- start of ended program achievement -->
+
+          <?php  
+          $query4 = "SELECT * FROM logbook WHERE logbook.kode_unit='$unit2'";
+        //execute the query
+          $result4 = $db->query( $query4 );
+          if (!$result)
+          {
+            die("could not query the database: <br />".$db->error);
+          }
+          $row4 = $result4->fetch_object();
+          echo $row4->komentar;
+          ?>
 
           <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile fixed_height_320">
@@ -426,84 +547,6 @@ else
             </div>
           </div>
           <!-- end of ended program achievement -->
-
-        </div>
-        <div class="row">
-          <!-- start of recent evaluation -->
-
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Recent Evaluation <small>Sessions</small></h2>
-                
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <div class="dashboard-widget-content">
-
-                  <ul class="list-unstyled timeline widget">
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="block">
-                        <div class="block_content">
-                          <h2 class="title">
-                            <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                          </h2>
-                          <div class="byline">
-                            <span>13 hours ago</span> by <a>Jane Smith</a>
-                          </div>
-                          <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                          </p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- end of recent evaluation -->
 
         </div>
       </div>

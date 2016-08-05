@@ -15,6 +15,7 @@ if(isset($_POST['id']) && isset($_POST['password']))
 		{
 			$_SESSION['id'] = $id_resp;
 			$_SESSION['role'] = $row->role;
+			$_SESSION['unit'] = $row->unit;
 			header("Location:../production/user/index.php");
 			exit;
 		}

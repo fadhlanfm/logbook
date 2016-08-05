@@ -1,8 +1,40 @@
+<!-- QUERIES -->
 <?php
 session_start();
+include_once('../../connect_db.php');
+$id = $_GET['id'];
+$query = "SELECT * FROM logbook WHERE id = '$id'";
+  //execute the query
+$result = $db->query( $query );
+if (!$result)
+{
+  die("could not query the database: <br />".$db->error);
+}
+$row = $result->fetch_object();
+
+$coba = $_SESSION['id'];
+$query2 = "SELECT * FROM user WHERE username = '$coba'";
+    //execute the query
+$result2 = $db->query( $query2 );
+if (!$result2)
+{
+  die("could not query the database: <br />".$db->error);
+}
+$row2 = $result2->fetch_object();
+?>
+
+<?php
 if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
 {
+  if (isset($_SESSION['unit']) && $_SESSION['unit'] == $row->kode_unit)
+  {
 
+  }
+  else
+  {
+    echo 'tetottt';
+    exit;
+  }
 } else if ($_SESSION['role'] == -1) {
   echo 'You are not logged in as User <br>';
   echo'<a href="../../process/acc_logout.php">LOGOUT</a><br>';
@@ -16,6 +48,7 @@ else
   exit;
 
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,29 +84,7 @@ else
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
-  <!-- QUERIES -->
-  <?php
-  include_once('../../connect_db.php');
-  $id = $_GET['id'];
-  $query = "SELECT * FROM logbook WHERE id = '$id'";
-  //execute the query
-  $result = $db->query( $query );
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row = $result->fetch_object();
 
-  $coba = $_SESSION['id'];
-  $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
-  $result2 = $db->query( $query2 );
-  if (!$result2)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row2 = $result2->fetch_object();
-  ?>
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
@@ -84,7 +95,7 @@ else
 
           <div class="clearfix"></div>
 
-          
+
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
@@ -111,7 +122,7 @@ else
 
           </div>
           <!-- /sidebar menu -->
-          
+
         </div>
       </div>
 
@@ -296,7 +307,7 @@ else
             </table>
 
             <br>
-            
+
             <table class="table table-hover">
               <tr>
                 <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
