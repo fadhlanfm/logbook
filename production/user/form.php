@@ -95,7 +95,7 @@ else
         });
 
       });
-      
+
       //function for dependent dropdown option
       function getSecond(val)
       {
@@ -120,52 +120,6 @@ else
           }
         });
       }
-
-      // // start of new clone func
-
-      // var regex = /^(.+?)(\d+)$/i;
-      // var cloneIndex = $(".clonedInput").length;
-
-      // function clone(){
-      //   $(this).parents(".clonedInput").clone()
-      //   .appendTo("body")
-      //   .attr("id", "clonedInput" +  cloneIndex)
-      //   .find("*")
-      //   .each(function() {
-      //     var id = this.id || "";
-      //     var match = id.match(regex) || [];
-      //     if (match.length == 3) {
-      //       this.id = match[1] + (cloneIndex);
-      //     }
-      //   })
-      //   .on('click', 'button.clone', clone)
-      //   .on('click', 'button.remove', remove);
-      //   cloneIndex++;
-      // }
-      // function remove(){
-      //   $(this).parents(".clonedInput").remove();
-      // }
-      // $("button.clone").on("click", clone);
-
-      // $("button.remove").on("click", remove);
-      // end
-      
-      // start of old clone func
-      // var _counter=0;
-      // window.actionEnabled = true;
-      // function addSomething()
-      // {
-      //   if (window.actionEnabled)
-      //   {
-      //     _counter++;
-      //     var oClone = document.getElementById("template").cloneNode(true);
-      //     oClone.id += ("-"+_counter);
-      //     document.getElementById("placeholder").appendChild(oClone);
-      //     if (_counter == 4) {
-      //       window.actionEnabled = false;
-      //     }
-      //   }
-      // }
 
       window.liveSettings = {
         api_key: "a0b49b34b93844c38eaee15690d86413",
@@ -505,19 +459,19 @@ else
                               <td>Mendorong Tercapainya Kinerja Terbaik</td>
                               <td>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="financial" value="Financial" required="required">
+                                <input name="kinerja[]" type="checkbox" value="Financial" required>
                                   <label for="financial">Financial</label>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-12">
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="customer" value="Customer" required="required">
+                                  <input name="kinerja[]" type="checkbox" value="Customer" required>
                                   <label for="customer">Customer</label>
                                 </div>
                                 <div class="col-md-4 col-sm-4 col-xs-12">
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="internal" value="Internal Business Process" required="required">
+                                  <input name="kinerja[]" type="checkbox" value="Internal Business Process" required>
                                   <label for="internal">Internal Business Process</label>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12">
-                                  <input name="kinerja[]" type="checkbox" class="filled-in" id="learning" value="Learning & Growth" required="required">
+                                  <input name="kinerja[]" type="checkbox" value="Learning Growth" required>
                                   <label for="learning">Learning & Growth</label>
                                 </div>
                               </td>
