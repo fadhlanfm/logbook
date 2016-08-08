@@ -96,29 +96,40 @@
 	$kinerja2 = (isset($_POST['kinerja'][2]) ? $_POST['kinerja'][2] : '');
 	$kinerja3 = (isset($_POST['kinerja'][3]) ? $_POST['kinerja'][3] : '');
 	$monitoring = (isset($_POST['monitoring']) ? $_POST['monitoring'] : '');
+	$other0 = (isset($_POST['other0']) ? $_POST['other0'] : '');
 	$positif = (isset($_POST['positif']) ? $_POST['positif'] : '');
+	$other1 = (isset($_POST['other1']) ? $_POST['other1'] : '');
 	$negatif = (isset($_POST['negatif']) ? $_POST['negatif'] : '');
+	$other2 = (isset($_POST['other2']) ? $_POST['other2'] : '');
 	$nama_ketua = (isset($_POST['nama_ketua']) ? $_POST['nama_ketua'] : '');
 	$email_ketua = (isset($_POST['email_ketua']) ? $_POST['email_ketua'] : '');
 	$nama_sekre = (isset($_POST['nama_sekre']) ? $_POST['nama_sekre'] : '');
 	$email_sekre = (isset($_POST['email_sekre']) ? $_POST['email_sekre'] : '');
-	$nama_pdd = (isset($_POST['nama_pdd']) ? $_POST['nama_pdd'] : '');
-	$email_pdd = (isset($_POST['email_pdd']) ? $_POST['email_pdd'] : '');
-	$nama_corp = (isset($_POST['nama_corp']) ? $_POST['nama_corp'] : '');
-	$email_corp = (isset($_POST['email_corp']) ? $_POST['email_corp'] : '');
-	$nama_rating = (isset($_POST['nama_rating']) ? $_POST['nama_rating'] : '');
-	$email_rating = (isset($_POST['email_rating']) ? $_POST['email_rating'] : '');
-	$nama_dare = (isset($_POST['nama_dare']) ? $_POST['nama_dare'] : '');
-	$email_dare = (isset($_POST['email_dare']) ? $_POST['email_dare'] : '');
-	$nama_pendukung = (isset($_POST['nama_pendukung']) ? $_POST['nama_pendukung'] : '');
-	$email_pendukung = (isset($_POST['email_pendukung']) ? $_POST['email_pendukung'] : '');
-	$nama_share = (isset($_POST['nama_share']) ? $_POST['nama_share'] : '');
-	$email_share = (isset($_POST['email_share']) ? $_POST['email_share'] : '');
-	$nama_spirit = (isset($_POST['nama_spirit']) ? $_POST['nama_spirit'] : '');
-	$email_spirit = (isset($_POST['email_spirit']) ? $_POST['email_spirit'] : '');
-	$nama_standar = (isset($_POST['nama_standar']) ? $_POST['nama_standar'] : '');
-	$email_standar = (isset($_POST['email_standar']) ? $_POST['email_standar'] : '');
-
+	$posisi_0 = (isset($_POST['posisi_'][0]) ? $_POST['posisi_'][0] : '');
+	$nama_0 = (isset($_POST['[nama_'][0]) ? $_POST['nama_'][0] : '');
+	$email_0 = (isset($_POST['email_'][0]) ? $_POST['email_'][0] : '');
+	$posisi_1 = (isset($_POST['posisi_'][1]) ? $_POST['posisi_'][1] : '');
+	$nama_1 = (isset($_POST['[nama_'][1]) ? $_POST['nama_'][1] : '');
+	$email_1 = (isset($_POST['email_'][1]) ? $_POST['email_'][1] : '');
+	$posisi_2 = (isset($_POST['posisi_'][2]) ? $_POST['posisi_'][2] : '');
+	$nama_2 = (isset($_POST['[nama_'][2]) ? $_POST['nama_'][2] : '');
+	$email_2 = (isset($_POST['email_'][2]) ? $_POST['email_'][2] : '');
+	$posisi_3 = (isset($_POST['posisi_'][3]) ? $_POST['posisi_'][3] : '');
+	$nama_3 = (isset($_POST['[nama_'][3]) ? $_POST['nama_'][3] : '');
+	$email_3 = (isset($_POST['email_'][3]) ? $_POST['email_'][3] : '');
+	$posisi_4 = (isset($_POST['posisi_'][4]) ? $_POST['posisi_'][4] : '');
+	$nama_4 = (isset($_POST['[nama_'][4]) ? $_POST['nama_'][4] : '');
+	$email_4 = (isset($_POST['email_'][4]) ? $_POST['email_'][4] : '');
+	$posisi_5 = (isset($_POST['posisi_'][5]) ? $_POST['posisi_'][5] : '');
+	$nama_5 = (isset($_POST['[nama_'][5]) ? $_POST['nama_'][5] : '');
+	$email_5 = (isset($_POST['email_'][5]) ? $_POST['email_'][5] : '');
+	$posisi_6 = (isset($_POST['posisi_'][6]) ? $_POST['posisi_'][6] : '');
+	$nama_6 = (isset($_POST['[nama_'][6]) ? $_POST['nama_'][6] : '');
+	$email_6 = (isset($_POST['email_'][6]) ? $_POST['email_'][6] : '');
+	$posisi_7 = (isset($_POST['posisi_'][7]) ? $_POST['posisi_'][7] : '');
+	$nama_7 = (isset($_POST['[nama_'][7]) ? $_POST['nama_'][7] : '');
+	$email_7 = (isset($_POST['email_'][7]) ? $_POST['email_'][7] : '');
+	
 	$file = rand(1000,100000)."-".$_FILES['file']['name'];
     $file_loc = $_FILES['file']['tmp_name'];
 	$file_size = $_FILES['file']['size'];
@@ -163,29 +174,40 @@
 									tujuan_capai_kinerja_1,
 									tujuan_capai_kinerja_2,
 									tujuan_capai_kinerja_3, 
-									metode_monitoring, 
+									metode_monitoring,
+									other0, 
 									metode_enforcement_positif, 
+									other1,
 									metode_enforcement_negatif, 
+									other2,
 									nama_ketua, 
 									email_ketua, 
 									nama_sekre_bendahara, 
 									email_sekre_bendahara, 
-									nama_dok_pub, 
-									email_dok_pub, 
-									nama_corp_prog, 
-									email_corp_prog, 
-									nama_pic_rate, 
-									email_pic_rate, 
-									nama_pic_dare, 
-									email_pic_dare, 
-									nama_prog_dukung, 
-									email_prog_dukung, 
-									nama_pic_share, 
-									email_pic_share, 
-									nama_pic_team, 
-									email_pic_team, 
-									nama_pic_standar, 
-									email_pic_standar,
+									posisi_0,
+									nama_0,
+									email_0,
+									posisi_1,
+									nama_1,
+									email_1,
+									posisi_2,
+									nama_2,
+									email_2,
+									posisi_3,
+									nama_3,
+									email_3,
+									posisi_4,
+									nama_4,
+									email_4,
+									posisi_5,
+									nama_5,
+									email_5,
+									posisi_6,
+									nama_6,
+									email_6,
+									posisi_7,
+									nama_7,
+									email_7,
 									file,
 									type,
 									size) 
@@ -219,28 +241,39 @@
 									'$kinerja2', 
 									'$kinerja3', 
 									'$monitoring', 
-									'$positif', 
+									'$other0',
+									'$positif',
+									'$other1', 
 									'$negatif',
+									'$other2',
 									'$nama_ketua', 
 									'$email_ketua', 
 									'$nama_sekre', 
 									'$email_sekre', 
-									'$nama_pdd', 
-									'$email_pdd',
-									'$nama_corp', 
-									'$email_corp', 
-									'$nama_rating', 
-									'$email_rating', 
-									'$nama_dare', 
-									'$email_dare', 
-									'$nama_pendukung', 
-									'$email_pendukung', 
-									'$nama_share', 
-									'$email_share', 
-									'$nama_spirit', 
-									'$email_spirit', 
-									'$nama_standar', 
-									'$email_standar',
+									'$posisi_0',
+									'$nama_0',
+									'$email_0',
+									'$posisi_1',
+									'$nama_1',
+									'$email_1',
+									'$posisi_2',
+									'$nama_2',
+									'$email_2',
+									'$posisi_3',
+									'$nama_3',
+									'$email_3',
+									'$posisi_4',
+									'$nama_4',
+									'$email_4',
+									'$posisi_5',
+									'$nama_5',
+									'$email_5',
+									'$posisi_6',
+									'$nama_6',
+									'$email_6',
+									'$posisi_7',
+									'$nama_7',
+									'$email_7',
 									'$final_file',
 									'$file_type',
 									'$new_size')";
