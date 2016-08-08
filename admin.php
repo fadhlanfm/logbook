@@ -5,7 +5,7 @@ include('process/connect_db.php');
 $db = new mysqli($db_host,$db_username, $db_password, $db_database);
 if ($db->connect_errno)
 {
-  die("Could not connect to teh database: <br />".$db->connect_error);
+  die("Could not connect to the database: <br />".$db->connect_error);
 }
 
 if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
@@ -24,7 +24,7 @@ else
 
 <html>
 <head>
-	<title>Login</title>
+	<title>Login Admin</title>
 	<link rel="stylesheet" type="text/css" href="assets/css_login.css">
 	<script type="text/javascript">
 		$('.message a').click(function(){
@@ -35,10 +35,10 @@ else
 <body>
 	<div class="login-page">
      <div class="form">
-       <form class="login-form" action="process/acc_login_responden.php" method="POST">
-          <h1>Login</h1>
-          <input type="text" placeholder="Nomor ID" name="id" required>
-          <input type="password" placeholder="Password" name="password" required>
+       <form class="login-form" action="process/acc_login_admin.php" method="POST">
+          <h1>Login Admin</h1>
+          <input type="text" placeholder="ID Admin" name="id">
+          <input type="password" placeholder="Password" name="password">
           <button type="submit">Masuk</button>
       </form>
   </div>
