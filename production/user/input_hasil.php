@@ -54,6 +54,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="../assets/gi.ico" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
