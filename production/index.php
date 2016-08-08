@@ -81,7 +81,29 @@ else
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.php">Dashboard</a></li>
+                    <li><a href="index.php">Overall</a></li>
+                    <li><a href="ucharts_JKTDZ.php">JKTDZ - President & CEO</a></li>
+                    <li><a href="ucharts_JKTDI.php">JKTDI - Human Capital & Corporate Affairs</a></li>
+                    <li><a href="ucharts_JKTDF.php">JKTDF - Finance & Risk Management</a></li>
+                    <li><a href="ucharts_JKTDG.php">JKTDG - Cargo</a></li>
+                    <li><a href="ucharts_JKTDO.php">JKTDO - Operations </a></li>
+                    <li><a href="ucharts_JKTDE.php">JKTDE - Maintenance & Information Technology</a></li>
+                    <li><a href="ucharts_JKTDC.php">JKTDC - Services</a></li>
+                    <li><a href="ucharts_JKTDN.php">JKTDN - Commercial</a>
+                        <li><a>JKTDN - Commercial (Branch Offices)<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="bcharts_MESAM.php">MESAM - Sumatera Region</a>
+                            </li>
+                            <li><a href="bcharts_JKTAM.php">JKTAM - Jakarta Raya Region</a>
+                            </li><li><a href="bcharts_SUBAM.php">SUBAM - Jawa, Bali, Nusa Tenggara Region</a>
+                            </li><li><a href="bcharts_UPGAM.php">UPGAM - Kalimantan, Sulawesi, Papua Region</a>
+                            </li><li><a href="bcharts_SINAM.php">SINAM - Asia Region</a>
+                            </li><li><a href="bcharts_TYOAM.php">TYOAM - Japan & Korea Region</a>
+                            </li><li><a href="bcharts_SHAAM.php">SHAAM - China Region</a>
+                            </li><li><a href="bcharts_SYDAM.php">SYDAM - South West Pacific Region</a>
+                            </li>
+                          </ul>
+                        </li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Logbook <span class="fa fa-chevron-down"></span></a>
@@ -212,772 +234,201 @@ else
         </div>
         <!-- /top navigation -->
 
+        <?php
+  include('../connect_db.php');
+  $queryy = "SELECT kode_unit FROM logbook WHERE end >= curdate() GROUP BY kode_unit "; //yg udah submit dan belom kelar
+  $queryy1 = "SELECT kode FROM unit GROUP BY kode";
+  $queryy2 = "SELECT kode FROM branch GROUP BY kode";
+  $queryy3 = "SELECT id FROM logbook WHERE start <= curdate() and end >= curdate()";
+
+  $queryy4 = "SELECT id FROM logbook WHERE kode_dir='JKTDZ' AND end < curdate()";
+  $queryy5 = "SELECT id FROM logbook WHERE kode_dir='JKTDI' AND end < curdate()";
+  $queryy6 = "SELECT id FROM logbook WHERE kode_dir='JKTDF' AND end < curdate()";
+  $queryy7 = "SELECT id FROM logbook WHERE kode_dir='JKTDO' AND end < curdate()";
+  $queryy8 = "SELECT id FROM logbook WHERE kode_dir='JKTDE' AND end < curdate()";
+  $queryy9 = "SELECT id FROM logbook WHERE kode_dir='JKTDC' AND end < curdate()";
+  $queryy10 = "SELECT id FROM logbook WHERE kode_dir='JKTDN' AND end < curdate()";
+  $queryy11 = "SELECT id FROM logbook WHERE kode_dir='JKTDG' AND end < curdate()";
+
+
+  $resultt = $db->query($queryy);
+  $resultt1 = $db->query($queryy1);
+  $resultt2 = $db->query($queryy2);
+  $resultt3 = $db->query($queryy3);
+  $resultt4 = $db->query($queryy4);
+  $resultt5 = $db->query($queryy5);
+  $resultt6 = $db->query($queryy6);
+  $resultt7 = $db->query($queryy7);
+  $resultt8 = $db->query($queryy8);
+  $resultt9 = $db->query($queryy9);
+  $resultt10 = $db->query($queryy10);
+  $resultt11 = $db->query($queryy11);
+
+
+  $tersubmit=mysqli_num_rows($resultt);
+  $totalunit=mysqli_num_rows($resultt1);
+  $totalbranch=mysqli_num_rows($resultt2);
+  $running=mysqli_num_rows($resultt3);
+
+  $total_JKTDZ=mysqli_num_rows($resultt4);
+  $total_JKTDI=mysqli_num_rows($resultt5);
+  $total_JKTDF=mysqli_num_rows($resultt6);
+  $total_JKTDO=mysqli_num_rows($resultt7);
+  $total_JKTDE=mysqli_num_rows($resultt8);
+  $total_JKTDC=mysqli_num_rows($resultt9);
+  $total_JKTDN=mysqli_num_rows($resultt10);
+  $total_JKTDG=mysqli_num_rows($resultt11);
+
+
+  $total=$totalunit+$totalbranch-8;
+  $value=$tersubmit/$total;
+  $value1=$running/$tersubmit;
+?>
+
         <!-- page content -->
         <div class="right_col" role="main">
+          <div class="page-title">
+
           <!-- top tiles -->
-          <div class="row tile_count">
-            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-              <span class="count_top"><i class="fa fa-user"></i> Total Passenger </span>
-              <div class="count">
-                <?php  
-                echo "$thisweek_totalpass";
-                ?>
-              </div>
-              <?php
-              if ($total = 1) {
-                ?>
-                <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"> </i>
-                  <?php
-                } else {
-                  ?>
-                  <span class="count_top"><i class="green"><i class="fa fa-sort-asc"> </i>
-
-                    <?php } echo "$total_perc" ?>% </i> From last Week </span>
+          <div class="row">
+          <div class="col-md-12 col-sm-6 col-xs-14">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Program Terlaksana</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
                   </div>
-                  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span class="count_top"><i class="fa fa-user"></i> Male Passengers </span>
-                    <div class="count">
-                      <?php  
-                      echo "$thisweek_mpass";
-                      ?>
+                  
+                  <div class="row tile_count">
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDZ.php"> JKTDZ - President & CEO</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDZ.php">'.$total_JKTDZ.'</a>'; ?></div>
                     </div>
-                    <?php
-                    if ($total = 1) {
-                      ?>
-                      <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"> </i>
-                        <?php
-                      } else {
-                        ?>
-                        <span class="count_top"><i class="green"><i class="fa fa-sort-asc"> </i>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDI.php"> JKTDI - Human Capital & Corporate Affairs</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDI.php">'.$total_JKTDI.'</a>'; ?></div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDF.php"> JKTDF - Finance & Risk Management</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDF.php">'.$total_JKTDF.'</a>'; ?></div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDO.php"> JKTDO - Operations</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDO.php">'.$total_JKTDO.'</a>'; ?></div>
+                    </div>
+                    </div>
+                    <div class="row tile_count">
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDE.php"> JKTDE - Engineering & Information Technology</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDE.php">'.$total_JKTDE.'</a>'; ?></div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDC.php"> JKTDC - Services</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDC.php">'.$total_JKTDC.'</a>'; ?></div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDN.php"> JKTDN - Commercial</a></span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDN.php">'.$total_JKTDN.'</a>'; ?></div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                      <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDG.php"> JKTDG - Cargo</span>
+                      <div class="count"><?php echo '<a href="ucharts_JKTDG.php">'.$total_JKTDG.'</a>'; ?></div>
+                    </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <!-- /top tiles -->
 
-                          <?php } echo "$m_perc" ?>% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                          <span class="count_top"><i class="fa fa-user"></i> Female Passengers </span>
-                          <div class="count">
-                            <?php  
-                            echo "$thisweek_fpass";
-                            ?>
-                          </div>
-                          <?php
-                          if ($total = 1) {
-                            ?>
-                            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"> </i>
-                              <?php
-                            } else {
-                              ?>
-                              <span class="count_top"><i class="green"><i class="fa fa-sort-asc"> </i>
+            <!-- CHART unit submit-->
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-14">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Unit yang sudah submit</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div id="submitted" style="height:370px;"></div>
+                  </div>
+                  <div class="tile-stats">
+                  <div class="count" style="color: <?php if ($value>=0 && $value<0.5) {echo "#ff4500";}elseif($value>=0.5 && $value<0.75){echo "#ffcc00";}else{echo "lightgreen";}?>"><?php echo ''.$tersubmit.'/'.$total.' Unit';?></div>
+                  <h3>Sudah submit</h3>
+                </div>
+                </div>
+              </div>
+            <!-- CHART unit submit-->
 
-                                <?php } echo "$f_perc" ?>% </i> From last Week</span>
-                              </div>
-                              <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                <span class="count_top"><i class="fa fa-user"></i> First Class </span>
-                                <div class="count">
-                                  <?php  
-                                  echo "$thisweek_fc";
-                                  ?>
-                                </div>
-                                <?php
-                                if ($total = 1) {
-                                  ?>
-                                  <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"> </i>
-                                    <?php
-                                  } else {
-                                    ?>
-                                    <span class="count_top"><i class="green"><i class="fa fa-sort-asc"> </i>
+            <!-- CHART unit sedang berjalan -->
+              <div class="col-md-6 col-sm-6 col-xs-14">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Unit dalam progress</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div id="running" style="height:370px;"></div>
+                  </div>
+                  <div class="tile-stats">
+                  <div class="count" style="color: <?php if ($value1>=0 && $value1<0.5) {echo "#ff4500";}elseif($value1>=0.5 && $value1<0.75){echo "#ffcc00";}else{echo "lightgreen";}?>"><?php echo ''.$running.'/'.$tersubmit.' Unit';?></div>
+                  <h3>Sedang running program</h3>
+                </div>
+                </div>
+              </div>
+              </div>
+            <!-- CHART unit sedang berjalan-->
 
-                                      <?php } echo "$fc_perc" ?>% </i> From last Week</span>
-                                    </div>
-                                    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                      <span class="count_top"><i class="fa fa-user"></i> Business Class </span>
-                                      <div class="count">
-                                        <?php  
-                                        echo "$thisweek_bc";
-                                        ?>
-                                      </div>
-                                      <?php
-                                      if ($total = 1) {
-                                        ?>
-                                        <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"> </i>
-                                          <?php
-                                        } else {
-                                          ?>
-                                          <span class="count_top"><i class="green"><i class="fa fa-sort-asc"> </i>
+            <!-- CHART unit sudah menyelesaikan -->
+              
+            <!-- CHART unit sudah menyelesaikan -->
+            
 
-                                            <?php } echo "$bc_perc" ?>% </i> From last Week</span>
-                                          </div>
-                                          <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                                            <span class="count_top"><i class="fa fa-user"></i> Economic Class </span>
-                                            <div class="count">
-                                              <?php  
-                                              echo "$thisweek_ec";
-                                              ?>
-                                            </div>
-                                            <?php
-                                            if ($total = 1) {
-                                              ?>
-                                              <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"> </i>
-                                                <?php
-                                              } else {
-                                                ?>
-                                                <span class="count_top"><i class="green"><i class="fa fa-sort-asc"> </i>
-
-                                                  <?php } echo "$ec_perc" ?>% </i> From last Week</span>
-                                                </div>
-
-                                              </div>
-                                              <!-- /top tiles -->
-
-                                              <div class="row">
-                                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                                  <div class="dashboard_graph">
-
-                                                    <div class="row x_title">
-                                                      <div class="col-md-6">
-                                                        <h3>Flight Activities <small>Perbandingan 2 tahun terakhir</small></h3>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                                          <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                                          <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-
-                                                    <div class="col-md-9 col-sm-9 col-xs-12">
-                                                      <div id="placeholder33" style="height: 260px; display: none" class="demo-placeholder"></div>
-                                                      <div style="width: 100%;">
-                                                        <div id="canvas_dahs" class="demo-placeholder" style="width: 100%; height:270px;"></div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
-                                                      <div class="x_title">
-                                                        <h2>Top 4 Flight Route</h2>
-                                                        <div class="clearfix"></div>
-                                                      </div>
-
-                                                      <div class="col-md-12 col-sm-12 col-xs-6">
-                                                        <div>
-                                                          <p>Jakarta - Surabaya</p>
-                                                          <div class="">
-                                                            <div class="progress progress_sm" style="width: 76%;">
-                                                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div>
-                                                          <p>Jakarta - Bandung</p>
-                                                          <div class="">
-                                                            <div class="progress progress_sm" style="width: 76%;">
-                                                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      <div class="col-md-12 col-sm-12 col-xs-6">
-                                                        <div>
-                                                          <p>Jakarta - Singapura</p>
-                                                          <div class="">
-                                                            <div class="progress progress_sm" style="width: 76%;">
-                                                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div>
-                                                          <p>Surabaya - Jakarta</p>
-                                                          <div class="">
-                                                            <div class="progress progress_sm" style="width: 76%;">
-                                                              <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-
-                                                    </div>
-
-                                                    <div class="clearfix"></div>
-                                                  </div>
-                                                </div>
-
-                                              </div>
-                                              <br />
-
-                                              <div class="row">
-
-
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                  <div class="x_panel tile fixed_height_320">
-                                                    <div class="x_title">
-                                                      <h2>App Versions</h2>
-                                                      <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                          <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                          </ul>
-                                                        </li>
-                                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                        </li>
-                                                      </ul>
-                                                      <div class="clearfix"></div>
-                                                    </div>
-                                                    <div class="x_content">
-                                                      <h4>App Usage across versions</h4>
-                                                      <div class="widget_summary">
-                                                        <div class="w_left w_25">
-                                                          <span>0.1.5.2</span>
-                                                        </div>
-                                                        <div class="w_center w_55">
-                                                          <div class="progress">
-                                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 66%;">
-                                                              <span class="sr-only">60% Complete</span>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="w_right w_20">
-                                                          <span>123k</span>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                      </div>
-
-                                                      <div class="widget_summary">
-                                                        <div class="w_left w_25">
-                                                          <span>0.1.5.3</span>
-                                                        </div>
-                                                        <div class="w_center w_55">
-                                                          <div class="progress">
-                                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                                                              <span class="sr-only">60% Complete</span>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="w_right w_20">
-                                                          <span>53k</span>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                      </div>
-                                                      <div class="widget_summary">
-                                                        <div class="w_left w_25">
-                                                          <span>0.1.5.4</span>
-                                                        </div>
-                                                        <div class="w_center w_55">
-                                                          <div class="progress">
-                                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                                                              <span class="sr-only">60% Complete</span>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="w_right w_20">
-                                                          <span>23k</span>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                      </div>
-                                                      <div class="widget_summary">
-                                                        <div class="w_left w_25">
-                                                          <span>0.1.5.5</span>
-                                                        </div>
-                                                        <div class="w_center w_55">
-                                                          <div class="progress">
-                                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                                                              <span class="sr-only">60% Complete</span>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="w_right w_20">
-                                                          <span>3k</span>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                      </div>
-                                                      <div class="widget_summary">
-                                                        <div class="w_left w_25">
-                                                          <span>0.1.5.6</span>
-                                                        </div>
-                                                        <div class="w_center w_55">
-                                                          <div class="progress">
-                                                            <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                                                              <span class="sr-only">60% Complete</span>
-                                                            </div>
-                                                          </div>
-                                                        </div>
-                                                        <div class="w_right w_20">
-                                                          <span>1k</span>
-                                                        </div>
-                                                        <div class="clearfix"></div>
-                                                      </div>
-
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                  <div class="x_panel tile fixed_height_320 overflow_hidden">
-                                                    <div class="x_title">
-                                                      <h2>Suite Chosen</h2>
-                                                      <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                          <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                          </ul>
-                                                        </li>
-                                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                        </li>
-                                                      </ul>
-                                                      <div class="clearfix"></div>
-                                                    </div>
-                                                    <div class="x_content">
-                                                      <table class="" style="width:100%">
-                                                        <tr>
-                                                          <th style="width:37%;">
-                                                            <p>Result</p>
-                                                          </th>
-                                                          <th>
-                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-                                                              <p class="">Suite</p>
-                                                            </div>
-                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
-                                                              <p class="">Percentage</p>
-                                                            </div>
-                                                          </th>
-                                                        </tr>
-                                                        <tr>
-                                                          <td>
-                                                            <canvas id="canvas1" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas>
-                                                          </td>
-                                                          <td>
-                                                            <table class="tile_info">
-                                                              <tr>
-                                                                <td>
-                                                                  <p><i class="fa fa-square blue"></i>First </p>
-                                                                </td>
-                                                                <td><?php $a=round($thisweek_fc/$thisweek_totalsuite*100); echo "$a"; ?>%</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td>
-                                                                  <p><i class="fa fa-square green"></i>Business </p>
-                                                                </td>
-                                                                <td><?php $a=round($thisweek_bc/$thisweek_totalsuite*100); echo "$a"; ?>%</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td>
-                                                                  <p><i class="fa fa-square purple"></i>Economy </p>
-                                                                </td>
-                                                                <td><?php $a=round($thisweek_ec/$thisweek_totalsuite*100); echo "$a"; ?>%</td>
-                                                              </tr>
-                                                            </table>
-                                                          </td>
-                                                        </tr>
-                                                      </table>
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                  <div class="x_panel tile fixed_height_320">
-                                                    <div class="x_title">
-                                                      <h2>Quick Settings</h2>
-                                                      <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                          <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                          </ul>
-                                                        </li>
-                                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                        </li>
-                                                      </ul>
-                                                      <div class="clearfix"></div>
-                                                    </div>
-                                                    <div class="x_content">
-                                                      <div class="dashboard-widget-content">
-                                                        <ul class="quick-list">
-                                                          <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a>
-                                                          </li>
-                                                          <li><i class="fa fa-bars"></i><a href="#">Subscription</a>
-                                                          </li>
-                                                          <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                                                          <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                                                          </li>
-                                                          <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                                                          <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a>
-                                                          </li>
-                                                          <li><i class="fa fa-area-chart"></i><a href="acc_logout.php">Logout</a>
-                                                          </li>
-                                                        </ul>
-
-                                                        <div class="sidebar-widget">
-                                                          <h4>Profile Completion</h4>
-                                                          <canvas width="150" height="80" id="foo" class="" style="width: 160px; height: 100px;"></canvas>
-                                                          <div class="goal-wrapper">
-                                                            <span class="gauge-value pull-left">$</span>
-                                                            <span id="gauge-text" class="gauge-value pull-left">3,200</span>
-                                                            <span id="goal-text" class="goal-value pull-right">$5,000</span>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-                                              </div>
-
-
-                                              <div class="row">
-                                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                                  <div class="x_panel">
-                                                    <div class="x_title">
-                                                      <h2>Recent Activities <small>Sessions</small></h2>
-                                                      <ul class="nav navbar-right panel_toolbox">
-                                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                          <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                          </ul>
-                                                        </li>
-                                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                        </li>
-                                                      </ul>
-                                                      <div class="clearfix"></div>
-                                                    </div>
-                                                    <div class="x_content">
-                                                      <div class="dashboard-widget-content">
-
-                                                        <ul class="list-unstyled timeline widget">
-                                                          <li>
-                                                            <div class="block">
-                                                              <div class="block_content">
-                                                                <h2 class="title">
-                                                                  <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                                                                </h2>
-                                                                <div class="byline">
-                                                                  <span>13 hours ago</span> by <a>Jane Smith</a>
-                                                                </div>
-                                                                <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                                                                </p>
-                                                              </div>
-                                                            </div>
-                                                          </li>
-                                                          <li>
-                                                            <div class="block">
-                                                              <div class="block_content">
-                                                                <h2 class="title">
-                                                                  <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                                                                </h2>
-                                                                <div class="byline">
-                                                                  <span>13 hours ago</span> by <a>Jane Smith</a>
-                                                                </div>
-                                                                <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                                                                </p>
-                                                              </div>
-                                                            </div>
-                                                          </li>
-                                                          <li>
-                                                            <div class="block">
-                                                              <div class="block_content">
-                                                                <h2 class="title">
-                                                                  <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                                                                </h2>
-                                                                <div class="byline">
-                                                                  <span>13 hours ago</span> by <a>Jane Smith</a>
-                                                                </div>
-                                                                <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                                                                </p>
-                                                              </div>
-                                                            </div>
-                                                          </li>
-                                                          <li>
-                                                            <div class="block">
-                                                              <div class="block_content">
-                                                                <h2 class="title">
-                                                                  <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>
-                                                                </h2>
-                                                                <div class="byline">
-                                                                  <span>13 hours ago</span> by <a>Jane Smith</a>
-                                                                </div>
-                                                                <p class="excerpt">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>
-                                                                </p>
-                                                              </div>
-                                                            </div>
-                                                          </li>
-                                                        </ul>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </div>
-
-
-                                                <div class="col-md-8 col-sm-8 col-xs-12">
-
-
-
-                                                  <div class="row">
-
-                                                    <div class="col-md-12 col-sm-12 col-xs-12">
-                                                      <div class="x_panel">
-                                                        <div class="x_title">
-                                                          <h2>International Flight <small>geo-presentation</small></h2>
-                                                          <ul class="nav navbar-right panel_toolbox">
-                                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                            </li>
-                                                            <li class="dropdown">
-                                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                              <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="#">Settings 1</a>
-                                                                </li>
-                                                                <li><a href="#">Settings 2</a>
-                                                                </li>
-                                                              </ul>
-                                                            </li>
-                                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                            </li>
-                                                          </ul>
-                                                          <div class="clearfix"></div>
-                                                        </div>
-                                                        <div class="x_content">
-                                                          <div class="dashboard-widget-content">
-                                                            <div class="col-md-4 hidden-small">
-                                                              <h2 class="line_30">125.7k Views from 60 countries</h2>
-
-                                                              <table class="countries_list">
-                                                                <tbody>
-                                                                  <tr>
-                                                                    <td>United States</td>
-                                                                    <td class="fs15 fw700 text-right">33%</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>France</td>
-                                                                    <td class="fs15 fw700 text-right">27%</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>Germany</td>
-                                                                    <td class="fs15 fw700 text-right">16%</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>Spain</td>
-                                                                    <td class="fs15 fw700 text-right">11%</td>
-                                                                  </tr>
-                                                                  <tr>
-                                                                    <td>Britain</td>
-                                                                    <td class="fs15 fw700 text-right">10%</td>
-                                                                  </tr>
-                                                                </tbody>
-                                                              </table>
-                                                            </div>
-                                                            <div id="world-map-gdp" class="col-md-8 col-sm-12 col-xs-12" style="height:230px;"></div>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-
-                                                  </div>
-                                                  <div class="row">
-
-
-                                                    <!-- Start to do list -->
-                                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                                      <div class="x_panel">
-                                                        <div class="x_title">
-                                                          <h2>To Do List <small>Sample tasks</small></h2>
-                                                          <ul class="nav navbar-right panel_toolbox">
-                                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                            </li>
-                                                            <li class="dropdown">
-                                                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                              <ul class="dropdown-menu" role="menu">
-                                                                <li><a href="#">Settings 1</a>
-                                                                </li>
-                                                                <li><a href="#">Settings 2</a>
-                                                                </li>
-                                                              </ul>
-                                                            </li>
-                                                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                            </li>
-                                                          </ul>
-                                                          <div class="clearfix"></div>
-                                                        </div>
-                                                        <div class="x_content">
-
-                                                          <div class="">
-                                                            <ul class="to_do">
-                                                              <li>
-                                                                <p>
-                                                                  <input type="checkbox" class="flat"> Schedule meeting with new client </p>
-                                                                </li>
-                                                                <li>
-                                                                  <p>
-                                                                    <input type="checkbox" class="flat"> Create email address for new intern</p>
-                                                                  </li>
-                                                                  <li>
-                                                                    <p>
-                                                                      <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                                                                    </li>
-                                                                    <li>
-                                                                      <p>
-                                                                        <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                                                                      </li>
-                                                                      <li>
-                                                                        <p>
-                                                                          <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                                                                        </li>
-                                                                        <li>
-                                                                          <p>
-                                                                            <input type="checkbox" class="flat"> Food truck fixie locavors mcsweeney</p>
-                                                                          </li>
-                                                                          <li>
-                                                                            <p>
-                                                                              <input type="checkbox" class="flat"> Create email address for new intern</p>
-                                                                            </li>
-                                                                            <li>
-                                                                              <p>
-                                                                                <input type="checkbox" class="flat"> Have IT fix the network printer</p>
-                                                                              </li>
-                                                                              <li>
-                                                                                <p>
-                                                                                  <input type="checkbox" class="flat"> Copy backups to offsite location</p>
-                                                                                </li>
-                                                                              </ul>
-                                                                            </div>
-                                                                          </div>
-                                                                        </div>
-                                                                      </div>
-                                                                      <!-- End to do list -->
-
-                                                                      <!-- start of weather widget -->
-                                                                      <div class="col-md-6 col-sm-6 col-xs-12">
-                                                                        <div class="x_panel">
-                                                                          <div class="x_title">
-                                                                            <h2>Daily active users <small>Sessions</small></h2>
-                                                                            <ul class="nav navbar-right panel_toolbox">
-                                                                              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                                              </li>
-                                                                              <li class="dropdown">
-                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                                                <ul class="dropdown-menu" role="menu">
-                                                                                  <li><a href="#">Settings 1</a>
-                                                                                  </li>
-                                                                                  <li><a href="#">Settings 2</a>
-                                                                                  </li>
-                                                                                </ul>
-                                                                              </li>
-                                                                              <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                                                              </li>
-                                                                            </ul>
-                                                                            <div class="clearfix"></div>
-                                                                          </div>
-                                                                          <div class="x_content">
-                                                                            <div class="row">
-                                                                              <div class="col-sm-12">
-                                                                                <?php
-                                                                                $mydate=getdate(date("U"));
-                                                                                ?>
-                                                                                <div class="temperature"><b><?php echo "$mydate[weekday]";?></b>,<span id="clock"><?php print date('H:i:s'); ?></span> 
-                                                                                  <span>F</span>
-                                                                                  <span><b>C</b></span>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                              <div class="col-sm-4">
-                                                                                <div class="weather-icon">
-                                                                                  <canvas height="84" width="84" id="partly-cloudy-day"></canvas>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-sm-8">
-                                                                                <div class="weather-text">
-                                                                                  <h2>Jakarta <br><i>Partly Cloudy Day</i></h2>
-                                                                                </div>
-                                                                              </div>
-                                                                            </div>
-                                                                            <div class="col-sm-12">
-                                                                              <div class="weather-text pull-right">
-                                                                                <h3 class="degrees">23</h3>
-                                                                              </div>
-                                                                            </div>
-
-                                                                            <div class="clearfix"></div>
-
-                                                                            <div class="row weather-days">
-                                                                              <div class="col-sm-2">
-                                                                                <div class="daily-weather">
-                                                                                  <h2 class="day">Mon</h2>
-                                                                                  <h3 class="degrees">25</h3>
-                                                                                  <canvas id="clear-day" width="32" height="32"></canvas>
-                                                                                  <h5>15 <i>km/h</i></h5>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-sm-2">
-                                                                                <div class="daily-weather">
-                                                                                  <h2 class="day">Tue</h2>
-                                                                                  <h3 class="degrees">25</h3>
-                                                                                  <canvas height="32" width="32" id="rain"></canvas>
-                                                                                  <h5>12 <i>km/h</i></h5>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-sm-2">
-                                                                                <div class="daily-weather">
-                                                                                  <h2 class="day">Wed</h2>
-                                                                                  <h3 class="degrees">27</h3>
-                                                                                  <canvas height="32" width="32" id="snow"></canvas>
-                                                                                  <h5>14 <i>km/h</i></h5>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-sm-2">
-                                                                                <div class="daily-weather">
-                                                                                  <h2 class="day">Thu</h2>
-                                                                                  <h3 class="degrees">28</h3>
-                                                                                  <canvas height="32" width="32" id="sleet"></canvas>
-                                                                                  <h5>15 <i>km/h</i></h5>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-sm-2">
-                                                                                <div class="daily-weather">
-                                                                                  <h2 class="day">Fri</h2>
-                                                                                  <h3 class="degrees">28</h3>
-                                                                                  <canvas height="32" width="32" id="wind"></canvas>
-                                                                                  <h5>11 <i>km/h</i></h5>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="col-sm-2">
-                                                                                <div class="daily-weather">
-                                                                                  <h2 class="day">Sat</h2>
-                                                                                  <h3 class="degrees">26</h3>
-                                                                                  <canvas height="32" width="32" id="cloudy"></canvas>
-                                                                                  <h5>10 <i>km/h</i></h5>
-                                                                                </div>
-                                                                              </div>
-                                                                              <div class="clearfix"></div>
-                                                                            </div>
-                                                                          </div>
-                                                                        </div>
-
-                                                                      </div>
-                                                                      <!-- end of weather widget -->
-                                                                    </div>
-                                                                  </div>
-                                                                </div>
-                                                              </div>
-                                                              <!-- /page content -->
+        <!-- /page content -->
 
                                                               <!-- footer content -->
                                                               <footer>
@@ -987,327 +438,451 @@ else
                                                                 <div class="clearfix"></div>
                                                               </footer>
                                                               <!-- /footer content -->
-                                                            </div>
-                                                          </div>
+                                                            
+        </div>
 
-                                                          <!-- jQuery -->
-                                                          <script src="../vendors/jquery/dist/jquery.min.js"></script>
-                                                          <!-- Bootstrap -->
-                                                          <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-                                                          <!-- FastClick -->
-                                                          <script src="../vendors/fastclick/lib/fastclick.js"></script>
-                                                          <!-- NProgress -->
-                                                          <script src="../vendors/nprogress/nprogress.js"></script>
-                                                          <!-- Chart.js -->
-                                                          <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-                                                          <!-- gauge.js -->
-                                                          <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-                                                          <!-- bootstrap-progressbar -->
-                                                          <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-                                                          <!-- iCheck -->
-                                                          <script src="../vendors/iCheck/icheck.min.js"></script>
-                                                          <!-- Skycons -->
-                                                          <script src="../vendors/skycons/skycons.js"></script>
-                                                          <!-- Flot -->
-                                                          <script src="../vendors/Flot/jquery.flot.js"></script>
-                                                          <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-                                                          <script src="../vendors/Flot/jquery.flot.time.js"></script>
-                                                          <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-                                                          <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-                                                          <!-- Flot plugins -->
-                                                          <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-                                                          <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-                                                          <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-                                                          <!-- DateJS -->
-                                                          <script src="../vendors/DateJS/build/date.js"></script>
-                                                          <!-- JQVMap -->
-                                                          <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-                                                          <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-                                                          <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-                                                          <!-- bootstrap-daterangepicker -->
-                                                          <script src="js/moment/moment.min.js"></script>
-                                                          <script src="js/datepicker/daterangepicker.js"></script>
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- ECharts -->
+    <script src="../vendors/echarts/dist/echarts.min.js"></script>
+    <script src="../vendors/echarts/map/js/world.js"></script>
 
-                                                          <!-- Custom Theme Scripts -->
-                                                          <script src="../build/js/custom.min.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
 
-                                                          <!-- Flot -->
-                                                          <script>
-                                                            $(document).ready(function() {
-                                                              var data1 = [
-                                                              [gd(2012, 1, 1), <?php echo $cek1;?>],
-                                                              [gd(2012, 2, 2), <?php echo $cek2;?>],
-                                                              [gd(2012, 3, 3), <?php echo $cek3;?>],
-                                                              [gd(2012, 4, 4), 65530],
-                                                              [gd(2012, 5, 5), 43356],
-                                                              [gd(2012, 6, 6), 54689]
-                                                              ];
+    <script>
+      var theme = {
+          color: [
+              '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+              '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+          ],
 
-                                                              var data2 = [
-                                                              [gd(2012, 1, 1), 10000],
-                                                              [gd(2012, 2, 2), 30000],
-                                                              [gd(2012, 3, 3), 50000],
-                                                              [gd(2012, 4, 4), 35000],
-                                                              [gd(2012, 5, 5), 20000],
-                                                              [gd(2012, 6, 6), 60000]
-                                                              ];
-                                                              $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
-                                                                data1, data2
-                                                                ], {
-                                                                  series: {
-                                                                    lines: {
-                                                                      show: false,
-                                                                      fill: true
-                                                                    },
-                                                                    splines: {
-                                                                      show: true,
-                                                                      tension: 0.4,
-                                                                      lineWidth: 1,
-                                                                      fill: 0.4
-                                                                    },
-                                                                    points: {
-                                                                      radius: 0,
-                                                                      show: true
-                                                                    },
-                                                                    shadowSize: 2
-                                                                  },
-                                                                  grid: {
-                                                                    verticalLines: true,
-                                                                    hoverable: true,
-                                                                    clickable: true,
-                                                                    tickColor: "#d5d5d5",
-                                                                    borderWidth: 1,
-                                                                    color: '#fff'
-                                                                  },
-                                                                  colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
-                                                                  xaxis: {
-                                                                    tickColor: "rgba(51, 51, 51, 0.06)",
-                                                                    mode: "time",
-                                                                    tickSize: [1, "month"],
-            //tickLength: 10,
-            axisLabel: "Date",
-            axisLabelUseCanvas: true,
-            axisLabelFontSizePixels: 12,
-            axisLabelFontFamily: 'Verdana, Arial',
-            axisLabelPadding: 10
+          title: {
+              itemGap: 8,
+              textStyle: {
+                  fontWeight: 'normal',
+                  color: '#408829'
+              }
           },
-          yaxis: {
-            ticks: 8,
-            tickColor: "rgba(51, 51, 51, 0.06)",
+
+          dataRange: {
+              color: ['#1f610a', '#97b58d']
           },
-          tooltip: false
-        });
 
-                                                              function gd(year, month, day) {
-                                                                return new Date(year, month - 1, day).getTime();
-                                                              }
-                                                            });
-                                                          </script>
-                                                          <!-- /Flot -->
+          toolbox: {
+              color: ['#408829', '#408829', '#408829', '#408829']
+          },
 
-                                                          <!-- JQVMap -->
-                                                          <script>
-                                                            $(document).ready(function(){
-                                                              $('#world-map-gdp').vectorMap({
-                                                                map: 'world_en',
-                                                                backgroundColor: null,
-                                                                color: '#ffffff',
-                                                                hoverOpacity: 0.7,
-                                                                selectedColor: '#666666',
-                                                                enableZoom: true,
-                                                                showTooltip: true,
-                                                                values: sample_data,
-                                                                scaleColors: ['#E6F2F0', '#149B7E'],
-                                                                normalizeFunction: 'polynomial'
-                                                              });
-                                                            });
-                                                          </script>
-                                                          <!-- /JQVMap -->
+          tooltip: {
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              axisPointer: {
+                  type: 'line',
+                  lineStyle: {
+                      color: '#408829',
+                      type: 'dashed'
+                  },
+                  crossStyle: {
+                      color: '#408829'
+                  },
+                  shadowStyle: {
+                      color: 'rgba(200,200,200,0.3)'
+                  }
+              }
+          },
 
-                                                          <!-- Skycons -->
-                                                          <script>
-                                                            $(document).ready(function() {
-                                                              var icons = new Skycons({
-                                                                "color": "#73879C"
-                                                              }),
-                                                              list = [
-                                                              "clear-day", "clear-night", "partly-cloudy-day",
-                                                              "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-                                                              "fog"
-                                                              ],
-                                                              i;
+          dataZoom: {
+              dataBackgroundColor: '#eee',
+              fillerColor: 'rgba(64,136,41,0.2)',
+              handleColor: '#408829'
+          },
+          grid: {
+              borderWidth: 0
+          },
 
-                                                              for (i = list.length; i--;)
-                                                                icons.set(list[i], list[i]);
+          categoryAxis: {
+              axisLine: {
+                  lineStyle: {
+                      color: '#408829'
+                  }
+              },
+              splitLine: {
+                  lineStyle: {
+                      color: ['#eee']
+                  }
+              }
+          },
 
-                                                              icons.play();
-                                                            });
-                                                          </script>
-                                                          <!-- /Skycons -->
+          valueAxis: {
+              axisLine: {
+                  lineStyle: {
+                      color: '#408829'
+                  }
+              },
+              splitArea: {
+                  show: true,
+                  areaStyle: {
+                      color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+                  }
+              },
+              splitLine: {
+                  lineStyle: {
+                      color: ['#eee']
+                  }
+              }
+          },
+          timeline: {
+              lineStyle: {
+                  color: '#408829'
+              },
+              controlStyle: {
+                  normal: {color: '#408829'},
+                  emphasis: {color: '#408829'}
+              }
+          },
 
-                                                          <!-- Doughnut Chart -->
-                                                          <script>
-                                                            $(document).ready(function(){
-                                                              var options = {
-                                                                legend: false,
-                                                                responsive: false
-                                                              };
+          k: {
+              itemStyle: {
+                  normal: {
+                      color: '#68a54a',
+                      color0: '#a9cba2',
+                      lineStyle: {
+                          width: 1,
+                          color: '#408829',
+                          color0: '#86b379'
+                      }
+                  }
+              }
+          },
+          map: {
+              itemStyle: {
+                  normal: {
+                      areaStyle: {
+                          color: '#ddd'
+                      },
+                      label: {
+                          textStyle: {
+                              color: '#c12e34'
+                          }
+                      }
+                  },
+                  emphasis: {
+                      areaStyle: {
+                          color: '#99d2dd'
+                      },
+                      label: {
+                          textStyle: {
+                              color: '#c12e34'
+                          }
+                      }
+                  }
+              }
+          },
+          force: {
+              itemStyle: {
+                  normal: {
+                      linkStyle: {
+                          strokeColor: '#408829'
+                      }
+                  }
+              }
+          },
+          chord: {
+              padding: 4,
+              itemStyle: {
+                  normal: {
+                      lineStyle: {
+                          width: 1,
+                          color: 'rgba(128, 128, 128, 0.5)'
+                      },
+                      chordStyle: {
+                          lineStyle: {
+                              width: 1,
+                              color: 'rgba(128, 128, 128, 0.5)'
+                          }
+                      }
+                  },
+                  emphasis: {
+                      lineStyle: {
+                          width: 1,
+                          color: 'rgba(128, 128, 128, 0.5)'
+                      },
+                      chordStyle: {
+                          lineStyle: {
+                              width: 1,
+                              color: 'rgba(128, 128, 128, 0.5)'
+                          }
+                      }
+                  }
+              }
+          },
+          gauge: {
+              startAngle: 225,
+              endAngle: -45,
+              axisLine: {
+                  show: true,
+                  lineStyle: {
+                      color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+                      width: 8
+                  }
+              },
+              axisTick: {
+                  splitNumber: 10,
+                  length: 12,
+                  lineStyle: {
+                      color: 'auto'
+                  }
+              },
+              axisLabel: {
+                  textStyle: {
+                      color: 'auto'
+                  }
+              },
+              splitLine: {
+                  length: 18,
+                  lineStyle: {
+                      color: 'auto'
+                  }
+              },
+              pointer: {
+                  length: '90%',
+                  color: 'auto'
+              },
+              title: {
+                  textStyle: {
+                      color: '#333'
+                  }
+              },
+              detail: {
+                  textStyle: {
+                      color: 'auto'
+                  }
+              }
+          },
+          textStyle: {
+              fontFamily: 'Arial, Verdana, sans-serif'
+          }
+      };
 
-                                                              new Chart(document.getElementById("canvas1"), {
-                                                                type: 'doughnut',
-                                                                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-                                                                data: {
-                                                                  labels: [
-                                                                  "Economy Class",
-                                                                  "Business Class",
-                                                                  "First Class"
-                                                                  ],
-                                                                  datasets: [{
-                                                                    data: [3412, 768, 475],
-                                                                    backgroundColor: [
-                                                                    "#9B59B6",
-                                                                    "#26B99A",
-                                                                    "#3498DB"
-                                                                    ],
-                                                                    hoverBackgroundColor: [
-                                                                    "#B370CF",
-                                                                    "#36CAAB",
-                                                                    "#49A9EA"
-                                                                    ]
-                                                                  }]
-                                                                },
-                                                                options: options
-                                                              });
-                                                            });
-                                                          </script>
-                                                          <!-- /Doughnut Chart -->
+      var echartGauge = echarts.init(document.getElementById('submitted'), theme);
 
-                                                          <!-- bootstrap-daterangepicker -->
-                                                          <script>
-                                                            $(document).ready(function() {
+      echartGauge.setOption({
+        tooltip: {
+          formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              title: "Save Image"
+            }
+          }
+        },
+        series: [{
+          name: 'Unit submit',
+          type: 'gauge',
+          center: ['50%', '50%'],
+          startAngle: 180,
+          endAngle: 0,
+          min: 0,
+          max: 100,
+          precision: 0,
+          splitNumber: 10,
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: [
+                [0.49, '#ff4500'],
+                [0.74, '#ffcc00'],
+                [1, 'lightgreen']
+              ],
+              width: 30
+            }
+          },
+          axisTick: {
+            show: true,
+            splitNumber: 5,
+            length: 8,
+            lineStyle: {
+              color: '#eee',
+              width: 1,
+              type: 'solid'
+            }
+          },
+          axisLabel: {
+            show: true,
+            formatter: function(v) {
+              switch (v + '') {
+                case '30':
+                  return 'c';
+                case '60':
+                  return 'b';
+                case '90':
+                  return 'a';
+                default:
+                  return '';
+              }
+            },
+            textStyle: {
+              color: '#333'
+            }
+          },
+          splitLine: {
+            show: true,
+            length: 30,
+            lineStyle: {
+              color: '#eee',
+              width: 2,
+              type: 'solid'
+            }
+          },
+          pointer: {
+            length: '80%',
+            width: 8,
+            color: 'auto'
+          },
+          title: {
+            show: true,
+            offsetCenter: ['-65%', -10],
+            textStyle: {
+              color: '#333',
+              fontSize: 15
+            }
+          },
+          detail: {
+            show: true,
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderWidth: 0,
+            borderColor: '#ccc',
+            width: 100,
+            height: 40,
+            offsetCenter: ['-60%', 10],
+            formatter: '{value}%',
+            textStyle: {
+              color: 'auto',
+              fontSize: 30
+            }
+          },
+          data: [{
+            value: <?php echo round($value*100,2);?>,
+            name: 'Submitted'
+          }]
+        }]
+      });
 
-                                                              var cb = function(start, end, label) {
-                                                                console.log(start.toISOString(), end.toISOString(), label);
-                                                                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                                                              };
+      var echartGauge = echarts.init(document.getElementById('running'), theme);
 
-                                                              var optionSet1 = {
-                                                                startDate: moment().subtract(29, 'days'),
-                                                                endDate: moment(),
-                                                                minDate: '01/01/2012',
-                                                                maxDate: '12/31/2015',
-                                                                dateLimit: {
-                                                                  days: 60
-                                                                },
-                                                                showDropdowns: true,
-                                                                showWeekNumbers: true,
-                                                                timePicker: false,
-                                                                timePickerIncrement: 1,
-                                                                timePicker12Hour: true,
-                                                                ranges: {
-                                                                  'Today': [moment(), moment()],
-                                                                  'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                                                                  'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                                                                  'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                                                                  'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                                                  'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                                                                },
-                                                                opens: 'left',
-                                                                buttonClasses: ['btn btn-default'],
-                                                                applyClass: 'btn-small btn-primary',
-                                                                cancelClass: 'btn-small',
-                                                                format: 'MM/DD/YYYY',
-                                                                separator: ' to ',
-                                                                locale: {
-                                                                  applyLabel: 'Submit',
-                                                                  cancelLabel: 'Clear',
-                                                                  fromLabel: 'From',
-                                                                  toLabel: 'To',
-                                                                  customRangeLabel: 'Custom',
-                                                                  daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                                                                  monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                                                                  firstDay: 1
-                                                                }
-                                                              };
-                                                              $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-                                                              $('#reportrange').daterangepicker(optionSet1, cb);
-                                                              $('#reportrange').on('show.daterangepicker', function() {
-                                                                console.log("show event fired");
-                                                              });
-                                                              $('#reportrange').on('hide.daterangepicker', function() {
-                                                                console.log("hide event fired");
-                                                              });
-                                                              $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-                                                                console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-                                                              });
-                                                              $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-                                                                console.log("cancel event fired");
-                                                              });
-                                                              $('#options1').click(function() {
-                                                                $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-                                                              });
-                                                              $('#options2').click(function() {
-                                                                $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-                                                              });
-                                                              $('#destroy').click(function() {
-                                                                $('#reportrange').data('daterangepicker').remove();
-                                                              });
-                                                            });
-                                                          </script>
-                                                          <!-- /bootstrap-daterangepicker -->
-
-                                                          <!-- gauge.js -->
-                                                          <script>
-                                                            var opts = {
-                                                              lines: 12,
-                                                              angle: 0,
-                                                              lineWidth: 0.4,
-                                                              pointer: {
-                                                                length: 0.75,
-                                                                strokeWidth: 0.042,
-                                                                color: '#1D212A'
-                                                              },
-                                                              limitMax: 'false',
-                                                              colorStart: '#1ABC9C',
-                                                              colorStop: '#1ABC9C',
-                                                              strokeColor: '#F0F3F3',
-                                                              generateGradient: true
-                                                            };
-                                                            var target = document.getElementById('foo'),
-                                                            gauge = new Gauge(target).setOptions(opts);
-
-                                                            gauge.maxValue = 6000;
-                                                            gauge.animationSpeed = 32;
-                                                            gauge.set(3200);
-                                                            gauge.setTextField(document.getElementById("gauge-text"));
-                                                          </script>
-                                                          <!-- /gauge.js -->
-
-                                                          <script type="text/javascript">
-    //set timezone
-    <?php date_default_timezone_set('Asia/Jakarta'); ?>
-  //buat object date berdasarkan waktu di server
-  var serverTime = new Date(<?php print date('Y, m, d, H, i, s, 0'); ?>);
-  //buat object date berdasarkan waktu di client
-  var clientTime = new Date();
-  //hitung selisih
-  var Diff = serverTime.getTime() - clientTime.getTime();    
-  //fungsi displayTime yang dipanggil di bodyOnLoad dieksekusi tiap 1000ms = 1detik
-  function displayServerTime(){
-  //buat object date berdasarkan waktu di client
-  var clientTime = new Date();
-  //buat object date dengan menghitung selisih waktu client dan server
-  var time = new Date(clientTime.getTime() + Diff);
-  //ambil nilai jam
-  var sh = time.getHours().toString();
-  //ambil nilai menit
-  var sm = time.getMinutes().toString();
-  //ambil nilai detik
-  var ss = time.getSeconds().toString();
-  //tampilkan jam:menit:detik dengan menambahkan angka 0 jika angkanya cuma satu digit (0-9)
-  document.getElementById("clock").innerHTML = (sh.length==1?"0"+sh:sh) + ":" + (sm.length==1?"0"+sm:sm) + ":" + (ss.length==1?"0"+ss:ss);
-}
-</script>
+      echartGauge.setOption({
+        tooltip: {
+          formatter: "{a} <br/>{b} : {c}%"
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {
+              show: true,
+              title: "Save Image"
+            }
+          }
+        },
+        series: [{
+          name: 'Unit progress',
+          type: 'gauge',
+          center: ['50%', '50%'],
+          startAngle: 180,
+          endAngle: 0,
+          min: 0,
+          max: 100,
+          precision: 0,
+          splitNumber: 10,
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: [
+                [0.49, '#ff4500'],
+                [0.74, '#ffcc00'],
+                [1, 'lightgreen']
+              ],
+              width: 30
+            }
+          },
+          axisTick: {
+            show: true,
+            splitNumber: 5,
+            length: 8,
+            lineStyle: {
+              color: '#eee',
+              width: 1,
+              type: 'solid'
+            }
+          },
+          axisLabel: {
+            show: true,
+            formatter: function(v) {
+              switch (v + '') {
+                case '30':
+                  return 'c';
+                case '60':
+                  return 'b';
+                case '90':
+                  return 'a';
+                default:
+                  return '';
+              }
+            },
+            textStyle: {
+              color: '#333'
+            }
+          },
+          splitLine: {
+            show: true,
+            length: 30,
+            lineStyle: {
+              color: '#eee',
+              width: 2,
+              type: 'solid'
+            }
+          },
+          pointer: {
+            length: '80%',
+            width: 8,
+            color: 'auto'
+          },
+          title: {
+            show: true,
+            offsetCenter: ['-65%', -10],
+            textStyle: {
+              color: '#333',
+              fontSize: 15
+            }
+          },
+          detail: {
+            show: true,
+            backgroundColor: 'rgba(0,0,0,0)',
+            borderWidth: 0,
+            borderColor: '#ccc',
+            width: 100,
+            height: 40,
+            offsetCenter: ['-60%', 10],
+            formatter: '{value}%',
+            textStyle: {
+              color: 'auto',
+              fontSize: 30
+            }
+          },
+          data: [{
+            value: <?php echo round($value1*100,2);?>,
+            name: 'On Progress'
+          }]
+        }]
+      });
+    </script>
 
 </body>
 </html>
