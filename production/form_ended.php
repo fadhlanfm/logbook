@@ -357,7 +357,7 @@ else
         col_widths: [
         '50px', '80px', '140px',
         '140px', '90px', '90px',
-        '150px', '40px', '100px'
+        '150px', '60px', '80px'
         ],
       };4
       var tf = new TableFilter('table1', filtersConfig);
