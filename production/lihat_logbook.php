@@ -393,87 +393,81 @@ else
               <br>
 
               <table class="table table-hover">
+              <tr>
+                <th colspan="2" class="center"><h4>Change Agent Team</h4></th>
+              </tr>
+              <tr>
+                <th rowspan="2">Ketua</th>
+                <td><?php echo''.$row->nama_ketua.'';?></td>
                 <tr>
-                  <th colspan="3" class="center"><h4>Change Agent Team</h4></th>
-                </tr>
-                <tr>
-                  <th rowspan="2">Ketua</th>
-                  <td><?php echo''.$row->nama_ketua.'';?></td>
-                  <tr>
-                    <td><?php echo''.$row->email_ketua.'';?></td>
-                  </tr>
-                </tr>
-                <tr>
-                  <th rowspan="2">Sekretaris & Bendahara</th>
-                  <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
-                  <tr>
-                    <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
-                  </tr>
-                </tr>
-                <tr>
-                  <th rowspan="2">Dokumentasi & Publikasi</th>
-                  <td><?php echo''.$row->nama_dok_pub.'';?></td>
-                  <tr>
-                    <td><?php echo''.$row->email_dok_pub.'';?></td>
-                  </tr>
+                  <td><?php echo''.$row->email_ketua.'';?></td>
                 </tr>
               </tr>
               <tr>
-                <th rowspan="2">Corporate Program</th>
-                <td><?php echo''.$row->nama_corp_prog.'';?></td>
+                <th rowspan="2">Sekretaris & Bendahara</th>
+                <td><?php echo''.$row->nama_sekre_bendahara.'';?></td>
                 <tr>
-                  <td><?php echo''.$row->email_corp_prog.'';?></td>
+                  <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_0.'';?></th>
+                <td><?php echo''.$row->nama_0.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_0.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_1.'';?></th>
+                <td><?php echo''.$row->nama_1.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_1.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_2.'';?></th>
+                <td><?php echo''.$row->nama_2.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_2.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_3.'';?></th>
+                <td><?php echo''.$row->nama_3.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_3.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_4.'';?></th>
+                <td><?php echo''.$row->nama_4.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_4.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_5.'';?></th>
+                <td><?php echo''.$row->nama_5.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_5.'';?></td>
+                </tr>
+              </tr>
+              <tr>
+                <th rowspan="2"><?php echo''.$row->posisi_6.'';?></th>
+                <td><?php echo''.$row->nama_6.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_6.'';?></td>
                 </tr>
               </tr>
             </tr>
             <tr>
-              <th rowspan="2">Pic Rating</th>
-              <td><?php echo''.$row->nama_pic_rate.'';?></td>
+              <th rowspan="2"><?php echo''.$row->posisi_7.'';?></th>
+              <td><?php echo''.$row->nama_7.'';?></td>
               <tr>
-                <td><?php echo''.$row->email_pic_rate.'';?></td>
+                <td><?php echo''.$row->email_7.'';?></td>
               </tr>
             </tr>
-          </tr>
-          <tr>
-            <th rowspan="2">Pic I-Dare</th>
-            <td><?php echo''.$row->nama_pic_dare.'';?></td>
-            <tr>
-              <td><?php echo''.$row->email_pic_dare.'';?></td>
-            </tr>
-          </tr>
-        </tr>
-        <tr>
-          <th rowspan="2">Program Pendukung</th>
-          <td><?php echo''.$row->nama_prog_dukung.'';?></td>
-          <tr>
-            <td><?php echo''.$row->email_prog_dukung.'';?></td>
-          </tr>
-        </tr>
-      </tr>
-      <tr>
-        <th rowspan="2">Pic Sharing Session</th>
-        <td><?php echo''.$row->nama_pic_share.'';?></td>
-        <tr>
-          <td><?php echo''.$row->email_pic_share.'';?></td>
-        </tr>
-      </tr>
-    </tr>
-    <tr>
-      <th rowspan="2">Pic One Team One Spirit One Goal Program</th>
-      <td><?php echo''.$row->nama_pic_team.'';?></td>
-      <tr>
-        <td><?php echo''.$row->email_pic_team.'';?></td>
-      </tr>
-    </tr>
-  </tr>
-  <tr>
-    <th rowspan="2">Pic Standar Layanan</th>
-    <td><?php echo''.$row->nama_pic_standar.'';?></td>
-    <tr>
-      <td><?php echo''.$row->email_pic_standar.'';?></td>
-    </tr>
-  </tr>
-</table>
+          </table>
 
 <br>
 <label for="deskripsi">Evaluasi Logbook</label>

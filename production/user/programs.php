@@ -216,11 +216,15 @@ else
           <div class="x_panel tile">
             <div class="x_title">
               <h2>Corporate Culture Programs</h2>
+              <ul class="nav navbar-right panel_toolbox">
+              <a href="form.php"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Buat Program Baru</button></a>
+              </li>
 
+            </ul>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <a href="form.php"><button class="btn btn-primary">Buat Program Baru</button></a>
+              
               <table class="table table-hover centered" id="table1">
                 <thead>
                   <tr>
