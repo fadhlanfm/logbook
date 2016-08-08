@@ -6,8 +6,7 @@
 	} 
 	else
 	{
-		echo 'You are not logged In <br>';
-		echo'<a href="../index.php">LOGIN</a>';
+		header ('Location: ../page_4033.php');
 		exit;
 	}
 	include('../process/connect_db.php');

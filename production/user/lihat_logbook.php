@@ -36,15 +36,12 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
     exit;
   }
 } else if (isset($_SESSION['role']) && SESSION['role'] == -1) {
-  echo 'You are not logged in as User <br>';
-  echo'<a href="../../process/acc_logout.php">LOGOUT</a><br>';
-  echo'<a href="../index.php">BACK</a>';
+  header ('Location: ../../page_403.php');
   exit;
 }
 else
 {
-  echo 'You are not logged In <br>';
-  echo'<a href="../../index.php">LOGIN</a>';
+  header ('Location: ../../page_4033.php');
   exit;
 
 }
