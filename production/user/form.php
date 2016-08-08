@@ -323,7 +323,7 @@ else
 											<div class="clearfix"></div>
 										</div>
 										<div class="x_content">
-
+										<div class="ln_solid"></div>
 											<h4>Program</h4>
 											<div class="ln_solid"></div>
 
