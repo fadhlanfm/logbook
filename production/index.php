@@ -40,8 +40,8 @@ else
   <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
   <!-- JQVMap -->
   <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-
-  <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+  <!-- print area -->
+  <link rel="stylesheet" type="text/css" href="css/print.css" media="print" />
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
