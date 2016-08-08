@@ -35,7 +35,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
     echo 'tetottt';
     exit;
   }
-} else if ($_SESSION['role'] == -1) {
+} else if (isset($_SESSION['role']) && SESSION['role'] == -1) {
   echo 'You are not logged in as User <br>';
   echo'<a href="../../process/acc_logout.php">LOGOUT</a><br>';
   echo'<a href="../index.php">BACK</a>';
@@ -53,7 +53,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../assets/gi.ico" />
+  <link rel="icon" href="../../assets/gi.ico" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

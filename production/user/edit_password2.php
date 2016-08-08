@@ -3,10 +3,11 @@ session_start();
 if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
 {
 
-} else if ($_SESSION['role'] == -1) {
+} else if (isset($_SESSION['role']) && $_SESSION['role'] == -1) {
   echo 'You are not logged in as User <br>';
   echo'<a href="../acc_logout.php">LOGOUT</a><br>';
   echo'<a href="../index.php">BACK</a>';
+  header(Location: )
   exit;
 }
 else
@@ -20,7 +21,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../assets/gi.ico" />
+  <link rel="icon" href="../../assets/gi.ico" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">

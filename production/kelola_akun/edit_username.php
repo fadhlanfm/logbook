@@ -21,7 +21,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="../assets/gi.ico" />
+  <link rel="icon" href="../../assets/gi.ico" />
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">

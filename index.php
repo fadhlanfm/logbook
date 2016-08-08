@@ -24,6 +24,7 @@ else
 
 <html>
 <head>
+  <link rel="icon" href="assets/gi.ico" />
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="assets/css_login.css">
 	<script type="text/javascript">

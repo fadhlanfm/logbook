@@ -38,13 +38,9 @@
             <p>Full authentication is required to access this resource. <a href="#">Report this?</a>
             </p>
             <div class="mid_center">
-              <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-primary" onclick="goBack();">
-                  <input type="radio" name="options" id="option1"> Back
-                </label>
-                
-                <label class="btn btn-danger" onclick="location.href='process/acc_logout.php';">
-                  <input type="radio" name="options" id="option2"> Log Out
+              <div class="btn-group" data-toggle="buttons">                
+                <label class="btn btn-success" onclick="location.href='process/acc_logout.php';">
+                  <input type="radio" name="options" id="option2"> Log In
                 </label>
                 </a>
               </div>
