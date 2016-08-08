@@ -26,7 +26,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>simulasi</title>
+  <title>Beranda</title>
 
   <!-- Bootstrap -->
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,8 +40,6 @@ else
   <link href="../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
   <!-- JQVMap -->
   <link href="../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-  <!-- print area -->
-  <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 
   <!-- Custom Theme Style -->
   <link href="../../build/css/custom.min.css" rel="stylesheet">
@@ -129,7 +127,7 @@ else
       </div>
 
       <!-- top navigation -->
-      <div class="top_nav dontprint">
+      <div class="top_nav hidden-print">
         <div class="nav_menu">
           <nav>
             <div class="nav toggle">
@@ -581,7 +579,7 @@ else
 <!-- /page content -->
 
 <!-- footer content -->
-<footer>
+<footer class="hidden-print">
   <div class="pull-right">
     Corporate Culture Information Systems - GA
   </div>
