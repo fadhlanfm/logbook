@@ -284,9 +284,10 @@
 			die("Could not query the database: <br />". $db->error);
 		}else
 		{
-			echo 'Data Updated. </br>';
-			echo '<a href="read_kategori.php">Lihat</a>';
-			$db->close();
-			exit;
+			$message = "Program berhasil tersubmit";
+  			echo "<script type='text/javascript'>alert('$message');
+  			window.location = 'index.php';
+  			</script>";
+  			exit;
 		}	
 ?>
