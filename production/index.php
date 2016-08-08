@@ -282,7 +282,9 @@ else
 
   $total=$totalunit+$totalbranch-8;
   $value=$tersubmit/$total;
-  $value1=$running/$tersubmit;
+  if($tersubmit!=0){
+    $value1=$running/$tersubmit;
+  }
 ?>
 
         <!-- page content -->
