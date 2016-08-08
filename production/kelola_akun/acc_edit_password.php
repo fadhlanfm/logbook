@@ -9,8 +9,7 @@
 			die("Could not query the database: <br />". $db->error);
 		}else
 		{
-			echo 'Data Updated. </br>';
-			echo '<a href="	user_management.php">Lihat</a>';
+			header ('Location: user_management.php');
 			$db->close();
 			exit;
 		}	

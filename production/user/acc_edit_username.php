@@ -14,7 +14,7 @@
 			$result2 = $db->query($query2);
 			$row2 = $result2->fetch_object();
 			$_SESSION['id'] = $row2->username;
-			echo $_SESSION['id'];
+			header('Location: index.php');
 			exit;
 		}	
 ?>
