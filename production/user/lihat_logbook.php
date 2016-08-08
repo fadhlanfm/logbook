@@ -53,6 +53,7 @@ else
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" href="../assets/gi.ico" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -61,7 +62,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>simulasi</title>
+  <title>Detail Logbook</title>
 
   <!-- Bootstrap -->
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
