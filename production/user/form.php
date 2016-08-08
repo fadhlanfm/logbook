@@ -466,11 +466,10 @@ else
 																		<label>Satuan Target</label>
 																		<select class="form-control" name="satuan[]" required="required">
 																			<option value="" disabled selected>Choose your option</option>
-																			<option value="Percepatan Proses">Uang (Rupiah)</option>
-																			<option value="Menjaga Reputasi/Image Perusahaan">Waktu (Hari)</option>
-																			<option value="Penurunan Error Rate">Presentasi (%)</option>
-																			<option value="Peningkatan Produktivitas Pegawai">Jumlah (Kali)</option>
-																			<option value="Others (...)">Others (...)</option>
+																			<option value="Uang (Rupiah)">Uang (Rupiah)</option>
+																			<option value="Waktu (Hari)">Waktu (Hari)</option>
+																			<option value="Presentasi (%)">Presentasi (%)</option>
+																			<option value="Jumlah (Kali)">Jumlah (Kali)</option>
 																		</select>
 
 																	</div>
