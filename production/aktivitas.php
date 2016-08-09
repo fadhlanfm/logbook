@@ -29,7 +29,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Beri Evaluasi</title>
+  <title>Program Corporate Culture Garuda Indonesia</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -48,6 +48,8 @@ else
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
+  <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
+  <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
@@ -55,15 +57,15 @@ else
   <!-- QUERIES -->
   <?php
   include_once('../connect_db.php');
-  $id = $_GET['id'];
-  $query = "SELECT * FROM logbook WHERE id = '$id'";
-  $result = $db->query($query);
+  $query = "SELECT * FROM aktivitas INNER JOIN subaktivitas WHERE aktivitas.id_aktivitas=subaktivitas.id_aktivitas";
+  //execute the query
+  $result = $db->query( $query );
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
-  $row = $result->fetch_object();
   $coba = $_SESSION['id'];
+  include_once('Connection/dbconn.php');
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
     //execute the query
   $result2 = $db->query( $query2 );
@@ -84,12 +86,11 @@ else
 
           <div class="clearfix"></div>
 
-          
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              
+
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
@@ -163,6 +164,7 @@ else
             <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
             <span class=" fa fa-angle-down"></span>
           </a>
+
           <ul class="dropdown-menu dropdown-usermenu pull-right">
             <li><a href="javascript:;"> Profile</a></li>
             <li>
@@ -240,7 +242,7 @@ else
             </li>
           </ul>
         </li>
-        
+
       </ul>
     </nav>
   </div>
@@ -251,45 +253,91 @@ else
 <div class="right_col" role="main">
   <div class="x_panel">
     <div class="x_title">
-      <h2>Logbook</h2>
-      <ul class="nav navbar-right panel_toolbox">
-        <li><a href="show_form.php"><button class="btn btn-primary btn-xs">Kembali</button></a>
-        </li>
-      </ul>
+      <h2>Aktivitas</h2>
+
       <div class="clearfix">
       </div>
     </div>
     <div class="x_content">
-      <form action="post_komentar_logbook.php" method="POST">
-        <table class="table table-hover">
+      <!-- bookmark -->
+
+      <table class="table table-hover">
+        <thead>
           <tr>
-            <td>ID LogBook</td>
-            <td>: </td>
-            <td> <input type="text" name="id" readonly value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>">
-            </td>
+            <th>
+              ID
+            </th>
+            <th>
+              Aktivitas
+            </th>
+            <th>
+              Kelompok
+            </th>
+            <th>
+              Poin
+            </th>
+            <th>
+              Ubah
+            </th>
+            <th>
+              Default
+            </th>
           </tr>
 
-          <tr>
-            <td>Kode Unit</td>
-            <td>: </td>
-            <td> <input type="text" name="kode_unit" disabled value="<?php if (isset($row->kode_unit)) {echo $row->kode_unit;} else {echo '';}?>"></td>
-          </tr>
+          <?php
+          $i=1;
+          $defa='';
+          while ($row = $result->fetch_object())
+          {
+            if ($row->default == 1) {
+              $defa='checked';
+            }
+            ?>
+            <tr>
+              <td>
+                <?php echo $i ?>
+              </td>
+              <td>
+                <?php echo $row->nama_subaktivitas ?>
+              </td>
+              <td>
+                <?php echo $row->nama_aktivitas ?>
+              </td>
+              <td>
+                <?php echo $row->poin ?>
+              </td>
+              <td>
+                <a href="ubah_subaktivitas.php?id=<?php echo $row->id_subaktivitas ?>"><button class="btn btn-primary btn-xs">
+                  Ubah
+                </button></a>
+              </td>
+              <td>
+                <div class="btn-group">
+                  <?php
+                  if ($defa == 'checked') {
+                    ?>
+                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-check"></i> </button>
+                    <button class="btn btn-default btn-xs" type="button"><a href="acc_undefault.php?id=<?php echo $row->id_subaktivitas ?>"><i class="fa fa-times"></i></a></button>
+                    <?php
+                  } else {
+                    ?>
+                    <button class="btn btn-default btn-xs" type="button"><a href="acc_default.php?id=<?php echo $row->id_subaktivitas ?>"><i class="fa fa-check"></i></a></button>
+                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-times"></i></button>
+                    <?php
+                  }
+                  ?>
+                </div>
+              </td>
 
-          <tr>
-            <td>Nama Program</td>
-            <td>: </td>
-            <td> <input type="text" name="nama_program" disabled value="<?php if (isset($row->nama_program)) {echo $row->nama_program;} else {echo '';}?>"></td>
-          </tr>
+            </tr>
+            <?php
+            $i++;
+            $defa='';
+          }
 
-          <tr>
-            <td>Evaluasi</td>
-            <td>: </td>
-            <td> <input type="text" name="komentar" value="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>"></td>
-          </tr>
-
-        </table>
-        <input type="submit" value="Submit">
-      </form>
+          ?>
+        </thead>
+      </table>
     </div>
   </div>
 </div>
@@ -347,7 +395,30 @@ else
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
 
-<!-- /JQVMap -->
+<!-- filterplgin -->
+
+<script data-config>
+  var filtersConfig = {
+    base_path: 'tablefilter/',
+    grid_layout: true,
+    grid_width: '100%',
+    rows_counter: true,
+    col_0: 'none',
+    col_7: 'none',
+    col_8: 'none',
+    col_9: 'none',
+    col_1: 'select',
+    col_widths: [
+    '50px', '80px', '140px',
+    '140px', '90px', '90px',
+    '150px', '60px', '100px'
+    ],
+  };
+
+  var tf = new TableFilter('table1', filtersConfig);
+  tf.init();
+
+</script>
 
 <!-- Skycons -->
 <script>

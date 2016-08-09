@@ -100,22 +100,22 @@ else
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="index.php">Halaman Utama</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> CC Program <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="programs.php">Corporate Culture Program</a></li>
+                    <li><a href="programs.php">Isi Aktivitas</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="edit_username2.php">Ubah Username</a></li>
                     <li><a href="edit_password2.php">Ubah Password</a></li>
+                    <li><a href="edit_password2.php">Ubah Foto</a></li>
                   </ul>
                 </li>
               </ul>
@@ -157,75 +157,6 @@ else
                 </ul>
               </li>
 
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li role="presentation">
-                <a href="javascript:window.print()">
-                  <i class="fa fa-print"></i>
-                </a>
-              </li>
             </ul>
           </nav>
         </div>
@@ -234,344 +165,64 @@ else
 
       <!-- page content -->
       <div class="right_col" role="main">
-        <div class="row">
+        <!-- bookmark -->
+        <div class="col-md-3 col-sm-3 col-xs-4">
+          <div class="x_panel tile">
+            <div class="x_title">
+            <h2>Profile</h2>
 
-          <!-- start of running program achievement -->
-          <div class="col-md-8 col-sm-8 col-xs-12">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel tile">
-                <div class="x_title">
-                  <h2><?php echo $row->nama_program;?> <small>Program yang sedang dijalankan</small></h2>
-
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <!-- sini inininin -->
-                  <?php
-              // aktivitas0
-                  if (is_null($row->aktifitas0)) {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas0;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target0; ?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan0;?>" class="form-control">
-                      </div>
-
-                    </div><br>
-                    <?php 
-                  } 
-
-              // aktivitas1
-                  if (is_null($row->aktifitas1) || $row->aktifitas1 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas1;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target1;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan1;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php  
-                  } 
-
-              // aktivitas2
-                  if (is_null($row->aktifitas2) || $row->aktifitas2 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas2;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target2;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan2;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php  
-                  } 
-
-              // aktivitas3
-                  if (is_null($row->aktifitas3) || $row->aktifitas3 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas3;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target3;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan3;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php 
-                  } 
-
-              // aktivitas4
-                  if (is_null($row->aktifitas4) || $row->aktifitas4 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas4;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target4;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan4;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php  
-                  } 
-                  ?>
-
-                </div>
-              </div>
+              <div class="clearfix"></div>
             </div>
-
-            <!-- start of recent evaluation -->
-            <?php
-            $query3 = "SELECT * FROM logbook WHERE id = '$row->id'";
-            //execute the query
-            $result3 = $db->query( $query3 );
-            if (!$result3)
-            {
-              die("could not query the database: <br />".$db->error);
-            }
-            $row3 = $result3->fetch_object();
-            ?>
-
-            <div class="col-md-12 col-sm-12 col-xs-12">
-              <div class="x_panel">
-                <div class="x_title">
-                  <h2>Recent Evaluation <small>Sessions</small></h2>
-
-                  <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                  <div class="dashboard-widget-content">
-
-                    <ul class="list-unstyled timeline widget">
-                      <?php
-                      while ($row5 = $result5->fetch_object())
-                      {
-                        if (is_null($row5->komentar) || $row5->komentar == '') {
-                        } else {
-                          ?>
-                          <li>
-                            <div class="block">
-                              <div class="block_content">
-                                <h2 class="title">
-                                  <a href="lihat_logbook.php%20?id=<?php echo $row5->id ?>"><?php echo $row5->nama_program ?></a>
-                                </h2>
-                                <div class="byline">
-                                  by <a>Admin</a>
-                                </div>
-                                <p class="excerpt">
-                                  <?php echo $row5->komentar ?>
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                          <?php
-                        }                        
-                      }
-
-                      ?>
-                      
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- end of recent evaluation -->
-          </div>
-          <!-- end of running program achievement -->
-
-          <!-- start of ended program achievement -->
-
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel tile">
-              <div class="x_title">
-                <h2>Finished Programs</h2>
-
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <h4>Accumulated Percentage</h4>
-
-                <?php
-
-                $query6 = "SELECT * FROM logbook JOIN unit WHERE end < curdate() and unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
-                //execute the query
-                $result6 = $db->query( $query6 );
-
-                if (!$result6)
-                {
-                  die("could not query the database: <br />".$db->error);
-                }
-
-                $percacc=0;
-                $colour='';
-                while ($row6 = $result6->fetch_object()) 
-                {
-                  
-                  if (is_null($row6->aktifitas0) || $row6->aktifitas0 == '') {
-                  } else {
-                    $target0 = $row6->target0;
-                    $hasil0 = $row6->hasil0;
-
-                    if ($row6->satuan0 == 'Waktu (Hari)') {
-                      $perc0 = $target0/$hasil0*100;
-                    } else {
-                      $perc0 = $hasil0/$target0*100;
-                    }
-                    
-                    $percacc = $perc0;
-                  }
-                  
-                  if (is_null($row6->aktifitas1) || $row6->aktifitas1 == '') {
-                  } else {
-                    $target1 = $row6->target1;
-                    $hasil1 = $row6->hasil1;
-                    
-                    if ($row6->satuan1 == 'Waktu (Hari)') {
-                      $perc1 = $target1/$hasil1*100;
-                    } else {
-                      $perc1 = $hasil1/$target1*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1)/2;
-                  }
-
-                  if (is_null($row6->aktifitas2) || $row6->aktifitas2 == '') {
-                  } else {
-                    $target2 = $row6->target2;
-                    $hasil2 = $row6->hasil2;
-                    
-                    if ($row6->satuan2 == 'Waktu (Hari)') {
-                      $perc2 = $target2/$hasil2*100;
-                    } else {
-                      $perc2 = $hasil2/$target2*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2)/3;
-                  }
-
-                  if (is_null($row6->aktifitas3) || $row6->aktifitas3 == '') {
-                  } else {
-                    $target3 = $row6->target3;
-                    $hasil3 = $row6->hasil3;
-                    
-                    if ($row6->satuan3 == 'Waktu (Hari)') {
-                      $perc3 = $target3/$hasil3*100;
-                    } else {
-                      $perc3 = $hasil3/$target3*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3)/4;
-                  }
-
-                  if (is_null($row6->aktifitas4) || $row6->aktifitas4 == '') {
-                  } else {
-                    $target4 = $row6->target4;
-                    $hasil4 = $row6->hasil4;
-
-                    if ($row6->satuan4 == 'Waktu (Hari)') {
-                      $perc4 = $target4/$hasil4*100;
-                    } else {
-                      $perc4 = $hasil4/$target4*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3 + $perc5)/5;
-                  }
-                  if ($percacc > 75) {
-                    $colour = 'green';
-                  } else if ($percacc > 50 && $percacc < 76) {
-                    $colour = 'orange';
-                  } else {
-                    $colour = 'red';
-                  }
-                  ?>
-                  <!-- widget start here -->
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span><a href="lihat_logbook.php%20?id=<?php echo $row6->id ?>"><?php echo $row6->nama_program; ?></a></span>
-                      
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div class="progress-bar bg-<?php echo $colour?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo round($percacc); ?>%;">
-                          <span class="sr-only"><?php echo round($percacc); ?>% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span><?php echo round($percacc); ?> %</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <!-- end of widget -->
-                  <?php
-                }
-
-                ?>
-
-              </div>
+            <div class="x_content">
             </div>
           </div>
-          <!-- end of ended program achievement -->
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-8">
+          <div class="x_panel tile">
+            <div class="x_title">
+            <h2>Aktivitas A</h2>
 
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            </div>
+          </div>
+          <div class="x_panel tile">
+            <div class="x_title">
+            <h2>Aktivitas B</h2>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            </div>
+          </div>
+          <div class="x_panel tile">
+            <div class="x_title">
+            <h2>Aktivitas C</h2>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            </div>
+          </div>
+          <div class="x_panel tile">
+            <div class="x_title">
+            <h2>Aktivitas D</h2>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            </div>
+          </div>
+          <div class="x_panel tile">
+            <div class="x_title">
+            <h2>Aktivitas E</h2>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+            </div>
+          </div>
         </div>
       </div>
     </div>
