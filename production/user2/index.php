@@ -110,7 +110,6 @@ else
 
           <!-- menu profile quick info -->
 
-
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
@@ -118,11 +117,12 @@ else
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="index.php">Halaman Utama</a></li>
+                    <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="programs.php">Isi Aktivitas</a></li>
+                    <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
@@ -183,7 +183,7 @@ else
         <div class="col-md-3 col-sm-3 col-xs-4">
           <div class="x_panel tile">
             <div class="x_title">
-              <h2>Profile</h2>
+              <h2><b>Profile</b></h2>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -202,103 +202,56 @@ else
             </div>
           </div>
         </div>
-        <div class="col-md-9 col-sm-9 col-xs-8">
-          <?php
-
-          $query5 = "SELECT * FROM aktivitas WHERE aktivitas.default2=1";
-        //execute the query
-          $result5 = $db->query( $query5 );
-          if (!$result5)
-          {
-            die("could not query the database: <br />".$db->error);
-          }
-          $id_akt=0;
-          while ($row5 = $result5->fetch_object()) {
-            $id_akt = $row5->id_aktivitas;
-            ?>
-
-            <div class="x_panel tile">
-              <div class="x_title">
-                <h2><?php echo $row5->nama_aktivitas ?></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th style="width:600px;">
-                        Nama Aktivitas
-                      </th>
-                      <th>
-                        Poin User
-                      </th>
-                      <th>
-                        Poin Maksimal
-                      </th>
-                      <th>
-                        Submit
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $query4 = "SELECT a.id_aktivitas, a.nama_aktivitas, a.desk_akt, b.id_subaktivitas, b.nama_subaktivitas, b.poin, b.max_freq, b.default2 FROM aktivitas a JOIN subaktivitas b WHERE a.id_aktivitas=b.id_aktivitas AND b.default2=1 AND b.id_aktivitas = '$id_akt'";
-              //execute the query
-                    $result4 = $db->query( $query4 );
-                    if (!$result4)
-                    {
-                      die("could not query the database: <br />".$db->error);
-                    }
-                    $id_subakt;
-                    while ($row4 = $result4->fetch_object()) {
-                      $id_subakt = $row4->id_subaktivitas;
-                      ?>
-                      <tr>
-                        <td>
-                          <?php echo $row4->nama_subaktivitas; ?>
-                        </td>
-                        <td>
-                          <?php 
-                          $query6 = "SELECT * FROM aktivitas_employee a WHERE a.id_user='$idid' AND a.id_subaktivitas = '$id_subakt'";
-                          //execute the query
-                          $result6 = $db->query( $query6 );
-                          $row6 = $result6->fetch_object();
-                          if (!$result6)
-                          {
-                            die("could not query the database: <br />".$db->error);
-                          }
-                          if (isset($row6->freq)) {
-                            $user_point = $row6->freq * $row4->poin;
-                            echo $user_point;
-                          } else {
-                            echo 0;
-                          }
-                          
-                          ?>
-                        </td>
-                        <td>
-                          <?php $max_pts =$row4->poin * $row4->max_freq;
-                          echo ' / '.$max_pts; ?>
-                        </td>
-                        <td>
-                          <button class="btn btn-xs">Submit</button>
-                        </td>
-                      </tr>
-                      <?php
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
+        
+        <div class="col-md-9 col-sm-9 col-xs-4">
+          <div class="x_panel tile">
+            <div class="x_title">
+              <h2><b>Profile</b></h2>
+              <div class="clearfix"></div>
             </div>
-            <?php
-          }
-          ?>
+            <div class="x_content">
+              <!-- easy -->
+              <div class="col-xs-2">
+                <span class="chart" data-percent="73">
+                  <span class="percent">73</span>
+                  <canvas height="110" width="110"></canvas>
+                </span>
+              </div>
+              <div class="col-xs-2">
+                <span class="chart" data-percent="73">
+                  <span class="percent">73</span>
+                  <canvas height="110" width="110"></canvas>
+                </span>
+              </div>
+              <div class="col-xs-2">
+                <span class="chart" data-percent="73">
+                  <span class="percent">73</span>
+                  <canvas height="110" width="110"></canvas>
+                </span>
+              </div>
+              <div class="col-xs-2">
+                <span class="chart" data-percent="73">
+                  <span class="percent">73</span>
+                  <canvas height="110" width="110"></canvas>
+                </span>
+              </div>
+              <div class="col-xs-2">
+                <span class="chart" data-percent="73">
+                  <span class="percent">73</span>
+                  <canvas height="110" width="110"></canvas>
+                </span>
+              </div>
+              <div class="col-xs-2">
+                <span class="chart" data-percent="73">
+                  <span class="percent">73</span>
+                  <canvas height="110" width="110"></canvas>
+                </span>
+              </div>
+
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -353,63 +306,122 @@ else
 <!-- bootstrap-daterangepicker -->
 <script src="../js/moment/moment.min.js"></script>
 <script src="../js/datepicker/daterangepicker.js"></script>
-
+<!-- echart -->
+<script src="../../vendors/echarts/dist/echarts.min.js"></script>
+<script src="../../vendors/echarts/map/js/world.js"></script>
+<!-- easypiechart -->
+<script src="../../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
 <!-- Custom Theme Scripts -->
 <script src="../../build/js/custom.min.js"></script>
 
-<!-- Flot -->
+<!-- easy pie chart -->
 <script>
   $(document).ready(function() {
-    var data1 = [
-    [gd(2012, 1, 1), <?php echo $cek1;?>],
-    [gd(2012, 2, 2), <?php echo $cek2;?>],
-    [gd(2012, 3, 3), <?php echo $cek3;?>],
-    [gd(2012, 4, 4), 65530],
-    [gd(2012, 5, 5), 43356],
-    [gd(2012, 6, 6), 54689]
-    ];
+    $('.chart').easyPieChart({
+      easing: 'easeOutElastic',
+      delay: 3000,
+      barColor: '#26B99A',
+      trackColor: '#fff',
+      scaleColor: false,
+      lineWidth: 20,
+      trackWidth: 16,
+      lineCap: 'butt',
+      onStep: function(from, to, percent) {
+        $(this.el).find('.percent').text(Math.round(percent));
+      }
+    });
+    var chart = window.chart = $('.chart').data('easyPieChart');
+    $('.js_update').on('click', function() {
+      chart.update(Math.random() * 200 - 100);
+    });
 
-    var data2 = [
-    [gd(2012, 1, 1), 10000],
-    [gd(2012, 2, 2), 30000],
-    [gd(2012, 3, 3), 50000],
-    [gd(2012, 4, 4), 35000],
-    [gd(2012, 5, 5), 20000],
-    [gd(2012, 6, 6), 60000]
-    ];
-    $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
-      data1, data2
-      ], {
-        series: {
-          lines: {
-            show: false,
-            fill: true
-          },
-          splines: {
-            show: true,
-            tension: 0.4,
-            lineWidth: 1,
-            fill: 0.4
-          },
-          points: {
-            radius: 0,
-            show: true
-          },
-          shadowSize: 2
-        },
-        grid: {
-          verticalLines: true,
-          hoverable: true,
-          clickable: true,
-          tickColor: "#d5d5d5",
-          borderWidth: 1,
-          color: '#fff'
-        },
-        colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
-        xaxis: {
-          tickColor: "rgba(51, 51, 51, 0.06)",
-          mode: "time",
-          tickSize: [1, "month"],
+        //hover and retain popover when on popover content
+        var originalLeave = $.fn.popover.Constructor.prototype.leave;
+        $.fn.popover.Constructor.prototype.leave = function(obj) {
+          var self = obj instanceof this.constructor ?
+          obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
+          var container, timeout;
+
+          originalLeave.call(this, obj);
+
+          if (obj.currentTarget) {
+            container = $(obj.currentTarget).siblings('.popover');
+            timeout = self.timeout;
+            container.one('mouseenter', function() {
+              //We entered the actual popover – call off the dogs
+              clearTimeout(timeout);
+              //Let's monitor popover content instead
+              container.one('mouseleave', function() {
+                $.fn.popover.Constructor.prototype.leave.call(self, self);
+              });
+            });
+          }
+        };
+
+        $('body').popover({
+          selector: '[data-popover]',
+          trigger: 'click hover',
+          delay: {
+            show: 50,
+            hide: 400
+          }
+        });
+      });
+    </script>
+
+    <!-- Flot -->
+    <script>
+      $(document).ready(function() {
+        var data1 = [
+        [gd(2012, 1, 1), <?php echo $cek1;?>],
+        [gd(2012, 2, 2), <?php echo $cek2;?>],
+        [gd(2012, 3, 3), <?php echo $cek3;?>],
+        [gd(2012, 4, 4), 65530],
+        [gd(2012, 5, 5), 43356],
+        [gd(2012, 6, 6), 54689]
+        ];
+
+        var data2 = [
+        [gd(2012, 1, 1), 10000],
+        [gd(2012, 2, 2), 30000],
+        [gd(2012, 3, 3), 50000],
+        [gd(2012, 4, 4), 35000],
+        [gd(2012, 5, 5), 20000],
+        [gd(2012, 6, 6), 60000]
+        ];
+        $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+          data1, data2
+          ], {
+            series: {
+              lines: {
+                show: false,
+                fill: true
+              },
+              splines: {
+                show: true,
+                tension: 0.4,
+                lineWidth: 1,
+                fill: 0.4
+              },
+              points: {
+                radius: 0,
+                show: true
+              },
+              shadowSize: 2
+            },
+            grid: {
+              verticalLines: true,
+              hoverable: true,
+              clickable: true,
+              tickColor: "#d5d5d5",
+              borderWidth: 1,
+              color: '#fff'
+            },
+            colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+            xaxis: {
+              tickColor: "rgba(51, 51, 51, 0.06)",
+              mode: "time",
+              tickSize: [1, "month"],
             //tickLength: 10,
             axisLabel: "Date",
             axisLabelUseCanvas: true,
@@ -424,192 +436,192 @@ else
           tooltip: false
         });
 
-    function gd(year, month, day) {
-      return new Date(year, month - 1, day).getTime();
-    }
-  });
-</script>
-<!-- /Flot -->
+        function gd(year, month, day) {
+          return new Date(year, month - 1, day).getTime();
+        }
+      });
+    </script>
+    <!-- /Flot -->
 
-<!-- JQVMap -->
-<script>
-  $(document).ready(function(){
-    $('#world-map-gdp').vectorMap({
-      map: 'world_en',
-      backgroundColor: null,
-      color: '#ffffff',
-      hoverOpacity: 0.7,
-      selectedColor: '#666666',
-      enableZoom: true,
-      showTooltip: true,
-      values: sample_data,
-      scaleColors: ['#E6F2F0', '#149B7E'],
-      normalizeFunction: 'polynomial'
-    });
-  });
-</script>
-<!-- /JQVMap -->
+    <!-- JQVMap -->
+    <script>
+      $(document).ready(function(){
+        $('#world-map-gdp').vectorMap({
+          map: 'world_en',
+          backgroundColor: null,
+          color: '#ffffff',
+          hoverOpacity: 0.7,
+          selectedColor: '#666666',
+          enableZoom: true,
+          showTooltip: true,
+          values: sample_data,
+          scaleColors: ['#E6F2F0', '#149B7E'],
+          normalizeFunction: 'polynomial'
+        });
+      });
+    </script>
+    <!-- /JQVMap -->
 
-<!-- Skycons -->
-<script>
-  $(document).ready(function() {
-    var icons = new Skycons({
-      "color": "#73879C"
-    }),
-    list = [
-    "clear-day", "clear-night", "partly-cloudy-day",
-    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-    "fog"
-    ],
-    i;
-
-    for (i = list.length; i--;)
-      icons.set(list[i], list[i]);
-
-    icons.play();
-  });
-</script>
-<!-- /Skycons -->
-
-<!-- Doughnut Chart -->
-<script>
-  $(document).ready(function(){
-    var options = {
-      legend: false,
-      responsive: false
-    };
-
-    new Chart(document.getElementById("canvas1"), {
-      type: 'doughnut',
-      tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-      data: {
-        labels: [
-        "Economy Class",
-        "Business Class",
-        "First Class"
+    <!-- Skycons -->
+    <script>
+      $(document).ready(function() {
+        var icons = new Skycons({
+          "color": "#73879C"
+        }),
+        list = [
+        "clear-day", "clear-night", "partly-cloudy-day",
+        "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+        "fog"
         ],
-        datasets: [{
-          data: [3412, 768, 475],
-          backgroundColor: [
-          "#9B59B6",
-          "#26B99A",
-          "#3498DB"
-          ],
-          hoverBackgroundColor: [
-          "#B370CF",
-          "#36CAAB",
-          "#49A9EA"
-          ]
-        }]
-      },
-      options: options
-    });
-  });
-</script>
-<!-- /Doughnut Chart -->
+        i;
 
-<!-- bootstrap-daterangepicker -->
-<script>
-  $(document).ready(function() {
+        for (i = list.length; i--;)
+          icons.set(list[i], list[i]);
 
-    var cb = function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    };
+        icons.play();
+      });
+    </script>
+    <!-- /Skycons -->
 
-    var optionSet1 = {
-      startDate: moment().subtract(29, 'days'),
-      endDate: moment(),
-      minDate: '01/01/2012',
-      maxDate: '12/31/2015',
-      dateLimit: {
-        days: 60
-      },
-      showDropdowns: true,
-      showWeekNumbers: true,
-      timePicker: false,
-      timePickerIncrement: 1,
-      timePicker12Hour: true,
-      ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      opens: 'left',
-      buttonClasses: ['btn btn-default'],
-      applyClass: 'btn-small btn-primary',
-      cancelClass: 'btn-small',
-      format: 'MM/DD/YYYY',
-      separator: ' to ',
-      locale: {
-        applyLabel: 'Submit',
-        cancelLabel: 'Clear',
-        fromLabel: 'From',
-        toLabel: 'To',
-        customRangeLabel: 'Custom',
-        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        firstDay: 1
-      }
-    };
-    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-    $('#reportrange').daterangepicker(optionSet1, cb);
-    $('#reportrange').on('show.daterangepicker', function() {
-      console.log("show event fired");
-    });
-    $('#reportrange').on('hide.daterangepicker', function() {
-      console.log("hide event fired");
-    });
-    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-    });
-    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-      console.log("cancel event fired");
-    });
-    $('#options1').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-    });
-    $('#options2').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-    });
-    $('#destroy').click(function() {
-      $('#reportrange').data('daterangepicker').remove();
-    });
-  });
-</script>
-<!-- /bootstrap-daterangepicker -->
+    <!-- Doughnut Chart -->
+    <script>
+      $(document).ready(function(){
+        var options = {
+          legend: false,
+          responsive: false
+        };
 
-<!-- gauge.js -->
-<script>
-  var opts = {
-    lines: 12,
-    angle: 0,
-    lineWidth: 0.4,
-    pointer: {
-      length: 0.75,
-      strokeWidth: 0.042,
-      color: '#1D212A'
-    },
-    limitMax: 'false',
-    colorStart: '#1ABC9C',
-    colorStop: '#1ABC9C',
-    strokeColor: '#F0F3F3',
-    generateGradient: true
-  };
-  var target = document.getElementById('foo'),
-  gauge = new Gauge(target).setOptions(opts);
+        new Chart(document.getElementById("canvas1"), {
+          type: 'doughnut',
+          tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+          data: {
+            labels: [
+            "Economy Class",
+            "Business Class",
+            "First Class"
+            ],
+            datasets: [{
+              data: [3412, 768, 475],
+              backgroundColor: [
+              "#9B59B6",
+              "#26B99A",
+              "#3498DB"
+              ],
+              hoverBackgroundColor: [
+              "#B370CF",
+              "#36CAAB",
+              "#49A9EA"
+              ]
+            }]
+          },
+          options: options
+        });
+      });
+    </script>
+    <!-- /Doughnut Chart -->
 
-  gauge.maxValue = 6000;
-  gauge.animationSpeed = 32;
-  gauge.set(3200);
-  gauge.setTextField(document.getElementById("gauge-text"));
-</script>
-<!-- /gauge.js -->
+    <!-- bootstrap-daterangepicker -->
+    <script>
+      $(document).ready(function() {
 
-<script type="text/javascript">
+        var cb = function(start, end, label) {
+          console.log(start.toISOString(), end.toISOString(), label);
+          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        };
+
+        var optionSet1 = {
+          startDate: moment().subtract(29, 'days'),
+          endDate: moment(),
+          minDate: '01/01/2012',
+          maxDate: '12/31/2015',
+          dateLimit: {
+            days: 60
+          },
+          showDropdowns: true,
+          showWeekNumbers: true,
+          timePicker: false,
+          timePickerIncrement: 1,
+          timePicker12Hour: true,
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          opens: 'left',
+          buttonClasses: ['btn btn-default'],
+          applyClass: 'btn-small btn-primary',
+          cancelClass: 'btn-small',
+          format: 'MM/DD/YYYY',
+          separator: ' to ',
+          locale: {
+            applyLabel: 'Submit',
+            cancelLabel: 'Clear',
+            fromLabel: 'From',
+            toLabel: 'To',
+            customRangeLabel: 'Custom',
+            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            firstDay: 1
+          }
+        };
+        $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+        $('#reportrange').daterangepicker(optionSet1, cb);
+        $('#reportrange').on('show.daterangepicker', function() {
+          console.log("show event fired");
+        });
+        $('#reportrange').on('hide.daterangepicker', function() {
+          console.log("hide event fired");
+        });
+        $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+          console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+        });
+        $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+          console.log("cancel event fired");
+        });
+        $('#options1').click(function() {
+          $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+        });
+        $('#options2').click(function() {
+          $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+        });
+        $('#destroy').click(function() {
+          $('#reportrange').data('daterangepicker').remove();
+        });
+      });
+    </script>
+    <!-- /bootstrap-daterangepicker -->
+
+    <!-- gauge.js -->
+    <script>
+      var opts = {
+        lines: 12,
+        angle: 0,
+        lineWidth: 0.4,
+        pointer: {
+          length: 0.75,
+          strokeWidth: 0.042,
+          color: '#1D212A'
+        },
+        limitMax: 'false',
+        colorStart: '#1ABC9C',
+        colorStop: '#1ABC9C',
+        strokeColor: '#F0F3F3',
+        generateGradient: true
+      };
+      var target = document.getElementById('foo'),
+      gauge = new Gauge(target).setOptions(opts);
+
+      gauge.maxValue = 6000;
+      gauge.animationSpeed = 32;
+      gauge.set(3200);
+      gauge.setTextField(document.getElementById("gauge-text"));
+    </script>
+    <!-- /gauge.js -->
+
+    <script type="text/javascript">
     //set timezone
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
     //buat object date berdasarkan waktu di server
