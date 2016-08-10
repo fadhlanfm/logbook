@@ -62,24 +62,38 @@ else
   }
   $row2 = $result2->fetch_object();
   $unit2 = $row2->unit;
+  $idid = $row2->iduser;
 
-  $query = "SELECT * FROM logbook JOIN unit WHERE start <= curdate() and end >= curdate() and unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
+  $query = "SELECT * FROM employee JOIN user WHERE employee.iduser=user.iduser and employee.iduser='$idid'";
         //execute the query
   $result = $db->query( $query );
   $row = $result->fetch_object();
-  // echo $row->nama_program;
+  // echo $row->username;
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
 
-  $query5 = "SELECT * FROM logbook JOIN unit WHERE unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
-        //execute the query
-  $result5 = $db->query( $query5 );
 
-  if (!$result5)
+  $query3 = "SELECT * FROM aktivitas_employee a JOIN subaktivitas b WHERE a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid'";
+        //execute the query
+  $result3 = $db->query( $query3 );
+  
+  // echo $row->username;
+  if (!$result)
   {
     die("could not query the database: <br />".$db->error);
+  }
+
+  // mencari total poin user
+  $totalpoin = 0;
+  $freq;
+  $poin;
+  while ( $row3 = $result3->fetch_object()) {
+    $freq = $row3->freq;
+    $poin = $row3->poin;
+    $poinakt = $freq * $poin;
+    $totalpoin = $totalpoin + $poinakt;
   }
   
   ?>
@@ -169,60 +183,121 @@ else
         <div class="col-md-3 col-sm-3 col-xs-4">
           <div class="x_panel tile">
             <div class="x_title">
-            <h2>Profile</h2>
-
+              <h2>Profile</h2>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
+              <div class="profile_img">
+                <div id="crop-avatar">
+                  <!-- Current avatar -->
+                  <img class="img-responsive avatar-view" src="profile_pictures/default.jpg" alt="Avatar" title="Change the avatar">
+                </div>
+              </div>
+              <div class="ln_solid"></div>
+              <h4><?php echo $row->nama; ?> </h4>
+              <p><?php echo $row->NIP ?> </p>
+              <p><?php echo $row->unit ?> </p>
+              <p><?php echo $totalpoin ?> pts </p>
+
             </div>
           </div>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-8">
-          <div class="x_panel tile">
-            <div class="x_title">
-            <h2>Aktivitas A</h2>
+          <?php
 
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-            </div>
-          </div>
-          <div class="x_panel tile">
-            <div class="x_title">
-            <h2>Aktivitas B</h2>
+          $query5 = "SELECT * FROM aktivitas WHERE aktivitas.default2=1";
+        //execute the query
+          $result5 = $db->query( $query5 );
+          if (!$result5)
+          {
+            die("could not query the database: <br />".$db->error);
+          }
+          $id_akt=0;
+          while ($row5 = $result5->fetch_object()) {
+            $id_akt = $row5->id_aktivitas;
+            ?>
 
-              <div class="clearfix"></div>
+            <div class="x_panel tile">
+              <div class="x_title">
+                <h2><?php echo $row5->nama_aktivitas ?></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th style="width:600px;">
+                        Nama Aktivitas
+                      </th>
+                      <th>
+                        Poin User
+                      </th>
+                      <th>
+                        Poin Maksimal
+                      </th>
+                      <th>
+                        Submit
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $query4 = "SELECT a.id_aktivitas, a.nama_aktivitas, a.desk_akt, b.id_subaktivitas, b.nama_subaktivitas, b.poin, b.max_freq, b.default2 FROM aktivitas a JOIN subaktivitas b WHERE a.id_aktivitas=b.id_aktivitas AND b.default2=1 AND b.id_aktivitas = '$id_akt'";
+              //execute the query
+                    $result4 = $db->query( $query4 );
+                    if (!$result4)
+                    {
+                      die("could not query the database: <br />".$db->error);
+                    }
+                    $id_subakt;
+                    while ($row4 = $result4->fetch_object()) {
+                      $id_subakt = $row4->id_subaktivitas;
+                      ?>
+                      <tr>
+                        <td>
+                          <?php echo $row4->nama_subaktivitas; ?>
+                        </td>
+                        <td>
+                          <?php 
+                          $query6 = "SELECT * FROM aktivitas_employee a WHERE a.id_user='$idid' AND a.id_subaktivitas = '$id_subakt'";
+                          //execute the query
+                          $result6 = $db->query( $query6 );
+                          $row6 = $result6->fetch_object();
+                          if (!$result6)
+                          {
+                            die("could not query the database: <br />".$db->error);
+                          }
+                          if (isset($row6->freq)) {
+                            $user_point = $row6->freq * $row4->poin;
+                            echo $user_point;
+                          } else {
+                            echo 0;
+                          }
+                          
+                          ?>
+                        </td>
+                        <td>
+                          <?php $max_pts =$row4->poin * $row4->max_freq;
+                          echo ' / '.$max_pts; ?>
+                        </td>
+                        <td>
+                          <button class="btn btn-xs">Submit</button>
+                        </td>
+                      </tr>
+                      <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div class="x_content">
-            </div>
-          </div>
-          <div class="x_panel tile">
-            <div class="x_title">
-            <h2>Aktivitas C</h2>
-
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-            </div>
-          </div>
-          <div class="x_panel tile">
-            <div class="x_title">
-            <h2>Aktivitas D</h2>
-
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-            </div>
-          </div>
-          <div class="x_panel tile">
-            <div class="x_title">
-            <h2>Aktivitas E</h2>
-
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-            </div>
-          </div>
+            <?php
+          }
+          ?>
         </div>
       </div>
     </div>
