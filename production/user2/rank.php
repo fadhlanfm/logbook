@@ -180,102 +180,51 @@ else
       <!-- page content -->
       <div class="right_col" role="main">
         <!-- bookmark -->
-        <div class="col-md-3 col-sm-3 col-xs-3">
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel tile">
             <div class="x_title">
-              <h2><b>Profile</b></h2>
+              <h2><b>Rank</b></h2>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <div class="profile_img">
-                <div id="crop-avatar">
-                  <!-- Current avatar -->
-                  <img class="img-responsive avatar-view" src="profile_pictures/default.jpg" alt="Avatar" title="Change the avatar">
-                </div>
-              </div>
-              <div class="ln_solid"></div>
-              <h4><?php echo $row->nama; ?> </h4>
-              <p><?php echo $row->NIP ?> </p>
-              <p><?php echo $row->unit ?> </p>
-              <p><?php echo $totalpoin ?> pts </p>
-
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-md-9 col-sm-9 col-xs-9">
-          <div class="x_panel tile">
-            <div class="x_title">
-              <h2><b>Profile</b></h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <!-- easy -->
-              <?php
-              $query7 = "SELECT *, sum(b.max_freq*b.poin) sumtot FROM aktivitas a join subaktivitas b WHERE a.id_aktivitas = b.id_aktivitas and b.default2 = 1 group by a.id_aktivitas";
-              //execute the query
-              $result7 = $db->query( $query7 );
-
-              // echo $row->username;
-              if (!$result7)
-              {
-                die("could not query the database: <br />".$db->error);
-              }
-              $id_akt=0;
-              $max_poin;
-              $nama;
-              $max_poin_kum = 0;
-              while ($row7 = $result7->fetch_object()) {
-                $id_akt = $row7->id_aktivitas;
-                $max_poin[$id_akt] = $row7->sumtot;
-                $nama[$id_akt] = $row7->nama_aktivitas;
-                $max_poin_kum = $max_poin_kum + $max_poin[$id_akt];
-              }
-
-              $query6 = "SELECT *, sum(a.freq*b.poin) sumtot FROM subaktivitas b LEFT join (SELECT * FROM aktivitas_employee c where c.id_user='$idid') a ON a.id_subaktivitas = b.id_subaktivitas and b.default2 = 1 group by id_aktivitas";
-              //execute the query
-              $result6 = $db->query( $query6 );
-
-              // echo $row->username;
-              if (!$result6)
-              {
-                die("could not query the database: <br />".$db->error);
-              }
-              $id_tak=0;
-              $poinkat;
-              $poinkum = 0;
-              while ($row6 = $result6->fetch_object()) {
-                $id_akt = $row6->id_aktivitas;
-                $poinkat[$id_akt] = 0;
-                if ($row6->sumtot == null) {
-                  $poinkat[$id_akt] = 0;
-                } else {
-                $poinkat[$id_akt] = $row6->sumtot;
-                }
-                $poinkum= $poinkum + $poinkat[$id_akt];
-                ?>
-                <div class="col-sm-3 col-md-3 col-xs-4">
-                  <span class="chart" data-percent="<?php echo $poinkat[$id_akt]/$max_poin[$id_akt]*100; ?>">
-                    <span class="percent"><?php echo $poinkat[$id_akt]/$max_poin[$id_akt]*100; ?></span>
-                    <canvas height="110" width="110"></canvas>
-                  </span>
-                  <p><h3><?php echo $nama[$id_akt] ?></h3></p>
-                  <p><b><?php echo $poinkat[$id_akt] ?> / <?php echo $max_poin[$id_akt] ?></b></p>
-                </div>
+              <!-- rank table -->
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>
+                      Nama
+                    </th>
+                    <th>
+                      Total Poin
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
                 <?php
-              }
-              ?>
-              
-                <div class="col-sm-3 col-md-3 col-xs-4">
-                  <span class="chart" data-percent="<?php echo $poinkum/$max_poin_kum*100; ?>">
-                    <span class="percent"><?php echo $poinkum/$max_poin_kum; ?></span>
-                    <canvas height="110" width="110"></canvas>
-                  </span>
-                  <p><h3>Total Kumulatif Poin</h3></p>
-                  <p><b><?php echo $poinkum ?> / <?php echo $max_poin_kum ?></b></p>
-                </div>
-              
+                $query6 = "SELECT a.id_user, a.nama, sum(a.freq*b.poin) sumtot FROM subaktivitas b LEFT join (select c.id_user, d.nama, c.id_subaktivitas, c.freq from aktivitas_employee c join employee d ON c.id_user = d.iduser) a ON a.id_subaktivitas = b.id_subaktivitas and b.default2 = 1 group by id_user order by sumtot desc";
+              //execute the query
+                $result6 = $db->query( $query6 );
 
+              // echo $row->username;
+                if (!$result6)
+                {
+                  die("could not query the database: <br />".$db->error);
+                }
+                while ($row6 = $result6->fetch_object()) {
+                  ?>
+                  <tr>
+                    <td>
+                    <?php echo $row6->nama ?>
+                    </td>
+                    <td>
+                    <?php echo $row6->sumtot ?>
+                    </td>
+                  </tr>
+                  <?php
+                }
+                ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

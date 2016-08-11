@@ -27,7 +27,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Ubah Password</title>
+  <title>Input Aktivitas</title>
 
   <!-- Bootstrap -->
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -62,14 +62,25 @@ else
   }
   $row2 = $result2->fetch_object();
   $unit2 = $row2->unit;
+  $idid = $row2->iduser;
 
-  $query = "SELECT * FROM user WHERE iduser='$coba'";
-  $result = $db->query($query);
-  if(!$result)
+  $id = $_GET['id'];
+  $query4 = "SELECT * FROM subaktivitas b left join aktivitas_employee a ON a.id_subaktivitas = b.id_subaktivitas WHERE a.id_subaktivitas = '$id' and a.id_user = '$idid'";
+  $result4 = $db->query($query4);
+  if(!$result4)
   {
     die("Could not query the database: <br />". $db->error);
   }
-  $row=$result->fetch_object();
+  $row4=$result4->fetch_object();
+  if (!$row4) {
+    $query5 = "SELECT * FROM subaktivitas WHERE id_subaktivitas = '$id'";
+    $result5 = $db->query($query5);
+    if(!$result5)
+    {
+      die("Could not query the database: <br />". $db->error);
+    }
+    $row5=$result5->fetch_object();
+  }
   ?>
   <div class="container body">
     <div class="main_container">
@@ -152,21 +163,52 @@ else
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel tile">
             <div class="x_title">
-              <h2>Ubah Password</h2>
+              <h2>Input Aktivitas</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
+                </li>
 
+              </ul>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
               <!-- insert content here -->
               
-              <form method="POST" action="acc_edit_password.php">
+              <form method="POST" action="acc_input_aktivitas.php">
+              <input style="display:none;" class="form-control" type="text" readonly id="id_user" name="id_user" value="<?php
+                echo $idid;
+                ?>"></input><br>
                 <label for="iduser">Unique ID : </label>
-                <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php echo''.$row2->iduser.''; ?>"></input><br>
-                <label for="iduser">Old Password : </label>
-                <input class="form-control" type="text" readonly id="oldpass" value="<?php echo''.$row2->password.''; ?>"></input><br>
-                <label for="newpass">New Password : </label>
-                <input class="form-control" type="password" id="newpass" placeholder="newpass" name="newpass"></input><br>
-                <input class="btn btn-primary" type="submit" value="Submit"></input>
+                <input class="form-control" type="text" readonly id="id_subaktivitas" name="id_subaktivitas" value="<?php
+                if (!$row4) {
+                  echo $row5->id_subaktivitas;
+                } else {
+                  echo''.$row4->id_subaktivitas.'';
+                }
+                ?>"></input><br>
+                <label for="iduser">Nama Aktivitas : </label>
+                <input class="form-control" type="text" readonly id="nama_aktivitas" value="<?php
+                if (!$row4) {
+                  echo $row5->nama_subaktivitas;
+                } else {
+                  echo''.$row4->nama_subaktivitas.'';
+                }
+                ?>"></input><br>
+                <label for="frekuensi">Frekuensi * : (maksimal  <?php if (!$row4) {
+                  echo $row5->max_freq;
+                } else {
+                  echo $row4->max_freq;
+                } ?>)</label>
+                <input class="form-control" type="text" id="frekuensi" placeholder="Frekuensi" name="frekuensi" required="required" value="<?php
+                if (!$row4) {
+                  echo 0;
+                } else {
+                  echo''.$row4->freq.'';
+                }
+                ?>"></input><br>
+                <label for="newpass">Attachment * :</label>
+                <input class="btn" type="file" name="file" required="required" /><br>
+                <input class="btn btn-success" type="submit" value="Submit" ></input>
               </form>
 
             </div>
@@ -226,6 +268,12 @@ else
 
   <!-- Custom Theme Scripts -->
   <script src="../../build/js/custom.min.js"></script>
+
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
 
   <!-- Flot -->
   <script>

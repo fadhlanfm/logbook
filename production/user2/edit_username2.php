@@ -78,16 +78,16 @@ else
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="index.php">Halaman Utama</a></li>
+                    <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="programs.php">Isi Aktivitas</a></li>
+                    <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>

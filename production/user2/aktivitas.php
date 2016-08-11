@@ -75,7 +75,7 @@ else
   }
 
 
-  $query3 = "SELECT * FROM aktivitas_employee a JOIN subaktivitas b WHERE a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid'";
+  $query3 = "SELECT * FROM aktivitas_employee a JOIN subaktivitas b WHERE a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid'  and b.default2=1";
         //execute the query
   $result3 = $db->query( $query3 );
   
@@ -241,7 +241,7 @@ else
                         Poin Maksimal
                       </th>
                       <th>
-                        Submit
+                        Input Hasil
                       </th>
                     </tr>
                   </thead>
@@ -278,6 +278,7 @@ else
                           } else {
                             echo 0;
                           }
+
                           
                           ?>
                         </td>
@@ -286,10 +287,21 @@ else
                           echo ' / '.$max_pts; ?>
                         </td>
                         <td>
-                          <button class="btn btn-xs">Submit</button>
+                        <?php
+                        if ($user_point == $max_pts) {
+                          
+                        } else {
+                          ?>
+                          <a href="input_form.php?id=<?php echo $id_subakt?>"><button class="btn btn-xs">Input</button></a>
+                          <?php
+                        }
+                        ?>
+                          
                         </td>
                       </tr>
                       <?php
+                      $user_point = 0;
+                      $max_pts = 0;
                     }
                     ?>
                   </tbody>

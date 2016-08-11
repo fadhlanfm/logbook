@@ -4,16 +4,16 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
 { 
 
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-  header ('Location: ../../page_403.php');
-  exit;
+	header ('Location: ../../page_403.php');
+	exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == -1) {
-  header ('Location: ../../page_403.php');
-  exit;
+	header ('Location: ../../page_403.php');
+	exit;
 }
 else
 {
-  header ('Location: ../../page_4033.php');
-  exit;
+	header ('Location: ../../page_4033.php');
+	exit;
 
 }
 ?>
@@ -324,7 +324,7 @@ else
 											<div class="clearfix"></div>
 										</div>
 										<div class="x_content">
-										<div class="ln_solid"></div>
+											<div class="ln_solid"></div>
 											<h4>Program</h4>
 											<div class="ln_solid"></div>
 
@@ -603,42 +603,42 @@ else
 											<div class="ln_solid"></div>
 											<h4>Change Agent Team</h4>
 											<div class="form-group">
-													<div class="ln_solid"></div>
-													<div class="row">
-														<div class="col-sm-10 col-md-10 col-xs-12">
-															<label>Posisi</label>
-															<input readonly type="text" class="form-control" name="posisi_ketua" required="required" value="Ketua">
-														</div>
+												<div class="ln_solid"></div>
+												<div class="row">
+													<div class="col-sm-10 col-md-10 col-xs-12">
+														<label>Posisi</label>
+														<input readonly type="text" class="form-control" name="posisi_ketua" required="required" value="Ketua">
 													</div>
-													<div class="row">
-														<div class="col-sm-5 col-md-5 col-xs-12">
-															<label>Nama</label>
-															<input id="nama_ketua" type="text" class="validate form-control" name="nama_ketua" required="required">
-														</div>
-														<div class="col-sm-5 col-md-5 col-xs-12">
-															<label>Email</label>
-															<input id="email_ketua" type="text" class="validate form-control" name="email_ketua" required="required">
-														</div>
-														</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-5 col-md-5 col-xs-12">
+														<label>Nama</label>
+														<input id="nama_ketua" type="text" class="validate form-control" name="nama_ketua" required="required">
+													</div>
+													<div class="col-sm-5 col-md-5 col-xs-12">
+														<label>Email</label>
+														<input id="email_ketua" type="text" class="validate form-control" name="email_ketua" required="required">
+													</div>
+												</div>
 											</div>
 											<div class="form-group">
-													<div class="ln_solid"></div>
-													<div class="row">
-														<div class="col-sm-10 col-md-10 col-xs-12">
-															<label>Posisi</label>
-															<input readonly type="text" class="form-control" name="posisi_sekre" required="required" value="Sekretaris & Bendahara">
-														</div>
+												<div class="ln_solid"></div>
+												<div class="row">
+													<div class="col-sm-10 col-md-10 col-xs-12">
+														<label>Posisi</label>
+														<input readonly type="text" class="form-control" name="posisi_sekre" required="required" value="Sekretaris & Bendahara">
 													</div>
-													<div class="row">
-														<div class="col-sm-5 col-md-5 col-xs-12">
-															<label>Nama</label>
-															<input id="nama_sekre" type="text" class="validate form-control" name="nama_sekre" required="required">
-														</div>
-														<div class="col-sm-5 col-md-5 col-xs-12">
-															<label>Email</label>
-															<input id="email_sekre" type="text" class="validate form-control" name="email_sekre" required="required">
-														</div>
-														</div>
+												</div>
+												<div class="row">
+													<div class="col-sm-5 col-md-5 col-xs-12">
+														<label>Nama</label>
+														<input id="nama_sekre" type="text" class="validate form-control" name="nama_sekre" required="required">
+													</div>
+													<div class="col-sm-5 col-md-5 col-xs-12">
+														<label>Email</label>
+														<input id="email_sekre" type="text" class="validate form-control" name="email_sekre" required="required">
+													</div>
+												</div>
 											</div>
 											<div class="form-group">
 												<div class="row clone2">
