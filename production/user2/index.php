@@ -190,7 +190,13 @@ else
               <div class="profile_img">
                 <div id="crop-avatar">
                   <!-- Current avatar -->
-                  <img class="img-responsive avatar-view" src="profile_pictures/default.jpg" alt="Avatar" title="Change the avatar">
+                  <img class="img-responsive avatar-view" src="profile_pictures/<?php 
+                  if ($row->size == 0) {
+                    echo 'default.jpg';
+                  } else {
+                  echo $row->foto;
+                  }
+                  ?>" alt="profile_pictures/default.jpg" title="Change the avatar">
                 </div>
               </div>
               <div class="ln_solid"></div>

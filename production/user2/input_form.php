@@ -174,7 +174,7 @@ else
             <div class="x_content">
               <!-- insert content here -->
               
-              <form method="POST" action="acc_input_aktivitas.php">
+              <form method="POST" action="acc_input_aktivitas.php" enctype="multipart/form-data">
               <input style="display:none;" class="form-control" type="text" readonly id="id_user" name="id_user" value="<?php
                 echo $idid;
                 ?>"></input><br>
