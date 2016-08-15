@@ -258,6 +258,13 @@ else
   <div class="x_panel">
     <div class="x_title">
       <h2>Aktivitas</h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a href="new_activity_form.php"><button class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Buat Aktivitas Baru</button></a>
+        </li>
+        <li><a href="new_group_activity_form.php"><button class="btn btn-success btn-xs"><i class="fa fa-plus"></i>  Buat Kelompok Aktivitas Baru</button></a>
+        </li>
+
+      </ul>
 
       <div class="clearfix">
       </div>
@@ -357,12 +364,12 @@ else
       echo "<a href='aktivitas.php?page=1'>".'|<'."</a> "; // Goto 1st page  
 
       for ($i=1; $i<=$total_pages; $i++) { 
-      echo "<a href='aktivitas.php?page=".$i."'>".$i."</a> "; 
+        echo "<a href='aktivitas.php?page=".$i."'>".$i."</a> "; 
       }; 
       echo "<a href='aktivitas.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
       ?>
-</div>
-</div>
+    </div>
+  </div>
 </div>
 <!-- /page content -->
 

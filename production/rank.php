@@ -158,7 +158,7 @@ else
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="../images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
             <span class=" fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -187,7 +187,10 @@ else
     <div class="x_panel tile">
       <div class="x_title">
         <h2>Leaderboard</h2>
-
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a href="post_leaderboard.php"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i> Simpan Leaderboard dan Akhiri Sesi</button></a>
+          </li>
+        </ul>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
@@ -196,13 +199,13 @@ else
           <thead>
             <tr>
               <th>
-              No
+                No
               </th>
               <th>
-              Nama
+                Nama
               </th>
               <th>
-              Poin
+                Poin
               </th>
             </tr>
           </thead>
@@ -212,15 +215,15 @@ else
             while ($row4 = $result4->fetch_object()) {
               ?>
               <tr>
-              <td>
-              <?php echo $i; $i++;?>
-              </td>
-              <td>
-              <?php echo $row4->nama; ?>
-              </td>
-              <td>
-              <?php echo $row4->sumtot; ?>
-              </td>
+                <td>
+                  <?php echo $i; $i++;?>
+                </td>
+                <td>
+                  <?php echo $row4->nama; ?>
+                </td>
+                <td>
+                  <?php echo $row4->sumtot; ?>
+                </td>
               </tr>
               <?php
               
