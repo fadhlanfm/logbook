@@ -92,7 +92,7 @@ else
                     <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
@@ -101,7 +101,7 @@ else
                   <ul class="nav child_menu">
                     <li><a href="edit_username2.php">Ubah Username</a></li>
                     <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_password2.php">Ubah Foto</a></li>
+                    <li><a href="edit_foto.php">Ubah Foto</a></li>
                   </ul>
                 </li>
               </ul>

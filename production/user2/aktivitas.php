@@ -121,7 +121,7 @@ else
                     <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i>Point <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
@@ -130,7 +130,7 @@ else
                   <ul class="nav child_menu">
                     <li><a href="edit_username2.php">Ubah Username</a></li>
                     <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_password2.php">Ubah Foto</a></li>
+                    <li><a href="edit_foto.php">Ubah Foto</a></li>
                   </ul>
                 </li>
               </ul>
@@ -181,35 +181,8 @@ else
       <!-- page content -->
       <div class="right_col" role="main">
         <!-- bookmark -->
-        <div class="col-md-3 col-sm-3 col-xs-4">
-          <div class="x_panel tile">
-            <div class="x_title">
-              <h2><b>Profile</b></h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <div class="profile_img">
-                <div id="crop-avatar">
-                  <!-- Current avatar -->
-                  <img class="img-responsive avatar-view" src="profile_pictures/<?php 
-                  if ($row->size == 0) {
-                    echo 'default.jpg';
-                  } else {
-                  echo $row->foto;
-                  }
-                  ?>" alt="profile_pictures/default.jpg" title="Change the avatar">
-                </div>
-              </div>
-              <div class="ln_solid"></div>
-              <h4><?php echo $row->nama; ?> </h4>
-              <p><?php echo $row->NIP ?> </p>
-              <p><?php echo $row->unit ?> </p>
-              <p><?php echo $totalpoin ?> pts </p>
-
-            </div>
-          </div>
-        </div>
-        <div class="col-md-9 col-sm-9 col-xs-8">
+        
+        <div class="col-md-12 col-sm-12 col-xs-12">
           <?php
 
           $query5 = "SELECT * FROM aktivitas WHERE aktivitas.default2=1";
@@ -222,11 +195,29 @@ else
           $id_akt=0;
           while ($row5 = $result5->fetch_object()) {
             $id_akt = $row5->id_aktivitas;
+
+            $qq = "SELECT sum(b.poin*a.freq) sump FROM aktivitas_employee a JOIN subaktivitas b ON a.id_subaktivitas=b.id_subaktivitas and a.id_user=113 and b.default2=1 and b.id_aktivitas = '$row5->id_aktivitas'";
+            $rsq = $db->query($qq);
+            if (!$rsq)
+            {
+              die("could not query the database: <br />".$db->error);
+            }
             ?>
 
             <div class="x_panel tile">
               <div class="x_title">
-                <h2><b><?php echo $row5->nama_aktivitas ?></b></h2>
+                <h2><b><?php echo $row5->nama_aktivitas."&nbsp" ?></b></h2><span class="badge bg-green" style="color:white;">
+                  <?php
+                  while ($rwq = $rsq->fetch_object()) {
+                    if (isset($rwq->sump)) {
+                      echo $rwq->sump;
+                    } else {
+                      echo 0;
+                    }
+                  }
+                  ?>
+                  </span>
+                
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -239,6 +230,9 @@ else
                     <tr>
                       <th style="width:600px;">
                         Nama Aktivitas
+                      </th>
+                      <th>
+                        Poin Aktivitas
                       </th>
                       <th>
                         Poin User
@@ -254,7 +248,7 @@ else
                   <tbody>
                     <?php
                     $query4 = "SELECT a.id_aktivitas, a.nama_aktivitas, a.desk_akt, b.id_subaktivitas, b.nama_subaktivitas, b.poin, b.max_freq, b.default2 FROM aktivitas a JOIN subaktivitas b WHERE a.id_aktivitas=b.id_aktivitas AND b.default2=1 AND b.id_aktivitas = '$id_akt'";
-              //execute the query
+                    //execute the query
                     $result4 = $db->query( $query4 );
                     if (!$result4)
                     {
@@ -266,42 +260,48 @@ else
                       ?>
                       <tr>
                         <td>
-                          <?php echo $row4->nama_subaktivitas; ?> <span class="badge bg-blue pull-right"> <?php echo $row4->poin; ?> </span>
+                          <?php echo $row4->nama_subaktivitas; ?>
                         </td>
                         <td>
-                          <?php 
-                          $query6 = "SELECT * FROM aktivitas_employee a WHERE a.id_user='$idid' AND a.id_subaktivitas = '$id_subakt'";
+                          <?php echo $row4->poin; ?>
+                        </td>
+                        <td>
+                          <span class="badge bg-blue"> 
+                            <?php 
+                            $query6 = "SELECT * FROM aktivitas_employee a WHERE a.id_user='$idid' AND a.id_subaktivitas = '$id_subakt'";
                           //execute the query
-                          $result6 = $db->query( $query6 );
-                          $row6 = $result6->fetch_object();
-                          if (!$result6)
-                          {
-                            die("could not query the database: <br />".$db->error);
-                          }
-                          if (isset($row6->freq)) {
-                            $user_point = $row6->freq * $row4->poin;
-                            echo $user_point;
-                          } else {
-                            echo 0;
-                          }
+                            $result6 = $db->query( $query6 );
+                            $row6 = $result6->fetch_object();
+                            $user_point=0;
+                            if (!$result6)
+                            {
+                              die("could not query the database: <br />".$db->error);
+                            }
+                            if (isset($row6->freq)) {
+                              $user_point = $row6->freq * $row4->poin;
+                              echo $user_point;
+                            } else {
+                              echo 0;
+                            }
 
-                          
-                          ?>
+
+                            ?>
+                          </span>
                         </td>
                         <td>
                           <?php $max_pts =$row4->poin * $row4->max_freq;
-                          echo ' / '.$max_pts; ?>
+                          echo $max_pts; ?>
                         </td>
                         <td>
-                        <?php
-                        if ($user_point == $max_pts) {
-                          
-                        } else {
-                          ?>
-                          <a href="input_form.php?id=<?php echo $id_subakt?>"><button class="btn btn-xs">Input</button></a>
                           <?php
-                        }
-                        ?>
+                          if ($user_point == $max_pts) {
+
+                          } else {
+                            ?>
+                            <a href="input_form.php?id=<?php echo $id_subakt?>"><button class="btn btn-xs">Input</button></a>
+                            <?php
+                          }
+                          ?>
                           
                         </td>
                       </tr>

@@ -74,13 +74,29 @@ else
     die("could not query the database: <br />".$db->error);
   }
 
+  $q1 = "SELECT * FROM view_rank";
+        //execute the query
+  $rss = $db->query( $q1 );
+  // echo $row->username;
+  if (!$rss)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+  $rank = 0;
+  while ($rrw = $rss->fetch_object()) {
+    $rank = $rank + 1;
+    if ($rrw->id_user == $idid) {
+      $rankstr = strval($rank);
+      break;
+    }
+  }
 
   $query3 = "SELECT * FROM aktivitas_employee a JOIN subaktivitas b WHERE a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid' and b.default2=1";
         //execute the query
   $result3 = $db->query( $query3 );
   
   // echo $row->username;
-  if (!$result)
+  if (!$result3)
   {
     die("could not query the database: <br />".$db->error);
   }
@@ -95,7 +111,17 @@ else
     $poinakt = $freq * $poin;
     $totalpoin = $totalpoin + $poinakt;
   }
-  
+
+  $q = "SELECT * FROM subaktivitas WHERE default2=1";
+  $rsc = $db->query($q);
+  if (!$rsc)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+  $poinmax = 0;
+  while ($r = $rsc->fetch_object()) {
+    $poinmax = $poinmax + $r->poin * $r->max_freq;
+  }
   ?>
 
   <div class="container body">
@@ -120,7 +146,7 @@ else
                     <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
@@ -129,7 +155,7 @@ else
                   <ul class="nav child_menu">
                     <li><a href="edit_username2.php">Ubah Username</a></li>
                     <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_password2.php">Ubah Foto</a></li>
+                    <li><a href="edit_foto.php">Ubah Foto</a></li>
                   </ul>
                 </li>
               </ul>
@@ -180,108 +206,201 @@ else
       <!-- page content -->
       <div class="right_col" role="main">
         <!-- bookmark -->
-        <div class="col-md-3 col-sm-3 col-xs-3">
-          <div class="x_panel tile">
-            <div class="x_title">
-              <h2><b>Profile</b></h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <div class="profile_img">
-                <div id="crop-avatar">
-                  <!-- Current avatar -->
-                  <img class="img-responsive avatar-view" src="profile_pictures/<?php 
-                  if ($row->size == 0) {
-                    echo 'default.jpg';
+        <div class="row">
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <div class="x_panel tile" style="height: 260px;">
+              <div class="x_title">
+                <h2><b>Profil</b></h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <div class="profile_img">
+                    <div id="crop-avatar">
+                      <!-- Current avatar -->
+                      <img class="img-responsive avatar-view" src="profile_pictures/<?php 
+                      if ($row->size == 0) {
+                        echo 'default.jpg';
+                      } else {
+                        echo $row->foto;
+                      }
+                      ?>" alt="profile_pictures/default.jpg" title="Change the avatar">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <h3 style="font-size:150%;"><?php echo $row->nama; ?> </h3>
+                  <p style="font-size:130%;"><?php echo $row->NIP ?> </p>
+                  <p><?php echo $row->unit ?> </p>
+                  <p style="font-size:150%;"><span class="label label-primary" style="width:100%; display: inline-block;""><?php echo $totalpoin; ?> pts</span></p>
+                  <p style="font-size:150%;"><span class="label label-success" style="width:100%; display: inline-block;"><?php echo $rank; ?>
+                    <?php
+                    if (strpos($rankstr, '1') !== false) {
+                      if (strpos($rankstr, '11') !== false) {
+                        echo "th";
+                      } else {
+                        echo "st"; 
+                      }
+                    } else if (strpos($rankstr, '2') !== false) {
+                      if (strpos($rankstr, '12') !== false) {
+                        echo "th";
+                      } else {
+                        echo "nd"; 
+                      }
+                    } else if (strpos($rankstr, '3') !== false) {
+                      if (strpos($rankstr, '13') !== false) {
+                        echo "th";
+                      } else {
+                        echo "rd"; 
+                      }
+                    } else {
+                      echo "th";
+                    }
+                    ?>
+                  </span></p>
+                  
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <?php
+                  $per = $totalpoin/$poinmax *100;
+                  if ($per < 51) {
+                    ?>
+                    <img src="../images/bronze.png" style="width: 70%; height: auto; margin-left: auto; margin-right: auto; display: block;">
+                    <?php
+                  } else if ($per > 50 && $per < 76) {
+                    ?>
+                    <img src="../images/silver.png" style="width: 70%; height: auto;">
+                    <?php
                   } else {
-                  echo $row->foto;
+                    ?>
+                    <img src="../images/gold.png" style="width: 70%; height: auto;">
+                    <?php
                   }
-                  ?>" alt="profile_pictures/default.jpg" title="Change the avatar">
+                  ?>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                  <?php
+                  $qqq = "SELECT count(*) a FROM rank_history where id_user=$idid group by id_user";
+                  $resq = $db->query($qqq);
+                  if (!$resq)
+                  {
+                    die("could not query the database: <br />".$db->error);
+                  }
+                  $rww = $resq->fetch_object();
+                  if (isset($rww->a)) {
+                    if ($rww->a >= 0 && $rww->a <= 2) {
+                    ?>
+                    <img src="../images/low.png" style="width: 70%; height: auto; margin-left: auto; margin-right: auto; display: block;">
+                    <?php
+                  } else if ($rww->a >= 3 && $rww->a <= 5) {
+                    ?>
+                    <img src="../images/mid.png" style="width: 70%; height: auto;">
+                    <?php
+                  } else {
+                    ?>
+                    <img src="../images/high.png" style="width: 70%; height: auto;">
+                    <?php
+                  }
+                  } else {
+                   ?>
+                    <img src="../images/low.png" style="width: 70%; height: auto; margin-left: auto; margin-right: auto; display: block;">
+                    <?php
+                  }
+                  
+                  ?>
+                  
                 </div>
               </div>
-              <div class="ln_solid"></div>
-              <h4><?php echo $row->nama; ?> </h4>
-              <p><?php echo $row->NIP ?> </p>
-              <p><?php echo $row->unit ?> </p>
-              <p><?php echo $totalpoin ?> pts </p>
-
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="x_panel tile" style="height: 260px;">
+              <div class="x_title">
+                <h2><b>Akumulasi Poin</b></h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                </div>
+                <div class="col-md-10 col-sm-10 col-xs-12">
+                  <span class="chart" data-percent="<?php echo $totalpoin/$poinmax*100; ?>">
+                    <span class="percent"><?php echo $totalpoin/$poinmax; ?></span>
+                    <canvas height="110" width="110"></canvas>
+                  </span>
+                  <p><b><span class="badge bg-blue"><?php echo $totalpoin ?> </span> / <?php echo $poinmax ?></b></p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="col-md-9 col-sm-9 col-xs-9">
-          <div class="x_panel tile">
-            <div class="x_title">
-              <h2><b>Profile</b></h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <!-- easy -->
-              <?php
-              $query7 = "SELECT *, sum(b.max_freq*b.poin) sumtot FROM aktivitas a join subaktivitas b WHERE a.id_aktivitas = b.id_aktivitas and b.default2 = 1 group by a.id_aktivitas";
-              //execute the query
-              $result7 = $db->query( $query7 );
 
-              // echo $row->username;
-              if (!$result7)
-              {
-                die("could not query the database: <br />".$db->error);
-              }
-              $id_akt=0;
-              $max_poin;
-              $nama;
-              $max_poin_kum = 0;
-              while ($row7 = $result7->fetch_object()) {
-                $id_akt = $row7->id_aktivitas;
-                $max_poin[$id_akt] = $row7->sumtot;
-                $nama[$id_akt] = $row7->nama_aktivitas;
-                $max_poin_kum = $max_poin_kum + $max_poin[$id_akt];
-              }
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile">
+              <div class="x_title">
+                <h2><b>Perolehan Poin</b></h2>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <div class="col-md-1 col-sm-1 col-xs-12">
 
-              $query6 = "SELECT *, sum(a.freq*b.poin) sumtot FROM subaktivitas b LEFT join (SELECT * FROM aktivitas_employee c where c.id_user='$idid') a ON a.id_subaktivitas = b.id_subaktivitas and b.default2 = 1 group by id_aktivitas";
-              //execute the query
-              $result6 = $db->query( $query6 );
-
-              // echo $row->username;
-              if (!$result6)
-              {
-                die("could not query the database: <br />".$db->error);
-              }
-              $id_tak=0;
-              $poinkat;
-              $poinkum = 0;
-              while ($row6 = $result6->fetch_object()) {
-                $id_akt = $row6->id_aktivitas;
-                $poinkat[$id_akt] = 0;
-                if ($row6->sumtot == null) {
-                  $poinkat[$id_akt] = 0;
-                } else {
-                $poinkat[$id_akt] = $row6->sumtot;
-                }
-                $poinkum= $poinkum + $poinkat[$id_akt];
-                ?>
-                <div class="col-sm-3 col-md-3 col-xs-4">
-                  <span class="chart" data-percent="<?php echo $poinkat[$id_akt]/$max_poin[$id_akt]*100; ?>">
-                    <span class="percent"><?php echo $poinkat[$id_akt]/$max_poin[$id_akt]*100; ?></span>
-                    <canvas height="110" width="110"></canvas>
-                  </span>
-                  <p><h3><?php echo $nama[$id_akt] ?></h3></p>
-                  <p><b><?php echo $poinkat[$id_akt] ?> / <?php echo $max_poin[$id_akt] ?></b></p>
                 </div>
+                <!-- easy -->
                 <?php
-              }
-              ?>
-              
-                <div class="col-sm-3 col-md-3 col-xs-4">
-                  <span class="chart" data-percent="<?php echo $poinkum/$max_poin_kum*100; ?>">
-                    <span class="percent"><?php echo $poinkum/$max_poin_kum; ?></span>
-                    <canvas height="110" width="110"></canvas>
-                  </span>
-                  <p><h3>Total Kumulatif Poin</h3></p>
-                  <p><b><?php echo $poinkum ?> / <?php echo $max_poin_kum ?></b></p>
-                </div>
-              
+                $query7 = "SELECT *, sum(b.max_freq*b.poin) sumtot FROM aktivitas a join subaktivitas b WHERE a.id_aktivitas = b.id_aktivitas and b.default2 = 1 group by a.id_aktivitas";
+              //execute the query
+                $result7 = $db->query( $query7 );
 
+              // echo $row->username;
+                if (!$result7)
+                {
+                  die("could not query the database: <br />".$db->error);
+                }
+                $id_akt=0;
+                $max_poin;
+                $nama;
+                $max_poin_kum = 0;
+                while ($row7 = $result7->fetch_object()) {
+                  $id_akt = $row7->id_aktivitas;
+                  $max_poin[$id_akt] = $row7->sumtot;
+                  $nama[$id_akt] = $row7->nama_aktivitas;
+                  $max_poin_kum = $max_poin_kum + $max_poin[$id_akt];
+                }
+
+                $query6 = "SELECT *, sum(a.freq*b.poin) sumtot FROM subaktivitas b LEFT join (SELECT * FROM aktivitas_employee c where c.id_user='$idid') a ON a.id_subaktivitas = b.id_subaktivitas and b.default2 = 1 group by id_aktivitas";
+              //execute the query
+                $result6 = $db->query( $query6 );
+
+              // echo $row->username;
+                if (!$result6)
+                {
+                  die("could not query the database: <br />".$db->error);
+                }
+                $id_tak=0;
+                $poinkat;
+                $poinkum = 0;
+                while ($row6 = $result6->fetch_object()) {
+                  $id_akt = $row6->id_aktivitas;
+                  $poinkat[$id_akt] = 0;
+                  if ($row6->sumtot == null) {
+                    $poinkat[$id_akt] = 0;
+                  } else {
+                    $poinkat[$id_akt] = $row6->sumtot;
+                  }
+                  $poinkum= $poinkum + $poinkat[$id_akt];
+                  ?>
+                  <div class="col-sm-2 col-md-2 col-xs-12">
+                    <span class="chart" data-percent="<?php echo $poinkat[$id_akt]/$max_poin[$id_akt]*100; ?>">
+                      <span class="percent"><?php echo $poinkat[$id_akt]/$max_poin[$id_akt]*100; ?></span>
+                      <canvas height="110" width="110"></canvas>
+                    </span>
+                    <p><h3 style="font-size:150%;"><?php echo $nama[$id_akt] ?></h3></p>
+                    <p><b><span class="badge bg-blue"><?php echo $poinkat[$id_akt] ?></span> / <?php echo $max_poin[$id_akt] ?></b></p>
+                  </div>
+                  <?php
+                }
+                ?>
+              </div>
             </div>
           </div>
         </div>
@@ -356,10 +475,10 @@ else
       easing: 'easeOutElastic',
       delay: 3000,
       barColor: '#5CCE8F',
-      trackColor: '#fff',
+      trackColor: '#DFDFDF',
       scaleColor: false,
-      lineWidth: 20,
-      trackWidth: 16,
+      lineWidth: 30,
+      trackWidth: 30,
       lineCap: 'butt',
       onStep: function(from, to, percent) {
         $(this.el).find('.percent').text(Math.round(percent));

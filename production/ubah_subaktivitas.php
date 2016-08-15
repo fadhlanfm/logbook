@@ -4,15 +4,15 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 { 
 
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-  header ('Location: ../../page_403.php');
+  header ('Location: ../page_403.php');
   exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-  header ('Location: ../../page_403.php');
+  header ('Location: ../page_403.php');
   exit;
 }
 else
 {
-  header ('Location: ../../page_4033.php');
+  header ('Location: ../page_4033.php');
   exit;
 
 }
@@ -21,15 +21,13 @@ else
 <html lang="en">
 <head>
   <link rel="icon" href="../assets/gi.ico" />
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Program Corporate Culture Garuda Indonesia</title>
+  <title>Ubah Aktivitas</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -44,48 +42,44 @@ else
   <!-- JQVMap -->
   <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
-  <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
-
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
-  <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
-  <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
   <!-- QUERIES -->
   <?php
-  include_once('../connect_db.php');
-  $num_rec_per_page=10;
-  if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
-  $start_from = ($page-1) * $num_rec_per_page; 
-  $query = "SELECT b.id_aktivitas, b.nama_aktivitas, b.desk_akt, a.id_subaktivitas, a.nama_subaktivitas, a.poin, a.max_freq, a.default2 FROM subaktivitas a JOIN aktivitas b ON b.id_aktivitas=a.id_aktivitas order by id_subaktivitas LIMIT $start_from, $num_rec_per_page";
-  //execute the query
-  $result = $db->query( $query );
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $coba = $_SESSION['id'];
   include_once('Connection/dbconn.php');
+
+  $coba = $_SESSION['id'];
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
+        //execute the query
   $result2 = $db->query( $query2 );
   if (!$result2)
   {
     die("could not query the database: <br />".$db->error);
   }
   $row2 = $result2->fetch_object();
+  $unit2 = $row2->unit;
+
+  $id = $_GET['id'];
+  $query4 = "SELECT b.id_aktivitas, b.nama_aktivitas, b.desk_akt, a.id_subaktivitas, a.nama_subaktivitas, a.poin, a.max_freq, a.default2 FROM subaktivitas a JOIN aktivitas b ON b.id_aktivitas=a.id_aktivitas WHERE a.id_subaktivitas = '$id'";
+  $result4 = $db->query($query4);
+  if(!$result4)
+  {
+    die("Could not query the database: <br />". $db->error);
+  }
+  $row4=$result4->fetch_object();
+
   ?>
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.php" class="site_title"><span>Garuda Indonesia</span></a>
+            <a href="index.php" class="site_title"> <span>Garuda Indonesia</span></a>
           </div>
-          <h5 style="text-indent:12px;color:white;">Admin Page</h5>
 
           <div class="clearfix"></div>
 
@@ -165,10 +159,9 @@ else
       <ul class="nav navbar-nav navbar-right">
         <li class="">
           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+            <img src="../images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
             <span class=" fa fa-angle-down"></span>
           </a>
-
           <ul class="dropdown-menu dropdown-usermenu pull-right">
             <li><a href="javascript:;"> Profile</a></li>
             <li>
@@ -178,72 +171,7 @@ else
               </a>
             </li>
             <li><a href="javascript:;">Help</a></li>
-            <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-          </ul>
-        </li>
-
-        <li role="presentation" class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-envelope-o"></i>
-            <span class="badge bg-green">6</span>
-          </a>
-          <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <div class="text-center">
-                <a>
-                  <strong>See All Alerts</strong>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-              </div>
-            </li>
+            <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
           </ul>
         </li>
 
@@ -255,114 +183,33 @@ else
 
 <!-- page content -->
 <div class="right_col" role="main">
-  <div class="x_panel">
-    <div class="x_title">
-      <h2>Aktivitas</h2>
 
-      <div class="clearfix">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel tile">
+      <div class="x_title">
+        <h2>Ubah Aktivitas</h2>
+
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <!-- insert content here -->
+        <form method="POST" action="post_ubah_subaktivitas.php">
+          <label for="id_sub">Unique ID : </label>
+          <input class="form-control" type="text" readonly id="id_sub" name="id_sub" value="<?php echo''.$row4->id_subaktivitas.''; ?>"></input><br>
+          <label for="nama_sub">Nama Aktivitas : </label>
+          <input  class="form-control"type="text" id="nama_sub" name="nama_sub" value="<?php echo''.$row4->nama_subaktivitas.''; ?>"></input>
+          <br>
+          <label for="id_akt">Grup Aktivitas : </label>
+          <input class="form-control" type="text" id="id_akt" name="id_akt" placeholder="new username" value="<?php echo $row4->id_aktivitas; ?>"></input><br>
+          <label for="poin">Poin : </label>
+          <input class="form-control" type="text" id="poin" placeholder="Poin" name="poin" value="<?php echo $row4->poin; ?>"></input><br>
+          <label for="freq">Frekuensi Maksimal : </label>
+          <input class="form-control" type="text" id="freq" placeholder="Frekuensi Maksimal" name="freq" value="<?php echo $row4->max_freq; ?>"></input><br>
+          <input class="btn btn-primary" type="submit" value="Submit"></input>
+        </form>
       </div>
     </div>
-    <div class="x_content">
-      <!-- bookmark -->
-
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>
-              ID
-            </th>
-            <th>
-              Aktivitas
-            </th>
-            <th>
-              Kelompok
-            </th>
-            <th>
-              Poin
-            </th>
-            <th>
-              Frekuensi Maks
-            </th>
-            <th>
-              Ubah
-            </th>
-            <th>
-              Default
-            </th>
-          </tr>
-
-          <?php
-          $i=1;
-          $defa=0;
-          while ($row = $result->fetch_object())
-          {
-            if ($row->default2 == 1) {
-              $defa=1;
-            }
-            ?>
-            <tr>
-              <td>
-                <?php echo $row->id_subaktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->nama_subaktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->nama_aktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->poin ?>
-              </td>
-              <td>
-                <?php echo $row->max_freq ?>
-              </td>
-              <td>
-                <a href="ubah_subaktivitas.php?id=<?php echo $row->id_subaktivitas ?>"><button class="btn btn-primary btn-xs">
-                  Ubah
-                </button></a>
-              </td>
-              <td style="width: 8%;">
-                <div class="btn-group">
-                  <?php
-                  if ($defa == 1) {
-                    ?>
-                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-check"></i> </button>
-                    <button class="btn btn-default btn-xs" type="button"><a href="acc_undefault.php?id=<?php echo $row->id_subaktivitas ?>"><i class="fa fa-times"></i></a></button>
-                    <?php
-                  } else if ($defa == 0) {
-                    ?>
-                    <button class="btn btn-default btn-xs" type="button"><a href="acc_default.php?id=<?php echo $row->id_subaktivitas ?>"><i class="fa fa-check"></i></a></button>
-                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-times"></i></button>
-                    <?php
-                  }
-                  ?>
-                </div>
-              </td>
-
-            </tr>
-            <?php
-            $i++;
-            $defa='';
-          }
-
-          ?>
-        </thead>
-      </table>
-      <?php 
-      $sql = "SELECT * FROM subaktivitas"; 
-      $rs_result = $db->query($sql); //run the query
-      $total_records = $rs_result->num_rows;  //count number of records
-      $total_pages = ceil($total_records / $num_rec_per_page); 
-
-      echo "<a href='aktivitas.php?page=1'>".'|<'."</a> "; // Goto 1st page  
-
-      for ($i=1; $i<=$total_pages; $i++) { 
-      echo "<a href='aktivitas.php?page=".$i."'>".$i."</a> "; 
-      }; 
-      echo "<a href='aktivitas.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
-      ?>
-</div>
-</div>
+  </div>
 </div>
 <!-- /page content -->
 
@@ -384,29 +231,29 @@ else
 <!-- FastClick -->
 <script src="../vendors/fastclick/lib/fastclick.js"></script>
 <!-- NProgress -->
-<script src="../vendors/nprogress/nprogress.js"></script>
+<script src="../../vendors/nprogress/nprogress.js"></script>
 <!-- Chart.js -->
-<script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+<script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
 <!-- gauge.js -->
-<script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+<script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
 <!-- bootstrap-progressbar -->
-<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+<script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 <!-- iCheck -->
 <script src="../vendors/iCheck/icheck.min.js"></script>
 <!-- Skycons -->
-<script src="../vendors/skycons/skycons.js"></script>
+<script src="../../vendors/skycons/skycons.js"></script>
 <!-- Flot -->
-<script src="../vendors/Flot/jquery.flot.js"></script>
-<script src="../vendors/Flot/jquery.flot.pie.js"></script>
-<script src="../vendors/Flot/jquery.flot.time.js"></script>
-<script src="../vendors/Flot/jquery.flot.stack.js"></script>
-<script src="../vendors/Flot/jquery.flot.resize.js"></script>
+<script src="../../vendors/Flot/jquery.flot.js"></script>
+<script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+<script src="../../vendors/Flot/jquery.flot.time.js"></script>
+<script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+<script src="../../vendors/Flot/jquery.flot.resize.js"></script>
 <!-- Flot plugins -->
-<script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+<script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+<script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+<script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
 <!-- DateJS -->
-<script src="../vendors/DateJS/build/date.js"></script>
+<script src="../../vendors/DateJS/build/date.js"></script>
 <!-- JQVMap -->
 <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
 <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
@@ -418,30 +265,98 @@ else
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
 
-<!-- filterplgin -->
+<!-- Flot -->
+<script>
+  $(document).ready(function() {
+    var data1 = [
+    [gd(2012, 1, 1), <?php echo $cek1;?>],
+    [gd(2012, 2, 2), <?php echo $cek2;?>],
+    [gd(2012, 3, 3), <?php echo $cek3;?>],
+    [gd(2012, 4, 4), 65530],
+    [gd(2012, 5, 5), 43356],
+    [gd(2012, 6, 6), 54689]
+    ];
 
-<script data-config>
-  var filtersConfig = {
-    base_path: 'tablefilter/',
-    grid_layout: true,
-    grid_width: '100%',
-    rows_counter: true,
-    col_0: 'none',
-    col_7: 'none',
-    col_8: 'none',
-    col_9: 'none',
-    col_1: 'select',
-    col_widths: [
-    '50px', '80px', '140px',
-    '140px', '90px', '90px',
-    '150px', '60px', '100px'
-    ],
-  };
+    var data2 = [
+    [gd(2012, 1, 1), 10000],
+    [gd(2012, 2, 2), 30000],
+    [gd(2012, 3, 3), 50000],
+    [gd(2012, 4, 4), 35000],
+    [gd(2012, 5, 5), 20000],
+    [gd(2012, 6, 6), 60000]
+    ];
+    $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+      data1, data2
+      ], {
+        series: {
+          lines: {
+            show: false,
+            fill: true
+          },
+          splines: {
+            show: true,
+            tension: 0.4,
+            lineWidth: 1,
+            fill: 0.4
+          },
+          points: {
+            radius: 0,
+            show: true
+          },
+          shadowSize: 2
+        },
+        grid: {
+          verticalLines: true,
+          hoverable: true,
+          clickable: true,
+          tickColor: "#d5d5d5",
+          borderWidth: 1,
+          color: '#fff'
+        },
+        colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+        xaxis: {
+          tickColor: "rgba(51, 51, 51, 0.06)",
+          mode: "time",
+          tickSize: [1, "month"],
+            //tickLength: 10,
+            axisLabel: "Date",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Verdana, Arial',
+            axisLabelPadding: 10
+          },
+          yaxis: {
+            ticks: 8,
+            tickColor: "rgba(51, 51, 51, 0.06)",
+          },
+          tooltip: false
+        });
 
-  var tf = new TableFilter('table1', filtersConfig);
-  tf.init();
-
+    function gd(year, month, day) {
+      return new Date(year, month - 1, day).getTime();
+    }
+  });
 </script>
+<!-- /Flot -->
+
+<!-- JQVMap -->
+<script>
+  $(document).ready(function(){
+    $('#world-map-gdp').vectorMap({
+      map: 'world_en',
+      backgroundColor: null,
+      color: '#ffffff',
+      hoverOpacity: 0.7,
+      selectedColor: '#666666',
+      enableZoom: true,
+      showTooltip: true,
+      values: sample_data,
+      scaleColors: ['#E6F2F0', '#149B7E'],
+      normalizeFunction: 'polynomial'
+    });
+  });
+</script>
+<!-- /JQVMap -->
 
 <!-- Skycons -->
 <script>

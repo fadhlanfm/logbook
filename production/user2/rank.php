@@ -120,7 +120,7 @@ else
                     <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
@@ -129,7 +129,7 @@ else
                   <ul class="nav child_menu">
                     <li><a href="edit_username2.php">Ubah Username</a></li>
                     <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_password2.php">Ubah Foto</a></li>
+                    <li><a href="edit_foto.php">Ubah Foto</a></li>
                   </ul>
                 </li>
               </ul>
@@ -180,10 +180,11 @@ else
       <!-- page content -->
       <div class="right_col" role="main">
         <!-- bookmark -->
+        <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel tile">
             <div class="x_title">
-              <h2><b>Rank</b></h2>
+              <h2><b>Leaderboard</b></h2>
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -191,6 +192,9 @@ else
               <table class="table table-hover">
                 <thead>
                   <tr>
+                    <th>
+                      Nomor
+                    </th>
                     <th>
                       Nama
                     </th>
@@ -210,14 +214,18 @@ else
                 {
                   die("could not query the database: <br />".$db->error);
                 }
+                $i = 1;
                 while ($row6 = $result6->fetch_object()) {
                   ?>
                   <tr>
                     <td>
-                    <?php echo $row6->nama ?>
+                    <?php echo $i; $i++; ?>
                     </td>
                     <td>
-                    <?php echo $row6->sumtot ?>
+                    <?php echo $row6->nama; ?>
+                    </td>
+                    <td>
+                    <?php echo $row6->sumtot; ?>
                     </td>
                   </tr>
                   <?php
@@ -229,6 +237,7 @@ else
           </div>
         </div>
 
+      </div>
       </div>
     </div>
   </div>

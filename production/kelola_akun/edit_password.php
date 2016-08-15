@@ -157,6 +157,12 @@ else
                     <li><a href="../form_ended.php">Program telah terlaksana</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="aktivitas.php">Daftar Aktivitas</a></li>
+                    <li><a href="rank.php">Ranking Pegawai</a></li>
+                  </ul>
+                </li>
                 <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="user_management.php">Daftar User</a></li>
@@ -276,38 +282,38 @@ else
       <!-- page content -->
       <div class="right_col" role="main">
         <div class="x_panel">
-            <div class="x_title">
-              <h2>Edit Password</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
-                </li>
+          <div class="x_title">
+            <h2>Edit Password</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
+              </li>
 
-              </ul>
-              <div class="clearfix">
-              </div>
+            </ul>
+            <div class="clearfix">
             </div>
+          </div>
 
           <div class="x_content">
-          <!-- start of running program achievement -->
-          <form method="POST" action="acc_edit_password.php">
-            <label for="iduser">Unique ID : </label>
-            <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php if (isset($row->iduser)) {echo $row->iduser;} else {echo '';}?>"></input><br>
-            <label for="iduser">Old Password : </label>
-            <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->password)) {echo $row->password;} else {echo '';}?>"></input><br>
-            <label for="newpass">New Password : </label>
-            <input class="form-control" type="text" id="newpass" placeholder="newpass" name="newpass"></input><br>
-            <input class="btn btn-success" type="submit" value="Submit"></input>
-          </form>
-          <!-- end of running program achievement -->
+            <!-- start of running program achievement -->
+            <form method="POST" action="acc_edit_password.php">
+              <label for="iduser">Unique ID : </label>
+              <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php if (isset($row->iduser)) {echo $row->iduser;} else {echo '';}?>"></input><br>
+              <label for="iduser">Old Password : </label>
+              <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->password)) {echo $row->password;} else {echo '';}?>"></input><br>
+              <label for="newpass">New Password : </label>
+              <input class="form-control" type="text" id="newpass" placeholder="newpass" name="newpass"></input><br>
+              <input class="btn btn-success" type="submit" value="Submit"></input>
+            </form>
+            <!-- end of running program achievement -->
           </div>
-          </div>
-
-          
-
         </div>
+
+        
+
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- /page content -->
 

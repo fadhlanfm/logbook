@@ -118,6 +118,12 @@ else
                     <li><a href="../form_ended.php">Program telah terlaksana</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="aktivitas.php">Daftar Aktivitas</a></li>
+                    <li><a href="rank.php">Ranking Pegawai</a></li>
+                  </ul>
+                </li>
                 <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="user_management.php">Daftar User</a></li>
@@ -244,9 +250,9 @@ else
               <div class="x_title">
                 <h2>Daftar User</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                      <li><a href="create_user.php"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New User</button></a>
-                      </li>
-                    </ul>
+                  <li><a href="create_user.php"><button class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New User</button></a>
+                  </li>
+                </ul>
                 <table class="table table-striped" id="table1">
                   <thead>
                     <tr>

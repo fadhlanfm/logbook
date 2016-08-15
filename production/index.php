@@ -4,15 +4,15 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 { 
 
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-  header ('Location: ../../page_403.php');
+  header ('Location: ../page_403.php');
   exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-  header ('Location: ../../page_403.php');
+  header ('Location: ../page_403.php');
   exit;
 }
 else
 {
-  header ('Location: ../../page_4033.php');
+  header ('Location: ../page_4033.php');
   exit;
 
 }
@@ -117,9 +117,10 @@ else
           <li><a href="form_ended.php">Program telah terlaksana</a></li>
         </ul>
       </li>
-      <li><a><i class="fa fa-edit"></i> Aktivitas <span class="fa fa-chevron-down"></span></a>
+      <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="aktivitas.php">Daftar Aktivitas</a></li>
+          <li><a href="rank.php">Ranking Pegawai</a></li>
         </ul>
       </li>
       <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>

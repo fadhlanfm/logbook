@@ -157,6 +157,12 @@ else
                     <li><a href="../form_ended.php">Program telah terlaksana</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="aktivitas.php">Daftar Aktivitas</a></li>
+                    <li><a href="rank.php">Ranking Pegawai</a></li>
+                  </ul>
+                </li>
                 <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="user_management.php">Daftar User</a></li>
