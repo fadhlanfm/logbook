@@ -97,6 +97,11 @@ else
                     <li><a href="aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                  <li><a href="ca_performance.php">CA Performance</a></li>
+                  </ul>
+                </li>
                 <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="edit_username2.php">Ubah Username</a></li>

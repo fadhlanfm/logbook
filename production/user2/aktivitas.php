@@ -121,9 +121,14 @@ else
                     <li><a href="rank.php">Ranking Pegawai</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i>Point <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="aktivitas.php">Isi Aktivitas</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                  <li><a href="ca_performance.php">CA Performance</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
@@ -181,7 +186,7 @@ else
       <!-- page content -->
       <div class="right_col" role="main">
         <!-- bookmark -->
-        
+        <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <?php
 
@@ -196,7 +201,7 @@ else
           while ($row5 = $result5->fetch_object()) {
             $id_akt = $row5->id_aktivitas;
 
-            $qq = "SELECT sum(b.poin*a.freq) sump FROM aktivitas_employee a JOIN subaktivitas b ON a.id_subaktivitas=b.id_subaktivitas and a.id_user=113 and b.default2=1 and b.id_aktivitas = '$row5->id_aktivitas'";
+            $qq = "SELECT sum(b.poin*a.freq) sump FROM aktivitas_employee a JOIN subaktivitas b ON a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid' and b.default2=1 and b.id_aktivitas = '$row5->id_aktivitas'";
             $rsq = $db->query($qq);
             if (!$rsq)
             {
@@ -206,7 +211,10 @@ else
 
             <div class="x_panel tile">
               <div class="x_title">
-                <h2><b><?php echo $row5->nama_aktivitas."&nbsp" ?></b></h2><span class="badge bg-green" style="color:white;">
+              <div class="row">
+              <div class="col-md-11 col-sm-11 col-xs-11">
+                <h2><b><?php echo $row5->nama_aktivitas."&nbsp" ?></b></h2>
+                <span class="pull-right badge bg-green" style="color:white;">
                   <?php
                   while ($rwq = $rsq->fetch_object()) {
                     if (isset($rwq->sump)) {
@@ -217,11 +225,17 @@ else
                   }
                   ?>
                   </span>
-                
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </div>
+                <ul class="nav navbar-right panel_toolbox pull-right">
+                  <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
                 </ul>
+                </div>
+                <div class="row">
+                <small style="margin-left:10px;">
+                  <?php echo $row5->desk_akt."&nbsp" ?>
+                </small>
+                </div>
                 <div class="clearfix"></div>
               </div>
               <div class="x_content" >
@@ -318,6 +332,7 @@ else
           }
           ?>
         </div>
+      </div>
       </div>
     </div>
   </div>
