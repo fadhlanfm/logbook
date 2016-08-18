@@ -63,7 +63,26 @@ else
   $row2 = $result2->fetch_object();
   $unit2 = $row2->unit;
 
-  
+  $q1 = "SELECT * FROM  direktorat";
+  $r1 = $db->query( $q1 );
+  if (!$r1)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+
+  $q1 = "SELECT * FROM  direktorat";
+  $r1 = $db->query( $q1 );
+  if (!$r1)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+
+  // HERE COMES THE ULTIMATE QUERY
+  $q2 = "SELECT v.kode, v.sumcar, z.jumlah, z.sumtot, z.lul FROM (SELECT f.kode, sum(g.poin*f.freq) sumcar FROM (SELECT * FROM direktorat a LEFT JOIN (SELECT * FROM user b JOIN aktivitas_employee c ON b.iduser = c.id_user where role = 0) d ON a.kode = d.dir) f LEFT JOIN subaktivitas g ON f.id_subaktivitas = g.id_subaktivitas group by f.kode) v left join (select *, (jumlah*sumtot) lul from (select kode, count(*) jumlah from direktorat a LEFT join user b ON a.kode = b.dir  where role = 0 group by a.kode) a, (SELECT sum(poin*max_freq) sumtot from subaktivitas where default2 = 1) b) z ON v.kode = z.kode";
+  $r2 = $db->query($q2);
+  if (!$r1) {
+    die("could not query the database: <br />".$db->error);
+  }
   ?>
   <div class="container body">
     <div class="main_container">
@@ -117,7 +136,48 @@ else
 
       <!-- page content -->
       <div class="right_col" role="main">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile">
+              <div class="x_title">
+                <h2>Poin Akumulasi per Direktorat</h2>
 
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <!-- insert content here -->
+                <!-- chart -->
+                <center>
+                  <?php
+                  while ($row2 = $r2->fetch_object()) {
+                    ?>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                      <span class="chart" data-percent="<?php
+
+                      $poin_dir = $row2->sumcar;
+                      if ($poin_dir == null) {
+                        $poin_dir = 0;
+                      }
+                      $poin_dir_max = $row2->lul;
+                      if ($poin_dir_max == null) {
+                        $poin_dir_max = 0;
+                      }
+                      $perc = $poin_dir / $poin_dir_max *100;
+                      echo $perc;
+                      ?>">
+                      <span class="percent">80</span>
+                      <canvas height="110" width="110"></canvas>
+                    </span>
+                    <p><b><?php echo $row2->kode ?></b></p>
+                  </div>
+                  <?php
+                }
+                ?>
+              </center>
+
+            </div>
+          </div>
+        </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel tile">
             <div class="x_title">
@@ -127,15 +187,64 @@ else
             </div>
             <div class="x_content">
               <!-- insert content here -->
-              <!-- chart -->
-              <center>
-                <span class="chart" data-percent="80">
-                  <span class="percent">80</span>
-                  <canvas height="110" width="110"></canvas>
-                </span>
-                <p><b><span class="badge bg-blue">80 </span> / 100</b></p>
-              </center>
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12"> <label>Pilih Direktorat</label></div>
+              </div>
+              <div class="row">
+                <form method="POST" action="poin_dashboard.php">
+                  <div class="col-md-11 col-sm-11 col-xs-12">
+                    <select class="form-control" name="direktorat">
+                      <option value="All">All</option>
+                      <?php 
+                      while ($row1 = $r1->fetch_object()) {
+                        ?>
+                        <option value="<?php echo $row1->kode ?>"><?php echo $row1->kode ?></option>
+                        <?php
+                      } ?>
+                    </select>
+                  </div>
+                  <div class="col-md-1 col-sm-1 col-xs-12">
+                    <button class="btn btn-primary">Pilih</button>
+                  </div>
+                </form>
+              </div>
+              <div class="ln_solid"></div>
+              <h2>
+                <!-- chart -->
+                <?php
+                if (!isset($_SESSION['direktorat'])) {
+                  $_SESSION['direktorat'] = 'All';
+                } else {
+                  if (isset($_POST['direktorat'])) {
+                    $_SESSION['direktorat'] = $_POST['direktorat'];
+                  }
 
+                }
+                $kelompok= $_SESSION['direktorat'];
+                echo $kelompok;
+                ?></h2><?php
+                if ($kelompok == 'All') {
+                  include('poin/poin_.php');
+                } else if ($kelompok == 'JKTDC') {
+                  include('poin/poin_JKTDC.php');
+                } else if ($kelompok == 'JKTDE') {
+                  include('poin/poin_JKTDE.php');
+                } else if ($kelompok == 'JKTDF') {
+                  include('poin/poin_JKTDF.php');
+                } else if ($kelompok == 'JKTDG') {
+                  include('poin/poin_JKTDG.php');
+                } else if ($kelompok == 'JKTDI') {
+                  include('poin/poin_JKTDI.php');
+                } else if ($kelompok == 'JKTDN') {
+                  include('poin/poin_JKTDN.php');
+                } else if ($kelompok == 'JKTDO') {
+                  include('poin/poin_JKTDO.php');
+                } else if ($kelompok == 'JKTDZ') {
+                  include('poin/poin_JKTDZ.php');
+                }
+                ?>
+
+              </div>
             </div>
           </div>
         </div>
@@ -191,7 +300,7 @@ else
   <script src="js/moment/moment.min.js"></script>
   <script src="js/datepicker/daterangepicker.js"></script>
   <!-- easypiechart -->
-  <script src="../../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+  <script src="../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
 
   <!-- Custom Theme Scripts -->
   <script src="../build/js/custom.min.js"></script>

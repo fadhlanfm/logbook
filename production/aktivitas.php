@@ -238,7 +238,7 @@ else
         
       }
       $kelompok= $_SESSION['kelompok'];
-      $queryy = "SELECT* from aktivitas where id_aktivitas=$kelompok";
+      $queryy = "SELECT * from aktivitas where id_aktivitas=$kelompok";
       //execute the query
       $resultt = $db->query( $queryy );
       if (!$resultt)
