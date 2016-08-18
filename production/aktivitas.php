@@ -47,7 +47,7 @@ else
   <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.css" rel="stylesheet">
   <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
   <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
@@ -57,17 +57,7 @@ else
   <!-- QUERIES -->
   <?php
   include_once('../connect_db.php');
-  $num_rec_per_page=10;
-  if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
-  $start_from = ($page-1) * $num_rec_per_page; 
-  $query = "SELECT b.id_aktivitas, b.nama_aktivitas, b.desk_akt, a.id_subaktivitas, a.nama_subaktivitas, a.poin, a.max_freq, a.default2 FROM subaktivitas a JOIN aktivitas b ON b.id_aktivitas=a.id_aktivitas order by id_subaktivitas LIMIT $start_from, $num_rec_per_page";
-  //execute the query
-  $result = $db->query( $query );
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  
+    
   $coba = $_SESSION['id'];
   include_once('Connection/dbconn.php');
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
@@ -78,6 +68,10 @@ else
     die("could not query the database: <br />".$db->error);
   }
   $row2 = $result2->fetch_object();
+
+  $num_rec_per_page=10;
+  if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
+  $start_from = ($page-1) * $num_rec_per_page; 
   ?>
   <div class="container body">
     <div class="main_container">
@@ -211,103 +205,65 @@ else
       </div>
     </div>
     <div class="x_content">
+      <!-- opsi -->
+      <form method="POST" action="aktivitas.php">
+        <label>
+          Kelompok
+        </label>
+        <select class="form-control" name="kelompok">
+          <option value="all">All</option>
+          <?php
+          $qqq = "select * from aktivitas";
+          $resw = $db->query($qqq);
+          while ( $roww = $resw->fetch_object()) {         
+            ?>
+            <option value="<?php echo $roww->id_aktivitas ?>"><?php echo $roww->nama_aktivitas ?></option>
+            <?php
+          }
+          ?>
+        </select> <br>
+        <button class="btn btn-primary btn-xs"> Tampilkan </button>
+      </form>
+      <div class="ln_solid"></div>
+
       <!-- bookmark -->
 
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>
-              ID
-            </th>
-            <th>
-              Aktivitas
-            </th>
-            <th>
-              Kelompok
-            </th>
-            <th>
-              Poin
-            </th>
-            <th>
-              Frekuensi Maks
-            </th>
-            <th>
-              Ubah
-            </th>
-            <th>
-              Default
-            </th>
-          </tr>
+      <?php
+      if (!isset($_SESSION['kelompok'])) {
+        $_SESSION['kelompok'] = 'all';
+      } else {
+        if (isset($_POST['kelompok'])) {
+          $_SESSION['kelompok'] = $_POST['kelompok'];
+        }
+        
+      }
+      $kelompok= $_SESSION['kelompok'];
+      $queryy = "SELECT* from aktivitas where id_aktivitas=$kelompok";
+      //execute the query
+      $resultt = $db->query( $queryy );
+      if (!$resultt)
+      {
+        echo "<p><h2><b>ALL</b></h2></p>";
+      } else {
+        $rwr=$resultt->fetch_object();
+        echo "<p><h2><b>".$rwr->nama_aktivitas."</b></h2></p>";
+      }
 
-          <?php
-          $i=1;
-          $defa=0;
-          while ($row = $result->fetch_object())
-          {
-            if ($row->default2 == 1) {
-              $defa=1;
-            }
-            ?>
-            <tr>
-              <td>
-                <?php echo $row->id_subaktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->nama_subaktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->nama_aktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->poin ?>
-              </td>
-              <td>
-                <?php echo $row->max_freq ?>
-              </td>
-              <td>
-                <a href="ubah_subaktivitas.php?id=<?php echo $row->id_subaktivitas ?>"><button class="btn btn-primary btn-xs">
-                  Ubah
-                </button></a>
-              </td>
-              <td style="width: 8%;">
-                <div class="btn-group">
-                  <?php
-                  if ($defa == 1) {
-                    ?>
-                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-check"></i> </button>
-                    <button class="btn btn-default btn-xs" type="button"><a href="acc_undefault.php?id=<?php echo $row->id_subaktivitas ?>"><i class="fa fa-times"></i></a></button>
-                    <?php
-                  } else if ($defa == 0) {
-                    ?>
-                    <button class="btn btn-default btn-xs" type="button"><a href="acc_default.php?id=<?php echo $row->id_subaktivitas ?>"><i class="fa fa-check"></i></a></button>
-                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-times"></i></button>
-                    <?php
-                  }
-                  ?>
-                </div>
-              </td>
+      if ($_SESSION['kelompok']=='all') {
+        include('aktivitas_all.php');
+      } else if ($_SESSION['kelompok']==1) {
+        include('aktivitas_1.php');
+      } else if ($_SESSION['kelompok']==2) {
+        include('aktivitas_2.php');
+      } else if ($_SESSION['kelompok']==3) {
+        include('aktivitas_3.php');
+      } else if ($_SESSION['kelompok']==4) {
+        include('aktivitas_4.php');
+      } else if ($_SESSION['kelompok']==5) {
+        include('aktivitas_5.php');
+      }
+      
 
-            </tr>
-            <?php
-            $i++;
-            $defa='';
-          }
-
-          ?>
-        </thead>
-      </table>
-      <?php 
-      $sql = "SELECT * FROM subaktivitas"; 
-      $rs_result = $db->query($sql); //run the query
-      $total_records = $rs_result->num_rows;  //count number of records
-      $total_pages = ceil($total_records / $num_rec_per_page); 
-
-      echo "<a href='aktivitas.php?page=1'>".'|<'."</a> "; // Goto 1st page  
-
-      for ($i=1; $i<=$total_pages; $i++) { 
-        echo "<a href='aktivitas.php?page=".$i."'>".$i."</a> "; 
-      }; 
-      echo "<a href='aktivitas.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
       ?>
     </div>
   </div>
@@ -364,8 +320,7 @@ else
 <script src="js/datepicker/daterangepicker.js"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
-
+    <script src="../build/js/custom.min.js"></script>
 <!-- filterplgin -->
 
 <script data-config>

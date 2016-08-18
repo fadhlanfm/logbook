@@ -47,7 +47,7 @@ else
   <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.css" rel="stylesheet">
   <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
   <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
@@ -350,9 +350,8 @@ else
 <!-- bootstrap-daterangepicker -->
 <script src="js/moment/moment.min.js"></script>
 <script src="js/datepicker/daterangepicker.js"></script>
-
 <!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
+    <script src="../build/js/custom.min.js"></script>
 
 <!-- filterplgin -->
 

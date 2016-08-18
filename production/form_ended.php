@@ -86,418 +86,417 @@ else
           <h5 style="text-indent:12px;color:white;">Admin Page</h5>
           <div class="clearfix"></div>
 
-<?php
+          <?php
           include('sidebar.php');
-?>
+          ?>
 
-          </div>
         </div>
-
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
-                    <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  </ul>
-                </li>
-
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
-
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="x_panel">
-            <div class="x_title">
-              <h2>Logbook</h2>
-              <div class="clearfix">
-              </div>
-            </div>
-            <?php
-            $db = new mysqli($db_host,$db_username, $db_password, $db_database);
-            if ($db->connect_errno)
-            {
-              die("Could not connect to teh database: <br />".$db->connect_error);
-            }
-    //asign a query
-            $query = "SELECT * FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
-    //execute the query
-            $result = $db->query( $query );
-            if (!$result)
-            {
-              die("could not query the database: <br />".$db->error);
-            }
-            ?> 
-            <div class="x_content">
-              <table class="table table-hover" id="table1">
-                <tr>
-                  <th>Nomor</th>
-                  <th>Kode Unit</th>
-                  <th>Nama Unit</th>
-                  <th>Nama Program</th>
-                  <th>Mulai Program</th>
-                  <th>Berakhir Program</th>
-                  <th>Status</th>
-                  <th class="center">Aksi</th>
-                  <th>Ubah Status</th>      
-                </tr>
-                <?php
-                $i = 1;
-                while($row = $result->fetch_object())
-                {
-                  $status = $row->status;
-                  if($status == 0){
-                    $status = 'Belum Diverifikasi';
-                  }else{
-                    $status = 'Sudah Diverifikasi';
-                  }
-                  echo'<tr>';
-                  echo'<td>'.$i.'</td>';
-                  echo'<td>'.$row->kode_unit.'</td>';
-                  echo'<td>'.$row->nama.'</td>';
-                  echo'<td>'.$row->nama_program.'</td>';
-                  echo'<td>'.$row->start.'</td>';
-                  echo'<td>'.$row->end.'</td>';
-                  echo'<td>'.$status.'</td>';
-                  echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">Lihat</button></a>';
-                  echo'<td><a class="btn-floating" href="status_logbook.php?id='.$row->id.'"> <button class="btn btn-primary btn-xs"> <i class="material-icons" style="font-size:0.7em;">done</i></button></a>';
-                  echo'<a class="btn-floating red lighten-2" href="status1_logbook.php?id='.$row->id.'"><button class="btn btn-danger btn-xs"><i class="material-icons" style="font-size:0.7em;">clear</i></button></a></td>';
-                  echo'</tr>';
-                  $i++;
-                }
-                echo'<br> <br>';
-      // echo'Total Rows = '.$result->num_rows;
-                $result->free();
-                $db->close();
-                ?>
-              </table>
-            </div>
-          </div>
-        </div>
-        <!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Corporate Culture Information Systems - GA
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
       </div>
-    </div>
 
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="../vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="../vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="../vendors/Flot/jquery.flot.js"></script>
-    <script src="../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="../vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="js/moment/moment.min.js"></script>
-    <script src="js/datepicker/daterangepicker.js"></script>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="javascript:;"> Profile</a></li>
+                  <li>
+                    <a href="javascript:;">
+                      <span class="badge bg-red pull-right">50%</span>
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li><a href="javascript:;">Help</a></li>
+                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
 
-    <!-- filterplgin -->
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
 
-    <script data-config>
-      var filtersConfig = {
-        base_path: 'tablefilter/',
-        grid_layout: true,
-        grid_width: '100%',
-        rows_counter: true,
-        col_0: 'none',
-        col_7: 'none',
-        col_8: 'none',
-        col_9: 'none',
-        col_1: 'select',
-        col_widths: [
-        '50px', '80px', '140px',
-        '140px', '90px', '90px',
-        '150px', '60px', '80px'
-        ],
-      };4
-      var tf = new TableFilter('table1', filtersConfig);
-      tf.init();
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
 
-    </script>
-
-    <!-- Skycons -->
-    <script>
-      $(document).ready(function() {
-        var icons = new Skycons({
-          "color": "#73879C"
-        }),
-        list = [
-        "clear-day", "clear-night", "partly-cloudy-day",
-        "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-        "fog"
-        ],
-        i;
-
-        for (i = list.length; i--;)
-          icons.set(list[i], list[i]);
-
-        icons.play();
-      });
-    </script>
-    <!-- /Skycons -->
-
-    <!-- Doughnut Chart -->
-    <script>
-      $(document).ready(function(){
-        var options = {
-          legend: false,
-          responsive: false
-        };
-
-        new Chart(document.getElementById("canvas1"), {
-          type: 'doughnut',
-          tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-          data: {
-            labels: [
-            "Economy Class",
-            "Business Class",
-            "First Class"
-            ],
-            datasets: [{
-              data: [3412, 768, 475],
-              backgroundColor: [
-              "#9B59B6",
-              "#26B99A",
-              "#3498DB"
-              ],
-              hoverBackgroundColor: [
-              "#B370CF",
-              "#36CAAB",
-              "#49A9EA"
-              ]
-            }]
-          },
-          options: options
-        });
-      });
-    </script>
-    <!-- /Doughnut Chart -->
-
-    <!-- bootstrap-daterangepicker -->
-    <script>
-      $(document).ready(function() {
-
-        var cb = function(start, end, label) {
-          console.log(start.toISOString(), end.toISOString(), label);
-          $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-        };
-
-        var optionSet1 = {
-          startDate: moment().subtract(29, 'days'),
-          endDate: moment(),
-          minDate: '01/01/2012',
-          maxDate: '12/31/2015',
-          dateLimit: {
-            days: 60
-          },
-          showDropdowns: true,
-          showWeekNumbers: true,
-          timePicker: false,
-          timePickerIncrement: 1,
-          timePicker12Hour: true,
-          ranges: {
-            'Today': [moment(), moment()],
-            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month': [moment().startOf('month'), moment().endOf('month')],
-            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          },
-          opens: 'left',
-          buttonClasses: ['btn btn-default'],
-          applyClass: 'btn-small btn-primary',
-          cancelClass: 'btn-small',
-          format: 'MM/DD/YYYY',
-          separator: ' to ',
-          locale: {
-            applyLabel: 'Submit',
-            cancelLabel: 'Clear',
-            fromLabel: 'From',
-            toLabel: 'To',
-            customRangeLabel: 'Custom',
-            daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-            monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            firstDay: 1
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Logbook</h2>
+            <div class="clearfix">
+            </div>
+          </div>
+          <?php
+          $db = new mysqli($db_host,$db_username, $db_password, $db_database);
+          if ($db->connect_errno)
+          {
+            die("Could not connect to teh database: <br />".$db->connect_error);
           }
-        };
-        $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-        $('#reportrange').daterangepicker(optionSet1, cb);
-        $('#reportrange').on('show.daterangepicker', function() {
-          console.log("show event fired");
-        });
-        $('#reportrange').on('hide.daterangepicker', function() {
-          console.log("hide event fired");
-        });
-        $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-          console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-        });
-        $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-          console.log("cancel event fired");
-        });
-        $('#options1').click(function() {
-          $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-        });
-        $('#options2').click(function() {
-          $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-        });
-        $('#destroy').click(function() {
-          $('#reportrange').data('daterangepicker').remove();
-        });
-      });
-    </script>
-    <!-- /bootstrap-daterangepicker -->
+    //asign a query
+          $query = "SELECT * FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
+    //execute the query
+          $result = $db->query( $query );
+          if (!$result)
+          {
+            die("could not query the database: <br />".$db->error);
+          }
+          ?> 
+          <div class="x_content">
+            <table class="table table-hover" id="table1">
+              <tr>
+                <th>Nomor</th>
+                <th>Kode Unit</th>
+                <th>Nama Unit</th>
+                <th>Nama Program</th>
+                <th>Mulai Program</th>
+                <th>Berakhir Program</th>
+                <th>Status</th>
+                <th class="center">Lihat Program</th>
+                <th>Lihat Hasil</th>      
+              </tr>
+              <?php
+              $i = 1;
+              while($row = $result->fetch_object())
+              {
+                $status = $row->status;
+                if($status == 0){
+                  $status = 'Belum Diverifikasi';
+                }else{
+                  $status = 'Sudah Diverifikasi';
+                }
+                echo'<tr>';
+                echo'<td>'.$i.'</td>';
+                echo'<td>'.$row->kode_unit.'</td>';
+                echo'<td>'.$row->nama.'</td>';
+                echo'<td>'.$row->nama_program.'</td>';
+                echo'<td>'.$row->start.'</td>';
+                echo'<td>'.$row->end.'</td>';
+                echo'<td>'.$status.'</td>';
+                echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">View</button></a>';
+                echo'<td><a class="btn-floating" href="lihat_hasil.php?id='.$row->id.'"> <button class="btn btn-primary btn-xs">View</button></a>';
+                echo'</tr>';
+                $i++;
+              }
+              echo'<br> <br>';
+      // echo'Total Rows = '.$result->num_rows;
+              $result->free();
+              $db->close();
+              ?>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- /page content -->
 
-    <!-- gauge.js -->
-    <script>
-      var opts = {
-        lines: 12,
-        angle: 0,
-        lineWidth: 0.4,
-        pointer: {
-          length: 0.75,
-          strokeWidth: 0.042,
-          color: '#1D212A'
-        },
-        limitMax: 'false',
-        colorStart: '#1ABC9C',
-        colorStop: '#1ABC9C',
-        strokeColor: '#F0F3F3',
-        generateGradient: true
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          Corporate Culture Information Systems - GA
+        </div>
+        <div class="clearfix"></div>
+      </footer>
+      <!-- /footer content -->
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="../vendors/nprogress/nprogress.js"></script>
+  <!-- Chart.js -->
+  <script src="../vendors/Chart.js/dist/Chart.min.js"></script>
+  <!-- gauge.js -->
+  <script src="../vendors/gauge.js/dist/gauge.min.js"></script>
+  <!-- bootstrap-progressbar -->
+  <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <!-- iCheck -->
+  <script src="../vendors/iCheck/icheck.min.js"></script>
+  <!-- Skycons -->
+  <script src="../vendors/skycons/skycons.js"></script>
+  <!-- Flot -->
+  <script src="../vendors/Flot/jquery.flot.js"></script>
+  <script src="../vendors/Flot/jquery.flot.pie.js"></script>
+  <script src="../vendors/Flot/jquery.flot.time.js"></script>
+  <script src="../vendors/Flot/jquery.flot.stack.js"></script>
+  <script src="../vendors/Flot/jquery.flot.resize.js"></script>
+  <!-- Flot plugins -->
+  <script src="../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+  <script src="../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+  <script src="../vendors/flot.curvedlines/curvedLines.js"></script>
+  <!-- DateJS -->
+  <script src="../vendors/DateJS/build/date.js"></script>
+  <!-- JQVMap -->
+  <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+  <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+  <!-- bootstrap-daterangepicker -->
+  <script src="js/moment/moment.min.js"></script>
+  <script src="js/datepicker/daterangepicker.js"></script>
+
+  <!-- Custom Theme Scripts -->
+  <script src="../build/js/custom.min.js"></script>
+
+  <!-- filterplgin -->
+
+  <script data-config>
+    var filtersConfig = {
+      base_path: 'tablefilter/',
+      grid_layout: true,
+      grid_width: '100%',
+      rows_counter: true,
+      col_0: 'none',
+      col_7: 'none',
+      col_8: 'none',
+      col_9: 'none',
+      col_1: 'select',
+      col_widths: [
+      '50px', '80px', '140px',
+      '140px', '90px', '90px',
+      '150px', '60px', '80px'
+      ],
+    };4
+    var tf = new TableFilter('table1', filtersConfig);
+    tf.init();
+
+  </script>
+
+  <!-- Skycons -->
+  <script>
+    $(document).ready(function() {
+      var icons = new Skycons({
+        "color": "#73879C"
+      }),
+      list = [
+      "clear-day", "clear-night", "partly-cloudy-day",
+      "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+      "fog"
+      ],
+      i;
+
+      for (i = list.length; i--;)
+        icons.set(list[i], list[i]);
+
+      icons.play();
+    });
+  </script>
+  <!-- /Skycons -->
+
+  <!-- Doughnut Chart -->
+  <script>
+    $(document).ready(function(){
+      var options = {
+        legend: false,
+        responsive: false
       };
-      var target = document.getElementById('foo'),
-      gauge = new Gauge(target).setOptions(opts);
 
-      gauge.maxValue = 6000;
-      gauge.animationSpeed = 32;
-      gauge.set(3200);
-      gauge.setTextField(document.getElementById("gauge-text"));
-    </script>
-    <!-- /gauge.js -->
+      new Chart(document.getElementById("canvas1"), {
+        type: 'doughnut',
+        tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+        data: {
+          labels: [
+          "Economy Class",
+          "Business Class",
+          "First Class"
+          ],
+          datasets: [{
+            data: [3412, 768, 475],
+            backgroundColor: [
+            "#9B59B6",
+            "#26B99A",
+            "#3498DB"
+            ],
+            hoverBackgroundColor: [
+            "#B370CF",
+            "#36CAAB",
+            "#49A9EA"
+            ]
+          }]
+        },
+        options: options
+      });
+    });
+  </script>
+  <!-- /Doughnut Chart -->
 
-    <script type="text/javascript">
+  <!-- bootstrap-daterangepicker -->
+  <script>
+    $(document).ready(function() {
+
+      var cb = function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+      };
+
+      var optionSet1 = {
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment(),
+        minDate: '01/01/2012',
+        maxDate: '12/31/2015',
+        dateLimit: {
+          days: 60
+        },
+        showDropdowns: true,
+        showWeekNumbers: true,
+        timePicker: false,
+        timePickerIncrement: 1,
+        timePicker12Hour: true,
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        opens: 'left',
+        buttonClasses: ['btn btn-default'],
+        applyClass: 'btn-small btn-primary',
+        cancelClass: 'btn-small',
+        format: 'MM/DD/YYYY',
+        separator: ' to ',
+        locale: {
+          applyLabel: 'Submit',
+          cancelLabel: 'Clear',
+          fromLabel: 'From',
+          toLabel: 'To',
+          customRangeLabel: 'Custom',
+          daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          firstDay: 1
+        }
+      };
+      $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+      $('#reportrange').daterangepicker(optionSet1, cb);
+      $('#reportrange').on('show.daterangepicker', function() {
+        console.log("show event fired");
+      });
+      $('#reportrange').on('hide.daterangepicker', function() {
+        console.log("hide event fired");
+      });
+      $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+        console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+      });
+      $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+        console.log("cancel event fired");
+      });
+      $('#options1').click(function() {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+      });
+      $('#options2').click(function() {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+      });
+      $('#destroy').click(function() {
+        $('#reportrange').data('daterangepicker').remove();
+      });
+    });
+  </script>
+  <!-- /bootstrap-daterangepicker -->
+
+  <!-- gauge.js -->
+  <script>
+    var opts = {
+      lines: 12,
+      angle: 0,
+      lineWidth: 0.4,
+      pointer: {
+        length: 0.75,
+        strokeWidth: 0.042,
+        color: '#1D212A'
+      },
+      limitMax: 'false',
+      colorStart: '#1ABC9C',
+      colorStop: '#1ABC9C',
+      strokeColor: '#F0F3F3',
+      generateGradient: true
+    };
+    var target = document.getElementById('foo'),
+    gauge = new Gauge(target).setOptions(opts);
+
+    gauge.maxValue = 6000;
+    gauge.animationSpeed = 32;
+    gauge.set(3200);
+    gauge.setTextField(document.getElementById("gauge-text"));
+  </script>
+  <!-- /gauge.js -->
+
+  <script type="text/javascript">
     //set timezone
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
     //buat object date berdasarkan waktu di server

@@ -156,6 +156,8 @@ include('header.php');
       <script src="../vendors/nprogress/nprogress.js"></script>
       <!-- iCheck -->
       <script src="../vendors/iCheck/icheck.min.js"></script>
+      <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
 
       <!-- getGroup -->
       <script>
@@ -186,6 +188,6 @@ include('header.php');
       <!-- getButton -->
 
       <!-- Custom Theme Scripts -->
-      <script src="../build/js/custom.min.js"></script>
+      <script src="../build/js/custom.js"></script>
     </body>
     </html>

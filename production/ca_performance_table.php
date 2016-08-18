@@ -90,11 +90,13 @@ include('header.php');
 								</thead>
 								<tbody>
 									<?php 
+									$ay=1;
 									while ($check=mysql_fetch_array($sql)) {
+										$ay=$x++;
 										if ($check['status']=='unread') {
 											?>
 											<tr style="background-color: #f9f9f9; ">
-												<th scope="row" style="text-align:center; vertical-align:middle">1</th>
+												<th scope="row" style="text-align:center; vertical-align:middle"><?php echo $ay ?></th>
 												<td style=" vertical-align:middle"><span class="image"><img src="images/img.jpg" class="avatar" alt="Avatar" /></span><a href=""> </a><?php echo $check['username']; ?></td>
 												<td style=" vertical-align:middle"><a href="ca_performance_display.php?id=<?php echo $check['id_activity'] ?>"><?php echo $check['activity_detail'] ?></a></td>
 												<td style="text-align:center; vertical-align:middle"><?php echo $check['last_modified']; ?></td>
@@ -104,7 +106,7 @@ include('header.php');
 										} else {
 											?>
 											<tr style="">
-												<th scope="row" style="text-align:center; vertical-align:middle">1</th>
+												<th scope="row" style="text-align:center; vertical-align:middle"><?php echo $ay ?></th>
 												<td style=" vertical-align:middle"><span class="image"><img src="images/img.jpg" class="avatar" alt="Avatar" /></span><a href=""> </a><?php echo $check['username']; ?></td>
 												<td style=" vertical-align:middle"><a href="ca_performance_display.php?id=<?php echo $check['id_activity'] ?>"><?php echo $check['activity_detail'] ?></a></td>
 												<td style="text-align:center; vertical-align:middle"><?php echo $check['last_modified']; ?></td>

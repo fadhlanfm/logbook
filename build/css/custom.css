@@ -328,7 +328,7 @@ body .container.body .right_col {
   background: #D9DEE4; }
 
 body {
-  color: #73879C;
+  color: #323232;
   background: #2A3F54;
   font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   font-size: 13px;
@@ -1842,12 +1842,12 @@ button,
   padding: 0;
   position: fixed;
   bottom: 0;
-  right: 0;
+  margin: auto;
   background: #fff;
   border: 1px solid #D9DEE4;
-  border-right: 0;
   border-bottom: 0;
   border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   z-index: 9999;
   display: none; }
 
@@ -1855,7 +1855,8 @@ button,
   padding: 5px;
   background: #169F85;
   color: #fff;
-  border-top-left-radius: 5px; }
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
 
 .compose .compose-header .close {
   text-shadow: 0 1px 0 #ffffff;

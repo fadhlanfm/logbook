@@ -1,35 +1,68 @@
-<?php 
-$num_rec_per_page=10;
-include_once('../connect_db.php');
-if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
-$start_from = ($page-1) * $num_rec_per_page; 
-$sql = "SELECT * FROM subaktivitas LIMIT $start_from, $num_rec_per_page"; 
-$rs_result = $db->query($sql); //run the query
-?> 
-<table>
-<tr><td>id</td><td>name</td></tr>
-<?php 
-while ($row = $rs_result->fetch_object()) { 
-?> 
-            <tr>
-            <td><?php echo $row->id_subaktivitas; ?></td>
-            <td><?php echo $row->nama_subaktivitas; ?></td>            
-            </tr>
-<?php 
-}; 
-?> 
-</table>
-<?php 
-$sql = "SELECT * FROM subaktivitas"; 
-$rs_result = $db->query($sql); //run the query
-$total_records = $rs_result->num_rows;  //count number of records
-$total_pages = ceil($total_records / $num_rec_per_page); 
+<!DOCTYPE html>
+<html>
+<style type='text/css'>
+    .row {
+        align-content: center;
+    }
+    .container {
+        border: solid 0px #DFDFDF;
+        width: 800px;
+        margin: auto;
+        margin-top: 50px;
+        height: 400px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        background: #ECECEC;
+    }
+    .center {
+        position: relative;
+        top: 50%;
+        text-align: center;
+    }
+    p {
+        font-family:Verdana, sans-serif;
+        font-weight: bold;
+    }
 
-echo "<a href='coba.php?page=1'>".'|<'."</a> "; // Goto 1st page  
+    div.box {
+        box-sizing: border-box;
+        width: 38%;
+        float: left;
+        background: #EBEBEB;
 
-for ($i=1; $i<=$total_pages; $i++) { 
-            echo "<a href='coba.php?page=".$i."'>".$i."</a> "; 
-}; 
-echo "<a href='coba.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
-?>
-    
+    }
+
+    .badge{
+        float: left;
+        height: 100%;
+        width: 40%;
+        margin-left: 50px;
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+</style>
+<body style='color: #4A4A4A;'>
+    <div class='row'>
+        <div class='container'>
+            <table style='margin: auto;' cellspacing='0' width='100%' height='100%'>
+                <tr>
+                    <td width='30%' style='padding: 0 0 0 25px;'>
+                        <a href='http://tinypic.com?ref=1lzcp' target='_blank'><img src='http://i64.tinypic.com/1lzcp.jpg' border='0' alt='Image and video hosting by TinyPic'></a>
+                    </td>
+                    <td style='text-align: center;'>
+                        <p style='font-size: 250%;'>CONGRATULATION</p>
+                        <p style='font-size: 120%;'>You earned a gold medal!</p>
+                    </td>
+                </tr>
+                <tr height='10%'>
+                    <td style='background: #4A4A4A;' colspan='2'>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class='center'>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -4,17 +4,16 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 { 
 
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-  header ('Location: ../page_403.php');
+  header ('Location: ../../page_403.php');
   exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-  header ('Location: ../page_403.php');
+  header ('Location: ../../page_403.php');
   exit;
 }
 else
 {
-  header ('Location: ../page_4033.php');
+  header ('Location: ../../page_4033.php');
   exit;
-
 }
 ?>
 <!DOCTYPE html>
@@ -75,115 +74,113 @@ else
           include('sidebar.php');
           ?>
 
-
-
-</div>
-</div>
-
-<!-- top navigation -->
-<div class="top_nav hidden-print">
-  <div class="nav_menu">
-    <nav>
-      <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        </div>
       </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-            <span class=" fa fa-angle-down"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <li><a href="javascript:;"> Profile</a></li>
-            <li>
-              <a href="javascript:;">
-                <span class="badge bg-red pull-right">50%</span>
-                <span>Settings</span>
-              </a>
-            </li>
-            <li><a href="javascript:;">Help</a></li>
-            <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-          </ul>
-        </li>
+      <!-- top navigation -->
+      <div class="top_nav hidden-print">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-        <li role="presentation" class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-envelope-o"></i>
-            <span class="badge bg-green">6</span>
-          </a>
-          <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <div class="text-center">
-                <a>
-                  <strong>See All Alerts</strong>
-                  <i class="fa fa-angle-right"></i>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <span class=" fa fa-angle-down"></span>
                 </a>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li role="presentation">
-          <a href="javascript:window.print()">
-            <i class="fa fa-print"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>
-<!-- /top navigation -->
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="javascript:;"> Profile</a></li>
+                  <li>
+                    <a href="javascript:;">
+                      <span class="badge bg-red pull-right">50%</span>
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li><a href="javascript:;">Help</a></li>
+                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
 
-<?php
-include('../connect_db.php');
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <li role="presentation">
+                <a href="javascript:window.print()">
+                  <i class="fa fa-print"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+
+      <?php
+      include('../connect_db.php');
   $queryy = "SELECT kode_unit FROM logbook WHERE end >= curdate() GROUP BY kode_unit "; //yg udah submit dan belom kelar
   $queryy1 = "SELECT kode FROM unit GROUP BY kode";
   $queryy2 = "SELECT kode FROM branch GROUP BY kode";
@@ -233,18 +230,135 @@ include('../connect_db.php');
   if($tersubmit!=0){
     $value1=$running/$tersubmit;
   }
+
+  $queryx = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDZ' GROUP BY kode_unit";
+  $resultx = $db->query($queryx);
+  $exec_JKTDZ=mysqli_num_rows($resultx);
+  $queryx1 = "SELECT * FROM unit WHERE kode_dir='JKTDZ'";
+  $resultx1 = $db->query($queryx1);
+  $unit_JKTDZ=mysqli_num_rows($resultx1);
+  $queryx2 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDI' GROUP BY kode_unit";
+  $resultx2 = $db->query($queryx2);
+  $exec_JKTDI=mysqli_num_rows($resultx2);
+  $queryx3 = "SELECT * FROM unit WHERE kode_dir='JKTDI'";
+  $resultx3 = $db->query($queryx3);
+  $unit_JKTDI=mysqli_num_rows($resultx3);
+  $queryx4 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDF' GROUP BY kode_unit";
+  $resultx4 = $db->query($queryx4);
+  $exec_JKTDF=mysqli_num_rows($resultx4);
+  $queryx5 = "SELECT * FROM unit WHERE kode_dir='JKTDF'";
+  $resultx5 = $db->query($queryx5);
+  $unit_JKTDF=mysqli_num_rows($resultx5);
+  $queryx6 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDO' GROUP BY kode_unit";
+  $resultx6 = $db->query($queryx6);
+  $exec_JKTDO=mysqli_num_rows($resultx6);
+  $queryx7 = "SELECT * FROM unit WHERE kode_dir='JKTDO'";
+  $resultx7 = $db->query($queryx7);
+  $unit_JKTDO=mysqli_num_rows($resultx7);
+  $queryx8 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDE' GROUP BY kode_unit";
+  $resultx8 = $db->query($queryx8);
+  $exec_JKTDE=mysqli_num_rows($resultx8);
+  $queryx9 = "SELECT * FROM unit WHERE kode_dir='JKTDE'";
+  $resultx9 = $db->query($queryx9);
+  $unit_JKTDE=mysqli_num_rows($resultx9);
+  $queryx10 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDC' GROUP BY kode_unit";
+  $resultx10 = $db->query($queryx10);
+  $exec_JKTDC=mysqli_num_rows($resultx10);
+  $queryx11 = "SELECT * FROM unit WHERE kode_dir='JKTDC'";
+  $resultx11 = $db->query($queryx11);
+  $unit_JKTDC=mysqli_num_rows($resultx11);
+  $queryx12 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDN' GROUP BY kode_unit";
+  $resultx12 = $db->query($queryx12);
+  $exec_JKTDN=mysqli_num_rows($resultx12);
+  $queryx13 = "SELECT * FROM unit WHERE kode_dir='JKTDN'";
+  $resultx13 = $db->query($queryx13);
+  $unit_JKTDN=mysqli_num_rows($resultx13);
+  $queryx14 = "SELECT * FROM logbook WHERE start <= curdate() AND end >= curdate() AND kode_dir='JKTDG' GROUP BY kode_unit";
+  $resultx14 = $db->query($queryx14);
+  $exec_JKTDG=mysqli_num_rows($resultx14);
+  $queryx15 = "SELECT * FROM unit WHERE kode_dir='JKTDG'";
+  $resultx15 = $db->query($queryx15);
+  $unit_JKTDG=mysqli_num_rows($resultx15);
   ?>
 
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="page-title">
 
+      
+
+      <!-- CHART unit submit-->
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-14">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Discipline Report</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div id="submitted" style="height:370px;"></div>
+            </div>
+            <div class="tile-stats">
+              <div class="count" style="color: <?php if ($value>=0 && $value<0.5) {echo "#ff4500";}elseif($value>=0.5 && $value<0.75){echo "#ffcc00";}else{echo "lightgreen";}?>"><?php echo ''.$tersubmit.'/'.$total.' Unit';?></div>
+            </div>
+          </div>
+        </div>
+        <!-- CHART unit submit-->
+
+        <!-- CHART unit sedang berjalan -->
+        <div class="col-md-6 col-sm-6 col-xs-14">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Execution Report</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a>
+                    </li>
+                    <li><a href="#">Settings 2</a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <div id="running" style="height:370px;"></div>
+            </div>
+            <div class="tile-stats">
+              <div class="count" style="color: <?php if ($value1>=0 && $value1<0.5) {echo "#ff4500";}elseif($value1>=0.5 && $value1<0.75){echo "#ffcc00";}else{echo "lightgreen";}?>"><?php echo ''.$running.'/'.$tersubmit.' Unit';?></div>          
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CHART unit sedang berjalan-->
+
       <!-- top tiles -->
       <div class="row">
         <div class="col-md-12 col-sm-6 col-xs-14">
           <div class="x_panel">
             <div class="x_title">
-              <h2>Program Terlaksana</h2>
+              <h2>Execution Report per Directorate</h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -266,37 +380,69 @@ include('../connect_db.php');
             <div class="row tile_count">
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDZ.php"> JKTDZ - President & CEO</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDZ.php">'.$total_JKTDZ.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDZ/$unit_JKTDZ*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDI.php"> JKTDI - Human Capital & Corporate Affairs</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDI.php">'.$total_JKTDI.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDI/$unit_JKTDI*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDF.php"> JKTDF - Finance & Risk Management</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDF.php">'.$total_JKTDF.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDF/$unit_JKTDF*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDO.php"> JKTDO - Operations</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDO.php">'.$total_JKTDO.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDO/$unit_JKTDO*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
             </div>
             <div class="row tile_count">
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDE.php"> JKTDE - Engineering & Information Technology</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDE.php">'.$total_JKTDE.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDE/$unit_JKTDE*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDC.php"> JKTDC - Services</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDC.php">'.$total_JKTDC.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDC/$unit_JKTDC*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDN.php"> JKTDN - Commercial</a></span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDN.php">'.$total_JKTDN.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDN/$unit_JKTDN*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <span class="count_top"><i class="fa fa-check-square-o"></i><a href="ucharts_JKTDG.php"> JKTDG - Cargo</span>
-                <div class="count"><?php echo '<a href="ucharts_JKTDG.php">'.$total_JKTDG.'</a>'; ?></div>
+                <div style="text-align: center; margin-bottom: 17px">
+                  <span class="chart" data-percent="<?php echo $exec_JKTDG/$unit_JKTDG*100; ?>">
+                    <span class="percent"></span>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -305,12 +451,13 @@ include('../connect_db.php');
     </div>
     <!-- /top tiles -->
 
-    <!-- CHART unit submit-->
+    <!-- TABEL -->
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-14">
+      <!-- Discipline Report -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Unit yang sudah submit</h2>
+            <h2>Discipline Report</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -329,21 +476,56 @@ include('../connect_db.php');
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <div id="submitted" style="height:370px;"></div>
-          </div>
-          <div class="tile-stats">
-            <div class="count" style="color: <?php if ($value>=0 && $value<0.5) {echo "#ff4500";}elseif($value>=0.5 && $value<0.75){echo "#ffcc00";}else{echo "lightgreen";}?>"><?php echo ''.$tersubmit.'/'.$total.' Unit';?></div>
-            <h3>Sudah submit</h3>
-          </div>
-        </div>
-      </div>
-      <!-- CHART unit submit-->
 
-      <!-- CHART unit sedang berjalan -->
-      <div class="col-md-6 col-sm-6 col-xs-14">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Unit</th>
+                  <th width="3%">Belum</th>
+                  <th width="3%">Sudah</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                $quero = "SELECT * FROM direktorat";
+                $resulto = $db->query( $quero );
+                while ($rowo = $resulto->fetch_object()) {
+                  echo '<tr>';
+                  echo '<th scope="row" colspan="3" bgcolor="black">'.$rowo->kode.' - '.$rowo->nama.'</th>';
+                  $cek_kodedir=$rowo->kode;
+                  $quero1 = "SELECT * FROM unit WHERE kode_dir='$cek_kodedir'";
+                  $resulto1 = $db->query( $quero1 );
+                  while ($rowo1 = $resulto1->fetch_object()) {
+                    echo '<tr>';
+                    echo '<td>'.$rowo1->kode.' - '.$rowo1->nama.'</td>';
+                    $cek_kodeunit=$rowo1->kode;
+                    $quero2 = "SELECT id FROM logbook WHERE kode_unit='$cek_kodeunit'";
+                    $resulto2 = $db->query( $quero2 );
+                    $rowo2 = $resulto2->fetch_object();
+                    if($rowo2=='' || empty($rowo2) || !isset($rowo2) || is_null($rowo2)){
+                      echo '<td bgcolor="red"></td>';
+                      echo '<td></td>';
+                      echo '</tr>';
+                    }else{
+                      echo '<td></td>';
+                      echo '<td bgcolor="green"></td>';
+                      echo '</tr>';
+                    }
+                  }
+                }
+                ?>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <!-- Discipline Report -->
+      <!-- execution report -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Unit dalam progress</h2>
+            <h2>Execution Report</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -362,20 +544,72 @@ include('../connect_db.php');
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <div id="running" style="height:370px;"></div>
-          </div>
-          <div class="tile-stats">
-            <div class="count" style="color: <?php if ($value1>=0 && $value1<0.5) {echo "#ff4500";}elseif($value1>=0.5 && $value1<0.75){echo "#ffcc00";}else{echo "lightgreen";}?>"><?php echo ''.$running.'/'.$tersubmit.' Unit';?></div>
-            <h3>Sedang running program</h3>
+
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Unit</th>
+                  <th width="3%">Belum</th>
+                  <th width="3%">Berjalan</th>
+                  <th width="3%">Sudah</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php 
+                $today=date("Y-m-d");
+                $queri = "SELECT * FROM direktorat";
+                $resulti = $db->query( $queri );
+                while ($rowi = $resulti->fetch_object()) {  
+                  echo '<tr>';
+                  echo '<th scope="row" colspan="4" bgcolor="black">'.$rowi->kode.' - '.$rowi->nama.'</th>';
+                  echo '</tr>';
+                  $cek1_kodedir=$rowi->kode;
+                  $queri1 = "SELECT * FROM logbook WHERE kode_dir='$cek1_kodedir' GROUP BY kode_unit";
+                  $resulti1 = $db->query( $queri1 );
+                  $rowcount = mysqli_num_rows($resulti1);
+                  if ($rowcount>0) {
+                    while ($rowi1 = $resulti1->fetch_object()) {
+                      $queri2 = "SELECT nama FROM unit WHERE kode='$rowi1->kode_unit'";
+                      $resulti2 = $db->query( $queri2 );
+                      $rowi2 = $resulti2->fetch_object();
+                      echo '<tr>';
+                      echo '<td>'.$rowi1->kode_unit.' - '.$rowi2->nama.'</td>';
+                      $queri3 = "SELECT start, end FROM logbook WHERE kode_unit='$rowi1->kode_unit'";
+                      $resulti3 = $db->query( $queri3 );
+                      $rowi3 = $resulti3->fetch_object();
+                      $start= $rowi3->start;
+                      $end= $rowi3->end;
+                      if ($start > $today) {
+                        echo '<td bgcolor="red"></td>';
+                        echo '<td></td>';
+                        echo '<td></td>';
+                      }elseif($start <= $today && $end >= $today){
+                        echo '<td></td>';
+                        echo '<td bgcolor="yellow"></td>';
+                        echo '<td></td>';
+                      }else{
+                        echo '<td></td>';
+                        echo '<td></td>';
+                        echo '<td bgcolor="green"></td>';
+                      }
+                      echo '</tr>';
+                    }
+                  }else{
+                    echo '<tr>';
+                    echo '<td colspan="4"> - </td>';
+                    echo '</tr>';
+                  }
+                }
+                ?>
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>
+      <!-- execution report -->
     </div>
-    <!-- CHART unit sedang berjalan-->
-
-    <!-- CHART unit sudah menyelesaikan -->
-    
-    <!-- CHART unit sudah menyelesaikan -->
+    <!-- TABEL -->
     
 
     <!-- /page content -->
@@ -393,6 +627,8 @@ include('../connect_db.php');
 
   <!-- jQuery -->
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- easy-pie-chart -->
+  <script src="../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
   <!-- Bootstrap -->
   <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- FastClick -->
@@ -832,6 +1068,25 @@ include('../connect_db.php');
         }]
       }]
     });
+
+    //easypiechart
+    $(function() {
+      $('.chart').easyPieChart({
+        easing: 'easeOutElastic',
+        delay: 3000,
+        barColor: '#26B99A',
+        trackColor: '#fff',
+        scaleColor: false,
+        lineWidth: 20,
+        trackWidth: 16,
+        lineCap: 'butt',
+        onStep: function(from, to, percent) {
+          $(this.el).find('.percent').text(Math.round(percent));
+        }
+      });
+    });
+    //easypiechart
+
   </script>
 
 </body>

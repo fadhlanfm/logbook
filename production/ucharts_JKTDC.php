@@ -107,7 +107,8 @@ else
 
           <?php
           include('sidebar.php');
-?>
+          ?>
+
         </div>
       </div>
 
@@ -262,7 +263,7 @@ else
               <div class="col-md-6 col-sm-6 col-xs-14">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Unit yang sudah submit (JKTDC)</h2>
+                    <h2>Discipline Report (JKTDC)</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -285,7 +286,6 @@ else
                   </div>
                   <div class="tile-stats">
                   <div class="count"><?php echo ''.$tersubmit.'/'.$total.' Unit di JKTDC';?></div>
-                  <h3>Sudah submit</h3>
                 </div>
                 </div>
               </div>
@@ -295,7 +295,7 @@ else
               <div class="col-md-6 col-sm-6 col-xs-14">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Unit dalam progress (JKTDC)</h2>
+                    <h2>Execution Report (JKTDC)</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -318,7 +318,7 @@ else
                   </div>
                   <div class="tile-stats">
                   <div class="count"><?php echo ''.$running.'/'.$tersubmit.' Unit di JKTDC';?></div>
-                  <h3>Sedang running program</h3>
+                  
                 </div>
                 </div>
               </div>

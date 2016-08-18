@@ -18,6 +18,14 @@ else
 	exit;
 
 }
+
+if (isset($_SESSION['error'])&&!empty($_SESSION['error'])) {
+	echo '<script language="javascript">';
+	echo 'alert("Sorry, only rar or zip files are allowed. your file is '.$_SESSION['tipe'].' extension ")';
+	echo '</script>';
+	unset($_SESSION['error']);
+	header("Refresh:0");
+}
 $coba = $_SESSION['id'];
 
 
@@ -27,13 +35,14 @@ $row2 = mysql_fetch_array($query2);
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="icon" href="../../assets/gi.ico" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Meta, title, CSS, favicons, etc. -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Gentellela Alela! | </title>
+	<title>CA Performance</title>
 
 	<!-- Bootstrap -->
 	<link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +61,7 @@ $row2 = mysql_fetch_array($query2);
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+						<a href="index.php" class="site_title"> <span>Garuda Indonesia</span></a>
 					</div>
 
 					<div class="clearfix"></div>
@@ -61,37 +70,42 @@ $row2 = mysql_fetch_array($query2);
 
 					<!-- sidebar menu -->
 					<!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="index.php">Halaman Utama</a></li>
-                    <li><a href="rank.php">Ranking Pegawai</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="aktivitas.php">Isi Aktivitas</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                  <li><a href="ca_performance.php">CA Performance</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="edit_username2.php">Ubah Username</a></li>
-                    <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_foto.php">Ubah Foto</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
+					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+						<div class="menu_section">
+							<ul class="nav side-menu">
+								<li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="index.php">Halaman Utama</a></li>
+										<li><a href="rank.php">Ranking Pegawai</a></li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="aktivitas.php">Isi Aktivitas</a></li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-edit"></i> Survey <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="survey.php">List Survey</a></li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="ca_performance.php">CA Performance</a></li>
+									</ul>
+								</li>
+								<li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
+									<ul class="nav child_menu">
+										<li><a href="edit_username2.php">Ubah Username</a></li>
+										<li><a href="edit_password2.php">Ubah Password</a></li>
+										<li><a href="edit_foto.php">Ubah Foto</a></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
 
-          </div>
-          <!-- /sidebar menu -->
+					</div>
+					<!-- /sidebar menu -->
 					<!-- /sidebar menu -->
 
 					<!-- /menu footer buttons -->
@@ -232,13 +246,10 @@ $row2 = mysql_fetch_array($query2);
 
 					<div class="clearfix"></div>	
 					<div class="row">
-						<div class="col-md-3 col-xs-12 widget widget_tally_box">
-							<div class="x_panel ui-ribbon-container fixed_height_390">
-								<div class="ui-ribbon-wrapper">
-
-								</div>
-								<div class="x_title">
-									<h2>Index Performa Anda</h2>
+						<div class="col-md-4 col-xs-12  widget_tally_box">
+							<div class="x_panel ui-ribbon-container ">
+								<div class="x_title" style="text-align:center">
+									<h2 >Index Performa Unit Anda</h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
@@ -268,9 +279,69 @@ $row2 = mysql_fetch_array($query2);
 
 								</div>
 							</div>
+
+
+							<div class="x_panel " >
+								<div class="x_title" >
+									<div style="text-align:center">
+										<h2 >List Hambatan Unit Anda</h2>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="x_content">
+									<?php
+									$bar=mysql_query("SELECT * FROM ca_performance_report where username='$coba'");
+									if ($bar_c=mysql_num_rows($bar)>0) {
+										while ($bar_=mysql_fetch_array($bar)) {
+											$mon= substr("$bar_[solusi_akhir]",0,2);
+											if ($mon==1) {$mon='Jan';}
+											if ($mon==2) {$mon='Feb';}
+											if ($mon==3) {$mon='Mar';}
+											if ($mon==4) {$mon='Apr';}
+											if ($mon==5) {$mon='May';}
+											if ($mon==6) {$mon='Jun';}
+											if ($mon==7) {$mon='Jul';}
+											if ($mon==8) {$mon='Aug';}
+											if ($mon==9) {$mon='Sept';}
+											if ($mon==10) {$mon='Oct';}
+											if ($mon==11) {$mon='Nov';}
+											if ($mon==12) {$mon='Dec';}
+											$dat= substr("$bar_[solusi_akhir]",3,2);
+											?>
+
+											<article class="media event">
+												<a class="pull-left date">
+													<p class="month"><?php echo $mon; ?></p>
+													<p class="day"><?php echo $dat; ?></p>
+												</a>
+												<div class="media-body">
+													<a class="title" href="#"><?php echo $bar_['hambatan']; ?></a>
+													<p style="text-align:left"><?php echo $bar_['solusi']; ?></p>
+													<a href="" style="text-align:left">edit</a>
+												</div>
+											</article>
+
+											<?php
+										}
+									} else {
+										echo "Unit Anda tidak memiliki hambatan.";
+									}
+									
+									?>
+									
+									<div class="ln_solid"></div>
+									<div class="form-group" style="text-align:center">
+										<div class="col-md-12 col-sm-12 col-xs-12 ">
+											<a href="ca_performance_report.php"><button type="submit" class="btn btn-primary" name="submit" value="simpan">Buat Laporan Hambatan</button></a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
 						</div>
 
-						<div class="col-md-9 col-sm-9 col-xs-12 ">
+						<div class="col-md-8 col-sm-8 col-xs-12 ">
 							<div class="x_panel ui-ribbon-container ">
 								<div class="ui-ribbon-wrapper">
 
@@ -282,7 +353,7 @@ $row2 = mysql_fetch_array($query2);
 								<div class="x_content">
 
 									<p>Upload attachment format only <u>.zip</u> or <u>.rar</u></p>
-									<a href="upload/BAGAS31 Jamu IDM Fix Serial Number.rar">example</a>
+									
 									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="ca_performance_.php" method="POST"  enctype="multipart/form-data">
 										<input type="text" id="name" name="name" style="display:none" value="<?php echo "$row2[username]" ?>">
 										<input type="text" id="unit" name="unit" style="display:none" value="<?php echo "$row2[unit]" ?>">
@@ -298,10 +369,22 @@ $row2 = mysql_fetch_array($query2);
 											<tbody>
 												<tr>
 													<?php
-													$sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='2'");
+													$sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='1'");
 													$row2=mysql_fetch_array($sql2);
 													?>
 													<th>1</th>
+													<td><?php	echo "$row2[ca_detail]"; ?></td>
+													<td style="vertical-align:middle">
+														
+														
+													</td>
+												</tr>
+												<tr>
+													<?php
+													$sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='2'");
+													$row2=mysql_fetch_array($sql2);
+													?>
+													<th>2</th>
 													<td><?php	echo "$row2[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
@@ -313,6 +396,12 @@ $row2 = mysql_fetch_array($query2);
 															<?php
 														} else {
 															echo "$rowisi2[file2]";
+															if ($rowisi2['status_f2']=='verified') {
+																?>
+																<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																<?php	
+															}
+									
 														}
 
 														?>
@@ -324,7 +413,7 @@ $row2 = mysql_fetch_array($query2);
 													$sql3=mysql_query("SELECT * FROM ca_performance_event where id_ca='3'");
 													$row3=mysql_fetch_array($sql3);
 													?>
-													<th>2</th>
+													<th>3</th>
 													<td><?php	echo "$row3[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
@@ -336,6 +425,11 @@ $row2 = mysql_fetch_array($query2);
 															<?php
 														} else {
 															echo "$rowisi3[file3]";
+															if ($rowisi2['status_f3']=='verified') {
+																?>
+																<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																<?php	
+															}
 														}
 
 														?>
@@ -346,7 +440,7 @@ $row2 = mysql_fetch_array($query2);
 													$sql4=mysql_query("SELECT * FROM ca_performance_event where id_ca='4'");
 													$row4=mysql_fetch_array($sql4);
 													?>
-													<th>3</th>
+													<th>4</th>
 													<td><?php	echo "$row4[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
@@ -358,6 +452,11 @@ $row2 = mysql_fetch_array($query2);
 															<?php
 														} else {
 															echo "$rowisi4[file4]";
+															if ($rowisi2['status_f4']=='verified') {
+																?>
+																<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																<?php	
+															}
 														}
 
 														?>
@@ -368,10 +467,10 @@ $row2 = mysql_fetch_array($query2);
 													$sql5=mysql_query("SELECT * FROM ca_performance_event where id_ca='5'");
 													$row5=mysql_fetch_array($sql5);
 													?>
-													<th>4</th>
+													<th>5</th>
 													<td><?php	echo "$row5[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
-													<?php 
+														<?php 
 														$cekisi5=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
 														$rowisi5=mysql_fetch_array($cekisi5);
 														if($rowisi5['file5']==null || empty($rowisi5['file5'])){
@@ -380,185 +479,218 @@ $row2 = mysql_fetch_array($query2);
 															<?php
 														} else {
 															echo "$rowisi5[file5]";
+															if ($rowisi2['status_f5']=='verified') {
+																?>
+																<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																<?php	
+															}
 														}
 
 														?></td>
-												</tr>
-												<tr>
-													<?php
-													$sql6=mysql_query("SELECT * FROM ca_performance_event where id_ca='6'");
-													$row6=mysql_fetch_array($sql6);
-													?>
-													<th>5</th>
-													<td><?php	echo "$row6[ca_detail]"; ?></td>
-													<td style="vertical-align:middle">
-														<?php 
-														$cekisi6=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi6=mysql_fetch_array($cekisi6);
-														if($rowisi6['file6']==null || empty($rowisi6['file6'])){
-															?>
-															<input class="btn btn-default " type="file" name="file6" />
-															<?php
-														} else {
-															echo "$rowisi6[file6]";
-														}
-
+													</tr>
+													<tr>
+														<?php
+														$sql6=mysql_query("SELECT * FROM ca_performance_event where id_ca='6'");
+														$row6=mysql_fetch_array($sql6);
 														?>
-													</td>
-												</tr>
-												<tr>
-													<?php
-													$sql7=mysql_query("SELECT * FROM ca_performance_event where id_ca='7'");
-													$row7=mysql_fetch_array($sql7);
-													?>
-													<th>6</th>
-													<td><?php	echo "$row7[ca_detail]"; ?></td>
-													<td style="vertical-align:middle">
-														<?php 
-														$cekisi7=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi7=mysql_fetch_array($cekisi7);
-														if($rowisi7['file7']==null || empty($rowisi7['file7'])){
+														<th>6</th>
+														<td><?php	echo "$row6[ca_detail]"; ?></td>
+														<td style="vertical-align:middle">
+															<?php 
+															$cekisi6=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi6=mysql_fetch_array($cekisi6);
+															if($rowisi6['file6']==null || empty($rowisi6['file6'])){
+																?>
+																<input class="btn btn-default " type="file" name="file6" />
+																<?php
+															} else {
+																echo "$rowisi6[file6]";
+																if ($rowisi2['status_f6']=='verified') {
+																	?>
+																	<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																	<?php	
+																}
+															}
+
 															?>
-															<input class="btn btn-default " type="file" name="file7" />
-															<?php
-														} else {
-															echo "$rowisi7[file7]";
-														}
-
+														</td>
+													</tr>
+													<tr>
+														<?php
+														$sql7=mysql_query("SELECT * FROM ca_performance_event where id_ca='7'");
+														$row7=mysql_fetch_array($sql7);
 														?>
-													</td>
-												</tr>
-												<tr>
-													<?php
-													$sql8=mysql_query("SELECT * FROM ca_performance_event where id_ca='8'");
-													$row8=mysql_fetch_array($sql8);
-													?>
-													<th>7</th>
-													<td><?php	echo "$row8[ca_detail]"; ?></td>
-													<td style="vertical-align:middle">
-														<?php 
-														$cekisi8=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi8=mysql_fetch_array($cekisi8);
-														if($rowisi8['file8']==null || empty($rowisi8['file8'])){
+														<th>7</th>
+														<td><?php	echo "$row7[ca_detail]"; ?></td>
+														<td style="vertical-align:middle">
+															<?php 
+															$cekisi7=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi7=mysql_fetch_array($cekisi7);
+															if($rowisi7['file7']==null || empty($rowisi7['file7'])){
+																?>
+																<input class="btn btn-default " type="file" name="file7" />
+																<?php
+															} else {
+																echo "$rowisi7[file7]";
+																if ($rowisi2['status_f7']=='verified') {
+																	?>
+																	<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																	<?php	
+																}
+															}
+
 															?>
-															<input class="btn btn-default " type="file" name="file8" />
-															<?php
-														} else {
-															echo "$rowisi8[file8]";
-														}
-
+														</td>
+													</tr>
+													<tr>
+														<?php
+														$sql8=mysql_query("SELECT * FROM ca_performance_event where id_ca='8'");
+														$row8=mysql_fetch_array($sql8);
 														?>
-													</td>
-												</tr>
-												<tr>
-													<?php
-													$sql9=mysql_query("SELECT * FROM ca_performance_event where id_ca='9'");
-													$row9=mysql_fetch_array($sql9);
-													?>
-													<th>8</th>
-													<td><?php	echo "$row9[ca_detail]"; ?></td>
-													<td style="vertical-align:middle">
-														<?php 
-														$cekisi9=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi9=mysql_fetch_array($cekisi9);
-														if($rowisi9['file9']==null || empty($rowisi9['file9'])){
+														<th>8</th>
+														<td><?php	echo "$row8[ca_detail]"; ?></td>
+														<td style="vertical-align:middle">
+															<?php 
+															$cekisi8=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi8=mysql_fetch_array($cekisi8);
+															if($rowisi8['file8']==null || empty($rowisi8['file8'])){
+																?>
+																<input class="btn btn-default " type="file" name="file8" />
+																<?php
+															} else {
+																echo "$rowisi8[file8]";
+																if ($rowisi2['status_f8']=='verified') {
+																	?>
+																	<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																	<?php	
+																}
+															}
+
 															?>
-															<input class="btn btn-default " type="file" name="file9" />
-															<?php
-														} else {
-															echo "$rowisi9[file9]";
-														}
-
+														</td>
+													</tr>
+													<tr>
+														<?php
+														$sql9=mysql_query("SELECT * FROM ca_performance_event where id_ca='9'");
+														$row9=mysql_fetch_array($sql9);
 														?>
-													</td>
-												</tr>
-												<tr>
-													<?php
-													$sql10=mysql_query("SELECT * FROM ca_performance_event where id_ca='10'");
-													$row10=mysql_fetch_array($sql10);
-													?>
-													<th>9</th>
-													<td><?php	echo "$row10[ca_detail]"; ?></td>
-													<td style="vertical-align:middle">
-														<?php 
-														$cekisi10=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi10=mysql_fetch_array($cekisi10);
-														if($rowisi10['file10']==null || empty($rowisi10['file10'])){
+														<th>9</th>
+														<td><?php	echo "$row9[ca_detail]"; ?></td>
+														<td style="vertical-align:middle">
+															<?php 
+															$cekisi9=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi9=mysql_fetch_array($cekisi9);
+															if($rowisi9['file9']==null || empty($rowisi9['file9'])){
+																?>
+																<input class="btn btn-default " type="file" name="file9" />
+																<?php
+															} else {
+																echo "$rowisi9[file9]";
+																if ($rowisi2['status_f9']=='verified') {
+																	?>
+																	<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																	<?php	
+																}
+															}
+
 															?>
-															<input class="btn btn-default " type="file" name="file10" />
-															<?php
-														} else {
-															echo "$rowisi10[file10]";
-														}
-
+														</td>
+													</tr>
+													<tr>
+														<?php
+														$sql10=mysql_query("SELECT * FROM ca_performance_event where id_ca='10'");
+														$row10=mysql_fetch_array($sql10);
 														?>
-													</td>
-												</tr>
-												<?php
-												
-												
-												?>
+														<th>10</th>
+														<td><?php	echo "$row10[ca_detail]"; ?></td>
+														<td style="vertical-align:middle">
+															<?php 
+															$cekisi10=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi10=mysql_fetch_array($cekisi10);
+															if($rowisi10['file10']==null || empty($rowisi10['file10'])){
+																?>
+																<input class="btn btn-default " type="file" name="file10" />
+																<?php
+															} else {
+																echo "$rowisi10[file10]";
+																if ($rowisi2['status_f10']=='verified') {
+																	?>
+																	<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
+																	<?php	
+																}
+															}
 
-											</tbody>
-										</table>
+															?>
+														</td>
+													</tr>
+													<?php
 
 
-										<div class="ln_solid"></div>
-										<div class="form-group">
-											<div class="col-md-12 col-sm-12 col-xs-12 ">
-												<button type="submit" class="btn btn-success" name="submit" value="simpan">Submit</button>
+													?>
+
+												</tbody>
+											</table>
+
+
+											<div class="ln_solid"></div>
+											<div class="form-group">
+												<div class="col-md-12 col-sm-12 col-xs-12 ">
+													<button type="submit" class="btn btn-success" name="submit" value="simpan">Submit</button>
+												</div>
 											</div>
-										</div>
-									</form>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
+
+						
+
 					</div>
 				</div>
 			</div>
+			<!-- /page content -->
+
+			<!-- footer content -->
+			<footer>
+				<div class="pull-right">
+					Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+				</div>
+				<div class="clearfix"></div>
+			</footer>
+			<!-- /footer content -->
 		</div>
-		<!-- /page content -->
-
-		<!-- footer content -->
-		<footer>
-			<div class="pull-right">
-				Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-			</div>
-			<div class="clearfix"></div>
-		</footer>
-		<!-- /footer content -->
 	</div>
-</div>
 
-<!-- jQuery -->
-<script src="../../vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="../../vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="../../vendors/nprogress/nprogress.js"></script>
-<!-- easy-pie-chart -->
-<script src="../../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-<script>
-	$(function() {
-		$('.chart').easyPieChart({
-			easing: 'easeOutElastic',
-			delay: 3000,
-			barColor: '#26B99A',
-			trackColor: '#fff',
-			scaleColor: false,
-			lineWidth: 20,
-			trackWidth: 16,
-			lineCap: 'butt',
-			onStep: function(from, to, percent) {
-				$(this.el).find('.percent').text(Math.round(percent));
-			}
+	<!-- jQuery -->
+	<script src="../../vendors/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- FastClick -->
+	<script src="../../vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="../../vendors/nprogress/nprogress.js"></script>
+	<!-- easy-pie-chart -->
+	<script src="../../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+	<script>
+		$(function() {
+			$('.chart').easyPieChart({
+				easing: 'easeOutElastic',
+				delay: 3000,
+				barColor: '#26B99A',
+				trackColor: '#F5F7FA',
+				scaleColor: false,
+				lineWidth: 20,
+				trackWidth: 16,
+				lineCap: 'butt',
+				onStep: function(from, to, percent) {
+					$(this.el).find('.percent').text(Math.round(percent));
+				}
+			});
 		});
-	});
-</script>
-<!-- Custom Theme Scripts -->
-<script src="../../build/js/custom.min.js"></script>
+	</script>
+	<!-- Custom Theme Scripts -->
+	<script src="../../build/js/custom.min.js"></script>
 
 </body>
 </html>

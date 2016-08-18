@@ -63,7 +63,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Detail Logbook</title>
+  <title>Detail Program</title>
 
   <!-- Bootstrap -->
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -234,7 +234,7 @@ else
       <div class="right_col" role="main">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Detail Logbook </h2>
+            <h2>Detail Program </h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a><button class="btn btn-primary btn-xs" id="clickme">Lihat Evaluasi</button></a>
               </li>
@@ -246,9 +246,9 @@ else
             </div>
           </div>
           <div class="x_content">
-            <table class="table table-hover">
+            <table class="table table-striped table-bordered">
               <tr>
-                <th colspan="2" class="center"><h4>Log Book</h4></th>
+                <th colspan="2" class="center"><h4>Deskripsi Program</h4></th>
               </tr>
               <tr>
                 <th>Kode Unik Log Book</th>
@@ -278,59 +278,312 @@ else
 
             <br>
 
-            <table class="table table-hover">
+            <?php 
+                if($row->target_flyhi1!==''){
+                  $jml_flyhi=2;
+                }elseif($row->target_flyhi2!==''){
+                  $jml_flyhi=3;
+                }elseif($row->target_flyhi3!==''){
+                  $jml_flyhi=4;
+                }elseif($row->target_flyhi4!==''){
+                  $jml_flyhi=5;
+                }else{
+                  $jml_flyhi=0;
+                }
+              ?>
+
+            <table class="table table-striped table-bordered">
               <tr>
                 <th colspan="2" class="center"><h4>Tujuan & Target Program</h4></th>
               </tr>
               <tr>
-                <th>Tujuan Merubah Perilaku</th>
-                <td><?php echo''.$row->tujuan_merubah_perilaku.'';?></td>
+                <td rowspan="6">Merubah Perilaku</td>
               </tr>
+              <?php if($row->tujuan_merubah_perilaku=='F (Efficient & Effective)'){ ?>
+                <tr>
+                  <td><strong><span class="fa fa-check-circle"></span>&ensp;F (Efficient & Effective)</strong><?php if($row->target_flyhi1!==''){
+                    echo '<br>Target: &ensp;1. '.$row->target_flyhi1.' '.$row->satuan_flyhi1;
+                  }if($row->target_flyhi2!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. '.$row->target_flyhi2.' '.$row->satuan_flyhi2;
+                  }if($row->target_flyhi3!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3. '.$row->target_flyhi3.' '.$row->satuan_flyhi3;
+                  }if($row->target_flyhi4!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4. '.$row->target_flyhi4.' '.$row->satuan_flyhi4;
+                  }
+                  ?></td></tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;L (Loyalty)</td>
+                </tr>
+                <tr> 
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;Y (Customer Centricity)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;H (Honesty & Openness)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;I (Integrity)</td>
+                </tr>
+              <?php }elseif($row->tujuan_merubah_perilaku=='L (Loyalty)'){ ?>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;F (Efficient & Effective)</td>
+                </tr>
+                <tr>
+                  <td><strong><span class="fa fa-check-circle"></span>&ensp;L (Loyalty)</strong><?php if($row->target_flyhi1!==''){
+                    echo '<br>Target: &ensp;1. '.$row->target_flyhi1.' '.$row->satuan_flyhi1;
+                  }if($row->target_flyhi2!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. '.$row->target_flyhi2.' '.$row->satuan_flyhi2;
+                  }if($row->target_flyhi3!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3. '.$row->target_flyhi3.' '.$row->satuan_flyhi3;
+                  }if($row->target_flyhi4!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4. '.$row->target_flyhi4.' '.$row->satuan_flyhi4;
+                  }
+                  ?></td>
+                </tr>
+                <tr> 
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;Y (Customer Centricity)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;H (Honesty & Openness)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;I (Integrity)</td>
+                </tr>
+              <?php }elseif($row->tujuan_merubah_perilaku=='Y (Customer Centricity)'){ ?>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;F (Efficient & Effective)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;L (Loyalty)</td>
+                </tr>
+                <tr> 
+                  <td><strong><span class="fa fa-check-circle"></span>&ensp;Y (Customer Centricity)</strong><?php if($row->target_flyhi1!==''){
+                    echo '<br>Target: &ensp;1. '.$row->target_flyhi1.' '.$row->satuan_flyhi1;
+                  }if($row->target_flyhi2!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. '.$row->target_flyhi2.' '.$row->satuan_flyhi2;
+                  }if($row->target_flyhi3!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3. '.$row->target_flyhi3.' '.$row->satuan_flyhi3;
+                  }if($row->target_flyhi4!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4. '.$row->target_flyhi4.' '.$row->satuan_flyhi4;
+                  }
+                  ?></td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;H (Honesty & Openness)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;I (Integrity)</td>
+                </tr>
+              <?php }elseif($row->tujuan_merubah_perilaku=='H (Honesty & Openness)'){ ?>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;F (Efficient & Effective)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;L (Loyalty)</td>
+                </tr>
+                <tr> 
+                  <td  style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;Y (Customer Centricity)</td>
+                </tr>
+                <tr>
+                  <td><strong><span class="fa fa-check-circle"></span>&ensp;H (Honesty & Openness)</strong><?php if($row->target_flyhi1!==''){
+                    echo '<br>Target: &ensp;1. '.$row->target_flyhi1.' '.$row->satuan_flyhi1    ;
+                  }if($row->target_flyhi2!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. '.$row->target_flyhi2.' '.$row->satuan_flyhi2;
+                  }if($row->target_flyhi3!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3. '.$row->target_flyhi3.' '.$row->satuan_flyhi3;
+                  }if($row->target_flyhi4!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4. '.$row->target_flyhi4.' '.$row->satuan_flyhi4;
+                  }
+                  ?></td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;I (Integrity)</td>
+                </tr>
+              <?php }else{?>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;F (Efficient & Effective)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;L (Loyalty)</td>
+                </tr>
+                <tr> 
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;Y (Customer Centricity)</td>
+                </tr>
+                <tr>
+                  <td style="color:#DCDCDC"><span class="fa fa-circle-o"></span>&ensp;H (Honesty & Openness)</td>
+                </tr>
+                <tr>
+                 <td><strong><span class="fa fa-check-circle"></span>&ensp;I (Integrity)</strong>
+                  <?php if($row->target_flyhi1!==''){
+                    echo '<br>Target: &ensp;1. '.$row->target_flyhi1.' '.$row->satuan_flyhi1;
+                  }if($row->target_flyhi2!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. '.$row->target_flyhi2.' '.$row->satuan_flyhi2;
+                  }if($row->target_flyhi3!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3. '.$row->target_flyhi3.' '.$row->satuan_flyhi3;
+                  }if($row->target_flyhi4!==''){
+                    echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4. '.$row->target_flyhi4.' '.$row->satuan_flyhi4;
+                  }
+                  ?>
+                 </td>
+                </tr>
+              <?php } ?>
+              <?php 
+                if($row->aktifitas0!==''){
+                  $jml_aktifitas=2;
+                }
+                if($row->aktifitas1!==''){
+                  $jml_aktifitas=3;
+                }
+                if($row->aktifitas2!==''){
+                  $jml_aktifitas=4;
+                }
+                if($row->aktifitas3!==''){
+                  $jml_aktifitas=5;
+                }
+                if($row->aktifitas4!==''){
+                  $jml_aktifitas=6;
+                }
+              ?>
               <tr>
-                <th>Target Merubah Perilaku</th>
-                <td><?php echo''.$row->target_merubah_perilaku.'';?></td>
-              </tr>
-              <tr>
-                <th>Tujuan Nilai Tambah</th>
-                <td><?php echo''.$row->tujuan_nilai_tambah.'';?></td>
-              </tr>
-              <tr>
-                <th>Target Nilai Tambah</th>
-                <td><?php echo''.$row->target_nilai_tambah.'';?></td>
+                <th rowspan="<?php echo $jml_aktifitas; ?>">Nilai Tambah Bagi Perusahaan</th>
+                <?php 
+                  if ($row->aktifitas0!=='') {
+                    echo '<tr><td>1.&ensp;'.$row->aktifitas0.' | '.$row->target0.' '.$row->satuan0.'</td></tr>';
+                  }
+                  if($row->aktifitas1!=='') {
+                    echo '<tr><td>2.&ensp;'.$row->aktifitas1.' | '.$row->target1.' '.$row->satuan1.'</td></tr>';
+                  }
+                  if($row->aktifitas2!=='') {
+                    echo '<tr><td>3.&ensp;'.$row->aktifitas2.' | '.$row->target2.' '.$row->satuan2.'</td></tr>';
+                  }
+                  if($row->aktifitas3!=='') {
+                    echo '<tr><td>4.&ensp;'.$row->aktifitas3.' | '.$row->target3.' '.$row->satuan3.'</td></tr>';
+                  }
+                  if($row->aktifitas4!=='') {
+                    echo '<tr><td>5.&ensp;'.$row->aktifitas4.' | '.$row->target4.' '.$row->satuan4.'</td></tr>';
+                  }
+                ?>
               </tr>   
               <tr>
-                <th>Tujuan Capai Kinerja</th>
-                <td><?php echo''.$row->tujuan_capai_kinerja_0.','.$row->tujuan_capai_kinerja_1.','.$row->tujuan_capai_kinerja_2.','.$row->tujuan_capai_kinerja_3.'';?></td>
-              </tr>
-              <tr>
-                <th>Target Capai Kinerja</th>
-                <td><?php echo''.$row->target_capai_kinerja.'';?></td>
+                <th rowspan="5">Pendorong Tercapainya Kinerja Terbaik</th>
+                <?php if ($row->tujuan_capai_kinerja_0==1) { ?>
+                <tr><td><strong><span class="fa fa-check-square-o"></span>&ensp;Financial</strong><?php 
+                if ($row->target_financial1!=='') {
+                  echo '<br>Target: 1.&ensp;'.$row->target_financial1.' '.$row->satuan_financial1;
+                }
+                if ($row->target_financial2!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2.&ensp;'.$row->target_financial2.' '.$row->satuan_financial2;
+                }
+                if ($row->target_financial3!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3.&ensp;'.$row->target_financial3.' '.$row->satuan_financial3;
+                }
+                if ($row->target_financial4!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4.&ensp;'.$row->target_financial4.' '.$row->satuan_financial4;
+                }
+                ?></td></tr>
+                
+                <?php }else{ ?>
+                <tr><td style="color:#DCDCDC"><span class="fa fa-square-o"></span>&ensp;Financial</td></tr>
+                <?php } ?>
+                <?php if ($row->tujuan_capai_kinerja_1==1) { ?>
+                <tr><td><strong><span class="fa fa-check-square-o"></span>&ensp;Customer</strong><?php 
+                if ($row->target_customer1!=='') {
+                  echo '<br>Target: 1.&ensp;'.$row->target_customer1.' '.$row->satuan_customer1;
+                }
+                if ($row->target_customer2!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2.&ensp;'.$row->target_customer2.' '.$row->satuan_customer2;
+                }
+                if ($row->target_customer3!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3.&ensp;'.$row->target_customer3.' '.$row->satuan_customer3;
+                }
+                if ($row->target_customer4!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4.&ensp;'.$row->target_customer4.' '.$row->satuan_customer4;
+                }                ?></td></tr>
+                <?php }else{ ?>
+                <tr><td style="color:#DCDCDC"><span class="fa fa-square-o"></span>&ensp;Customer</td></tr>
+                <?php } ?>
+                <?php if ($row->tujuan_capai_kinerja_2==1) { ?>
+                <tr><td><strong><span class="fa fa-check-square-o"></span>&ensp;Internal Business Process</strong><?php 
+                if ($row->target_ibp1!=='') {
+                  echo '<br>Target: 1.&ensp;'.$row->target_ibp1.' '.$row->satuan_ibp1;
+                }
+                if ($row->target_ibp2!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2.&ensp;'.$row->target_ibp2.' '.$row->satuan_ibp2;
+                }
+                if ($row->target_ibp3!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3.&ensp;'.$row->target_ibp3.' '.$row->satuan_ibp3;
+                }
+                if ($row->target_ibp4!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4.&ensp;'.$row->target_ibp4.' '.$row->satuan_ibp4;
+                }
+                ?></td></tr>
+                <?php }else{ ?>
+                <tr><td style="color:#DCDCDC"><span class="fa fa-square-o"></span>&ensp;Internal Business Process</td></tr>
+                <?php } ?>
+                <?php if ($row->tujuan_capai_kinerja_3==1) { ?>
+                <tr><td><strong><span class="fa fa-check-square-o"></span>&ensp;Learning & Growth</strong><?php 
+                if ($row->target_lg1!=='') {
+                  echo '<br>Target: 1.&ensp;'.$row->target_lg1.' '.$row->satuan_lg1;
+                }
+                if ($row->target_lg2!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2.&ensp;'.$row->target_lg2.' '.$row->satuan_lg2;
+                }
+                if ($row->target_lg3!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;3.&ensp;'.$row->target_lg3.' '.$row->satuan_lg3;
+                }
+                if ($row->target_lg4!=='') {
+                  echo '<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;4.&ensp;'.$row->target_lg4.' '.$row->satuan_lg4;
+                }
+                ?></td></tr>
+                <?php }else{ ?>
+                <tr><td style="color:#DCDCDC"><span class="fa fa-square-o"></span>&ensp;Learning & Growth</td></tr>
+                <?php } ?>
               </tr>
             </table>
 
             <br>
 
-            <table class="table table-hover">
+            <table class="table table-striped table-bordered">
               <tr>
-                <th colspan="2" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
+                <th colspan="3" class="center"><h4>Metode Monitoring & Reinforcement</h4></th>
               </tr>
               <tr>
                 <th>Metode Monitoring</th>
                 <td><?php echo''.$row->metode_monitoring.'';?></td>
+                <?php
+                if ($row->type_monitoring!=='' && $row->size_monitoring>=0) {
+                echo '<td><a href="uploads/'.$row->file_monitoring.'"><i class="fa fa-cloud-download"></i> '.$row->file_monitoring.'</a></td>';
+                }else{
+                  echo '<td>-</td>';
+                }
+                ?>
               </tr>
               <tr>
                 <th>Metode Enforcement Positif</th>
                 <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
+                <?php
+                if ($row->type_positif!=='' && $row->size_positif>=0) {
+                echo '<td><a href="uploads/'.$row->file_positif.'"><i class="fa fa-cloud-download"></i> '.$row->file_positif.'</a></td>';
+                }else{
+                  echo '<td>-</td>';
+                }
+                ?>
               </tr>
               <tr>
                 <th>Metode Enforcement Negatif</th>
                 <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
+                <?php
+                if ($row->type_negatif!=='' && $row->size_negatif>=0) {
+                echo '<td><a href="uploads/'.$row->file_negatif.'"><i class="fa fa-cloud-download"></i> '.$row->file_negatif.'</a></td>';
+                }else{
+                  echo '<td>-</td>';
+                }
+                ?>
               </tr>
             </table>
 
             <br>
 
-            <table class="table table-hover">
+            <table class="table table-striped table-bordered">
               <tr>
                 <th colspan="2" class="center"><h4>Change Agent Team</h4></th>
               </tr>
@@ -348,13 +601,16 @@ else
                   <td><?php echo''.$row->email_sekre_bendahara.'';?></td>
                 </tr>
               </tr>
+              <?php if($row->nama_0!=='' || $row->posisi_0!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_0.'';?></th>
                 <td><?php echo''.$row->nama_0.'';?></td>
+              </tr>
                 <tr>
                   <td><?php echo''.$row->email_0.'';?></td>
                 </tr>
-              </tr>
+              <?php } 
+              if($row->nama_1!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_1.'';?></th>
                 <td><?php echo''.$row->nama_1.'';?></td>
@@ -362,6 +618,8 @@ else
                   <td><?php echo''.$row->email_1.'';?></td>
                 </tr>
               </tr>
+              <?php } 
+              if($row->nama_2!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_2.'';?></th>
                 <td><?php echo''.$row->nama_2.'';?></td>
@@ -369,6 +627,8 @@ else
                   <td><?php echo''.$row->email_2.'';?></td>
                 </tr>
               </tr>
+              <?php } 
+              if($row->nama_3!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_3.'';?></th>
                 <td><?php echo''.$row->nama_3.'';?></td>
@@ -376,6 +636,8 @@ else
                   <td><?php echo''.$row->email_3.'';?></td>
                 </tr>
               </tr>
+              <?php } 
+              if($row->nama_4!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_4.'';?></th>
                 <td><?php echo''.$row->nama_4.'';?></td>
@@ -383,6 +645,8 @@ else
                   <td><?php echo''.$row->email_4.'';?></td>
                 </tr>
               </tr>
+              <?php } 
+              if($row->nama_5!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_5.'';?></th>
                 <td><?php echo''.$row->nama_5.'';?></td>
@@ -390,6 +654,8 @@ else
                   <td><?php echo''.$row->email_5.'';?></td>
                 </tr>
               </tr>
+              <?php } 
+              if($row->nama_6!==''){ ?>
               <tr>
                 <th rowspan="2"><?php echo''.$row->posisi_6.'';?></th>
                 <td><?php echo''.$row->nama_6.'';?></td>
@@ -397,20 +663,158 @@ else
                   <td><?php echo''.$row->email_6.'';?></td>
                 </tr>
               </tr>
-            </tr>
-            <tr>
-              <th rowspan="2"><?php echo''.$row->posisi_7.'';?></th>
-              <td><?php echo''.$row->nama_7.'';?></td>
+              <?php } 
+              if($row->nama_5!==''){ ?>
               <tr>
-                <td><?php echo''.$row->email_7.'';?></td>
+                <th rowspan="2"><?php echo''.$row->posisi_7.'';?></th>
+                <td><?php echo''.$row->nama_7.'';?></td>
+                <tr>
+                  <td><?php echo''.$row->email_7.'';?></td>
+                </tr>
               </tr>
-            </tr>
+              <?php } ?>
           </table>
 
           <br>
-          <label for="deskripsi">Evaluasi Logbook</label>
+          <label for="deskripsi">Evaluasi Program</label>
           <div class="input-field col s12">
             <textarea id="deskripsi" class="form-control" readonly placeholder="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>" name="komentar" ></textarea>
+          </div>
+
+                    <!-- start of ended program achievement -->
+
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile">
+              <div class="x_title">
+                <h2>Finished Programs</h2>
+
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <h4>Accumulated Percentage</h4>
+
+                <?php
+
+                $query6 = "SELECT * FROM logbook JOIN unit WHERE id = '$id'";
+                //execute the query
+                $result6 = $db->query( $query6 );
+
+                if (!$result6)
+                {
+                  die("could not query the database: <br />".$db->error);
+                }
+
+                $percacc=0;
+                $colour='';
+                while ($row6 = $result6->fetch_object()) 
+                {
+                  
+                  if (is_null($row6->aktifitas0) || $row6->aktifitas0 == '') {
+                  } else {
+                    $target0 = $row6->target0;
+                    $hasil0 = $row6->hasil0;
+
+                    if ($row6->satuan0 == 'Waktu (Hari)') {
+                      $perc0 = $target0/$hasil0*100;
+                    } else {
+                      $perc0 = $hasil0/$target0*100;
+                    }
+                    
+                    $percacc = $perc0;
+                  }
+                  
+                  if (is_null($row6->aktifitas1) || $row6->aktifitas1 == '') {
+                  } else {
+                    $target1 = $row6->target1;
+                    $hasil1 = $row6->hasil1;
+                    
+                    if ($row6->satuan1 == 'Waktu (Hari)') {
+                      $perc1 = $target1/$hasil1*100;
+                    } else {
+                      $perc1 = $hasil1/$target1*100;
+                    }
+
+                    $percacc = ($perc0 + $perc1)/2;
+                  }
+
+                  if (is_null($row6->aktifitas2) || $row6->aktifitas2 == '') {
+                  } else {
+                    $target2 = $row6->target2;
+                    $hasil2 = $row6->hasil2;
+                    
+                    if ($row6->satuan2 == 'Waktu (Hari)') {
+                      $perc2 = $target2/$hasil2*100;
+                    } else {
+                      $perc2 = $hasil2/$target2*100;
+                    }
+
+                    $percacc = ($perc0 + $perc1 + $perc2)/3;
+                  }
+
+                  if (is_null($row6->aktifitas3) || $row6->aktifitas3 == '') {
+                  } else {
+                    $target3 = $row6->target3;
+                    $hasil3 = $row6->hasil3;
+                    
+                    if ($row6->satuan3 == 'Waktu (Hari)') {
+                      $perc3 = $target3/$hasil3*100;
+                    } else {
+                      $perc3 = $hasil3/$target3*100;
+                    }
+
+                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3)/4;
+                  }
+
+                  if (is_null($row6->aktifitas4) || $row6->aktifitas4 == '') {
+                  } else {
+                    $target4 = $row6->target4;
+                    $hasil4 = $row6->hasil4;
+
+                    if ($row6->satuan4 == 'Waktu (Hari)') {
+                      $perc4 = $target4/$hasil4*100;
+                    } else {
+                      $perc4 = $hasil4/$target4*100;
+                    }
+
+                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3 + $perc5)/5;
+                  }
+                  if ($percacc > 75) {
+                    $colour = 'green';
+                  } else if ($percacc > 50 && $percacc < 76) {
+                    $colour = 'orange';
+                  } else {
+                    $colour = 'red';
+                  }
+                  ?>
+                  
+                  <?php
+                }
+
+
+                ?>
+                <!-- widget start here -->
+                  <div class="widget_summary">
+                    <div class="w_left w_25">
+                      <span><a href="lihat_logbook.php%20?id=<?php echo $row6->id ?>"><?php echo $row6->nama_program; ?></a></span>
+                      
+                    </div>
+                    <div class="w_center w_55">
+                      <div class="progress">
+                        <div class="progress-bar bg-<?php echo $colour?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo round($percacc); ?>%;">
+                          <span class="sr-only"><?php echo round($percacc); ?>% Complete</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="w_right w_20">
+                      <span><?php echo round($percacc); ?> %</span>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <!-- end of widget -->
+
+              </div>
+            </div>
           </div>
 
         </div>

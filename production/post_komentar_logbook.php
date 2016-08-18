@@ -11,8 +11,11 @@
 			exit;
 		}else
 		{
-			header('Location: show_form.php');
-			exit;
+			$message = "Komentar berhasil ditambahkan";
+  			echo "<script type='text/javascript'>alert('$message');
+  			window.location = 'show_form.php';
+  			</script>";
+  			exit;
 		}	
 
 	$db->close();

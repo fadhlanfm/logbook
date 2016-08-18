@@ -44,7 +44,7 @@ else
   <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.css" rel="stylesheet">
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
@@ -211,7 +211,7 @@ else
 <script src="js/datepicker/daterangepicker.js"></script>
 
 <!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
+    <script src="../build/js/custom.min.js"></script>
 
 <!-- Flot -->
 <script>

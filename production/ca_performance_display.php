@@ -162,7 +162,10 @@ $_SESSION['notif']=$id;
                       } else {
                         ?>
                         <td style="vertical-align:middle;text-align:center">
-                          <?php echo "$rowisi2[file2]";?>
+                          <?php 
+                          $file = "$rowisi2[file2]"; //Let say If I put the file name Bang.png
+                          echo "<a href='download.php?nama=".$file."'>".$rowisi2['file2']."</a> ";
+                          ?>
                         </td>
                         <td style="vertical-align:middle;text-align:center"><?php echo $rowisi2['status_f2'] ?></td>
                         <td style="vertical-align:middle;text-align:center">

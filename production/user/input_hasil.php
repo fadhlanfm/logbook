@@ -246,160 +246,758 @@ else
             <form action="post_hasil_logbook.php" method="POST"><br>
               <div class="row">
                 <div class="col-md-1 col-sm-1 col-xs-12">
+                <label>Kode Unik</label>
                   <input readonly class="form-control" type="text" name="id" id="id" value="<?php echo $row->id ?>">
                 </div> 
-              </div> <br/>
+              </div> <br/> <hr>
+              
               <?php
               // aktivitas0
-              if (is_null($row->aktifitas0)) {
-              } else {
+              if ($row->target_flyhi0!=='') {
+                ?>
+                <h2>Merubah Perilaku</h2>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Perilaku</label>
+                    <input readonly type="text" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 1</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_flyhi0; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi0; ?></span>
+                   </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 1</label>
+                      <input type="text" id="target" name="hasil_flyhi0" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi0; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_flyhi1!=='') {
                 ?>
                 <div class="row">
                   <div class="col-sm-4 col-md-4 col-xs-12">
-                    <label>Aktivitas</label>
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 2</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_flyhi1; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi1; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 2</label>
+                      <input type="text" id="target" name="hasil_flyhi1" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi1; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_flyhi2!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 3</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_flyhi2; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi2; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 3</label>
+                      <input type="text" id="target" name="hasil_flyhi2" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi2; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_flyhi3!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 4</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_flyhi3; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi3; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 4</label>
+                      <input type="text" id="target" name="hasil_flyhi3" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi3; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_flyhi4!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 5</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_flyhi4; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi4; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 5</label>
+                      <input type="text" id="target" name="hasil_flyhi4" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_flyhi4; ?></span>
+                    </div>
+                  </div>
+                </div><hr>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->aktifitas0!=='') {
+                ?>
+                <hr>
+                <h2>Nilai Tambah Untuk Perusahaan</h2>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Aktifitas 1</label>
                     <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas0;?>">
-
                   </div>
-                  <div class="col-sm-2 col-md-2 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="target1">Target</label>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 1</label>
                       <input readonly type="text" id="target" value="<?php echo $row->target0; ?>" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan0; ?></span>
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3 col-xs-12">
-                    <label>Satuan Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->satuan0;?>" class="form-control">
-                  </div>
-                  <div class="col-sm-3 col-md-3 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="hasil1">Hasil</label>
-                      <input type="text" id="target" name="hasil1" class="form-control" value="<?php echo $row->hasil0; ?>">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 1</label>
+                      <input type="text" id="target" name="hasil0" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan0; ?></span>
                     </div>
                   </div>
-                </div><br>
+                </div>
                 <?php 
               } 
 
               // aktivitas1
-              if (is_null($row->aktifitas1) || $row->aktifitas1 == '') {
-              } else {
+              if ($row->aktifitas1!=='') {
                 ?>
                 <div class="row">
                   <div class="col-sm-4 col-md-4 col-xs-12">
-                    <label>Aktivitas</label>
+                    <label>Aktifitas 2</label>
                     <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas1;?>">
 
                   </div>
-                  <div class="col-sm-2 col-md-2 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="target1">Target</label>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 2</label>
                       <input readonly type="text" id="target" value="<?php echo $row->target1;?>" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan1; ?></span>
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3 col-xs-12">
-                    <label>Satuan Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->satuan1;?>" class="form-control">
-                  </div>
-                  <div class="col-sm-3 col-md-3 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="hasil2">Hasil</label>
-                      <input type="text" id="target" name="hasil2" class="form-control" value="<?php echo $row->hasil1; ?>">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil2">Hasil 2</label>
+                      <input type="text" id="target" name="hasil1" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan1; ?></span>
                     </div>
                   </div>
-                </div> <br>
+                </div> 
                 <?php  
               } 
 
               // aktivitas2
-              if (is_null($row->aktifitas2) || $row->aktifitas2 == '') {
-              } else {
+              if ($row->aktifitas2!=='') {
                 ?>
                 <div class="row">
                   <div class="col-sm-4 col-md-4 col-xs-12">
-                    <label>Aktivitas</label>
+                    <label>Aktifitas 3</label>
                     <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas2;?>">
 
                   </div>
-                  <div class="col-sm-2 col-md-2 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="target1">Target</label>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 3</label>
                       <input readonly type="text" id="target" value="<?php echo $row->target2;?>" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan2; ?></span>
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3 col-xs-12">
-                    <label>Satuan Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->satuan2;?>" class="form-control">
-                  </div>
-                  <div class="col-sm-3 col-md-3 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="hasil3">Hasil</label>
-                      <input type="text" id="target" name="hasil3" class="form-control" value="<?php echo $row->hasil2; ?>">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil3">Hasil 3</label>
+                      <input type="text" id="target" name="hasil2" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan2; ?></span>
                     </div>
                   </div>
-                </div> <br>
+                </div> 
                 <?php  
               } 
 
               // aktivitas3
-              if (is_null($row->aktifitas3) || $row->aktifitas3 == '') {
-              } else {
+              if ($row->aktifitas3!=='') {
                 ?>
                 <div class="row">
                   <div class="col-sm-4 col-md-4 col-xs-12">
-                    <label>Aktivitas</label>
+                    <label>Aktifitas 4</label>
                     <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas3;?>">
-
                   </div>
-                  <div class="col-sm-2 col-md-2 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="target1">Target</label>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 4</label>
                       <input readonly type="text" id="target" value="<?php echo $row->target3;?>" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan3; ?></span>
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3 col-xs-12">
-                    <label>Satuan Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->satuan3;?>" class="form-control">
-                  </div>
-                  <div class="col-sm-3 col-md-3 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="hasil4">Hasil</label>
-                      <input type="text" id="target" name="hasil4" class="form-control" value="<?php echo $row->hasil3; ?>">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil4">Hasil 4</label>
+                      <input type="text" id="target" name="hasil3" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan3; ?></span>
                     </div>
                   </div>
-                </div> <br>
+                </div> 
                 <?php 
               } 
 
               // aktivitas4
-              if (is_null($row->aktifitas4) || $row->aktifitas4 == '') {
-              } else {
+              if ($row->aktifitas4!=='') {
                 ?>
                 <div class="row">
                   <div class="col-sm-4 col-md-4 col-xs-12">
-                    <label>Aktivitas</label>
+                    <label>Aktifitas 5</label>
                     <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas4;?>">
 
                   </div>
-                  <div class="col-sm-2 col-md-2 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="target1">Target</label>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 5</label>
                       <input readonly type="text" id="target" value="<?php echo $row->target4;?>" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan4; ?></span>
                     </div>
                   </div>
                   <div class="col-sm-3 col-md-3 col-xs-12">
-                    <label>Satuan Target</label>
-                    <input readonly type="text" id="target" value="<?php echo $row->satuan4;?>" class="form-control">
-                  </div>
-                  <div class="col-sm-3 col-md-3 col-xs-12">
-                    <div class="input-field col s6">
-                      <label for="hasil5">Hasil</label>
-                      <input type="text" id="target" name="hasil5" class="form-control" value="<?php echo $row->hasil4; ?>">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil5">Hasil 5</label>
+                      <input type="text" id="target" name="hasil4" class="form-control">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan4; ?></span>
                     </div>
                   </div>
-                </div> <br>
-                <?php  
-              } 
-              ?>
+                </div> <hr>
+                <?php } ?>
+
+
+                <!-- financial-->
+                <?php if ($row->tujuan_capai_kinerja_0==1) { ?>
+                <hr>
+                <h2>Pendorong Tercapainya Kinerja Terbaik</h2>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Kinerja</label>
+                    <input readonly type="text" class="form-control" value="Financial">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 1</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_financial0; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial0; ?></span>
+                   </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 1</label>
+                      <input type="text" id="target" name="hasil_financial0" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial0; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_financial1!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 2</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_financial1; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial1; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 2</label>
+                      <input type="text" id="target" name="hasil_financial1" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial1; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_financial2!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 3</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_financial2; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial2; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 3</label>
+                      <input type="text" id="target" name="hasil_financial2" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial2; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_financial3!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 4</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_financial3; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial3; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 4</label>
+                      <input type="text" id="target" name="hasil_financial3" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial3; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_financial4!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 5</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_financial4; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial4; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 5</label>
+                      <input type="text" id="target" name="hasil_financial4" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_financial4; ?></span>
+                    </div>
+                  </div>
+                </div><br>
+                <?php 
+              } ?>
+              <!-- financial-->
+
+              <!-- customer -->
+              <?php if ($row->tujuan_capai_kinerja_1==1) { ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Kinerja</label>
+                    <input readonly type="text" class="form-control" value="Customer">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 1</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_customer0; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer0; ?></span>
+                   </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 1</label>
+                      <input type="text" id="target" name="hasil_customer0" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer0; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_customer1!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 2</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_customer1; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer1; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 2</label>
+                      <input type="text" id="target" name="hasil_customer1" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer1; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_customer2!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 3</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_customer2; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer2; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 3</label>
+                      <input type="text" id="target" name="hasil_customer2" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer2; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_customer3!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 4</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_customer3; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer3; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 4</label>
+                      <input type="text" id="target" name="hasil_customer3" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer3; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_customer4!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 5</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_customer4; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer4; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 5</label>
+                      <input type="text" id="target" name="hasil_customer4" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_customer4; ?></span>
+                    </div>
+                  </div>
+                </div><br>
+                <?php 
+              } ?>
+              <!-- customer -->
+
+              <!-- ibp -->
+              <?php if ($row->tujuan_capai_kinerja_2==1) { ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Kinerja</label>
+                    <input readonly type="text" class="form-control" value="Internal Business Process">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 1</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_ibp0; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp0; ?></span>
+                   </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 1</label>
+                      <input type="text" id="target" name="hasil_ibp0" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp0; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_ibp1!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 2</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_ibp1; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp1; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 2</label>
+                      <input type="text" id="target" name="hasil_ibp1" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp1; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_ibp2!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 3</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_ibp2; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp2; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 3</label>
+                      <input type="text" id="target" name="hasil_ibp2" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp2; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_ibp3!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 4</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_ibp3; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp3; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 4</label>
+                      <input type="text" id="target" name="hasil_ibp3" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp3; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_ibp4!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 5</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_ibp4; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp4; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 5</label>
+                      <input type="text" id="target" name="hasil_ibp4" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_ibp4; ?></span>
+                    </div>
+                  </div>
+                </div><br>
+                <?php 
+              } ?>
+              <!-- ibp -->
+
+              <!-- lg -->
+              <?php if ($row->tujuan_capai_kinerja_3==1) { ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <label>Kinerja</label>
+                    <input readonly type="text" class="form-control" value="Learning & Growth">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 1</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_lg0; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg0; ?></span>
+                   </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 1</label>
+                      <input type="text" id="target" name="hasil_lg0" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg0; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_lg1!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 2</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_lg1; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg1; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 2</label>
+                      <input type="text" id="target" name="hasil_lg1" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg1; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_lg2!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 3</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_lg2; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg2; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 3</label>
+                      <input type="text" id="target" name="hasil_lg2" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg2; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_lg3!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 4</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_lg3; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg3; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 4</label>
+                      <input type="text" id="target" name="hasil_lg3" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg3; ?></span>
+                    </div>
+                  </div>
+                </div>
+                <?php 
+              }
+              // aktivitas0
+              if ($row->target_lg4!=='') {
+                ?>
+                <div class="row">
+                  <div class="col-sm-4 col-md-4 col-xs-12">
+                    <input readonly type="hidden" class="form-control" value="<?php echo $row->tujuan_merubah_perilaku;?>">
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="target1">Target 5</label>
+                      <input readonly type="text" id="target" value="<?php echo $row->target_lg4; ?>" class="form-control">
+                        <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg4; ?></span>
+                    </div>
+                  </div>
+                  <div class="col-sm-3 col-md-3 col-xs-12">
+                    <div class="input-field col s6 has-feedback">
+                      <label for="hasil1">Hasil 5</label>
+                      <input type="text" id="target" name="hasil_lg4" class="form-control" value="">
+                      <span class="form-control-feedback right" aria-hidden="true" style="color: grey"><?php echo $row->satuan_lg4; ?></span>
+                    </div>
+                  </div>
+                </div><hr><br>
+                <?php 
+              } ?>
+              <!-- lg -->
 
               <div class="row">
                 <div class="col-sm-4 col-md-4 col-xs-12">

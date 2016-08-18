@@ -1,4 +1,4 @@
-<?php
+ <?php
 session_start();
 if(isset($_SESSION['role']) && $_SESSION['role'] == 1)
 { 
@@ -72,17 +72,7 @@ else
   {
     die("could not query the database: <br />".$db->error);
   }
-
-  $query5 = "SELECT * FROM logbook JOIN unit WHERE unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
-        //execute the query
-  $result5 = $db->query( $query5 );
-
-  if (!$result5)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  
-  ?>
+ ?>
 
   <div class="container body">
     <div class="main_container">
@@ -236,164 +226,247 @@ else
       <div class="right_col" role="main">
         <div class="row">
 
+        <?php if(isset($row)){?>
           <!-- start of running program achievement -->
-          <div class="col-md-8 col-sm-8 col-xs-12">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-12 col-sm-8 col-xs-12">
+            <div class="col-md-6 col-sm-12 col-xs-12">
               <div class="x_panel tile">
                 <div class="x_title">
-                  <h2><?php echo $row->nama_program;?> <small>Program yang sedang dijalankan</small></h2>
-
+                  <h2>Running Program Summary</h2>
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   <!-- sini inininin -->
-                  <?php
-              // aktivitas0
-                  if (is_null($row->aktifitas0)) {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas0;?>">
+                  <table class="table table-striped table-bordered">
+                      <tr>
+                        <th>Kode Unik</th>
+                        <td><?php echo $row->id; ?></td>
+                      </tr>
+                      <tr>
+                        <th>Nama Program</th>
+                        <td><?php echo $row->nama_program;?></td>
+                      </tr>
+                      <tr>
+                        <th>Periode Program</th>
+                        <td><?php echo $row->start.' s/d '.$row->end; ?></td>
+                      </tr>
+                  </table>
 
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target0; ?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan0;?>" class="form-control">
-                      </div>
+                  </br>
 
-                    </div><br>
-                    <?php 
-                  } 
+                  <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <td colspan="2" align="center"><strong>Merubah Perilaku</strong></td>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <th>Tujuan</th>
+                        <td><?php echo $row->tujuan_merubah_perilaku; ?></td>
+                      </tr>
+                      <tr>
+                        <th>Target</th>
+                        <td><ol>
+                              <?php
+                                if ($row->target_flyhi0!==0) {
+                                  echo '<li>'.$row->target_flyhi0.' '.$row->satuan_flyhi0.'</li>';
+                                }if ($row->target_flyhi1!==0) {
+                                  echo '<li>'.$row->target_flyhi1.' '.$row->satuan_flyhi1.'</li>';
+                                }if ($row->target_flyhi2!==0) {
+                                  echo '<li>'.$row->target_flyhi2.' '.$row->satuan_flyhi2.'</li>';
+                                }if ($row->target_flyhi3!==0) {
+                                  echo '<li>'.$row->target_flyhi3.' '.$row->satuan_flyhi3.'</li>';
+                                }if ($row->target_flyhi4!==0) {
+                                  echo '<li>'.$row->target_flyhi4.' '.$row->satuan_flyhi4.'</li>';
+                                }
+                              ?>
+                            </ol>
+                        </td>
+                      </tr>
+                  </table>
 
-              // aktivitas1
-                  if (is_null($row->aktifitas1) || $row->aktifitas1 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas1;?>">
+                  </br>
 
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target1;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan1;?>" class="form-control">
-                      </div>
+                  <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <td colspan="2" align="center"><strong>Nilai Tambah Untuk Perusahaan</strong></td>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <th>Aktifitas</th>
+                        <th>Target</td>
+                      </tr>
+                      <?php if ($row->aktifitas0!==''){?>
+                      <tr>
+                        <td><?php echo $row->aktifitas0; ?></td>
+                        <td><?php echo $row->target0.' '.$row->satuan0; ?></td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->aktifitas1!==''){?>
+                      <tr>
+                        <td><?php echo $row->aktifitas1; ?></td>
+                        <td><?php echo $row->target1.' '.$row->satuan1; ?></td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->aktifitas2!==''){?>
+                      <tr>
+                        <td><?php echo $row->aktifitas2; ?></td>
+                        <td><?php echo $row->target2.' '.$row->satuan2; ?></td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->aktifitas3!==''){?>
+                      <tr>
+                        <td><?php echo $row->aktifitas3; ?></td>
+                        <td><?php echo $row->target3.' '.$row->satuan3; ?></td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->aktifitas4!==''){?>
+                      <tr>
+                        <td><?php echo $row->aktifitas4; ?></td>
+                        <td><?php echo $row->target4.' '.$row->satuan4; ?></td>
+                      </tr>
+                      <?php } ?>
+                  </table>
 
-                    </div> <br>
-                    <?php  
-                  } 
+                  </br>
 
-              // aktivitas2
-                  if (is_null($row->aktifitas2) || $row->aktifitas2 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas2;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target2;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan2;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php  
-                  } 
-
-              // aktivitas3
-                  if (is_null($row->aktifitas3) || $row->aktifitas3 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas3;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target3;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan3;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php 
-                  } 
-
-              // aktivitas4
-                  if (is_null($row->aktifitas4) || $row->aktifitas4 == '') {
-                  } else {
-                    ?>
-                    <div class="row">
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Aktivitas</label>
-                        <input readonly type="text" class="form-control" value="<?php echo $row->aktifitas4;?>">
-
-                      </div>
-                      <div class="col-sm-2 col-md-2 col-xs-12">
-                        <div class="input-field col s6">
-                          <label for="target1">Target</label>
-                          <input readonly type="text" id="target" value="<?php echo $row->target4;?>" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-sm-5 col-md-5 col-xs-12">
-                        <label>Satuan Target</label>
-                        <input readonly type="text" id="target" value="<?php echo $row->satuan4;?>" class="form-control">
-                      </div>
-
-                    </div> <br>
-                    <?php  
-                  } 
-                  ?>
+                  <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <td colspan="2" align="center"><strong>Mendorong Tercapainya Kinerja Terbaik</strong></td>
+                        </tr>
+                      </thead>
+                      <tr>
+                        <th>Tujuan</th>
+                        <th>Target</td>
+                      </tr>
+                      <?php if ($row->tujuan_capai_kinerja_0!==''){?>
+                      <tr>
+                        <td><span class="fa fa-check-square-o"></span>&ensp;Financial</td>
+                        <td><ol>
+                              <?php
+                                if ($row->target_financial0!==0) {
+                                  echo '<li>'.$row->target_financial0.' '.$row->satuan_financial0.'</li>';
+                                }if ($row->target_financial1!==0) {
+                                  echo '<li>'.$row->target_financial1.' '.$row->satuan_financial1.'</li>';
+                                }if ($row->target_financial2!==0) {
+                                  echo '<li>'.$row->target_financial2.' '.$row->satuan_financial2.'</li>';
+                                }if ($row->target_financial3!==0) {
+                                  echo '<li>'.$row->target_financial3.' '.$row->satuan_financial3.'</li>';
+                                }if ($row->target_financial4!==0) {
+                                  echo '<li>'.$row->target_financial4.' '.$row->satuan_financial4.'</li>';
+                                }
+                              ?>
+                            </ol></td>
+                      </tr>
+                      <?php }else{ ?>
+                      <tr>
+                        <td style="color:#DCDCDC"><span class="fa fa-check-square-o"></span>&ensp;Financial</td>
+                        <td>-</td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->tujuan_capai_kinerja_1!==''){?>
+                      <tr>
+                        <td><span class="fa fa-check-square-o"></span>&ensp;Customer</td>
+                        <td><ol>
+                              <?php
+                                if ($row->target_customer0!==0) {
+                                  echo '<li>'.$row->target_customer0.' '.$row->satuan_customer0.'</li>';
+                                }if ($row->target_customer1!==0) {
+                                  echo '<li>'.$row->target_customer1.' '.$row->satuan_customer1.'</li>';
+                                }if ($row->target_customer2!==0) {
+                                  echo '<li>'.$row->target_customer2.' '.$row->satuan_customer2.'</li>';
+                                }if ($row->target_customer3!==0) {
+                                  echo '<li>'.$row->target_customer3.' '.$row->satuan_customer3.'</li>';
+                                }if ($row->target_customer4!==0) {
+                                  echo '<li>'.$row->target_customer4.' '.$row->satuan_customer4.'</li>';
+                                }
+                              ?>
+                            </ol></td>
+                      </tr>
+                      <?php }else{ ?>
+                      <tr>
+                        <td style="color:#DCDCDC"><span class="fa fa-check-square-o"></span>&ensp;Customer</td>
+                        <td>-</td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->tujuan_capai_kinerja_2!==''){?>
+                      <tr>
+                        <td><span class="fa fa-check-square-o"></span>&ensp;Internal Business Process</td>
+                        <td><ol>
+                              <?php
+                                if ($row->target_ibp0!==0) {
+                                  echo '<li>'.$row->target_ibp0.' '.$row->satuan_ibp0.'</li>';
+                                }if ($row->target_ibp1!==0) {
+                                  echo '<li>'.$row->target_ibp1.' '.$row->satuan_ibp1.'</li>';
+                                }if ($row->target_ibp2!==0) {
+                                  echo '<li>'.$row->target_ibp2.' '.$row->satuan_ibp2.'</li>';
+                                }if ($row->target_ibp3!==0) {
+                                  echo '<li>'.$row->target_ibp3.' '.$row->satuan_ibp3.'</li>';
+                                }if ($row->target_ibp4!==0) {
+                                  echo '<li>'.$row->target_ibp4.' '.$row->satuan_ibp4.'</li>';
+                                }
+                              ?>
+                            </ol></td>
+                      </tr>
+                      <?php }else{ ?>
+                      <tr>
+                        <td style="color:#DCDCDC"><span class="fa fa-check-square-o"></span>&ensp;Internal Business Process</td>
+                        <td>-</td>
+                      </tr>
+                      <?php } ?>
+                      <?php if ($row->tujuan_capai_kinerja_3!==''){?>
+                      <tr>
+                        <td><span class="fa fa-check-square-o"></span>&ensp;Learning & Growth</td>
+                        <td><ol>
+                              <?php
+                                if ($row->target_lg0!==0) {
+                                  echo '<li>'.$row->target_lg0.' '.$row->satuan_lg0.'</li>';
+                                }if ($row->target_lg1!==0) {
+                                  echo '<li>'.$row->target_lg1.' '.$row->satuan_lg1.'</li>';
+                                }if ($row->target_lg2!==0) {
+                                  echo '<li>'.$row->target_lg2.' '.$row->satuan_lg2.'</li>';
+                                }if ($row->target_lg3!==0) {
+                                  echo '<li>'.$row->target_lg3.' '.$row->satuan_lg3.'</li>';
+                                }if ($row->target_lg4!==0) {
+                                  echo '<li>'.$row->target_lg4.' '.$row->satuan_lg4.'</li>';
+                                }
+                              ?>
+                            </ol></td>
+                      </tr>
+                      <?php }else{ ?>
+                      <tr>
+                        <td style="color:#DCDCDC"><span class="fa fa-check-square-o"></span>&ensp;Learning & Growth</td>
+                        <td>-</td>
+                      </tr>
+                      <?php } ?>
+                  </table>
 
                 </div>
               </div>
             </div>
-
-            <!-- start of recent evaluation -->
-            <?php
-            $query3 = "SELECT * FROM logbook WHERE id = '$row->id'";
-            //execute the query
-            $result3 = $db->query( $query3 );
-            if (!$result3)
-            {
-              die("could not query the database: <br />".$db->error);
-            }
-            $row3 = $result3->fetch_object();
-            ?>
-
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <?php }else{?>
+            <div class="col-md-6 col-sm-8 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Recent Evaluation <small>Sessions</small></h2>
+                  <h2>Running Program Summary</h2>
+
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <a>Tidak Ada Program Sedang Berjalan</a>
+                </div>
+              </div>
+            </div>
+            <?php } ?>
+
+            <?php if (isset($row)) { ?>
+            <!-- start of recent evaluation -->
+            <div class="col-md-6 col-sm-8 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Recent Evaluation</h2>
 
                   <div class="clearfix"></div>
                 </div>
@@ -402,175 +475,66 @@ else
 
                     <ul class="list-unstyled timeline widget">
                       <?php
-                      while ($row5 = $result5->fetch_object())
-                      {
-                        if (is_null($row5->komentar) || $row5->komentar == '') {
-                        } else {
+                        if ($row->komentar !== '') {
                           ?>
                           <li>
                             <div class="block">
                               <div class="block_content">
                                 <h2 class="title">
-                                  <a href="lihat_logbook.php%20?id=<?php echo $row5->id ?>"><?php echo $row5->nama_program ?></a>
+                                  <a href="lihat_logbook.php%20?id=<?php echo $row->id ?>"><?php echo $row->nama_program ?></a>
                                 </h2>
                                 <div class="byline">
                                   by <a>Admin</a>
                                 </div>
                                 <p class="excerpt">
-                                  <?php echo $row5->komentar ?>
+                                  <?php echo $row->komentar ?>
                                 </p>
                               </div>
                             </div>
                           </li>
                           <?php
-                        }                        
-                      }
-
+                        }else{
                       ?>
-                      
+                      <li>
+                            <div class="block">
+                              <div class="block_content">
+                                <h2 class="title">
+                                  <a href="lihat_logbook.php%20?id=<?php echo $row->id ?>"><?php echo $row->nama_program ?></a>
+                                </h2>
+                                <div class="byline">
+                                  by <a>Admin</a>
+                                </div>
+                                <p class="excerpt">
+                                  Tidak Ada Evaluasi
+                                </p>
+                              </div>
+                            </div>
+                          </li>
+                          <?php } ?>
                     </ul>
                   </div>
                 </div>
               </div>
             </div>
+            <?php }   else{ ?>
+            <!-- start of recent evaluation -->
+            <div class="col-md-12 col-sm-8 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>Evaluation</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <a>Tidak Ada</a>
+                </div>
+              </div>
+            </div>
+            <?php } ?>
             <!-- end of recent evaluation -->
           </div>
           <!-- end of running program achievement -->
 
-          <!-- start of ended program achievement -->
-
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel tile">
-              <div class="x_title">
-                <h2>Finished Programs</h2>
-
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <h4>Accumulated Percentage</h4>
-
-                <?php
-
-                $query6 = "SELECT * FROM logbook JOIN unit WHERE end < curdate() and unit.kode=logbook.kode_unit and logbook.kode_unit='$unit2'";
-                //execute the query
-                $result6 = $db->query( $query6 );
-
-                if (!$result6)
-                {
-                  die("could not query the database: <br />".$db->error);
-                }
-
-                $percacc=0;
-                $colour='';
-                while ($row6 = $result6->fetch_object()) 
-                {
-                  
-                  if (is_null($row6->aktifitas0) || $row6->aktifitas0 == '') {
-                  } else {
-                    $target0 = $row6->target0;
-                    $hasil0 = $row6->hasil0;
-
-                    if ($row6->satuan0 == 'Waktu (Hari)') {
-                      $perc0 = $target0/$hasil0*100;
-                    } else {
-                      $perc0 = $hasil0/$target0*100;
-                    }
-                    
-                    $percacc = $perc0;
-                  }
-                  
-                  if (is_null($row6->aktifitas1) || $row6->aktifitas1 == '') {
-                  } else {
-                    $target1 = $row6->target1;
-                    $hasil1 = $row6->hasil1;
-                    
-                    if ($row6->satuan1 == 'Waktu (Hari)') {
-                      $perc1 = $target1/$hasil1*100;
-                    } else {
-                      $perc1 = $hasil1/$target1*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1)/2;
-                  }
-
-                  if (is_null($row6->aktifitas2) || $row6->aktifitas2 == '') {
-                  } else {
-                    $target2 = $row6->target2;
-                    $hasil2 = $row6->hasil2;
-                    
-                    if ($row6->satuan2 == 'Waktu (Hari)') {
-                      $perc2 = $target2/$hasil2*100;
-                    } else {
-                      $perc2 = $hasil2/$target2*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2)/3;
-                  }
-
-                  if (is_null($row6->aktifitas3) || $row6->aktifitas3 == '') {
-                  } else {
-                    $target3 = $row6->target3;
-                    $hasil3 = $row6->hasil3;
-                    
-                    if ($row6->satuan3 == 'Waktu (Hari)') {
-                      $perc3 = $target3/$hasil3*100;
-                    } else {
-                      $perc3 = $hasil3/$target3*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3)/4;
-                  }
-
-                  if (is_null($row6->aktifitas4) || $row6->aktifitas4 == '') {
-                  } else {
-                    $target4 = $row6->target4;
-                    $hasil4 = $row6->hasil4;
-
-                    if ($row6->satuan4 == 'Waktu (Hari)') {
-                      $perc4 = $target4/$hasil4*100;
-                    } else {
-                      $perc4 = $hasil4/$target4*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3 + $perc5)/5;
-                  }
-                  if ($percacc > 75) {
-                    $colour = 'green';
-                  } else if ($percacc > 50 && $percacc < 76) {
-                    $colour = 'orange';
-                  } else {
-                    $colour = 'red';
-                  }
-                  ?>
-                  <!-- widget start here -->
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span><a href="lihat_logbook.php%20?id=<?php echo $row6->id ?>"><?php echo $row6->nama_program; ?></a></span>
-                      
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div class="progress-bar bg-<?php echo $colour?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo round($percacc); ?>%;">
-                          <span class="sr-only"><?php echo round($percacc); ?>% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span><?php echo round($percacc); ?> %</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <!-- end of widget -->
-                  <?php
-                }
-
-                ?>
-
-              </div>
-            </div>
-          </div>
-          <!-- end of ended program achievement -->
+          
 
         </div>
       </div>

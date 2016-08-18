@@ -43,7 +43,7 @@ else
   <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.css" rel="stylesheet">
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
@@ -82,208 +82,210 @@ else
 
           <div class="clearfix"></div>
 
-<?php
+          <?php
           include('sidebar.php');
-?>
+          ?>
 
-</div>
-</div>
-
-<!-- top navigation -->
-<div class="top_nav">
-  <div class="nav_menu">
-    <nav>
-      <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        </div>
       </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-            <span class=" fa fa-angle-down"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <li><a href="javascript:;"> Profile</a></li>
-            <li>
-              <a href="javascript:;">
-                <span class="badge bg-red pull-right">50%</span>
-                <span>Settings</span>
-              </a>
-            </li>
-            <li><a href="javascript:;">Help</a></li>
-            <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-          </ul>
-        </li>
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-      </ul>
-    </nav>
-  </div>
-</div>
-<!-- /top navigation -->
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="javascript:;"> Profile</a></li>
+                  <li>
+                    <a href="javascript:;">
+                      <span class="badge bg-red pull-right">50%</span>
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li><a href="javascript:;">Help</a></li>
+                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
 
-<!-- page content -->
-<div class="right_col" role="main">
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
 
-  <div class="col-md-12 col-sm-12 col-xs-12">
-    <div class="x_panel tile">
-      <div class="x_title">
-        <h2>Leaderboard</h2>
-        <ul class="nav navbar-right panel_toolbox">
-          <li><a href="post_leaderboard2.php"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i> Simpan Leaderboard dan Akhiri Sesi</button></a>
-          </li>
-        </ul>
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-12"></div>
+        <div class="col-md-8 col-sm-8 col-xs-12" >
+          <div class="x_panel tile">
+            <div class="x_title">
+              <h2 style="font-size: 180%;"><b>Leaderboard</b></h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a href="post_leaderboard2.php"><button class="btn btn-success btn-xs"><i class="fa fa-check"></i> Simpan Leaderboard dan Akhiri Sesi</button></a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+              <!-- insert content here -->
+              <table class="table table-hover" style="font-size: 130%;">
+                <thead>
+                  <tr>
+                    <th>
+                      No
+                    </th>
+                    <th>
+                      Nama
+                    </th>
+                    <th>
+                      Poin
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  $i = 1;
+                  while ($row4 = $result4->fetch_object()) {
+                    ?>
+                    <tr>
+                      <td>
+                        <?php echo $i; $i++;?>
+                      </td>
+                      <td>
+                        <?php echo $row4->nama; ?>
+                      </td>
+                      <td>
+                        <?php echo $row4->sumtot; ?>
+                      </td>
+                    </tr>
+                    <?php
+
+                  }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      <!-- /page content -->
+
+      <!-- footer content -->
+      <footer>
+        <div class="pull-right">
+          Corporate Culture Information Systems - GA
+        </div>
         <div class="clearfix"></div>
-      </div>
-      <div class="x_content">
-        <!-- insert content here -->
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>
-                No
-              </th>
-              <th>
-                Nama
-              </th>
-              <th>
-                Poin
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php 
-            $i = 1;
-            while ($row4 = $result4->fetch_object()) {
-              ?>
-              <tr>
-                <td>
-                  <?php echo $i; $i++;?>
-                </td>
-                <td>
-                  <?php echo $row4->nama; ?>
-                </td>
-                <td>
-                  <?php echo $row4->sumtot; ?>
-                </td>
-              </tr>
-              <?php
-              
-            }
-            ?>
-          </tbody>
-        </table>
-      </div>
+      </footer>
+      <!-- /footer content -->
     </div>
   </div>
-</div>
-<!-- /page content -->
 
-<!-- footer content -->
-<footer>
-  <div class="pull-right">
-    Corporate Culture Information Systems - GA
-  </div>
-  <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-</div>
-</div>
+  <!-- jQuery -->
+  <script src="../vendors/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap -->
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- FastClick -->
+  <script src="../vendors/fastclick/lib/fastclick.js"></script>
+  <!-- NProgress -->
+  <script src="../../vendors/nprogress/nprogress.js"></script>
+  <!-- Chart.js -->
+  <script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
+  <!-- gauge.js -->
+  <script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
+  <!-- bootstrap-progressbar -->
+  <script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <!-- iCheck -->
+  <script src="../vendors/iCheck/icheck.min.js"></script>
+  <!-- Skycons -->
+  <script src="../../vendors/skycons/skycons.js"></script>
+  <!-- Flot -->
+  <script src="../../vendors/Flot/jquery.flot.js"></script>
+  <script src="../../vendors/Flot/jquery.flot.pie.js"></script>
+  <script src="../../vendors/Flot/jquery.flot.time.js"></script>
+  <script src="../../vendors/Flot/jquery.flot.stack.js"></script>
+  <script src="../../vendors/Flot/jquery.flot.resize.js"></script>
+  <!-- Flot plugins -->
+  <script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+  <script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+  <script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
+  <!-- DateJS -->
+  <script src="../../vendors/DateJS/build/date.js"></script>
+  <!-- JQVMap -->
+  <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
+  <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+  <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+  <!-- bootstrap-daterangepicker -->
+  <script src="js/moment/moment.min.js"></script>
+  <script src="js/datepicker/daterangepicker.js"></script>
 
-<!-- jQuery -->
-<script src="../vendors/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap -->
-<script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="../vendors/fastclick/lib/fastclick.js"></script>
-<!-- NProgress -->
-<script src="../../vendors/nprogress/nprogress.js"></script>
-<!-- Chart.js -->
-<script src="../../vendors/Chart.js/dist/Chart.min.js"></script>
-<!-- gauge.js -->
-<script src="../../vendors/gauge.js/dist/gauge.min.js"></script>
-<!-- bootstrap-progressbar -->
-<script src="../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-<!-- iCheck -->
-<script src="../vendors/iCheck/icheck.min.js"></script>
-<!-- Skycons -->
-<script src="../../vendors/skycons/skycons.js"></script>
-<!-- Flot -->
-<script src="../../vendors/Flot/jquery.flot.js"></script>
-<script src="../../vendors/Flot/jquery.flot.pie.js"></script>
-<script src="../../vendors/Flot/jquery.flot.time.js"></script>
-<script src="../../vendors/Flot/jquery.flot.stack.js"></script>
-<script src="../../vendors/Flot/jquery.flot.resize.js"></script>
-<!-- Flot plugins -->
-<script src="../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-<script src="../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-<script src="../../vendors/flot.curvedlines/curvedLines.js"></script>
-<!-- DateJS -->
-<script src="../../vendors/DateJS/build/date.js"></script>
-<!-- JQVMap -->
-<script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
-<script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-<script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="js/moment/moment.min.js"></script>
-<script src="js/datepicker/daterangepicker.js"></script>
+  <!-- Custom Theme Scripts -->
+  <script src="../build/js/custom.min.js"></script>
 
-<!-- Custom Theme Scripts -->
-<script src="../build/js/custom.min.js"></script>
+  <!-- Flot -->
+  <script>
+    $(document).ready(function() {
+      var data1 = [
+      [gd(2012, 1, 1), <?php echo $cek1;?>],
+      [gd(2012, 2, 2), <?php echo $cek2;?>],
+      [gd(2012, 3, 3), <?php echo $cek3;?>],
+      [gd(2012, 4, 4), 65530],
+      [gd(2012, 5, 5), 43356],
+      [gd(2012, 6, 6), 54689]
+      ];
 
-<!-- Flot -->
-<script>
-  $(document).ready(function() {
-    var data1 = [
-    [gd(2012, 1, 1), <?php echo $cek1;?>],
-    [gd(2012, 2, 2), <?php echo $cek2;?>],
-    [gd(2012, 3, 3), <?php echo $cek3;?>],
-    [gd(2012, 4, 4), 65530],
-    [gd(2012, 5, 5), 43356],
-    [gd(2012, 6, 6), 54689]
-    ];
-
-    var data2 = [
-    [gd(2012, 1, 1), 10000],
-    [gd(2012, 2, 2), 30000],
-    [gd(2012, 3, 3), 50000],
-    [gd(2012, 4, 4), 35000],
-    [gd(2012, 5, 5), 20000],
-    [gd(2012, 6, 6), 60000]
-    ];
-    $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
-      data1, data2
-      ], {
-        series: {
-          lines: {
-            show: false,
-            fill: true
+      var data2 = [
+      [gd(2012, 1, 1), 10000],
+      [gd(2012, 2, 2), 30000],
+      [gd(2012, 3, 3), 50000],
+      [gd(2012, 4, 4), 35000],
+      [gd(2012, 5, 5), 20000],
+      [gd(2012, 6, 6), 60000]
+      ];
+      $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+        data1, data2
+        ], {
+          series: {
+            lines: {
+              show: false,
+              fill: true
+            },
+            splines: {
+              show: true,
+              tension: 0.4,
+              lineWidth: 1,
+              fill: 0.4
+            },
+            points: {
+              radius: 0,
+              show: true
+            },
+            shadowSize: 2
           },
-          splines: {
-            show: true,
-            tension: 0.4,
-            lineWidth: 1,
-            fill: 0.4
+          grid: {
+            verticalLines: true,
+            hoverable: true,
+            clickable: true,
+            tickColor: "#d5d5d5",
+            borderWidth: 1,
+            color: '#fff'
           },
-          points: {
-            radius: 0,
-            show: true
-          },
-          shadowSize: 2
-        },
-        grid: {
-          verticalLines: true,
-          hoverable: true,
-          clickable: true,
-          tickColor: "#d5d5d5",
-          borderWidth: 1,
-          color: '#fff'
-        },
-        colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
-        xaxis: {
-          tickColor: "rgba(51, 51, 51, 0.06)",
-          mode: "time",
-          tickSize: [1, "month"],
+          colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+          xaxis: {
+            tickColor: "rgba(51, 51, 51, 0.06)",
+            mode: "time",
+            tickSize: [1, "month"],
             //tickLength: 10,
             axisLabel: "Date",
             axisLabelUseCanvas: true,
@@ -298,192 +300,192 @@ else
           tooltip: false
         });
 
-    function gd(year, month, day) {
-      return new Date(year, month - 1, day).getTime();
-    }
-  });
-</script>
-<!-- /Flot -->
-
-<!-- JQVMap -->
-<script>
-  $(document).ready(function(){
-    $('#world-map-gdp').vectorMap({
-      map: 'world_en',
-      backgroundColor: null,
-      color: '#ffffff',
-      hoverOpacity: 0.7,
-      selectedColor: '#666666',
-      enableZoom: true,
-      showTooltip: true,
-      values: sample_data,
-      scaleColors: ['#E6F2F0', '#149B7E'],
-      normalizeFunction: 'polynomial'
-    });
-  });
-</script>
-<!-- /JQVMap -->
-
-<!-- Skycons -->
-<script>
-  $(document).ready(function() {
-    var icons = new Skycons({
-      "color": "#73879C"
-    }),
-    list = [
-    "clear-day", "clear-night", "partly-cloudy-day",
-    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
-    "fog"
-    ],
-    i;
-
-    for (i = list.length; i--;)
-      icons.set(list[i], list[i]);
-
-    icons.play();
-  });
-</script>
-<!-- /Skycons -->
-
-<!-- Doughnut Chart -->
-<script>
-  $(document).ready(function(){
-    var options = {
-      legend: false,
-      responsive: false
-    };
-
-    new Chart(document.getElementById("canvas1"), {
-      type: 'doughnut',
-      tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-      data: {
-        labels: [
-        "Economy Class",
-        "Business Class",
-        "First Class"
-        ],
-        datasets: [{
-          data: [3412, 768, 475],
-          backgroundColor: [
-          "#9B59B6",
-          "#26B99A",
-          "#3498DB"
-          ],
-          hoverBackgroundColor: [
-          "#B370CF",
-          "#36CAAB",
-          "#49A9EA"
-          ]
-        }]
-      },
-      options: options
-    });
-  });
-</script>
-<!-- /Doughnut Chart -->
-
-<!-- bootstrap-daterangepicker -->
-<script>
-  $(document).ready(function() {
-
-    var cb = function(start, end, label) {
-      console.log(start.toISOString(), end.toISOString(), label);
-      $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-    };
-
-    var optionSet1 = {
-      startDate: moment().subtract(29, 'days'),
-      endDate: moment(),
-      minDate: '01/01/2012',
-      maxDate: '12/31/2015',
-      dateLimit: {
-        days: 60
-      },
-      showDropdowns: true,
-      showWeekNumbers: true,
-      timePicker: false,
-      timePickerIncrement: 1,
-      timePicker12Hour: true,
-      ranges: {
-        'Today': [moment(), moment()],
-        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-      },
-      opens: 'left',
-      buttonClasses: ['btn btn-default'],
-      applyClass: 'btn-small btn-primary',
-      cancelClass: 'btn-small',
-      format: 'MM/DD/YYYY',
-      separator: ' to ',
-      locale: {
-        applyLabel: 'Submit',
-        cancelLabel: 'Clear',
-        fromLabel: 'From',
-        toLabel: 'To',
-        customRangeLabel: 'Custom',
-        daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        firstDay: 1
+      function gd(year, month, day) {
+        return new Date(year, month - 1, day).getTime();
       }
+    });
+  </script>
+  <!-- /Flot -->
+
+  <!-- JQVMap -->
+  <script>
+    $(document).ready(function(){
+      $('#world-map-gdp').vectorMap({
+        map: 'world_en',
+        backgroundColor: null,
+        color: '#ffffff',
+        hoverOpacity: 0.7,
+        selectedColor: '#666666',
+        enableZoom: true,
+        showTooltip: true,
+        values: sample_data,
+        scaleColors: ['#E6F2F0', '#149B7E'],
+        normalizeFunction: 'polynomial'
+      });
+    });
+  </script>
+  <!-- /JQVMap -->
+
+  <!-- Skycons -->
+  <script>
+    $(document).ready(function() {
+      var icons = new Skycons({
+        "color": "#73879C"
+      }),
+      list = [
+      "clear-day", "clear-night", "partly-cloudy-day",
+      "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+      "fog"
+      ],
+      i;
+
+      for (i = list.length; i--;)
+        icons.set(list[i], list[i]);
+
+      icons.play();
+    });
+  </script>
+  <!-- /Skycons -->
+
+  <!-- Doughnut Chart -->
+  <script>
+    $(document).ready(function(){
+      var options = {
+        legend: false,
+        responsive: false
+      };
+
+      new Chart(document.getElementById("canvas1"), {
+        type: 'doughnut',
+        tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+        data: {
+          labels: [
+          "Economy Class",
+          "Business Class",
+          "First Class"
+          ],
+          datasets: [{
+            data: [3412, 768, 475],
+            backgroundColor: [
+            "#9B59B6",
+            "#26B99A",
+            "#3498DB"
+            ],
+            hoverBackgroundColor: [
+            "#B370CF",
+            "#36CAAB",
+            "#49A9EA"
+            ]
+          }]
+        },
+        options: options
+      });
+    });
+  </script>
+  <!-- /Doughnut Chart -->
+
+  <!-- bootstrap-daterangepicker -->
+  <script>
+    $(document).ready(function() {
+
+      var cb = function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+      };
+
+      var optionSet1 = {
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment(),
+        minDate: '01/01/2012',
+        maxDate: '12/31/2015',
+        dateLimit: {
+          days: 60
+        },
+        showDropdowns: true,
+        showWeekNumbers: true,
+        timePicker: false,
+        timePickerIncrement: 1,
+        timePicker12Hour: true,
+        ranges: {
+          'Today': [moment(), moment()],
+          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        opens: 'left',
+        buttonClasses: ['btn btn-default'],
+        applyClass: 'btn-small btn-primary',
+        cancelClass: 'btn-small',
+        format: 'MM/DD/YYYY',
+        separator: ' to ',
+        locale: {
+          applyLabel: 'Submit',
+          cancelLabel: 'Clear',
+          fromLabel: 'From',
+          toLabel: 'To',
+          customRangeLabel: 'Custom',
+          daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+          monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          firstDay: 1
+        }
+      };
+      $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+      $('#reportrange').daterangepicker(optionSet1, cb);
+      $('#reportrange').on('show.daterangepicker', function() {
+        console.log("show event fired");
+      });
+      $('#reportrange').on('hide.daterangepicker', function() {
+        console.log("hide event fired");
+      });
+      $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
+        console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+      });
+      $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
+        console.log("cancel event fired");
+      });
+      $('#options1').click(function() {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+      });
+      $('#options2').click(function() {
+        $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+      });
+      $('#destroy').click(function() {
+        $('#reportrange').data('daterangepicker').remove();
+      });
+    });
+  </script>
+  <!-- /bootstrap-daterangepicker -->
+
+  <!-- gauge.js -->
+  <script>
+    var opts = {
+      lines: 12,
+      angle: 0,
+      lineWidth: 0.4,
+      pointer: {
+        length: 0.75,
+        strokeWidth: 0.042,
+        color: '#1D212A'
+      },
+      limitMax: 'false',
+      colorStart: '#1ABC9C',
+      colorStop: '#1ABC9C',
+      strokeColor: '#F0F3F3',
+      generateGradient: true
     };
-    $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-    $('#reportrange').daterangepicker(optionSet1, cb);
-    $('#reportrange').on('show.daterangepicker', function() {
-      console.log("show event fired");
-    });
-    $('#reportrange').on('hide.daterangepicker', function() {
-      console.log("hide event fired");
-    });
-    $('#reportrange').on('apply.daterangepicker', function(ev, picker) {
-      console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
-    });
-    $('#reportrange').on('cancel.daterangepicker', function(ev, picker) {
-      console.log("cancel event fired");
-    });
-    $('#options1').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
-    });
-    $('#options2').click(function() {
-      $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
-    });
-    $('#destroy').click(function() {
-      $('#reportrange').data('daterangepicker').remove();
-    });
-  });
-</script>
-<!-- /bootstrap-daterangepicker -->
+    var target = document.getElementById('foo'),
+    gauge = new Gauge(target).setOptions(opts);
 
-<!-- gauge.js -->
-<script>
-  var opts = {
-    lines: 12,
-    angle: 0,
-    lineWidth: 0.4,
-    pointer: {
-      length: 0.75,
-      strokeWidth: 0.042,
-      color: '#1D212A'
-    },
-    limitMax: 'false',
-    colorStart: '#1ABC9C',
-    colorStop: '#1ABC9C',
-    strokeColor: '#F0F3F3',
-    generateGradient: true
-  };
-  var target = document.getElementById('foo'),
-  gauge = new Gauge(target).setOptions(opts);
+    gauge.maxValue = 6000;
+    gauge.animationSpeed = 32;
+    gauge.set(3200);
+    gauge.setTextField(document.getElementById("gauge-text"));
+  </script>
+  <!-- /gauge.js -->
 
-  gauge.maxValue = 6000;
-  gauge.animationSpeed = 32;
-  gauge.set(3200);
-  gauge.setTextField(document.getElementById("gauge-text"));
-</script>
-<!-- /gauge.js -->
-
-<script type="text/javascript">
+  <script type="text/javascript">
     //set timezone
     <?php date_default_timezone_set('Asia/Jakarta'); ?>
     //buat object date berdasarkan waktu di server

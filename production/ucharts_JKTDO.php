@@ -18,7 +18,7 @@ else
 }
 ?>
 <?php
-  include('../connect_db.php');
+include('../connect_db.php');
   $query = "SELECT kode_unit FROM logbook WHERE end >= curdate() AND kode_dir='JKTDO' GROUP BY kode_unit"; //yg udah submit dan belom kelar
   $query1 = "SELECT kode FROM unit WHERE kode_dir='JKTDO' GROUP BY kode";
   $query3 = "SELECT id FROM logbook WHERE start <= curdate() and end >= curdate() and kode_dir='JKTDO'";
@@ -47,166 +47,166 @@ else
   {
     $value1=$running/$tersubmit;
   }
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="icon" href="../assets/gi.ico" />
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- Meta, title, CSS, favicons, etc. -->
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>simulasi</title>
-
-  <!-- Bootstrap -->
-  <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <!-- NProgress -->
-  <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-  <!-- iCheck -->
-  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
-  <!-- bootstrap-progressbar -->
-  <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-  <!-- JQVMap -->
-  <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-
-  <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
-
-  <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
-</head>
-
-<body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
-
-  <!-- QUERIES -->
-  <?php
-  $coba = $_SESSION['id'];
-  include_once('Connection/dbconn.php');
-  $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
-  $result2 = $db->query( $query2 );
-  if (!$result2)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row2 = $result2->fetch_object();
   ?>
-  <div class="container body">
-    <div class="main_container">
-      <div class="col-md-3 left_col">
-        <div class="left_col scroll-view">
-          <div class="navbar nav_title" style="border: 0;">
-            <a href="index.php" class="site_title"><span>Garuda Indonesia</span></a>
-          </div>
-          <h5 style="text-indent:12px;color:white;">Admin Page</h5>
-          <div class="clearfix"></div>
 
-          <?php
-          include('sidebar.php');
-?>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <link rel="icon" href="../assets/gi.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        </div>
-      </div>
+    <title>simulasi</title>
 
-      <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav>
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/print.css" media="print" />
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
+
+    <!-- QUERIES -->
+    <?php
+    $coba = $_SESSION['id'];
+    include_once('Connection/dbconn.php');
+    $query2 = "SELECT * FROM user WHERE username = '$coba'";
+    //execute the query
+    $result2 = $db->query( $query2 );
+    if (!$result2)
+    {
+      die("could not query the database: <br />".$db->error);
+    }
+    $row2 = $result2->fetch_object();
+    ?>
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.php" class="site_title"><span>Garuda Indonesia</span></a>
             </div>
+            <h5 style="text-indent:12px;color:white;">Admin Page</h5>
+            <div class="clearfix"></div>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-                  <span class=" fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
-                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
+            <?php
+            include('sidebar.php');
+            ?>
 
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
                       </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li role="presentation">
-                <a href="javascript:window.print()">
-                  <i class="fa fa-print"></i>
-                </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li role="presentation">
+                  <a href="javascript:window.print()">
+                    <i class="fa fa-print"></i>
+                  </a>
                 </li>
               </ul>
             </nav>
@@ -214,163 +214,162 @@ else
         </div>
         <!-- /top navigation -->
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
+        <body class="nav-md">
+          <div class="container body">
+            <div class="main_container">
 
-        <!-- page content -->
-        <div class="right_col" role="main">
-            <div class="page-title">
+              <!-- page content -->
+              <div class="right_col" role="main">
+                <div class="page-title">
 
-          <!-- top tiles -->
-          <div class="row">
-          <div class="col-md-12 col-sm-6 col-xs-14">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Program Terlaksana - JKTDO</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  
-                  <div class="row tile_count">
-                    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
-                      <span class="count_top"><i class="fa fa-check-square-o"></i> JKTDO - Operations</span>
-                      <div class="count"><?php echo $total_JKTDO; ?></div>
+                  <!-- top tiles -->
+                  <div class="row">
+                    <div class="col-md-12 col-sm-6 col-xs-14">
+                      <div class="x_panel">
+                        <div class="x_title">
+                          <h2>Program Terlaksana - JKTDO</h2>
+                          <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                          </ul>
+                          <div class="clearfix"></div>
+                        </div>
+                        
+                        <div class="row tile_count">
+                          <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-check-square-o"></i> JKTDO - Operations</span>
+                            <div class="count"><?php echo $total_JKTDO; ?></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                </div>
+                <!-- /top tiles -->
+
+                <!-- CHART unit submit-->
+                <div class="col-md-6 col-sm-6 col-xs-14">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>Discipline Report (JKTDO)</h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <div id="submitted" style="height:370px;"></div>
+                    </div>
+                    <div class="tile-stats">
+                      <div class="count"><?php echo ''.$tersubmit.'/'.$total.' Unit di JKTDO';?></div>
                     </div>
                   </div>
-                  </div>
-                  </div>
-                  </div>
-          <!-- /top tiles -->
+                </div>
+                <!-- CHART unit submit-->
 
-            <!-- CHART unit submit-->
-              <div class="col-md-6 col-sm-6 col-xs-14">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Unit yang sudah submit (JKTDO)</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                <!-- CHART unit sedang berjalan -->
+                <div class="col-md-6 col-sm-6 col-xs-14">
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>Execution Report (JKTDO)</h2>
+                      <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                          <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                      </ul>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <div id="running" style="height:370px;"></div>
+                    </div>
+                    <div class="tile-stats">
+                      <div class="count"><?php echo ''.$running.'/'.$tersubmit.' Unit di JKTDO';?></div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- CHART unit sedang berjalan-->
+
+                <!-- CHART unit sudah menyelesaikan -->
+                <div class="row">
+                  <div class="col-md-12 col-sm-8 col-xs-12">
+                    <div class="x_panel">
+                      <div class="x_title">
+                        <h2>Per Unit</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                           </li>
-                          <li><a href="#">Settings 2</a>
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                              <li><a href="#">Settings 1</a>
+                              </li>
+                              <li><a href="#">Settings 2</a>
+                              </li>
+                            </ul>
+                          </li>
+                          <li><a class="close-link"><i class="fa fa-close"></i></a>
                           </li>
                         </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <div id="submitted" style="height:370px;"></div>
-                  </div>
-                  <div class="tile-stats">
-                  <div class="count"><?php echo ''.$tersubmit.'/'.$total.' Unit di JKTDO';?></div>
-                  <h3>Sudah submit</h3>
-                </div>
-                </div>
-              </div>
-            <!-- CHART unit submit-->
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="x_content">
 
-            <!-- CHART unit sedang berjalan -->
-              <div class="col-md-6 col-sm-6 col-xs-14">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Unit dalam progress (JKTDO)</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <div id="running" style="height:370px;"></div>
-                  </div>
-                  <div class="tile-stats">
-                  <div class="count"><?php echo ''.$running.'/'.$tersubmit.' Unit di JKTDO';?></div>
-                  <h3>Sedang running program</h3>
-                </div>
-                </div>
-              </div>
-            <!-- CHART unit sedang berjalan-->
+                        <div id="mainb" style="height:350px;"></div>
 
-            <!-- CHART unit sudah menyelesaikan -->
-            <div class="row">
-              <div class="col-md-12 col-sm-8 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Per Unit</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-                    <div id="mainb" style="height:350px;"></div>
-
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <!-- CHART unit sudah menyelesaikan -->
+                
               </div>
-              </div>
-            <!-- CHART unit sudah menyelesaikan -->
-            
-            </div>
             </div>
           </div>
         </div>
         <!-- /page content -->
 
         <!-- footer content -->
-                                                              <footer>
-                                                                <div class="pull-right">
-                                                                  Corporate Culture Information Systems - GA
-                                                                </div>
-                                                                <div class="clearfix"></div>
-                                                              </footer>
-                                                              <!-- /footer content -->
+        <footer>
+          <div class="pull-right">
+            Corporate Culture Information Systems - GA
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
 
@@ -391,215 +390,215 @@ else
 
     <script>
       var theme = {
-          color: [
-              '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
-              '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
-          ],
+        color: [
+        '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+        '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+        ],
 
-          title: {
-              itemGap: 8,
-              textStyle: {
-                  fontWeight: 'normal',
-                  color: '#408829'
-              }
-          },
-
-          dataRange: {
-              color: ['#1f610a', '#97b58d']
-          },
-
-          toolbox: {
-              color: ['#408829', '#408829', '#408829', '#408829']
-          },
-
-          tooltip: {
-              backgroundColor: 'rgba(0,0,0,0.5)',
-              axisPointer: {
-                  type: 'line',
-                  lineStyle: {
-                      color: '#408829',
-                      type: 'dashed'
-                  },
-                  crossStyle: {
-                      color: '#408829'
-                  },
-                  shadowStyle: {
-                      color: 'rgba(200,200,200,0.3)'
-                  }
-              }
-          },
-
-          dataZoom: {
-              dataBackgroundColor: '#eee',
-              fillerColor: 'rgba(64,136,41,0.2)',
-              handleColor: '#408829'
-          },
-          grid: {
-              borderWidth: 0
-          },
-
-          categoryAxis: {
-              axisLine: {
-                  lineStyle: {
-                      color: '#408829'
-                  }
-              },
-              splitLine: {
-                  lineStyle: {
-                      color: ['#eee']
-                  }
-              }
-          },
-
-          valueAxis: {
-              axisLine: {
-                  lineStyle: {
-                      color: '#408829'
-                  }
-              },
-              splitArea: {
-                  show: true,
-                  areaStyle: {
-                      color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
-                  }
-              },
-              splitLine: {
-                  lineStyle: {
-                      color: ['#eee']
-                  }
-              }
-          },
-          timeline: {
-              lineStyle: {
-                  color: '#408829'
-              },
-              controlStyle: {
-                  normal: {color: '#408829'},
-                  emphasis: {color: '#408829'}
-              }
-          },
-
-          k: {
-              itemStyle: {
-                  normal: {
-                      color: '#68a54a',
-                      color0: '#a9cba2',
-                      lineStyle: {
-                          width: 1,
-                          color: '#408829',
-                          color0: '#86b379'
-                      }
-                  }
-              }
-          },
-          map: {
-              itemStyle: {
-                  normal: {
-                      areaStyle: {
-                          color: '#ddd'
-                      },
-                      label: {
-                          textStyle: {
-                              color: '#c12e34'
-                          }
-                      }
-                  },
-                  emphasis: {
-                      areaStyle: {
-                          color: '#99d2dd'
-                      },
-                      label: {
-                          textStyle: {
-                              color: '#c12e34'
-                          }
-                      }
-                  }
-              }
-          },
-          force: {
-              itemStyle: {
-                  normal: {
-                      linkStyle: {
-                          strokeColor: '#408829'
-                      }
-                  }
-              }
-          },
-          chord: {
-              padding: 4,
-              itemStyle: {
-                  normal: {
-                      lineStyle: {
-                          width: 1,
-                          color: 'rgba(128, 128, 128, 0.5)'
-                      },
-                      chordStyle: {
-                          lineStyle: {
-                              width: 1,
-                              color: 'rgba(128, 128, 128, 0.5)'
-                          }
-                      }
-                  },
-                  emphasis: {
-                      lineStyle: {
-                          width: 1,
-                          color: 'rgba(128, 128, 128, 0.5)'
-                      },
-                      chordStyle: {
-                          lineStyle: {
-                              width: 1,
-                              color: 'rgba(128, 128, 128, 0.5)'
-                          }
-                      }
-                  }
-              }
-          },
-          gauge: {
-              startAngle: 225,
-              endAngle: -45,
-              axisLine: {
-                  show: true,
-                  lineStyle: {
-                      color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
-                      width: 8
-                  }
-              },
-              axisTick: {
-                  splitNumber: 10,
-                  length: 12,
-                  lineStyle: {
-                      color: 'auto'
-                  }
-              },
-              axisLabel: {
-                  textStyle: {
-                      color: 'auto'
-                  }
-              },
-              splitLine: {
-                  length: 18,
-                  lineStyle: {
-                      color: 'auto'
-                  }
-              },
-              pointer: {
-                  length: '90%',
-                  color: 'auto'
-              },
-              title: {
-                  textStyle: {
-                      color: '#333'
-                  }
-              },
-              detail: {
-                  textStyle: {
-                      color: 'auto'
-                  }
-              }
-          },
+        title: {
+          itemGap: 8,
           textStyle: {
-              fontFamily: 'Arial, Verdana, sans-serif'
+            fontWeight: 'normal',
+            color: '#408829'
           }
+        },
+
+        dataRange: {
+          color: ['#1f610a', '#97b58d']
+        },
+
+        toolbox: {
+          color: ['#408829', '#408829', '#408829', '#408829']
+        },
+
+        tooltip: {
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          axisPointer: {
+            type: 'line',
+            lineStyle: {
+              color: '#408829',
+              type: 'dashed'
+            },
+            crossStyle: {
+              color: '#408829'
+            },
+            shadowStyle: {
+              color: 'rgba(200,200,200,0.3)'
+            }
+          }
+        },
+
+        dataZoom: {
+          dataBackgroundColor: '#eee',
+          fillerColor: 'rgba(64,136,41,0.2)',
+          handleColor: '#408829'
+        },
+        grid: {
+          borderWidth: 0
+        },
+
+        categoryAxis: {
+          axisLine: {
+            lineStyle: {
+              color: '#408829'
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: ['#eee']
+            }
+          }
+        },
+
+        valueAxis: {
+          axisLine: {
+            lineStyle: {
+              color: '#408829'
+            }
+          },
+          splitArea: {
+            show: true,
+            areaStyle: {
+              color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: ['#eee']
+            }
+          }
+        },
+        timeline: {
+          lineStyle: {
+            color: '#408829'
+          },
+          controlStyle: {
+            normal: {color: '#408829'},
+            emphasis: {color: '#408829'}
+          }
+        },
+
+        k: {
+          itemStyle: {
+            normal: {
+              color: '#68a54a',
+              color0: '#a9cba2',
+              lineStyle: {
+                width: 1,
+                color: '#408829',
+                color0: '#86b379'
+              }
+            }
+          }
+        },
+        map: {
+          itemStyle: {
+            normal: {
+              areaStyle: {
+                color: '#ddd'
+              },
+              label: {
+                textStyle: {
+                  color: '#c12e34'
+                }
+              }
+            },
+            emphasis: {
+              areaStyle: {
+                color: '#99d2dd'
+              },
+              label: {
+                textStyle: {
+                  color: '#c12e34'
+                }
+              }
+            }
+          }
+        },
+        force: {
+          itemStyle: {
+            normal: {
+              linkStyle: {
+                strokeColor: '#408829'
+              }
+            }
+          }
+        },
+        chord: {
+          padding: 4,
+          itemStyle: {
+            normal: {
+              lineStyle: {
+                width: 1,
+                color: 'rgba(128, 128, 128, 0.5)'
+              },
+              chordStyle: {
+                lineStyle: {
+                  width: 1,
+                  color: 'rgba(128, 128, 128, 0.5)'
+                }
+              }
+            },
+            emphasis: {
+              lineStyle: {
+                width: 1,
+                color: 'rgba(128, 128, 128, 0.5)'
+              },
+              chordStyle: {
+                lineStyle: {
+                  width: 1,
+                  color: 'rgba(128, 128, 128, 0.5)'
+                }
+              }
+            }
+          }
+        },
+        gauge: {
+          startAngle: 225,
+          endAngle: -45,
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
+              width: 8
+            }
+          },
+          axisTick: {
+            splitNumber: 10,
+            length: 12,
+            lineStyle: {
+              color: 'auto'
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: 'auto'
+            }
+          },
+          splitLine: {
+            length: 18,
+            lineStyle: {
+              color: 'auto'
+            }
+          },
+          pointer: {
+            length: '90%',
+            color: 'auto'
+          },
+          title: {
+            textStyle: {
+              color: '#333'
+            }
+          },
+          detail: {
+            textStyle: {
+              color: 'auto'
+            }
+          }
+        },
+        textStyle: {
+          fontFamily: 'Arial, Verdana, sans-serif'
+        }
       };
 
       var echartGauge = echarts.init(document.getElementById('submitted'), theme);
@@ -631,9 +630,9 @@ else
             show: true,
             lineStyle: {
               color: [
-                [0.49, '#ff4500'],
-                [0.74, '#ffcc00'],
-                [1, 'lightgreen']
+              [0.49, '#ff4500'],
+              [0.74, '#ffcc00'],
+              [1, 'lightgreen']
               ],
               width: 30
             }
@@ -653,13 +652,13 @@ else
             formatter: function(v) {
               switch (v + '') {
                 case '30':
-                  return 'c';
+                return 'c';
                 case '60':
-                  return 'b';
+                return 'b';
                 case '90':
-                  return 'a';
+                return 'a';
                 default:
-                  return '';
+                return '';
               }
             },
             textStyle: {
@@ -738,9 +737,9 @@ else
             show: true,
             lineStyle: {
               color: [
-                [0.49, '#ff4500'],
-                [0.74, '#ffcc00'],
-                [1, 'lightgreen']
+              [0.49, '#ff4500'],
+              [0.74, '#ffcc00'],
+              [1, 'lightgreen']
               ],
               width: 30
             }
@@ -760,13 +759,13 @@ else
             formatter: function(v) {
               switch (v + '') {
                 case '30':
-                  return 'c';
+                return 'c';
                 case '60':
-                  return 'b';
+                return 'b';
                 case '90':
-                  return 'a';
+                return 'a';
                 default:
-                  return '';
+                return '';
               }
             },
             textStyle: {
@@ -818,35 +817,35 @@ else
 
       <?php
 
-        $submitted_JKTOS_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOS' AND start > curdate()";
-        $running_JKTOS_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOS' AND start <= curdate() and end >= curdate()";
-        $ended_JKTOS_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOS' AND end < curdate()";
-        $submitted_JKTOG_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOG' AND start > curdate()";
-        $running_JKTOG_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOG' AND start <= curdate() and end >= curdate()";
-        $ended_JKTOG_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOG' AND end < curdate()";
-        $submitted_JKTOF_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOF' AND start > curdate()";
-        $running_JKTOF_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOF' AND start <= curdate() and end >= curdate()";
-        $ended_JKTOF_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOF' AND end < curdate()";
+      $submitted_JKTOS_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOS' AND start > curdate()";
+      $running_JKTOS_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOS' AND start <= curdate() and end >= curdate()";
+      $ended_JKTOS_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOS' AND end < curdate()";
+      $submitted_JKTOG_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOG' AND start > curdate()";
+      $running_JKTOG_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOG' AND start <= curdate() and end >= curdate()";
+      $ended_JKTOG_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOG' AND end < curdate()";
+      $submitted_JKTOF_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOF' AND start > curdate()";
+      $running_JKTOF_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOF' AND start <= curdate() and end >= curdate()";
+      $ended_JKTOF_query= "SELECT kode_unit FROM logbook WHERE kode_unit='JKTOF' AND end < curdate()";
 
-        $submitted_JKTOS_result=$db->query($submitted_JKTOS_query);
-        $running_JKTOS_result=$db->query($running_JKTOS_query);
-        $ended_JKTOS_result=$db->query($ended_JKTOS_query);
-        $submitted_JKTOG_result=$db->query($submitted_JKTOG_query);
-        $running_JKTOG_result=$db->query($running_JKTOG_query);
-        $ended_JKTOG_result=$db->query($ended_JKTOG_query);        
-        $submitted_JKTOF_result=$db->query($submitted_JKTOF_query);
-        $running_JKTOF_result=$db->query($running_JKTOF_query);
-        $ended_JKTOF_result=$db->query($ended_JKTOF_query);
+      $submitted_JKTOS_result=$db->query($submitted_JKTOS_query);
+      $running_JKTOS_result=$db->query($running_JKTOS_query);
+      $ended_JKTOS_result=$db->query($ended_JKTOS_query);
+      $submitted_JKTOG_result=$db->query($submitted_JKTOG_query);
+      $running_JKTOG_result=$db->query($running_JKTOG_query);
+      $ended_JKTOG_result=$db->query($ended_JKTOG_query);        
+      $submitted_JKTOF_result=$db->query($submitted_JKTOF_query);
+      $running_JKTOF_result=$db->query($running_JKTOF_query);
+      $ended_JKTOF_result=$db->query($ended_JKTOF_query);
 
-        $submitted_JKTOS=mysqli_num_rows($submitted_JKTOS_result);
-        $running_JKTOS=mysqli_num_rows($running_JKTOS_result);
-        $ended_JKTOS=mysqli_num_rows($ended_JKTOS_result);
-        $submitted_JKTOG=mysqli_num_rows($submitted_JKTOG_result);
-        $running_JKTOG=mysqli_num_rows($running_JKTOG_result);
-        $ended_JKTOG=mysqli_num_rows($ended_JKTOG_result);       
-        $submitted_JKTOF=mysqli_num_rows($submitted_JKTOF_result);
-        $running_JKTOF=mysqli_num_rows($running_JKTOF_result);
-        $ended_JKTOF=mysqli_num_rows($ended_JKTOF_result);
+      $submitted_JKTOS=mysqli_num_rows($submitted_JKTOS_result);
+      $running_JKTOS=mysqli_num_rows($running_JKTOS_result);
+      $ended_JKTOS=mysqli_num_rows($ended_JKTOS_result);
+      $submitted_JKTOG=mysqli_num_rows($submitted_JKTOG_result);
+      $running_JKTOG=mysqli_num_rows($running_JKTOG_result);
+      $ended_JKTOG=mysqli_num_rows($ended_JKTOG_result);       
+      $submitted_JKTOF=mysqli_num_rows($submitted_JKTOF_result);
+      $running_JKTOF=mysqli_num_rows($running_JKTOF_result);
+      $ended_JKTOF=mysqli_num_rows($ended_JKTOF_result);
       ?>
 
       var echartBar = echarts.init(document.getElementById('mainb'), theme);
@@ -936,4 +935,4 @@ else
     </script>
 
   </body>
-</html>
+  </html>

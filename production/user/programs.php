@@ -260,7 +260,7 @@ else
                     }
                     echo'<tr>';
                     echo'<td>'.$i.'</td>';
-                    echo'<td>'.$row->nama_program.$status2;
+                    echo'<td>'.$row->nama_program;
                     echo'<td>'.$row->start.'</td>';
                     echo'<td>'.$row->end.'</td>';
                     echo'<td>'.$status.'</td>';
