@@ -138,44 +138,9 @@ else
           <!-- menu profile quick info -->
 
 
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../index.php">Dashboard</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Logbook <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../show_form.php">Daftar Logbook</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../form_running.php">Program sedang berjalan</a></li>
-                    <li><a href="../form_unstarted.php">Program akan dilaksanakan</a></li>
-                    <li><a href="../form_ended.php">Program telah terlaksana</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="aktivitas.php">Daftar Aktivitas</a></li>
-                    <li><a href="rank.php">Ranking Pegawai</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="user_management.php">Daftar User</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- /sidebar menu -->
+          <?php
+          include('sidebar.php');
+          ?>
 
         </div>
       </div>

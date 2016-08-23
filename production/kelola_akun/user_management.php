@@ -51,13 +51,7 @@ else
   //connect database
   include('../connect_db.php');
   $id = $_SESSION['id'];
-  $query = "SELECT * FROM logbook WHERE id = '$id'";
-  $result = $db->query($query);
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row = $result->fetch_object();
+  
   $coba = $_SESSION['id'];
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
     //execute the query
@@ -73,13 +67,16 @@ else
     die("Could not connect to the database: <br />".$db->connect_error);
   }
   //asign a query
-  $query = " SELECT * FROM user WHERE role=1";
+  
+  $num_rec_per_page=10;
+  if (isset($_GET["page"])) { $page  = $_GET["page"]; } else { $page=1; }; 
+  $start_from = ($page-1) * $num_rec_per_page; 
+
+  $query = "SELECT * FROM user WHERE role!=-1 LIMIT $start_from, $num_rec_per_page";
   //execute the query
   $result = $db->query( $query );
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
+
+  
   ?>
 </head>
 
@@ -99,44 +96,9 @@ else
           <!-- menu profile quick info -->
 
 
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../index.php">Dashboard</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Logbook <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../show_form.php">Daftar Logbook</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="../form_running.php">Program sedang berjalan</a></li>
-                    <li><a href="../form_unstarted.php">Program akan dilaksanakan</a></li>
-                    <li><a href="../form_ended.php">Program telah terlaksana</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="aktivitas.php">Daftar Aktivitas</a></li>
-                    <li><a href="rank.php">Ranking Pegawai</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="user_management.php">Daftar User</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- /sidebar menu -->
+          <?php
+          include('sidebar.php');
+          ?>
 
         </div>
       </div>
@@ -289,11 +251,20 @@ else
                       $row3 = $result3->fetch_object();
                       if(!$row3){
                         echo'<tr>';
-                        echo'<td>'.$i.'</td>';
+                        echo'<td>'.$row->iduser.'</td>';
                         echo'<td>'.$row->username.'</td>';
                         echo'<td>'.$row->password.'</td>';
-                        echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
-                        echo'<td>'.$row->unit.' - '.$row2->nama.'</td>';
+                        if (isset($row->dir)) {
+                          echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
+                        } else {
+                          echo "<td>-</td>";
+                        }
+                        if (isset($row->unit)) {
+                          echo'<td>'.$row->unit.' - '.$row2->nama.'</td>';
+                        } else {
+                          echo "<td>-</td>";
+                        }
+                        
                         echo'<td>-</td>';
                         echo'<td><a href="edit_username.php?iduser='.$row->iduser.'"><button class="btn btn-primary btn-xs">Edit Username</button></a></td>';
                         echo'<td><a href="edit_password.php?iduser='.$row->iduser.'"><button class="btn btn-xs">Edit Password</button></a></td>';
@@ -301,7 +272,7 @@ else
                         $i++;
                       }else{
                         echo'<tr>';
-                        echo'<td>'.$i.'</td>';
+                        echo'<td>'.$row->iduser.'</td>';
                         echo'<td>'.$row->username.'</td>';
                         echo'<td>'.$row->password.'</td>';
                         echo'<td>'.$row->dir.' - '.$row1->nama.'</td>';
@@ -315,11 +286,23 @@ else
 
                     }
                     $result->free();
-                    $db->close();
                     ?>
                   </tbody>
                 </table>
-                
+                <?php
+                $queque = "SELECT * FROM user WHERE role!=-1"; 
+                $rs_result1 = $db->query($queque); //run the query
+                $total_records1 = $rs_result1->num_rows;  //count number of records
+                $total_pages = ceil($total_records1 / $num_rec_per_page); 
+
+                echo "<a href='user_management.php?page=1'>".'|<'."</a> "; // Goto 1st page  
+
+                for ($i=1; $i<=$total_pages; $i++) { 
+                  echo "<a href='user_management.php?page=".$i."'>".$i."</a> "; 
+                }; 
+                echo "<a href='user_management.php?page=$total_pages'>".'>|'."</a> "; // Goto last page
+                ?>
+
                 <div class="clearfix"></div>
               </div>
               <div class="x_content">
@@ -329,7 +312,7 @@ else
           </div>
           <!-- end of running program achievement -->
 
-          
+
 
         </div>
       </div>

@@ -142,10 +142,22 @@ $_SESSION['notif']=$id;
                   <tbody>
                     <tr>
                       <?php
-                      $sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='2'");
+                      $sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='1'");
                       $row2=mysql_fetch_array($sql2);
                       ?>
                       <th>1</th>
+                      <td><?php echo "$row2[ca_detail]"; ?></td>
+                      <td style="vertical-align:middle;text-align:center">-</td>
+                      <td style="vertical-align:middle;text-align:center">-</td>
+                      <td style="vertical-align:middle;text-align:center">-</td>
+                    </tr>
+                    <tr>
+
+                      <?php
+                      $sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='2'");
+                      $row2=mysql_fetch_array($sql2);
+                      ?>
+                      <th>2</th>
                       <td><?php echo "$row2[ca_detail]"; ?></td>
 
                       <?php 
@@ -193,7 +205,7 @@ $_SESSION['notif']=$id;
                       $sql3=mysql_query("SELECT * FROM ca_performance_event where id_ca='3'");
                       $row3=mysql_fetch_array($sql3);
                       ?>
-                      <th>2</th>
+                      <th>3</th>
                       <td><?php echo "$row3[ca_detail]"; ?></td>
                       <?php 
                       $cekisi3=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -235,7 +247,7 @@ $_SESSION['notif']=$id;
                       $sql4=mysql_query("SELECT * FROM ca_performance_event where id_ca='4'");
                       $row4=mysql_fetch_array($sql4);
                       ?>
-                      <th>3</th>
+                      <th>4</th>
                       <td><?php echo "$row4[ca_detail]"; ?></td>
                       <?php 
                       $cekisi4=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -277,7 +289,7 @@ $_SESSION['notif']=$id;
                       $sql5=mysql_query("SELECT * FROM ca_performance_event where id_ca='5'");
                       $row5=mysql_fetch_array($sql5);
                       ?>
-                      <th>4</th>
+                      <th>5</th>
                       <td><?php echo "$row5[ca_detail]"; ?></td>
                       <?php 
                       $cekisi5=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -319,7 +331,7 @@ $_SESSION['notif']=$id;
                       $sql6=mysql_query("SELECT * FROM ca_performance_event where id_ca='6'");
                       $row6=mysql_fetch_array($sql6);
                       ?>
-                      <th>5</th>
+                      <th>6</th>
                       <td><?php echo "$row6[ca_detail]"; ?></td>
                       <?php 
                       $cekisi6=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -361,7 +373,7 @@ $_SESSION['notif']=$id;
                       $sql7=mysql_query("SELECT * FROM ca_performance_event where id_ca='7'");
                       $row7=mysql_fetch_array($sql7);
                       ?>
-                      <th>6</th>
+                      <th>7</th>
                       <td><?php echo "$row7[ca_detail]"; ?></td>
                       <?php 
                       $cekisi7=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -403,7 +415,7 @@ $_SESSION['notif']=$id;
                       $sql8=mysql_query("SELECT * FROM ca_performance_event where id_ca='8'");
                       $row8=mysql_fetch_array($sql8);
                       ?>
-                      <th>7</th>
+                      <th>8</th>
                       <td><?php echo "$row8[ca_detail]"; ?></td>
                       <?php 
                       $cekisi8=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -445,7 +457,7 @@ $_SESSION['notif']=$id;
                       $sql9=mysql_query("SELECT * FROM ca_performance_event where id_ca='9'");
                       $row9=mysql_fetch_array($sql9);
                       ?>
-                      <th>8</th>
+                      <th>9</th>
                       <td><?php echo "$row9[ca_detail]"; ?></td>
                       <?php 
                       $cekisi9=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");
@@ -487,7 +499,7 @@ $_SESSION['notif']=$id;
                       $sql10=mysql_query("SELECT * FROM ca_performance_event where id_ca='10'");
                       $row10=mysql_fetch_array($sql10);
                       ?>
-                      <th>9</th>
+                      <th>10</th>
                       <td><?php echo "$row10[ca_detail]"; ?></td>
                       <?php 
                       $cekisi10=mysql_query("SELECT * FROM ca_performance_upload where username='$xx'");

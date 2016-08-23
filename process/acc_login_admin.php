@@ -22,7 +22,7 @@ if(isset($_POST['id']) && isset($_POST['password']))
 		{
 			$message = "ID atau Password anda salah.\\nSilahkan coba kembali.";
   			echo "<script type='text/javascript'>alert('$message');
-  			window.location = '../pages/login_admin.php';
+  			window.location = '../admin.php';
   			</script>";
   			exit;
 		}

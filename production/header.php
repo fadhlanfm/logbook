@@ -2,13 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="../assets/gi.ico" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- Meta, title, CSS, favicons, etc. -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Gentellela Alela! | </title>
+	<title>Garuda Indonesia</title>
 
 	<!-- Bootstrap -->
 	<link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -105,12 +106,19 @@
       <li><a href="ca_performance_table.php">CA Update</a></li>
     </ul>
   </li>
-  <li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
+  <li><a><i class="fa fa-lightbulb-o"></i> Innovation Index <span class="fa fa-chevron-down"></span></a>
    <ul class="nav child_menu">
-    <li><a href="form_running.php">Program sedang berjalan</a></li>
-    <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
-    <li><a href="form_ended.php">Program telah terlaksana</a></li>
+    <li><a href="innovation_index.php">Innovation Index</a></li>
+    <li><a href="innovation_score.php">Penilaian</a></li>
+    <li><a href="innovation_library.php">Library</a></li>
   </ul>
+</li>
+<li><a><i class="fa fa-tasks"></i> Program <span class="fa fa-chevron-down"></span></a>
+ <ul class="nav child_menu">
+  <li><a href="form_running.php">Program sedang berjalan</a></li>
+  <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
+  <li><a href="form_ended.php">Program telah terlaksana</a></li>
+</ul>
 </li>
 <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
   <ul class="nav child_menu">

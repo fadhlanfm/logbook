@@ -109,86 +109,86 @@ else
           <div class="clearfix"></div>
 
           <!-- menu profile quick info -->
-<?php  
+          <?php  
           include('header.php');
           ?>
 
-      <!-- page content -->
-      <div class="right_col" role="main">
-        <!-- bookmark -->
-        <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel tile">
-            <div class="x_title">
-              <h2><b>Leaderboard</b></h2>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <!-- rank table -->
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      Nomor
-                    </th>
-                    <th>
-                      Nama
-                    </th>
-                    <th>
-                      Total Poin
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php
-                $query6 = "SELECT a.id_user, a.nama, sum(a.freq*b.poin) sumtot FROM subaktivitas b LEFT join (select c.id_user, d.nama, c.id_subaktivitas, c.freq from aktivitas_employee c join employee d ON c.id_user = d.iduser) a ON a.id_subaktivitas = b.id_subaktivitas and b.default2 = 1 group by id_user order by sumtot desc";
+          <!-- page content -->
+          <div class="right_col" role="main">
+            <!-- bookmark -->
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel tile">
+                  <div class="x_title">
+                    <h2><b>Leaderboard</b></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <!-- rank table -->
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>
+                            Nomor
+                          </th>
+                          <th>
+                            Pegawai
+                          </th>
+                          <th>
+                            Total Poin
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $query6 = "SELECT a.id_user, a.nama, sum(a.freq*b.poin) sumtot FROM subaktivitas b LEFT join (select c.id_user, d.nama, c.id_subaktivitas, c.freq from aktivitas_employee c join employee d ON c.id_user = d.iduser) a ON a.id_subaktivitas = b.id_subaktivitas and b.default2 = 1 group by id_user order by sumtot desc";
               //execute the query
-                $result6 = $db->query( $query6 );
+                        $result6 = $db->query( $query6 );
 
               // echo $row->username;
-                if (!$result6)
-                {
-                  die("could not query the database: <br />".$db->error);
-                }
-                $i = 1;
-                while ($row6 = $result6->fetch_object()) {
-                  ?>
-                  <tr>
-                    <td>
-                    <?php echo $i; $i++; ?>
-                    </td>
-                    <td>
-                    <?php echo $row6->nama; ?>
-                    </td>
-                    <td>
-                    <?php echo $row6->sumtot; ?>
-                    </td>
-                  </tr>
-                  <?php
-                }
-                ?>
-                </tbody>
-              </table>
+                        if (!$result6)
+                        {
+                          die("could not query the database: <br />".$db->error);
+                        }
+                        $i = 1;
+                        while ($row6 = $result6->fetch_object()) {
+                          ?>
+                          <tr>
+                            <td>
+                              <?php echo $i; $i++; ?>
+                            </td>
+                            <td>
+                              <?php echo $row6->nama; ?>
+                            </td>
+                            <td>
+                              <?php echo $row6->sumtot; ?>
+                            </td>
+                          </tr>
+                          <?php
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-
-      </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- /page content -->
+    <!-- /page content -->
 
-<!-- footer content -->
-<footer class="hidden-print">
-  <div class="pull-right">
-    Corporate Culture Information Systems - GA
+    <!-- footer content -->
+    <footer class="hidden-print">
+      <div class="pull-right">
+        Corporate Culture Information Systems - GA
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
   </div>
-  <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-</div>
 </div>
 
 <!-- jQuery -->

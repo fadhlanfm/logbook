@@ -225,22 +225,8 @@ else
                 ?></h2><?php
                 if ($kelompok == 'All') {
                   include('poin/poin_.php');
-                } else if ($kelompok == 'JKTDC') {
-                  include('poin/poin_JKTDC.php');
-                } else if ($kelompok == 'JKTDE') {
-                  include('poin/poin_JKTDE.php');
-                } else if ($kelompok == 'JKTDF') {
-                  include('poin/poin_JKTDF.php');
-                } else if ($kelompok == 'JKTDG') {
-                  include('poin/poin_JKTDG.php');
-                } else if ($kelompok == 'JKTDI') {
-                  include('poin/poin_JKTDI.php');
-                } else if ($kelompok == 'JKTDN') {
-                  include('poin/poin_JKTDN.php');
-                } else if ($kelompok == 'JKTDO') {
-                  include('poin/poin_JKTDO.php');
-                } else if ($kelompok == 'JKTDZ') {
-                  include('poin/poin_JKTDZ.php');
+                } else {
+                  include('poin/poin_unit.php');
                 }
                 ?>
 

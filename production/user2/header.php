@@ -10,7 +10,7 @@
                 </li>
                 <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="aktivitas.php">Isi Aktivitas</a></li>
+                    <li><a href="hal_aktivitas.php">Isi Aktivitas</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>

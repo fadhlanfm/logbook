@@ -1,14 +1,13 @@
 <?php
-// session checker
 session_start();
-if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
+if(isset($_SESSION['role']) && $_SESSION['role'] == 0)
 { 
 
-} else if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-  header ('Location: ../page_403.php');
+} else if (isset($_SESSION['role']) && $_SESSION['role'] == -1) {
+  header ('Location: ../../page_403.php');
   exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 1) {
-  header ('Location: ../page_403.php');
+  header ('Location: ../../page_403.php');
   exit;
 }
 else
@@ -28,7 +27,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Edit Username</title>
+  <title>Beranda</title>
 
   <!-- Bootstrap -->
   <link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -45,259 +44,215 @@ else
 
   <!-- Custom Theme Style -->
   <link href="../../build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
   <!-- QUERIES -->
   <?php
-  //connect database
-  include('../connect_db.php');
-  $id = $_SESSION['id'];
-  $query = "SELECT * FROM logbook WHERE id = '$id'";
-  $result = $db->query($query);
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row = $result->fetch_object();
-  $coba = $_SESSION['id'];
+  include('../Connection/dbconn.php');
 
+  $coba = $_SESSION['id'];
   $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
+        //execute the query
   $result2 = $db->query( $query2 );
   if (!$result2)
   {
     die("could not query the database: <br />".$db->error);
   }
   $row2 = $result2->fetch_object();
-  $db = new mysqli($db_host,$db_username, $db_password, $db_database);
-  if ($db->connect_errno)
+  $unit2 = $row2->unit;
+  $idid = $row2->iduser;
+
+  $query = "SELECT * FROM employee JOIN user WHERE employee.iduser=user.iduser and employee.iduser='$idid'";
+        //execute the query
+  $result = $db->query( $query );
+  $row = $result->fetch_object();
+  // echo $row->username;
+  if (!$result)
   {
-    die("Could not connect to the database: <br />".$db->connect_error);
+    die("could not query the database: <br />".$db->error);
   }
-  if (isset($_GET['iduser']))
+
+
+  $query3 = "SELECT * FROM aktivitas_employee a JOIN subaktivitas b WHERE a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid'  and b.default2=1";
+        //execute the query
+  $result3 = $db->query( $query3 );
+  
+  // echo $row->username;
+  if (!$result)
   {
-    $iduser=$_GET['iduser'];
-    include('../connect_db.php');
-    $db = new mysqli($db_host, $db_username, $db_password, $db_database);
-    if ($db->connect_errno)
-    {
-      die("Could not connect to the database: <br />". $db->connect_error);
-    }
-    $query = "SELECT * FROM user WHERE iduser='$iduser'";
-    $result = $db->query($query);
-    if(!$result)
-    {
-      die("Could not query the database: <br />". $db->error);
-    }
-    $row=$result->fetch_object();
+    die("could not query the database: <br />".$db->error);
   }
+
+  // mencari total poin user
+  $totalpoin = 0;
+  $freq;
+  $poin;
+  while ( $row3 = $result3->fetch_object()) {
+    $freq = $row3->freq;
+    $poin = $row3->poin;
+    $poinakt = $freq * $poin;
+    $totalpoin = $totalpoin + $poinakt;
+  }
+  
   ?>
-  <script>
-    function goBack() {
-      window.history.back();
-    }
-    //function for dependent dropdown option
-    function getSecond(val)
-    {
-      $.ajax({
-        type: "POST",
-        url: "get_second.php",
-        data: 'kode='+val,
-        success: function(data) {
-          $("#second-choice").html(data);
-        }
-      });
-    }
-
-    function getThird(val)
-    {
-      $.ajax({
-        type: "POST",
-        url: "get_third.php",
-        data: 'kode='+val,
-        success: function(data) {
-          $("#third-choice").html(data);
-        }
-      });
-    }
-  </script>
-</head>
-
-<body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
 
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="../index.php" class="site_title"> <span>Garuda Indonesia</span></a>
+            <a href="index.php" class="site_title"> <span>Garuda Indonesia</span></a>
           </div>
-          <h5 style="text-indent:12px;">Admin Page</h5>
 
           <div class="clearfix"></div>
 
           <!-- menu profile quick info -->
 
 
-          <?php
-          include('sidebar.php');
+          <?php  
+          include('header.php');
           ?>
 
-        </div>
-      </div>
-
-      <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav>
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
-
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-                  <span class="fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
-                  <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
-
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li role="presentation">
-                <a href="javascript:window.print()">
-                  <i class="fa fa-print"></i>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <!-- /top navigation -->
-
-      <!-- page content -->
-      <div class="right_col" role="main">
-        <div class="x_panel">
-          <div class="x_title">
-            <h2>Edit Username</h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a><button onclick="goBack()" class="btn btn-primary btn-xs">Kembali</button></a>
-              </li>
-
-            </ul>
-            <div class="clearfix">
-            </div>
-          </div>
-
-          <div class="x_content">
+          <!-- page content -->
+          <div class="right_col" role="main">
+            <!-- bookmark -->
             <div class="row">
+              <!-- Penilaian diri -->
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel tile">
+                  <div class="x_title">
 
-              <!-- start of running program achievement -->
-              <form method="POST" action="acc_edit_username.php">
-                <div class="form-group">
-                  <label for="iduser">Unique ID : </label>
-                  <input class="form-control" type="text" readonly id="iduser" name="iduser" value="<?php if (isset($row->iduser)) {echo $row->iduser;} else {echo '';}?>"></input><br>
-                  <label for="iduser">Old Username : </label>
-                  <input class="form-control" type="text" readonly id="oldpass" value="<?php if (isset($row->username)) {echo $row->username;} else {echo '';}?>"></input>
-                  <br>
-                  <label for="newpass">New Username : </label>
-                  <input type="text" class="form-control" id="newpass" placeholder="new username" name="username"></input><br>
-                  <input class="btn btn-success" type="submit" value="Submit"></input>
+                    <div class="col-md-11 col-sm-11 col-xs-11">
+                    <h2><b>Penilaian 360</b></h2>
+                    </div>
+                    <ul class="nav navbar-right panel_toolbox pull-right">
+                      <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content" >
+                    <div class="row">
+                      <h2>Penilaian diri</h2>
+                      <div class="col-md-8 col-xs-12">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th colspan="2">
+                                Nama
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td width="80%">
+                                Boy Jeremi Mantini
+                              </td>
+                              <td width="20%">
+                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="row">
+                      <h2>Penilaian Atasan</h2>
+                      <div class="col-md-8 col-xs-12">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th colspan="2">
+                                Nama
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td width="80%">
+                                Boy Jeremi Mantini
+                              </td>
+                              <td width="20%">
+                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="row">
+                      <h2>Penilaian Peers</h2>
+                      <div class="col-md-8 col-xs-12">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th colspan="2">
+                                Nama
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td width="80%">
+                                Boy Jeremi Mantini
+                              </td>
+                              <td width="20%">
+                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="row">
+                      <h2>Penilaian Bawahan</h2>
+                      <div class="col-md-8 col-xs-12">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th colspan="2">
+                                Nama
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td width="80%">
+                                Boy Jeremi Mantini
+                              </td>
+                              <td width="20%">
+                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </form>
-              <!-- end of running program achievement -->
+              </div>
+
             </div>
           </div>
-          
-
         </div>
       </div>
     </div>
-  </div>
-</div>
-<!-- /page content -->
+    <!-- /page content -->
 
-<!-- footer content -->
-<footer>
-  <div class="pull-right">
-    Corporate Culture Information Systems - GA
+    <!-- footer content -->
+    <footer class="hidden-print">
+      <div class="pull-right">
+        Corporate Culture Information Systems - GA
+      </div>
+      <div class="clearfix"></div>
+    </footer>
+    <!-- /footer content -->
   </div>
-  <div class="clearfix"></div>
-</footer>
-<!-- /footer content -->
-</div>
 </div>
 
 <!-- jQuery -->
