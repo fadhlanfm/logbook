@@ -68,33 +68,15 @@ else
         //execute the query
   $result = $db->query( $query );
   $row = $result->fetch_object();
-  // echo $row->username;
+  //echo $row->NIP;
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
+  $rot = $row->rot;
+  $dir = $row->dir;
+  $unit = $row->unit;
 
-
-  $query3 = "SELECT * FROM aktivitas_employee a JOIN subaktivitas b WHERE a.id_subaktivitas=b.id_subaktivitas and a.id_user='$idid'  and b.default2=1";
-        //execute the query
-  $result3 = $db->query( $query3 );
-  
-  // echo $row->username;
-  if (!$result)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-
-  // mencari total poin user
-  $totalpoin = 0;
-  $freq;
-  $poin;
-  while ( $row3 = $result3->fetch_object()) {
-    $freq = $row3->freq;
-    $poin = $row3->poin;
-    $poinakt = $freq * $poin;
-    $totalpoin = $totalpoin + $poinakt;
-  }
   
   ?>
 
@@ -125,7 +107,7 @@ else
                   <div class="x_title">
 
                     <div class="col-md-11 col-sm-11 col-xs-11">
-                    <h2><b>Penilaian 360</b></h2>
+                      <h2><b>Penilaian 360</b></h2>
                     </div>
                     <ul class="nav navbar-right panel_toolbox pull-right">
                       <li class="pull-right"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -134,56 +116,96 @@ else
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content" >
-                    <div class="row">
-                      <h2>Penilaian diri</h2>
-                      <div class="col-md-8 col-xs-12">
-                        <table class="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th colspan="2">
-                                Nama
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td width="80%">
-                                Boy Jeremi Mantini
-                              </td>
-                              <td width="20%">
-                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+
+
+                    <!-- Penilaian Diri -->
+                    <?php
+                    if ($rot != 5) {
+                      ?>
+
+                      <div class="row">
+                        <h2>Penilaian diri</h2>
+                        <div class="col-md-8 col-xs-12">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th colspan="2">
+                                  Nama
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td width="80%">
+                                  <?php echo $row->nama ?>
+                                </td>
+                                <td width="20%">
+                                  <a href="coba.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row->iduser; ?>&deg=1"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
-                    <div class="ln_solid"></div>
-                    <div class="row">
-                      <h2>Penilaian Atasan</h2>
-                      <div class="col-md-8 col-xs-12">
-                        <table class="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th colspan="2">
-                                Nama
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td width="80%">
-                                Boy Jeremi Mantini
-                              </td>
-                              <td width="20%">
-                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                      <div class="ln_solid"></div>
+
+
+                      <?php
+                    }
+                    ?>
+
+
+                    <!-- Penilaian Atasan -->
+
+                    <?php
+                    if ($rot == 0 || $rot == 9) {
+                      # code...
+                    } else {
+                      $atas='';
+                      $rotatas = $rot;
+                      while (isset($atas)) {
+                        $rotatas = $rotatas-1;
+                        $q1 = "SELECT * FROM employee where rot='$rotatas' AND dir='$dir' AND unit='$unit'";
+                        $r1 = $db->query($q1);
+                        $row1 = $r1->fetch_object();
+                        if (isset($row1->nama)) {
+                          $atas = $row1->nama;
+                          break;
+                        }
+                      }
+                      ?>
+                      <div class="row">
+                        <h2>Penilaian Atasan</h2>
+                        <div class="col-md-8 col-xs-12">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th colspan="2">
+                                  Nama
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td width="80%">
+                                  <?php echo $atas; ?>
+                                </td>
+                                <td width="20%">
+                                  <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
-                    <div class="ln_solid"></div>
+                      <div class="ln_solid"></div>
+                      <?php    
+                    }
+
+                    ?>
+                    
+                    <!-- Penilaian Peers -->
+                    
                     <div class="row">
                       <h2>Penilaian Peers</h2>
                       <div class="col-md-8 col-xs-12">
@@ -210,6 +232,9 @@ else
                     </div>
                     <div class="ln_solid"></div>
                     <div class="row">
+
+                      <!-- Penilaian Bawahan -->
+
                       <h2>Penilaian Bawahan</h2>
                       <div class="col-md-8 col-xs-12">
                         <table class="table table-bordered">
