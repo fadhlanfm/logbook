@@ -135,80 +135,7 @@ else
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
                   <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
-
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="../images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
               <li role="presentation">
@@ -247,7 +174,7 @@ else
                         <td><?php echo $row->nama_program;?></td>
                       </tr>
                       <tr>
-                        <th>Periode Program</th>
+                        <th>Periode Program <small>(YYYY-MM-DD)</small></th>
                         <td><?php echo $row->start.' s/d '.$row->end; ?></td>
                       </tr>
                   </table>
@@ -268,15 +195,15 @@ else
                         <th>Target</th>
                         <td><ol>
                               <?php
-                                if ($row->target_flyhi0!==0) {
+                                if ($row->target_flyhi0!=='') {
                                   echo '<li>'.$row->target_flyhi0.' '.$row->satuan_flyhi0.'</li>';
-                                }if ($row->target_flyhi1!==0) {
+                                }if ($row->target_flyhi1!=='') {
                                   echo '<li>'.$row->target_flyhi1.' '.$row->satuan_flyhi1.'</li>';
-                                }if ($row->target_flyhi2!==0) {
+                                }if ($row->target_flyhi2!=='') {
                                   echo '<li>'.$row->target_flyhi2.' '.$row->satuan_flyhi2.'</li>';
-                                }if ($row->target_flyhi3!==0) {
+                                }if ($row->target_flyhi3!=='') {
                                   echo '<li>'.$row->target_flyhi3.' '.$row->satuan_flyhi3.'</li>';
-                                }if ($row->target_flyhi4!==0) {
+                                }if ($row->target_flyhi4!=='') {
                                   echo '<li>'.$row->target_flyhi4.' '.$row->satuan_flyhi4.'</li>';
                                 }
                               ?>
@@ -346,15 +273,15 @@ else
                         <td><span class="fa fa-check-square-o"></span>&ensp;Financial</td>
                         <td><ol>
                               <?php
-                                if ($row->target_financial0!==0) {
+                                if ($row->target_financial0!=='') {
                                   echo '<li>'.$row->target_financial0.' '.$row->satuan_financial0.'</li>';
-                                }if ($row->target_financial1!==0) {
+                                }if ($row->target_financial1!=='') {
                                   echo '<li>'.$row->target_financial1.' '.$row->satuan_financial1.'</li>';
-                                }if ($row->target_financial2!==0) {
+                                }if ($row->target_financial2!=='') {
                                   echo '<li>'.$row->target_financial2.' '.$row->satuan_financial2.'</li>';
-                                }if ($row->target_financial3!==0) {
+                                }if ($row->target_financial3!=='') {
                                   echo '<li>'.$row->target_financial3.' '.$row->satuan_financial3.'</li>';
-                                }if ($row->target_financial4!==0) {
+                                }if ($row->target_financial4!=='') {
                                   echo '<li>'.$row->target_financial4.' '.$row->satuan_financial4.'</li>';
                                 }
                               ?>
@@ -371,15 +298,15 @@ else
                         <td><span class="fa fa-check-square-o"></span>&ensp;Customer</td>
                         <td><ol>
                               <?php
-                                if ($row->target_customer0!==0) {
+                                if ($row->target_customer0!=='') {
                                   echo '<li>'.$row->target_customer0.' '.$row->satuan_customer0.'</li>';
-                                }if ($row->target_customer1!==0) {
+                                }if ($row->target_customer1!=='') {
                                   echo '<li>'.$row->target_customer1.' '.$row->satuan_customer1.'</li>';
-                                }if ($row->target_customer2!==0) {
+                                }if ($row->target_customer2!=='') {
                                   echo '<li>'.$row->target_customer2.' '.$row->satuan_customer2.'</li>';
-                                }if ($row->target_customer3!==0) {
+                                }if ($row->target_customer3!=='') {
                                   echo '<li>'.$row->target_customer3.' '.$row->satuan_customer3.'</li>';
-                                }if ($row->target_customer4!==0) {
+                                }if ($row->target_customer4!=='') {
                                   echo '<li>'.$row->target_customer4.' '.$row->satuan_customer4.'</li>';
                                 }
                               ?>
@@ -396,15 +323,15 @@ else
                         <td><span class="fa fa-check-square-o"></span>&ensp;Internal Business Process</td>
                         <td><ol>
                               <?php
-                                if ($row->target_ibp0!==0) {
+                                if ($row->target_ibp0!=='') {
                                   echo '<li>'.$row->target_ibp0.' '.$row->satuan_ibp0.'</li>';
-                                }if ($row->target_ibp1!==0) {
+                                }if ($row->target_ibp1!=='') {
                                   echo '<li>'.$row->target_ibp1.' '.$row->satuan_ibp1.'</li>';
-                                }if ($row->target_ibp2!==0) {
+                                }if ($row->target_ibp2!=='') {
                                   echo '<li>'.$row->target_ibp2.' '.$row->satuan_ibp2.'</li>';
-                                }if ($row->target_ibp3!==0) {
+                                }if ($row->target_ibp3!=='') {
                                   echo '<li>'.$row->target_ibp3.' '.$row->satuan_ibp3.'</li>';
-                                }if ($row->target_ibp4!==0) {
+                                }if ($row->target_ibp4!=='') {
                                   echo '<li>'.$row->target_ibp4.' '.$row->satuan_ibp4.'</li>';
                                 }
                               ?>
@@ -421,15 +348,15 @@ else
                         <td><span class="fa fa-check-square-o"></span>&ensp;Learning & Growth</td>
                         <td><ol>
                               <?php
-                                if ($row->target_lg0!==0) {
+                                if ($row->target_lg0!=='') {
                                   echo '<li>'.$row->target_lg0.' '.$row->satuan_lg0.'</li>';
-                                }if ($row->target_lg1!==0) {
+                                }if ($row->target_lg1!=='') {
                                   echo '<li>'.$row->target_lg1.' '.$row->satuan_lg1.'</li>';
-                                }if ($row->target_lg2!==0) {
+                                }if ($row->target_lg2!=='') {
                                   echo '<li>'.$row->target_lg2.' '.$row->satuan_lg2.'</li>';
-                                }if ($row->target_lg3!==0) {
+                                }if ($row->target_lg3!=='') {
                                   echo '<li>'.$row->target_lg3.' '.$row->satuan_lg3.'</li>';
-                                }if ($row->target_lg4!==0) {
+                                }if ($row->target_lg4!=='') {
                                   echo '<li>'.$row->target_lg4.' '.$row->satuan_lg4.'</li>';
                                 }
                               ?>
@@ -447,15 +374,15 @@ else
               </div>
             </div>
             <?php }else{?>
-            <div class="col-md-6 col-sm-8 col-xs-12">
+            <div class="col-md-12 col-sm-8 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
-                  <h2>Running Program Summary</h2>
+                  <h2 align="center">Unit Belum Mempunyai Program Aktif</h2>
 
                   <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
-                  <a>Tidak Ada Program Sedang Berjalan</a>
+                <div class="x_content" align="center">
+                  <a href="programs.php"><button class="btn btn-primary btn-xs" style="padding: 10px 100px"><strong>&ensp;Cek Disini</strong></button></a>
                 </div>
               </div>
             </div>

@@ -60,7 +60,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>simulasi</title>
+  <title>Dashboard Branch Perspective: SINAM</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -108,114 +108,89 @@ else
 
           
 
-          <?php
-          include('sidebar.php');
-          ?>
+          <!-- sidebar menu -->
+          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+              
+              <ul class="nav side-menu">
+                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="index.php">Overall</a></li>
+                    <li><a href="ucharts_JKTDZ.php">JKTDZ - President & CEO</a></li>
+                    <li><a href="ucharts_JKTDI.php">JKTDI - Human Capital & Corporate Affairs</a></li>
+                    <li><a href="ucharts_JKTDF.php">JKTDF - Finance & Risk Management</a></li>
+                    <li><a href="ucharts_JKTDG.php">JKTDG - Cargo</a></li>
+                    <li><a href="ucharts_JKTDO.php">JKTDO - Operations </a></li>
+                    <li><a href="ucharts_JKTDE.php">JKTDE - Maintenance & Information Technology</a></li>
+                    <li><a href="ucharts_JKTDC.php">JKTDC - Services</a></li>
+                    <li><a href="ucharts_JKTDN.php">JKTDN - Commercial</a>
+                      <li><a>JKTDN - Commercial (Branch Offices)<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li class="sub_menu"><a href="bcharts_MESAM.php">MESAM - Sumatera Region</a>
+                          </li>
+                          <li><a href="bcharts_JKTAM.php">JKTAM - Jakarta Raya Region</a>
+                          </li><li><a href="bcharts_SUBAM.php">SUBAM - Jawa, Bali, Nusa Tenggara Region</a>
+                        </li><li><a href="bcharts_UPGAM.php">UPGAM - Kalimantan, Sulawesi, Papua Region</a>
+                      </li><li><a href="bcharts_SINAM.php">SINAM - Asia Region</a>
+                    </li><li><a href="bcharts_TYOAM.php">TYOAM - Japan & Korea Region</a>
+                  </li><li><a href="bcharts_SHAAM.php">SHAAM - China Region</a>
+                </li><li><a href="bcharts_SYDAM.php">SYDAM - South West Pacific Region</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a><i class="fa fa-tasks"></i> Lihat Program <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="show_form.php">Semua Program</a></li>
+          <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
+          <li><a href="form_running.php">Program sedang berjalan</a></li>
+          <li><a href="form_ended.php">Program telah terlaksana</a></li>
+        </ul>
+      </li>
+      <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="user_management.php">Daftar User</a></li>
+          <li><a href="admin_management.php">Daftar Admin</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+</div>
+<!-- /sidebar menu -->
 
         </div>
       </div>
 
       <!-- top navigation -->
-      <div class="top_nav">
-        <div class="nav_menu">
-          <nav>
-            <div class="nav toggle">
-              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-            </div>
+<div class="top_nav hidden-print">
+  <div class="nav_menu">
+    <nav>
+      <div class="nav toggle">
+        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+      </div>
 
-            <ul class="nav navbar-nav navbar-right">
-              <li class="">
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-                  <span class=" fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
-                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
-
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li role="presentation">
-                <a href="javascript:window.print()">
-                  <i class="fa fa-print"></i>
-                </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="">
+          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+            <span class=" fa fa-angle-down"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-usermenu pull-right">
+            <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+          </ul>
+        </li>
+        <li role="presentation">
+          <a href="javascript:window.print()">
+            <i class="fa fa-print"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- /top navigation -->
 
   <body class="nav-md">
     <div class="container body">
@@ -325,6 +300,166 @@ else
                 </div>
               </div>
             <!-- CHART unit sedang berjalan-->
+
+            <!-- TABEL -->
+    <div class="row">
+    <!-- Discipline Report -->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Discipline Report</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Unit</th>
+                          <th width="3%">Belum</th>
+                          <th width="3%">Sudah</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php
+                        $quero = "SELECT * FROM unit WHERE kode='SINAM'";
+                        $resulto = $db->query( $quero );
+                        while ($rowo = $resulto->fetch_object()) {
+                          echo '<tr>';
+                          echo '<th scope="row" colspan="3" bgcolor="black">'.$rowo->kode.' - '.$rowo->nama.'</th>';
+                          $cek_kodeunit=$rowo->kode;
+                          $quero1 = "SELECT * FROM branch WHERE kode_unit='$cek_kodeunit'";
+                          $resulto1 = $db->query( $quero1 );
+                          while ($rowo1 = $resulto1->fetch_object()) {
+                            echo '<tr>';
+                            echo '<td>'.$rowo1->kode.' - '.$rowo1->nama.'</td>';
+                            $cek_kodeunit=$rowo1->kode;
+                            $quero2 = "SELECT id FROM logbook WHERE kode_unit='$cek_kodeunit'";
+                            $resulto2 = $db->query( $quero2 );
+                            $rowo2 = $resulto2->fetch_object();
+                            if($rowo2=='' || empty($rowo2) || !isset($rowo2) || is_null($rowo2)){
+                              echo '<td bgcolor="red"></td>';
+                              echo '<td></td>';
+                              echo '</tr>';
+                            }else{
+                              echo '<td></td>';
+                              echo '<td bgcolor="green"></td>';
+                              echo '</tr>';
+                            }
+                          }
+                        }
+                      ?>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+    <!-- Discipline Report -->
+    <!-- execution report -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Execution Report</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Unit</th>
+                          <th width="3%">Belum</th>
+                          <th width="3%">Berjalan</th>
+                          <th width="3%">Sudah</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <?php 
+                        $today=date("Y-m-d");
+                        $queri = "SELECT * FROM unit WHERE kode='SINAM'";
+                        $resulti = $db->query( $queri );
+                        while ($rowi = $resulti->fetch_object()) {  
+                          echo '<tr>';
+                          echo '<th scope="row" colspan="4" bgcolor="black">'.$rowi->kode.' - '.$rowi->nama.'</th>';
+                          echo '</tr>';
+                          $cek1_kodeunit=$rowi->kode;
+                          $queri1 = "SELECT * FROM logbook WHERE kode_unit='$cek1_kodeunit' GROUP BY kode_branch";
+                          $resulti1 = $db->query( $queri1 );
+                          $rowcount = mysqli_num_rows($resulti1);
+                          if ($rowcount>0) {
+                            while ($rowi1 = $resulti1->fetch_object()) {
+                              $queri2 = "SELECT nama FROM branch WHERE kode='$rowi1->kode_branch'";
+                              $resulti2 = $db->query( $queri2 );
+                              $rowi2 = $resulti2->fetch_object();
+                              echo '<tr>';
+                              echo '<td>'.$rowi1->kode_branch.' - '.$rowi2->nama.'</td>';
+                              $queri3 = "SELECT start, end FROM logbook WHERE kode_branch='$rowi1->kode_branch'";
+                              $resulti3 = $db->query( $queri3 );
+                              $rowi3 = $resulti3->fetch_object();
+                              $start= $rowi3->start;
+                              $end= $rowi3->end;
+                              if ($start > $today) {
+                                echo '<td bgcolor="red"></td>';
+                                echo '<td></td>';
+                                echo '<td></td>';
+                              }elseif($start <= $today && $end >= $today){
+                                echo '<td></td>';
+                                echo '<td bgcolor="yellow"></td>';
+                                echo '<td></td>';
+                              }else{
+                                echo '<td></td>';
+                                echo '<td></td>';
+                                echo '<td bgcolor="green"></td>';
+                              }
+                              echo '</tr>';
+                            }
+                          }else{
+                            echo '<tr>';
+                            echo '<td colspan="4"> - </td>';
+                            echo '</tr>';
+                          }
+                        }
+                      ?>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+    <!-- execution report -->
+    </div>
+    <!-- TABEL -->
 
             <!-- CHART unit sudah menyelesaikan -->
             <div class="row">

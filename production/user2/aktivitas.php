@@ -1,5 +1,20 @@
 <?php
 session_start();
+if (isset($_GET['id'])) {
+  $asal=$_GET['id'];
+} else {
+  header('Location: hal_aktivitas.php');
+  exit;
+}
+
+if (isset($_GET['idc'])) {
+  $tujuan=$_GET['idc'];
+}
+
+if (isset($_GET['deg'])) {
+  $deg=$_GET['deg'];
+}
+
 if(isset($_SESSION['role']) && $_SESSION['role'] == 0)
 { 
 
@@ -63,12 +78,22 @@ else
   $row2 = $result2->fetch_object();
   $unit2 = $row2->unit;
   $idid = $row2->iduser;
+  $idc = $_GET['idc'];
 
   $query = "SELECT * FROM employee JOIN user WHERE employee.iduser=user.iduser and employee.iduser='$idid'";
         //execute the query
   $result = $db->query( $query );
   $row = $result->fetch_object();
   // echo $row->username;
+  if (!$result)
+  {
+    die("could not query the database: <br />".$db->error);
+  }
+
+  $q1 = "SELECT * FROM employee WHERE iduser='$idc'";
+        //execute the query
+  $r1 = $db->query( $q1 );
+  $row1 = $r1->fetch_object();
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
@@ -119,6 +144,34 @@ else
       <div class="right_col" role="main">
         <!-- bookmark -->
         <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel tile">
+            <?php
+            if ($deg == 1) {
+              echo "<h2><b>Penilaian Diri</b></h2><br/>";
+            } else if ($deg == 2) {
+              echo "<h2><b>Penilaian Atasan</b></h2>";
+              echo "<h2><b>Penilai : ";
+              echo $row->nama."</b></h2>";
+              echo "<h2><b>Dinilai : ";
+              echo $row1->nama."</b></h2>";
+            } else if ($deg == 3) {
+              echo "<h2><b>Penilaian Peer</b></h2>";
+              echo "<h2><b>Penilai : ";
+              echo $row->nama."</b></h2><br />";
+              echo "<h2><b>Dinilai : ";
+              echo $row1->nama."</b></h2><br />";
+            } else if ($deg == 4) {
+              echo "<h2><b>Penilaian Bawahan</b></h2>";
+              echo "<h2><b>Penilai : ";
+              echo $row->nama."</b></h2><br />";
+              echo "<h2><b>Dinilai : ";
+              echo $row1->nama."</b></h2><br />";
+            }
+
+            ?>
+          </div>
+        </div>
         <div class="col-md-12 col-sm-12 col-xs-12">
           <?php
 
@@ -244,7 +297,7 @@ else
 
                           } else {
                             ?>
-                            <a href="input_form.php?id=<?php echo $id_subakt?>"><button class="btn btn-xs">Input</button></a>
+                            <a href="input_form.php?id=<?php echo $id_subakt?>&asal=<?php echo $asal ?>&tujuan=<?php echo $tujuan?>&deg=<?php echo $deg ?>"><button class="btn btn-xs">Input</button></a>
                             <?php
                           }
                           ?>

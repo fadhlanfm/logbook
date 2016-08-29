@@ -1,5 +1,20 @@
 <?php
 session_start();
+
+if (isset($_GET['asal'])) {
+  $asal=$_GET['asal'];
+} else {
+  header('Location: aktivitas.php');
+}
+
+if (isset($_GET['tujuan'])) {
+  $tujuan=$_GET['tujuan'];
+}
+
+if (isset($_GET['deg'])) {
+  $deg=$_GET['deg'];
+}
+
 if(isset($_SESSION['role']) && $_SESSION['role'] == 0)
 { 
 
@@ -127,12 +142,33 @@ else
               <input style="display:none;" class="form-control" type="text" readonly id="id_user" name="id_user" value="<?php
                 echo $idid;
                 ?>"></input><br>
-                <label for="iduser">Unique ID : </label>
+                <label for="iduser"> ID Aktivitas: </label>
                 <input class="form-control" type="text" readonly id="id_subaktivitas" name="id_subaktivitas" value="<?php
                 if (!$row4) {
                   echo $row5->id_subaktivitas;
                 } else {
                   echo''.$row4->id_subaktivitas.'';
+                }
+                ?>"></input><br>
+                <label for="iduser"> ID Penilai: </label>
+                <input class="form-control" type="text" readonly id="id_penilai" name="id_penilai" value="<?php
+                if (!$asal) {
+                } else {
+                  echo $asal;
+                }
+                ?>"></input><br>
+                <label for="iduser"> ID Tujuan: </label>
+                <input class="form-control" type="text" readonly id="id_tujuan" name="id_tujuan" value="<?php
+                if (!$tujuan) {
+                } else {
+                  echo $tujuan;
+                }
+                ?>"></input><br>
+                <label for="iduser"> degree: </label>
+                <input class="form-control" type="text" readonly id="degree" name="degree" value="<?php
+                if (!$deg) {
+                } else {
+                  echo $deg;
                 }
                 ?>"></input><br>
                 <label for="iduser">Nama Aktivitas : </label>

@@ -76,7 +76,13 @@ else
 	{
 		die("could not query the database: <br />".$db->error);
 	}
+
+	$message = "Anda akan submit program untuk ".$row2->username.". Pastikan Anda menginput form dengan tepat dan benar. Klik OK untuk melanjutkan ke halaman form";
+  			echo "<script type='text/javascript'>alert('$message');
+  			</script>";
 	?>
+
+
 
 	<script>
 			// add
@@ -207,102 +213,36 @@ else
 				</div>
 
 				<!-- top navigation -->
-				<div class="top_nav">
-					<div class="nav_menu">
-						<nav>
-							<div class="nav toggle">
-								<a id="menu_toggle"><i class="fa fa-bars"></i></a>
-							</div>
+      <div class="top_nav hidden-print">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
 
-							<ul class="nav navbar-nav navbar-right">
-								<li class="">
-									<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-										<img src="../images/img.jpg" alt="">
-										<?php echo''.$row2->username.''; ?>
-										<span class=" fa fa-angle-down"></span>
-									</a>
-									<ul class="dropdown-menu dropdown-usermenu pull-right">
-										<li><a href="javascript:;"> Profile</a></li>
-										<li>
-											<a href="javascript:;">
-												<span class="badge bg-red pull-right">50%</span>
-												<span>Settings</span>
-											</a>
-										</li>
-										<li><a href="javascript:;">Help</a></li>
-										<li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-									</ul>
-								</li>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="../images/img.jpg" alt=""><?php
 
-								<li role="presentation" class="dropdown">
-									<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-										<i class="fa fa-envelope-o"></i>
-										<span class="badge bg-green">6</span>
-									</a>
-									<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-										<li>
-											<a>
-												<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-												<span>
-													<span>John Smith</span>
-													<span class="time">3 mins ago</span>
-												</span>
-												<span class="message">
-													Film festivals used to be do-or-die moments for movie makers. They were where...
-												</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-												<span>
-													<span>John Smith</span>
-													<span class="time">3 mins ago</span>
-												</span>
-												<span class="message">
-													Film festivals used to be do-or-die moments for movie makers. They were where...
-												</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-												<span>
-													<span>John Smith</span>
-													<span class="time">3 mins ago</span>
-												</span>
-												<span class="message">
-													Film festivals used to be do-or-die moments for movie makers. They were where...
-												</span>
-											</a>
-										</li>
-										<li>
-											<a>
-												<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-												<span>
-													<span>John Smith</span>
-													<span class="time">3 mins ago</span>
-												</span>
-												<span class="message">
-													Film festivals used to be do-or-die moments for movie makers. They were where...
-												</span>
-											</a>
-										</li>
-										<li>
-											<div class="text-center">
-												<a>
-													<strong>See All Alerts</strong>
-													<i class="fa fa-angle-right"></i>
-												</a>
-											</div>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-				<!-- /top navigation -->
+                  echo''.$row2->username.'';
+                  ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
+              <li role="presentation">
+                <a href="javascript:window.print()">
+                  <i class="fa fa-print"></i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
 
 				<!-- page content -->
 				<div class="right_col" role="main">
@@ -320,12 +260,18 @@ else
 												<li><a href="programs.php"><button type="button" class="btn btn-primary btn-xs">Kembali</button></a>
 												</li>
 											</ul>
-
+											<div class="x_content bs-example-popovers">
+												<div class="alert alert-danger alert-dismissible fade in" role="alert">
+								                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+								                    </button>
+								                    <strong> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Pastikan Anda mengisi form ini dengan tepat sesuai dengan program <?php echo $row2->username;?>. Periksalah kembali sebelum Anda submit <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> </strong>
+								                  </div>
+											</div>
 											<div class="clearfix"></div>
 										</div>
 										<div class="x_content">
-										<div class="ln_solid"></div>
-											<h4>Program</h4>
+											<div class="ln_solid"></div>
+											<h4>Deskripsi Program</h4>
 											<div class="ln_solid"></div>
 
 											<div class="form-group">
@@ -370,14 +316,14 @@ else
 												<label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Mulai <span class="required">*</span>
 												</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input id="start_date" name="start_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+													<input id="start_date" name="start_date" class="form-control col-md-7 col-xs-12" required="required" type="text" placeholder="MM/DD/YYYY">
 												</div>
 											</div>
 											<div class="form-group">
 												<label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal Selesai <span class="required" >*</span>
 												</label>
 												<div class="col-md-6 col-sm-6 col-xs-12">
-													<input id="end_date" name="end_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
+													<input id="end_date" name="end_date" class="form-control col-md-7 col-xs-12" required="required" type="text" placeholder="MM/DD/YYYY">
 												</div>
 											</div>
 											<div class="ln_solid"></div>
@@ -472,7 +418,7 @@ else
 																	<div class="col-xs-3">
 																		<div class="input-field">
 																			<label for="target1">Target</label>
-																			<input type="text" id="target" name="target[]" class="form-control">
+																			<input type="text" id="target" name="target[]" class="form-control" required>
 																		</div>
 																	</div>
 																	<div class="col-xs-3">
@@ -705,7 +651,7 @@ else
 														</div>
 														<div class="col-sm-5 col-md-5 col-xs-12">
 															<label>Email</label>
-															<input id="email_ketua" type="email" class="validate form-control" name="email_ketua" required="required">
+															<input id="email_ketua" type="email" class="validate form-control" name="email_ketua" required="required" placeholder="Contoh : abc@gmail.com">
 														</div>
 														</div>
 											</div>
@@ -724,7 +670,7 @@ else
 														</div>
 														<div class="col-sm-5 col-md-5 col-xs-12">
 															<label>Email</label>
-															<input id="email_sekre" type="email" class="validate form-control" name="email_sekre" required="required">
+															<input id="email_sekre" type="email" class="validate form-control" name="email_sekre" required="required" placeholder="Contoh : abc@gmail.com">
 														</div>
 														</div>
 											</div>
@@ -754,7 +700,7 @@ else
 														</div>
 														<div class="col-sm-5 col-md-5 col-xs-12">
 															<label>Email</label>
-															<input id="email" type="email" class="validate form-control" name="email_[]">
+															<input id="email" type="email" class="validate form-control" name="email_[]" placeholder="Contoh : abc@gmail.com">
 														</div>
 														</div>
 													</div>
@@ -776,7 +722,13 @@ else
 
 											<div class="ln_solid"></div>
 											<div class="form-group">
-												<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+											<div class="x_content bs-example" data-example-id="glyphicons-accessibility">
+					                        	<div class="alert alert-danger" role="alert">
+					                        		<input type="checkbox" required>
+					                          		Saya mengisi form ini dengan tepat dan benar sesuai dengan program dari <?php echo $row2->username; ?>
+					                        	</div>
+					                      	</div>
+												<div class="col-md-6 col-sm-6 col-xs-12" align="right">
 													<button type="submit" value="Submit" class="btn btn-success">Submit</button>
 												</div>
 											</div>
@@ -853,7 +805,7 @@ else
 		<script src="../../build/js/custom.min.js"></script>
 
 		<!-- bootstrap-daterangepicker -->
-		<script>
+		<!-- <script>
 			$(document).ready(function() {
 				$('#start_date').daterangepicker({
 					singleDatePicker: true,
@@ -870,7 +822,7 @@ else
 					console.log(start.toISOString(), end.toISOString(), label);
 				});
 			});
-		</script>
+		</script> -->
 		<!-- /bootstrap-daterangepicker -->
 
 		<!-- bootstrap-wysiwyg -->
@@ -1071,5 +1023,28 @@ else
 			});
 		</script>
 		<!-- /Starrr -->
+		<!-- date picker -->
+		<script type="text/javascript">
+			$(function() {
+			    $('input[name="start_date"]').daterangepicker({
+			        locale: {
+						format: 'YYYY-MM-DD'
+					},
+			        singleDatePicker: true,
+			        showDropdowns: true,
+			    });
+			});
+
+			$(function() {
+			    $('input[name="end_date"]').daterangepicker({
+			        locale: {
+						format: 'YYYY-MM-DD'
+					},
+			        singleDatePicker: true,
+			        showDropdowns: true,
+			    });
+			});
+		</script>
+		<!-- date picker -->
 	</body>
 	</html>

@@ -129,7 +129,7 @@ else
       </div>
 
       <!-- top navigation -->
-      <div class="top_nav">
+      <div class="top_nav hidden-print">
         <div class="nav_menu">
           <nav>
             <div class="nav toggle">
@@ -139,84 +139,14 @@ else
             <ul class="nav navbar-nav navbar-right">
               <li class="">
                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="../images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <img src="../images/img.jpg" alt=""><?php
+
+                  echo''.$row2->username.'';
+                  ?>
                   <span class=" fa fa-angle-down"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="javascript:;"> Profile</a></li>
-                  <li>
-                    <a href="javascript:;">
-                      <span class="badge bg-red pull-right">50%</span>
-                      <span>Settings</span>
-                    </a>
-                  </li>
-                  <li><a href="javascript:;">Help</a></li>
                   <li><a href="../acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                </ul>
-              </li>
-
-              <li role="presentation" class="dropdown">
-                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                  <i class="fa fa-envelope-o"></i>
-                  <span class="badge bg-green">6</span>
-                </a>
-                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                      <span>
-                        <span>John Smith</span>
-                        <span class="time">3 mins ago</span>
-                      </span>
-                      <span class="message">
-                        Film festivals used to be do-or-die moments for movie makers. They were where...
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="text-center">
-                      <a>
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                    </div>
-                  </li>
                 </ul>
               </li>
               <li role="presentation">
@@ -234,7 +164,19 @@ else
       <div class="right_col" role="main">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Detail Program </h2>
+          <?php 
+            $date1 = $row->end;
+            $date3 = $row->start;
+            $date2 = date("Y-m-d");
+            if ($date1 < $date2) {
+              $status2 = ' <span class="badge bg-green">Program ini sudah berakhir</span>';
+            } else if ($date3 < $date2 && $date2 < $date1) {
+              $status2 = ' <span class="badge bg-blue">Program ini sedang berjalan</span>';
+            } else if ($date3 > $date2) {
+              $status2 = ' <span class="badge bg-white">Program ini belum berjalan</span>';
+            }
+          ?>
+            <h2>Detail Program <?php echo $status2; ?></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a><button class="btn btn-primary btn-xs" id="clickme">Lihat Evaluasi</button></a>
               </li>
@@ -681,137 +623,8 @@ else
             <textarea id="deskripsi" class="form-control" readonly placeholder="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>" name="komentar" ></textarea>
           </div>
 
-                    <!-- start of ended program achievement -->
 
-          <div class="col-md-4 col-sm-4 col-xs-12">
-            <div class="x_panel tile">
-              <div class="x_title">
-                <h2>Finished Programs</h2>
-
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <h4>Accumulated Percentage</h4>
-
-                <?php
-
-                $query6 = "SELECT * FROM logbook JOIN unit WHERE id = '$id'";
-                //execute the query
-                $result6 = $db->query( $query6 );
-
-                if (!$result6)
-                {
-                  die("could not query the database: <br />".$db->error);
-                }
-
-                $percacc=0;
-                $colour='';
-                while ($row6 = $result6->fetch_object()) 
-                {
-                  
-                  if (is_null($row6->aktifitas0) || $row6->aktifitas0 == '') {
-                  } else {
-                    $target0 = $row6->target0;
-                    $hasil0 = $row6->hasil0;
-
-                    if ($row6->satuan0 == 'Waktu (Hari)') {
-                      $perc0 = $target0/$hasil0*100;
-                    } else {
-                      $perc0 = $hasil0/$target0*100;
-                    }
                     
-                    $percacc = $perc0;
-                  }
-                  
-                  if (is_null($row6->aktifitas1) || $row6->aktifitas1 == '') {
-                  } else {
-                    $target1 = $row6->target1;
-                    $hasil1 = $row6->hasil1;
-                    
-                    if ($row6->satuan1 == 'Waktu (Hari)') {
-                      $perc1 = $target1/$hasil1*100;
-                    } else {
-                      $perc1 = $hasil1/$target1*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1)/2;
-                  }
-
-                  if (is_null($row6->aktifitas2) || $row6->aktifitas2 == '') {
-                  } else {
-                    $target2 = $row6->target2;
-                    $hasil2 = $row6->hasil2;
-                    
-                    if ($row6->satuan2 == 'Waktu (Hari)') {
-                      $perc2 = $target2/$hasil2*100;
-                    } else {
-                      $perc2 = $hasil2/$target2*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2)/3;
-                  }
-
-                  if (is_null($row6->aktifitas3) || $row6->aktifitas3 == '') {
-                  } else {
-                    $target3 = $row6->target3;
-                    $hasil3 = $row6->hasil3;
-                    
-                    if ($row6->satuan3 == 'Waktu (Hari)') {
-                      $perc3 = $target3/$hasil3*100;
-                    } else {
-                      $perc3 = $hasil3/$target3*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3)/4;
-                  }
-
-                  if (is_null($row6->aktifitas4) || $row6->aktifitas4 == '') {
-                  } else {
-                    $target4 = $row6->target4;
-                    $hasil4 = $row6->hasil4;
-
-                    if ($row6->satuan4 == 'Waktu (Hari)') {
-                      $perc4 = $target4/$hasil4*100;
-                    } else {
-                      $perc4 = $hasil4/$target4*100;
-                    }
-
-                    $percacc = ($perc0 + $perc1 + $perc2 + $perc3 + $perc5)/5;
-                  }
-                  if ($percacc > 75) {
-                    $colour = 'green';
-                  } else if ($percacc > 50 && $percacc < 76) {
-                    $colour = 'orange';
-                  } else {
-                    $colour = 'red';
-                  }
-                  ?>
-                  
-                  <?php
-                }
-
-
-                ?>
-                <!-- widget start here -->
-                  <div class="widget_summary">
-                    <div class="w_left w_25">
-                      <span><a href="lihat_logbook.php%20?id=<?php echo $row6->id ?>"><?php echo $row6->nama_program; ?></a></span>
-                      
-                    </div>
-                    <div class="w_center w_55">
-                      <div class="progress">
-                        <div class="progress-bar bg-<?php echo $colour?>" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo round($percacc); ?>%;">
-                          <span class="sr-only"><?php echo round($percacc); ?>% Complete</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w_right w_20">
-                      <span><?php echo round($percacc); ?> %</span>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <!-- end of widget -->
 
               </div>
             </div>

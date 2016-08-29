@@ -28,7 +28,7 @@ else
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Lihat Seluruh Program</title>
+  <title>simulasi</title>
 
   <!-- Bootstrap -->
   <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,8 +47,6 @@ else
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">
-  <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
-  <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
@@ -56,24 +54,14 @@ else
   <!-- QUERIES -->
   <?php
   include_once('../connect_db.php');
-  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
-  //execute the query
-  $result = $db->query( $query );
+  $id = $_GET['id'];
+  $query = "SELECT * FROM logbook WHERE id = '$id'";
+  $result = $db->query($query);
   if (!$result)
   {
     die("could not query the database: <br />".$db->error);
   }
-
-  $coba = $_SESSION['id'];
-  include_once('Connection/dbconn.php');
-  $query2 = "SELECT * FROM user WHERE username = '$coba'";
-    //execute the query
-  $result2 = $db->query( $query2 );
-  if (!$result2)
-  {
-    die("could not query the database: <br />".$db->error);
-  }
-  $row2 = $result2->fetch_object();
+  $row = $result->fetch_object();
   ?>
   <div class="container body">
     <div class="main_container">
@@ -85,61 +73,121 @@ else
 
           <div class="clearfix"></div>
 
-          
+          <!-- menu profile quick info -->
+          <div class="profile">
+            <div class="profile_pic">
+              <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+              <span>Welcome,</span>
+              <h2>John Doe</h2>
+            </div>
+          </div>
+          <!-- /menu profile quick info -->
 
-          
+          <br />
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              
+              <h3>General</h3>
               <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.php">Overall</a></li>
-                    <li><a href="ucharts_JKTDZ.php">JKTDZ - President & CEO</a></li>
-                    <li><a href="ucharts_JKTDI.php">JKTDI - Human Capital & Corporate Affairs</a></li>
-                    <li><a href="ucharts_JKTDF.php">JKTDF - Finance & Risk Management</a></li>
-                    <li><a href="ucharts_JKTDG.php">JKTDG - Cargo</a></li>
-                    <li><a href="ucharts_JKTDO.php">JKTDO - Operations </a></li>
-                    <li><a href="ucharts_JKTDE.php">JKTDE - Maintenance & Information Technology</a></li>
-                    <li><a href="ucharts_JKTDC.php">JKTDC - Services</a></li>
-                    <li><a href="ucharts_JKTDN.php">JKTDN - Commercial</a>
-                      <li><a>JKTDN - Commercial (Branch Offices)<span class="fa fa-chevron-down"></span></a>
+                    <li><a href="index.php">Dashboard</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="show_form.php">Daftar Logbook</a></li>
+                    <li><a href="form_advanced.html">Advanced Components</a></li>
+                    <li><a href="form_validation.html">Form Validation</a></li>
+                    <li><a href="form_wizards.html">Form Wizard</a></li>
+                    <li><a href="form_upload.html">Form Upload</a></li>
+                    <li><a href="form_buttons.html">Form Buttons</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="general_elements.html">General Elements</a></li>
+                    <li><a href="media_gallery.html">Media Gallery</a></li>
+                    <li><a href="typography.html">Typography</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                    <li><a href="glyphicons.html">Glyphicons</a></li>
+                    <li><a href="widgets.html">Widgets</a></li>
+                    <li><a href="invoice.html">Invoice</a></li>
+                    <li><a href="inbox.html">Inbox</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="tables.html">Tables</a></li>
+                    <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="chartjs.html">Chart JS</a></li>
+                    <li><a href="chartjs2.html">Chart JS2</a></li>
+                    <li><a href="morisjs.html">Moris JS</a></li>
+                    <li><a href="echarts.html">ECharts</a></li>
+                    <li><a href="other_charts.html">Other Charts</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+                    <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="menu_section">
+              <h3>Live On</h3>
+              <ul class="nav side-menu">
+                <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="e_commerce.html">E-commerce</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="project_detail.html">Project Detail</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="page_403.html">403 Error</a></li>
+                    <li><a href="page_404.html">404 Error</a></li>
+                    <li><a href="page_500.html">500 Error</a></li>
+                    <li><a href="plain_page.html">Plain Page</a></li>
+                    <li><a href="login.php">Login Page</a></li>
+                    <li><a href="pricing_tables.html">Pricing Tables</a></li>
+                  </ul>
+                </li>
+                <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                  <ul class="nav child_menu">
+                    <li><a href="#level1_1">Level One</a>
+                      <li><a>Level One<span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li class="sub_menu"><a href="bcharts_MESAM.php">MESAM - Sumatera Region</a>
+                          <li class="sub_menu"><a href="level2.html">Level Two</a>
                           </li>
-                          <li><a href="bcharts_JKTAM.php">JKTAM - Jakarta Raya Region</a>
-                          </li><li><a href="bcharts_SUBAM.php">SUBAM - Jawa, Bali, Nusa Tenggara Region</a>
-                        </li><li><a href="bcharts_UPGAM.php">UPGAM - Kalimantan, Sulawesi, Papua Region</a>
-                      </li><li><a href="bcharts_SINAM.php">SINAM - Asia Region</a>
-                    </li><li><a href="bcharts_TYOAM.php">TYOAM - Japan & Korea Region</a>
-                  </li><li><a href="bcharts_SHAAM.php">SHAAM - China Region</a>
-                </li><li><a href="bcharts_SYDAM.php">SYDAM - South West Pacific Region</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a><i class="fa fa-tasks"></i> Lihat Program <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-          <li><a href="show_form.php">Semua Program</a></li>
-          <li><a href="form_unstarted.php">Program akan dilaksanakan</a></li>
-          <li><a href="form_running.php">Program sedang berjalan</a></li>
-          <li><a href="form_ended.php">Program telah terlaksana</a></li>
-        </ul>
-      </li>
-      <li><a><i class="fa fa-user"></i> Manajemen User <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
-          <li><a href="user_management.php">Daftar User</a></li>
-          <li><a href="admin_management.php">Daftar Admin</a></li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+                          <li><a href="#level2_1">Level Two</a>
+                          </li>
+                          <li><a href="#level2_2">Level Two</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a href="#level1_2">Level One</a>
+                      </li>
+                    </ul>
+                  </li>                  
+                  <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
+                </ul>
+              </div>
 
-</div>
-<!-- /sidebar menu -->
+            </div>
+            <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
@@ -162,33 +210,105 @@ else
         </div>
 
         <!-- top navigation -->
-<div class="top_nav hidden-print">
-  <div class="nav_menu">
-    <nav>
-      <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-      </div>
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
 
-      <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-            <span class=" fa fa-angle-down"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-          </ul>
-        </li>
-        <li role="presentation">
-          <a href="javascript:window.print()">
-            <i class="fa fa-print"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>
-<!-- /top navigation -->
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt="">John Doe
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="login.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li role="presentation">
+                  <a href="javascript:window.print()">
+                    <i class="fa fa-print"></i>
+                  </a>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- /top navigation -->
 
           <!-- page content -->
           <div class="right_col" role="main">
@@ -198,76 +318,37 @@ else
                 <div class="clearfix">
                 </div>
               </div>
-              <?php
-              $db = new mysqli($db_host,$db_username, $db_password, $db_database);
-              if ($db->connect_errno)
-              {
-                die("Could not connect to teh database: <br />".$db->connect_error);
-              }
-    //asign a query
-              $query = "SELECT * FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
-    //execute the query
-              $result = $db->query( $query );
-              if (!$result)
-              {
-                die("could not query the database: <br />".$db->error);
-              }
-              ?> 
               <div class="x_content">
-                <table class="table table-hover" id="table1">
-                  <thead>
+                <form action="post_komentar_logbook.php" method="POST">
+                <table class="table table-hover">
                     <tr>
-                      <th width="5%">Nomor</th>
-                      <th width="10%">Kode Direktorat</th>
-                      <th width="10%">Kode Unit</th>
-                      <th width="20%">Nama Program</th>
-                      <th width="20%">Periode</th>
-                      <th width="10%">Status</th>
-                      <th width="10%">Aksi</th>
-                      <th colspan="2" align="center">Ubah Status</th>     
+                      <td>ID LogBook</td>
+                      <td>: </td>
+                      <td> <input type="text" name="id" readonly value="<?php if (isset($row->id)) {echo $row->id;} else {echo '';}?>">
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $i = 1;
-                    while($row = $result->fetch_object())
-                    {
-                      $status = $row->status;
-                      if($status == 0){
-                        $status = 'Belum Diverifikasi';
-                      }else{
-                        $status = 'Sudah Diverifikasi';
-                      }
-                      $date1 = $row->end;
-                      $date3 = $row->start;
-                      $date2 = date("Y-m-d");
-                      if ($date1 < $date2) {
-                        $status2 = ' <span class="badge bg-green">Finished</span></td>';
-                      } else if ($date3 < $date2 && $date2 < $date1) {
-                        $status2 = ' <span class="badge bg-blue">Running</span></td>';
-                      } else if ($date3 > $date2) {
-                        $status2 = ' <span class="badge bg-white">Planned</span></td>';
-                      }
-                      echo'<tr>';
-                      echo'<td>'.$i.'</td>';
-                      echo'<td>'.$row->kode_dir.'</td>';
-                      echo'<td>'.$row->kode_unit.'</td>';
-                      echo'<td><a href="lihat_logbook.php ?id='.$row->id.'">'.$row->nama_program.$status2;
-                      echo'<td>'.$row->start.' - '.$row->end.'</td>';
-                      echo'<td>'.$status.'</td>';
-                      echo'<td><a href="lihat_logbook.php ?id='.$row->id.'"><button class="btn btn-primary btn-xs">Lihat / Evaluasi</button></a></td>';
-                      echo'<td><a href="status_logbook.php?id='.$row->id.'"><button class="btn btn-success btn-xs"><span class="glyphicon glyphicon-ok"></span></button></a></td>';
-                      echo'<td><a href="status1_logbook.php?id='.$row->id.'"><button class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button></a></td>';
-                      echo'</tr>';
-                      $i++;
-                    }
-                    echo'<br> <br>';
-      // echo'Total Rows = '.$result->num_rows;
-                    $result->free();
-                    $db->close();
-                    ?>
-                  </tbody>
-                </table>
+
+                    <tr>
+                      <td>Kode Unit</td>
+                      <td>: </td>
+                      <td> <input type="text" name="kode_unit" disabled value="<?php if (isset($row->kode_unit)) {echo $row->kode_unit;} else {echo '';}?>"></td>
+                    </tr>
+
+                    <tr>
+                      <td>Nama Program</td>
+                      <td>: </td>
+                      <td> <input type="text" name="nama_program" disabled value="<?php if (isset($row->nama_program)) {echo $row->nama_program;} else {echo '';}?>"></td>
+                    </tr>
+
+                    <tr>
+                      <td>Komentar</td>
+                      <td>: </td>
+                      <td> <input type="text" name="komentar" value="<?php if (isset($row->komentar)) {echo $row->komentar;} else {echo '';}?>"></td>
+                    </tr>
+
+                  </table>
+                  <input type="submit" value="Submit">
+                </form>
               </div>
             </div>
           </div>
@@ -325,29 +406,7 @@ else
       <!-- Custom Theme Scripts -->
       <script src="../build/js/custom.min.js"></script>
 
-      <!-- filterplgin -->
-
-      <script data-config>
-        var filtersConfig = {
-          base_path: 'tablefilter/',
-          grid_layout: true,
-          grid_width: '100%',
-          rows_counter: true,
-          col_0: 'none',
-          col_7: 'none',
-          col_8: 'none',
-          col_9: 'none',
-          col_4: 'none',
-          col_6: 'none',
-          col_1: 'select',
-          col_2: 'select',
-          col_5: 'select'
-        };
-
-        var tf = new TableFilter('table1', filtersConfig);
-        tf.init();
-
-      </script>
+      <!-- /JQVMap -->
 
       <!-- Skycons -->
       <script>

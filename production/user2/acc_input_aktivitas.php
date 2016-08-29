@@ -2,8 +2,10 @@
 session_start();
 // initialize var from the submitted form
 $idid = $_POST['id_user'];
+$id_tujuan = $_POST['id_tujuan'];
 $id_subaktivitas = $_POST['id_subaktivitas'];
 $newfreq = $_POST['frekuensi'];
+$degree = $_POST['degree'];
 include('../../connect_db.php');
 
 // file attachment initialize
@@ -25,7 +27,7 @@ $final_file=str_replace(' ','-',$new_file_name);
 move_uploaded_file($file_loc,$folder.$final_file);
 
 // check if there is already a record for this activity
-$query2 = "SELECT * from aktivitas_employee WHERE id_user = '$idid'";
+$query2 = "SELECT * from aktivitas_employee WHERE id_user = '$idid' AND id_tujuan = '$id_tujuan'";
 $result2 = $db->query($query2);
 if(!$result2)
 {
@@ -42,7 +44,7 @@ while ($row2 = $result2->fetch_object()) {
 
 // if there is already a record for this activity do
 if ($checker == 1) {
-	$query = "UPDATE aktivitas_employee SET freq='$newfreq', akt_attachment='$final_file', type='$file_type', size='$new_size' WHERE id_user='$idid' and id_subaktivitas='$id_subaktivitas'";
+	$query = "UPDATE aktivitas_employee SET freq='$newfreq', akt_attachment='$final_file', type='$file_type', size='$new_size' WHERE id_user='$idid' and id_subaktivitas='$id_subaktivitas' and id_tujuan='$id_tujuan'";
 	$result = $db->query($query);
 	if(!$result)
 	{
@@ -57,7 +59,7 @@ if ($checker == 1) {
 	}
 // if there is no record for this activity yet do	
 } else {
-	$query = "INSERT INTO `aktivitas_employee` (`id_user`, `id_subaktivitas`, `freq`, `akt_attachment`, `type`, `size`) VALUES ('$idid', '$id_subaktivitas', '$newfreq', '$final_file', '$file_type', '$new_size');";
+	$query = "INSERT INTO `aktivitas_employee` (`id_user`, `id_tujuan`, `id_subaktivitas`, `freq`, `akt_attachment`, `type`, `size`, `degree`) VALUES ('$idid', '$id_tujuan', '$id_subaktivitas', '$newfreq', '$final_file', '$file_type', '$new_size', '$degree');";
 	$result = $db->query($query);
 	if(!$result)
 	{

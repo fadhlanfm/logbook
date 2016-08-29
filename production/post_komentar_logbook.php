@@ -13,7 +13,7 @@
 		{
 			$message = "Komentar berhasil ditambahkan";
   			echo "<script type='text/javascript'>alert('$message');
-  			window.location = 'show_form.php';
+  			window.location = 'lihat_logbook.php?id=$id';
   			</script>";
   			exit;
 		}	

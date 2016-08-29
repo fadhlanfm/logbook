@@ -67,7 +67,8 @@
         hasil_lg1='$hasil_lg1',
         hasil_lg2='$hasil_lg2',
         hasil_lg3='$hasil_lg3',
-        hasil_lg4='$hasil_lg4'
+        hasil_lg4='$hasil_lg4',
+        status_res=1
          WHERE id=$id";
         $result = $db->query($query);
         if(!$result)

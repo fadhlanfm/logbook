@@ -76,7 +76,7 @@ else
   $rot = $row->rot;
   $dir = $row->dir;
   $unit = $row->unit;
-
+  $sitacode = $row->sitacode;
   
   ?>
 
@@ -129,18 +129,21 @@ else
                           <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th colspan="2">
+                                <th colspan="3">
                                   Nama
                                 </th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td width="80%">
+                                <td width="20%">
+                                  <?php echo $row->NIP ?>
+                                </td>
+                                <td width="60%">
                                   <?php echo $row->nama ?>
                                 </td>
                                 <td width="20%">
-                                  <a href="coba.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row->iduser; ?>&deg=1"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
+                                  <a href="aktivitas.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row->iduser; ?>&deg=1"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
                                 </td>
                               </tr>
                             </tbody>
@@ -158,7 +161,7 @@ else
                     <!-- Penilaian Atasan -->
 
                     <?php
-                    if ($rot == 0 || $rot == 9) {
+                    if ($rot == 0 || $rot == 1 || $rot == 9) {
                       # code...
                     } else {
                       $atas='';
@@ -170,6 +173,7 @@ else
                         $row1 = $r1->fetch_object();
                         if (isset($row1->nama)) {
                           $atas = $row1->nama;
+                          $NIPatas = $row1->NIP;
                           break;
                         }
                       }
@@ -180,18 +184,21 @@ else
                           <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th colspan="2">
+                                <th colspan="3">
                                   Nama
                                 </th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td width="80%">
+                                <td width="20%">
+                                  <?php echo $NIPatas ?>
+                                </td>
+                                <td width="60%">
                                   <?php echo $atas; ?>
                                 </td>
                                 <td width="20%">
-                                  <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
+                                  <a href="aktivitas.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row1->iduser; ?>&deg=2"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
                                 </td>
                               </tr>
                             </tbody>
@@ -206,78 +213,187 @@ else
                     
                     <!-- Penilaian Peers -->
                     
-                    <div class="row">
-                      <h2>Penilaian Peers</h2>
-                      <div class="col-md-8 col-xs-12">
-                        <table class="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th colspan="2">
-                                Nama
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td width="80%">
-                                Boy Jeremi Mantini
-                              </td>
-                              <td width="20%">
-                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="ln_solid"></div>
-                    <div class="row">
+                    <?php
+                    if ($rot==5 || $rot==0 || $rot==9) {
+                    } else {
+                      ?>
+                      <div class="row">
+                        <h2>Penilaian Peers</h2>
+                        <div class="col-md-8 col-xs-12">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th colspan="3">
+                                  Nama
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
 
-                      <!-- Penilaian Bawahan -->
-
-                      <h2>Penilaian Bawahan</h2>
-                      <div class="col-md-8 col-xs-12">
-                        <table class="table table-bordered">
-                          <thead>
-                            <tr>
-                              <th colspan="2">
-                                Nama
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td width="80%">
-                                Boy Jeremi Mantini
-                              </td>
-                              <td width="20%">
-                                <button class="btn btn-primary btn-xs"> Isi Aktivitas</button>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                              <?php
+                              $q2 = "SELECT * FROM employee where rot='$rot' AND dir='$dir' AND iduser != '$idid'";
+                              $r2 = $db->query($q2);
+                              while ($row2 = $r2->fetch_object()) {
+                                ?>
+                                <tr>
+                                  <td width="20%">
+                                    <?php echo $row2->NIP ?>
+                                  </td>
+                                  <td width="60%">
+                                    <?php echo $row2->nama ?>
+                                  </td>
+                                  <td width="20%">
+                                    <a href="aktivitas.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row2->iduser; ?>&deg=3"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
+                                  </td>
+                                </tr>
+                                <?php
+                              }
+                              ?>
+                              
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
+                      <div class="ln_solid"></div>
+                      <?php
+                    }
+                    ?>
+
+                    <!-- Penilaian Bawahan -->
+
+                    <?php
+                    if ($rot == 5 || $rot == 9) {
+                      # code...
+                    } else if ($rot == 0) {
+                      $bawah='';
+                      $rotbawah = $rot;
+                      while (isset($bawah)) {
+                        $rotbawah = $rotbawah+1;
+                        $q3 = "SELECT * FROM employee where rot='$rotbawah' AND dir='$dir'";
+                        $r3 = $db->query($q3);
+                        $row3 = $r3->fetch_object();
+                        if (isset($row3->nama)) {
+                          $bawah = $row3->nama;
+                          break;
+                        }
+                      }
+                      ?>
+                      <div class="row">
+                        <h2>Penilaian Bawahan</h2>
+                        <div class="col-md-8 col-xs-12">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th colspan="3">
+                                  Nama
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $q3 = "SELECT * FROM employee where rot='$rotbawah' AND dir='$dir'";
+                              $r3 = $db->query($q3);
+                              while ($row3 = $r3->fetch_object()) {
+                                ?>  
+                                <tr>
+                                  <td width="20%">
+                                  <?php echo $row3->NIP ?>
+                                  </td>
+                                  <td width="60%">
+                                    <?php echo $row3->nama; ?>
+                                  </td>
+                                  <td width="20%">
+                                  <a href="aktivitas.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row3->iduser; ?>&deg=4"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
+                                  </td>
+                                </tr>
+                                <?php
+                              }
+                              ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <?php    
+                    } else {
+                      $bawah='';
+                      $rotbawah = $rot;
+                      while (isset($bawah)) {
+                        $rotbawah = $rotbawah+1;
+                        $q3 = "SELECT * FROM employee where rot='$rotbawah' AND dir='$dir' AND unit='$unit'";
+                        $r3 = $db->query($q3);
+                        $row3 = $r3->fetch_object();
+                        if (isset($row3->nama)) {
+                          $bawah = $row3->nama;
+                          break;
+                        }
+                      }
+                      ?>
+                      <div class="row">
+                        <h2>Penilaian Bawahan</h2>
+                        <div class="col-md-8 col-xs-12">
+                          <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th colspan="3">
+                                  Nama
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              $q3 = "SELECT * FROM employee where rot='$rotbawah' AND dir='$dir'";
+                              $r3 = $db->query($q3);
+                              $row3 = $r3->fetch_object();
+                              while ($row3 = $r3->fetch_object()) {
+                                ?>  
+
+
+                                <tr>
+                                  <td width="20%">
+                                    <?php echo $row3->NIP ?>
+                                  </td>
+                                  <td width="60%">
+                                    <?php echo $row3->nama; ?>
+                                  </td>
+                                  <td width="20%">
+                                  <a href="aktivitas.php?id=<?php echo $row->iduser; ?>&idc=<?php echo $row3->iduser; ?>&deg=4"><button class="btn btn-primary btn-xs"> Isi Aktivitas</button></a>
+                                  </td>
+                                </tr>
+                                <?php
+                              }
+                              ?>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <?php    
+                    }
+
+                    ?>
+
                   </div>
                 </div>
               </div>
-
             </div>
+
           </div>
         </div>
       </div>
     </div>
-    <!-- /page content -->
-
-    <!-- footer content -->
-    <footer class="hidden-print">
-      <div class="pull-right">
-        Corporate Culture Information Systems - GA
-      </div>
-      <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
   </div>
+  <!-- /page content -->
+
+  <!-- footer content -->
+  <footer class="hidden-print">
+    <div class="pull-right">
+      Corporate Culture Information Systems - GA
+    </div>
+    <div class="clearfix"></div>
+  </footer>
+  <!-- /footer content -->
+</div>
 </div>
 
 <!-- jQuery -->
