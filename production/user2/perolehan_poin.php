@@ -60,7 +60,7 @@
                     <canvas height="110" width="110"></canvas>
                   </span></center>
                   <p><center><h3 style="font-size:150%;"><?php echo $nama[$id_akt] ?></h3></center></p>
-                  <p><center><b><span class="badge bg-blue"><?php echo $poinkat[$id_akt] ?></span> / <?php echo $max_poin[$id_akt] ?></b></center></p>
+                  <p><center><b><span class="badge bg-blue"><?php echo number_format($poinkat[$id_akt], 0, '.', ' ') ?></span> / <?php echo $max_poin[$id_akt] ?></b></center></p>
                 </div>
                 <?php
               }

@@ -154,7 +154,7 @@ SELECT id_user, id_tujuan, freq, a.id_subaktivitas, id_aktivitas, poin, max_freq
             <!-- bookmark -->
             <div class="row">
               <div class="col-md-9 col-sm-9 col-xs-12">
-                <div class="x_panel tile" style="height: 260px;">
+                <div class="x_panel tile">
                   <div class="x_title">
                     <h2><b>Profil</b></h2>
                     <div class="clearfix"></div>
@@ -172,7 +172,7 @@ SELECT id_user, id_tujuan, freq, a.id_subaktivitas, id_aktivitas, poin, max_freq
                       <h3 style="font-size:150%;"><?php echo $row->nama; ?> </h3>
                       <p style="font-size:130%;"><?php echo $row->NIP ?> </p>
                       <p><?php echo $row->unit ?> </p>
-                      <p style="font-size:150%;"><span class="label label-primary" style="width:100%; display: inline-block;""><?php echo $totalpoin; ?> pts</span></p>
+                      <p style="font-size:150%;"><span class="label label-primary" style="width:100%; display: inline-block;""><?php echo number_format($totalpoin, 0, '.', ' '); ?> pts</span></p>
                       <p style="font-size:150%;"><span class="label label-success" style="width:100%; display: inline-block;"><?php echo $rank; ?>
                         <?php
                         if (substr($rankstr, -1) == 1) {
@@ -263,11 +263,11 @@ SELECT id_user, id_tujuan, freq, a.id_subaktivitas, id_aktivitas, poin, max_freq
                 <div class="x_content">
                   <div class="col-md-12 col-sm-12 col-xs-12">
                     <center>
-                      <span class="chart" data-percent="<?php echo $totalpoin/$poinmax*100; ?>">
+                      <span class="chart" data-percent="<?php echo number_format($totalpoin/$poinmax*100, 0, '.', ' '); ?>">
                         <span class="percent"><?php echo $totalpoin/$poinmax; ?></span>
                         <canvas height="110" width="110"></canvas>
                       </span>
-                      <p><b><span class="badge bg-blue"><?php echo $totalpoin ?> </span> / <?php echo $poinmax ?></b></p>
+                      <p><b><span class="badge bg-blue"><?php echo number_format($totalpoin, 0, '.', ' ') ?> </span> / <?php echo $poinmax ?></b></p>
                     </center>
                   </div>
                 </div>
