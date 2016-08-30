@@ -285,7 +285,7 @@ else
                         $resulto = $db->query( $quero );
                         while ($rowo = $resulto->fetch_object()) {
                           echo '<tr>';
-                          echo '<th scope="row" colspan="3" bgcolor="black">'.$rowo->kode.' - '.$rowo->nama.'</th>';
+                          echo '<th scope="row" colspan="3" bgcolor="black" style="color:white">'.$rowo->kode.' - '.$rowo->nama_unit.'</th>';
                           $cek_kodeunit=$rowo->kode;
                           $quero1 = "SELECT * FROM branch WHERE kode_unit='$cek_kodeunit'";
                           $resulto1 = $db->query( $quero1 );
@@ -355,7 +355,7 @@ else
                         $resulti = $db->query( $queri );
                         while ($rowi = $resulti->fetch_object()) {  
                           echo '<tr>';
-                          echo '<th scope="row" colspan="4" bgcolor="black">'.$rowi->kode.' - '.$rowi->nama.'</th>';
+                          echo '<th scope="row" colspan="4" bgcolor="black" style="color:white">'.$rowi->kode.' - '.$rowi->nama_unit.'</th>';
                           echo '</tr>';
                           $cek1_kodeunit=$rowi->kode;
                           $queri1 = "SELECT * FROM logbook WHERE kode_unit='$cek1_kodeunit' GROUP BY kode_branch";

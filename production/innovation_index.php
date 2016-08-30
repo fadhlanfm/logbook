@@ -2,7 +2,7 @@
 session_start();
 include_once('Connection/conn.php');
 
-$query = mysql_query("SELECT * FROM Survey_list WHERE status='active'" );
+$query = mysqli_query($con,"SELECT * FROM Survey_list WHERE status='active'" );
 
 if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 {
@@ -21,8 +21,8 @@ else
 
 }
 $coba ='admin';
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 <!-- page content -->

@@ -5,7 +5,7 @@ session_start();
 if(isset($_SESSION['role']) && $_SESSION['role'] == 0)
 {
 
-} else if ($_SESSION['role'] == o) {
+} else if ($_SESSION['role'] != 0) {
 	echo 'You are not logged in as User <br>';
 	echo'<a href="../process/acc_logout.php">LOGOUT</a><br>';
 	echo'<a href="../pages/survey.php">BACK</a>';
@@ -26,11 +26,25 @@ if (isset($_SESSION['error'])&&!empty($_SESSION['error'])) {
 	unset($_SESSION['error']);
 	header("Refresh:0");
 }
+if (isset($_SESSION['error3'])&&!empty($_SESSION['error3'])) {
+	echo '<script language="javascript">';
+	echo 'alert("Tidak ada File yang diunggah. Pilih File anda terlebih dahulu.")';
+	echo '</script>';
+	unset($_SESSION['error3']);
+	header("Refresh:0");
+}
+if (isset($_SESSION['size'])&&!empty($_SESSION['size'])) {
+	echo '<script language="javascript">';
+	echo 'alert("'.$_SESSION['size'].'")';
+	echo '</script>';
+	unset($_SESSION['size']);
+	header("Refresh:0");
+}
 $coba = $_SESSION['id'];
 
 
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM ca_user JOIN employee on ca_user.ca_nopeg=employee.NIP WHERE ca_nopeg = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +56,7 @@ $row2 = mysql_fetch_array($query2);
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>CA Performance</title>
+	<title>Unit Performance</title>
 
 	<!-- Bootstrap -->
 	<link href="../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -68,45 +82,9 @@ $row2 = mysql_fetch_array($query2);
 
 					<br />
 
-					<!-- sidebar menu -->
-					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<ul class="nav side-menu">
-								<li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="index.php">Halaman Utama</a></li>
-										<li><a href="rank.php">Ranking Pegawai</a></li>
-									</ul>
-								</li>
-								<li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="aktivitas.php">Isi Aktivitas</a></li>
-									</ul>
-								</li>
-								<li><a><i class="fa fa-edit"></i> Survey <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="survey.php">List Survey</a></li>
-									</ul>
-								</li>
-								<li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="ca_performance.php">CA Performance</a></li>
-									</ul>
-								</li>
-								<li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href="edit_username2.php">Ubah Username</a></li>
-										<li><a href="edit_password2.php">Ubah Password</a></li>
-										<li><a href="edit_foto.php">Ubah Foto</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-
-					</div>
-					<!-- /sidebar menu -->
-					<!-- /sidebar menu -->
+					<?php
+					include('sidebar.php');
+					?>
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
@@ -138,7 +116,7 @@ $row2 = mysql_fetch_array($query2);
 						<ul class="nav navbar-nav navbar-right">
 							<li class="">
 								<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-									<img src="../images/img.jpg" alt=""><?php echo $row2['username']; ?>
+									<img src="../images/img.jpg" alt=""><?php echo $row2['nama']; ?>
 									<span class=" fa fa-angle-down"></span>
 								</a>
 								<ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -232,113 +210,52 @@ $row2 = mysql_fetch_array($query2);
 							<h3>CA Performance</h3>
 						</div>
 
-						<div class="title_right">
-							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search for...">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">Go!</button>
-									</span>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 
-					<div class="clearfix"></div>	
+					<div class="clearfix"></div>
+					<br>	
 					<div class="row">
 						<div class="col-md-4 col-xs-12  widget_tally_box">
 							<div class="x_panel ui-ribbon-container ">
 								<div class="x_title" style="text-align:center">
-									<h2 >Index Performa Unit Anda</h2>
+									<h2 >Index Performa Anda</h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
 									<?php 
-									$nama=$row2['username'];
-									$cekchart=mysql_query("SELECT * FROM ca_performance_upload where username='$nama'");
-									$rowc=mysql_fetch_array($cekchart);
+									$nama=$row2['ca_nopeg'];
+									$cekchart=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$nama'");
+									$rowc=mysqli_fetch_array($cekchart);
 									$total=$rowc['total'];
 									
 									$persen=$total*10;
-									if ($persen<40) {
+									if ($persen<50) {
 										$status='Bad';
+										$des="If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.";
+									} else if ($persen>=50 && $persen<75) {
+										$status='Good';
+										$des="Good Communication makes a great teamwork! Keep Spirit and do your best.";
+									} else if ($persen>=75) {
+										$status='Excelent';
+										$des="You have a great work. Congratulations!!!";
 									}
 									?>
-									<div style="text-align: center; margin-bottom: 17px">
+									<div style="text-align: center; margin-bottom: 17px" >
 										<span class="chart" data-percent="<?php echo $persen; ?>">
 											<span class="percent"></span>
 										</span>
 									</div>
 
 									<h3 class="name_title"><?php echo $status; ?></h3>
-									<p>Short Description</p>
+									
 
 									<div class="divider"></div>
 
-									<p>If you've decided to go in development mode and tweak all of this a bit, there are few things you should do.</p>
+									<p><?php echo $des; ?></p>
 
 								</div>
 							</div>
-
-
-							<div class="x_panel " >
-								<div class="x_title" >
-									<div style="text-align:center">
-										<h2 >List Hambatan Unit Anda</h2>
-										<div class="clearfix"></div>
-									</div>
-								</div>
-								<div class="x_content">
-									<?php
-									$bar=mysql_query("SELECT * FROM ca_performance_report where username='$coba'");
-									if ($bar_c=mysql_num_rows($bar)>0) {
-										while ($bar_=mysql_fetch_array($bar)) {
-											$mon= substr("$bar_[solusi_akhir]",0,2);
-											if ($mon==1) {$mon='Jan';}
-											if ($mon==2) {$mon='Feb';}
-											if ($mon==3) {$mon='Mar';}
-											if ($mon==4) {$mon='Apr';}
-											if ($mon==5) {$mon='May';}
-											if ($mon==6) {$mon='Jun';}
-											if ($mon==7) {$mon='Jul';}
-											if ($mon==8) {$mon='Aug';}
-											if ($mon==9) {$mon='Sept';}
-											if ($mon==10) {$mon='Oct';}
-											if ($mon==11) {$mon='Nov';}
-											if ($mon==12) {$mon='Dec';}
-											$dat= substr("$bar_[solusi_akhir]",3,2);
-											?>
-
-											<article class="media event">
-												<a class="pull-left date">
-													<p class="month"><?php echo $mon; ?></p>
-													<p class="day"><?php echo $dat; ?></p>
-												</a>
-												<div class="media-body">
-													<a class="title" href="#"><?php echo $bar_['hambatan']; ?></a>
-													<p style="text-align:left"><?php echo $bar_['solusi']; ?></p>
-													<a href="" style="text-align:left">edit</a>
-												</div>
-											</article>
-
-											<?php
-										}
-									} else {
-										echo "Unit Anda tidak memiliki hambatan.";
-									}
-									
-									?>
-									
-									<div class="ln_solid"></div>
-									<div class="form-group" style="text-align:center">
-										<div class="col-md-12 col-sm-12 col-xs-12 ">
-											<a href="ca_performance_report.php"><button type="submit" class="btn btn-primary" name="submit" value="simpan">Buat Laporan Hambatan</button></a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
 						</div>
 
 						<div class="col-md-8 col-sm-8 col-xs-12 ">
@@ -352,8 +269,8 @@ $row2 = mysql_fetch_array($query2);
 								</div>
 								<div class="x_content">
 
-									<p>Upload attachment format only <u>.zip</u> or <u>.rar</u></p>
-									
+									<p>Upload attachment format only <u>.zip</u> or <u>.rar</u>. Maximum File Size is 4Mb</p>
+
 									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="ca_performance_.php" method="POST"  enctype="multipart/form-data">
 										<input type="text" id="name" name="name" style="display:none" value="<?php echo "$row2[username]" ?>">
 										<input type="text" id="unit" name="unit" style="display:none" value="<?php echo "$row2[unit]" ?>">
@@ -369,29 +286,30 @@ $row2 = mysql_fetch_array($query2);
 											<tbody>
 												<tr>
 													<?php
-													$sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='1'");
-													$row2=mysql_fetch_array($sql2);
+													$sql2=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='1'");
+													$row2=mysqli_fetch_array($sql2);
 													?>
 													<th>1</th>
 													<td><?php	echo "$row2[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
-														
-														
+
+
 													</td>
 												</tr>
 												<tr>
 													<?php
-													$sql2=mysql_query("SELECT * FROM ca_performance_event where id_ca='2'");
-													$row2=mysql_fetch_array($sql2);
+													$sql2=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='2'");
+													$row2=mysqli_fetch_array($sql2);
 													?>
 													<th>2</th>
 													<td><?php	echo "$row2[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
-														$cekisi2=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi2=mysql_fetch_array($cekisi2);
+														$cekisi2=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+														$rowisi2=mysqli_fetch_array($cekisi2);
 														if($rowisi2['file2']==null || empty($rowisi2['file2'])){
 															?>
+															<!-- <input type="hidden" name="MAX_FILE_SIZE" value="4194304" /> -->
 															<input class="btn btn-default " type="file" name="file2" />
 															<?php
 														} else {
@@ -401,24 +319,24 @@ $row2 = mysql_fetch_array($query2);
 																<span><i class="fa fa-check-circle" style="color:#26B99A"></i></span>
 																<?php	
 															}
-									
+
 														}
 
 														?>
-														
+
 													</td>
 												</tr>
 												<tr>
 													<?php
-													$sql3=mysql_query("SELECT * FROM ca_performance_event where id_ca='3'");
-													$row3=mysql_fetch_array($sql3);
+													$sql3=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='3'");
+													$row3=mysqli_fetch_array($sql3);
 													?>
 													<th>3</th>
 													<td><?php	echo "$row3[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
-														$cekisi3=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi3=mysql_fetch_array($cekisi3);
+														$cekisi3=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+														$rowisi3=mysqli_fetch_array($cekisi3);
 														if($rowisi3['file3']==null || empty($rowisi3['file3'])){
 															?>
 															<input class="btn btn-default " type="file" name="file3" />
@@ -437,15 +355,15 @@ $row2 = mysql_fetch_array($query2);
 												</tr>
 												<tr>
 													<?php
-													$sql4=mysql_query("SELECT * FROM ca_performance_event where id_ca='4'");
-													$row4=mysql_fetch_array($sql4);
+													$sql4=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='4'");
+													$row4=mysqli_fetch_array($sql4);
 													?>
 													<th>4</th>
 													<td><?php	echo "$row4[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
-														$cekisi4=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi4=mysql_fetch_array($cekisi4);
+														$cekisi4=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+														$rowisi4=mysqli_fetch_array($cekisi4);
 														if($rowisi4['file4']==null || empty($rowisi4['file4'])){
 															?>
 															<input class="btn btn-default " type="file" name="file4" />
@@ -464,15 +382,15 @@ $row2 = mysql_fetch_array($query2);
 												</tr>
 												<tr>
 													<?php
-													$sql5=mysql_query("SELECT * FROM ca_performance_event where id_ca='5'");
-													$row5=mysql_fetch_array($sql5);
+													$sql5=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='5'");
+													$row5=mysqli_fetch_array($sql5);
 													?>
 													<th>5</th>
 													<td><?php	echo "$row5[ca_detail]"; ?></td>
 													<td style="vertical-align:middle">
 														<?php 
-														$cekisi5=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-														$rowisi5=mysql_fetch_array($cekisi5);
+														$cekisi5=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+														$rowisi5=mysqli_fetch_array($cekisi5);
 														if($rowisi5['file5']==null || empty($rowisi5['file5'])){
 															?>
 															<input class="btn btn-default " type="file" name="file5" />
@@ -490,15 +408,15 @@ $row2 = mysql_fetch_array($query2);
 													</tr>
 													<tr>
 														<?php
-														$sql6=mysql_query("SELECT * FROM ca_performance_event where id_ca='6'");
-														$row6=mysql_fetch_array($sql6);
+														$sql6=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='6'");
+														$row6=mysqli_fetch_array($sql6);
 														?>
 														<th>6</th>
 														<td><?php	echo "$row6[ca_detail]"; ?></td>
 														<td style="vertical-align:middle">
 															<?php 
-															$cekisi6=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-															$rowisi6=mysql_fetch_array($cekisi6);
+															$cekisi6=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi6=mysqli_fetch_array($cekisi6);
 															if($rowisi6['file6']==null || empty($rowisi6['file6'])){
 																?>
 																<input class="btn btn-default " type="file" name="file6" />
@@ -517,15 +435,15 @@ $row2 = mysql_fetch_array($query2);
 													</tr>
 													<tr>
 														<?php
-														$sql7=mysql_query("SELECT * FROM ca_performance_event where id_ca='7'");
-														$row7=mysql_fetch_array($sql7);
+														$sql7=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='7'");
+														$row7=mysqli_fetch_array($sql7);
 														?>
 														<th>7</th>
 														<td><?php	echo "$row7[ca_detail]"; ?></td>
 														<td style="vertical-align:middle">
 															<?php 
-															$cekisi7=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-															$rowisi7=mysql_fetch_array($cekisi7);
+															$cekisi7=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi7=mysqli_fetch_array($cekisi7);
 															if($rowisi7['file7']==null || empty($rowisi7['file7'])){
 																?>
 																<input class="btn btn-default " type="file" name="file7" />
@@ -544,15 +462,15 @@ $row2 = mysql_fetch_array($query2);
 													</tr>
 													<tr>
 														<?php
-														$sql8=mysql_query("SELECT * FROM ca_performance_event where id_ca='8'");
-														$row8=mysql_fetch_array($sql8);
+														$sql8=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='8'");
+														$row8=mysqli_fetch_array($sql8);
 														?>
 														<th>8</th>
 														<td><?php	echo "$row8[ca_detail]"; ?></td>
 														<td style="vertical-align:middle">
 															<?php 
-															$cekisi8=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-															$rowisi8=mysql_fetch_array($cekisi8);
+															$cekisi8=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi8=mysqli_fetch_array($cekisi8);
 															if($rowisi8['file8']==null || empty($rowisi8['file8'])){
 																?>
 																<input class="btn btn-default " type="file" name="file8" />
@@ -571,15 +489,15 @@ $row2 = mysql_fetch_array($query2);
 													</tr>
 													<tr>
 														<?php
-														$sql9=mysql_query("SELECT * FROM ca_performance_event where id_ca='9'");
-														$row9=mysql_fetch_array($sql9);
+														$sql9=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='9'");
+														$row9=mysqli_fetch_array($sql9);
 														?>
 														<th>9</th>
 														<td><?php	echo "$row9[ca_detail]"; ?></td>
 														<td style="vertical-align:middle">
 															<?php 
-															$cekisi9=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-															$rowisi9=mysql_fetch_array($cekisi9);
+															$cekisi9=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi9=mysqli_fetch_array($cekisi9);
 															if($rowisi9['file9']==null || empty($rowisi9['file9'])){
 																?>
 																<input class="btn btn-default " type="file" name="file9" />
@@ -598,15 +516,15 @@ $row2 = mysql_fetch_array($query2);
 													</tr>
 													<tr>
 														<?php
-														$sql10=mysql_query("SELECT * FROM ca_performance_event where id_ca='10'");
-														$row10=mysql_fetch_array($sql10);
+														$sql10=mysqli_query($con,"SELECT * FROM ca_performance_event where id_ca='10'");
+														$row10=mysqli_fetch_array($sql10);
 														?>
 														<th>10</th>
 														<td><?php	echo "$row10[ca_detail]"; ?></td>
 														<td style="vertical-align:middle">
 															<?php 
-															$cekisi10=mysql_query("SELECT * FROM ca_performance_upload where username='$coba'");
-															$rowisi10=mysql_fetch_array($cekisi10);
+															$cekisi10=mysqli_query($con,"SELECT * FROM ca_performance_upload where username='$coba'");
+															$rowisi10=mysqli_fetch_array($cekisi10);
 															if($rowisi10['file10']==null || empty($rowisi10['file10'])){
 																?>
 																<input class="btn btn-default " type="file" name="file10" />
@@ -644,7 +562,7 @@ $row2 = mysql_fetch_array($query2);
 							</div>
 						</div>
 
-						
+
 
 					</div>
 				</div>
@@ -670,27 +588,40 @@ $row2 = mysql_fetch_array($query2);
 	<script src="../../vendors/fastclick/lib/fastclick.js"></script>
 	<!-- NProgress -->
 	<script src="../../vendors/nprogress/nprogress.js"></script>
+	<!-- Autosize -->
+	<script src="../../vendors/autosize/dist/autosize.min.js"></script>
+	<!-- Autosize -->
+	<script>
+	$(document).ready(function() {
+		autosize($('.resizable_textarea'));
+	});
+
+	</script>
+	<!-- /Autosize -->
 	<!-- easy-pie-chart -->
 	<script src="../../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
 	<script>
-		$(function() {
-			$('.chart').easyPieChart({
-				easing: 'easeOutElastic',
-				delay: 3000,
-				barColor: '#26B99A',
-				trackColor: '#F5F7FA',
-				scaleColor: false,
-				lineWidth: 20,
-				trackWidth: 16,
-				lineCap: 'butt',
-				onStep: function(from, to, percent) {
-					$(this.el).find('.percent').text(Math.round(percent));
-				}
-			});
+	$(function() {
+		$('.chart').easyPieChart({
+			easing: 'easeOutElastic',
+			delay: 3000,
+			barColor: '#26B99A',
+			trackColor: '#F5F7FA',
+			scaleColor: false,
+			lineWidth: 20,
+			trackWidth: 16,
+			lineCap: 'butt',
+			onStep: function(from, to, percent) {
+				$(this.el).find('.percent').text(Math.round(percent));
+			}
 		});
+	});
 	</script>
 	<!-- Custom Theme Scripts -->
 	<script src="../../build/js/custom.min.js"></script>
+
+
+
 
 </body>
 </html>

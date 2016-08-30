@@ -347,7 +347,7 @@ else
                           $resulto1 = $db->query( $quero1 );
                           while ($rowo1 = $resulto1->fetch_object()) {
                             echo '<tr>';
-                            echo '<td>'.$rowo1->kode.' - '.$rowo1->nama.'</td>';
+                            echo '<td>'.$rowo1->kode.' - '.$rowo1->nama_unit.'</td>';
                             $cek_kodeunit=$rowo1->kode;
                             $quero2 = "SELECT id FROM logbook WHERE kode_unit='$cek_kodeunit'";
                             $resulto2 = $db->query( $quero2 );
@@ -419,11 +419,11 @@ else
                           $rowcount = mysqli_num_rows($resulti1);
                           if ($rowcount>0) {
                             while ($rowi1 = $resulti1->fetch_object()) {
-                              $queri2 = "SELECT nama FROM unit WHERE kode='$rowi1->kode_unit'";
+                              $queri2 = "SELECT nama_unit FROM unit WHERE kode='$rowi1->kode_unit'";
                               $resulti2 = $db->query( $queri2 );
                               $rowi2 = $resulti2->fetch_object();
                               echo '<tr>';
-                              echo '<td>'.$rowi1->kode_unit.' - '.$rowi2->nama.'</td>';
+                              echo '<td>'.$rowi1->kode_unit.' - '.$rowi2->nama_unit.'</td>';
                               $queri3 = "SELECT start, end FROM logbook WHERE kode_unit='$rowi1->kode_unit'";
                               $resulti3 = $db->query( $queri3 );
                               $rowi3 = $resulti3->fetch_object();

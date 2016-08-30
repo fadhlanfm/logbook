@@ -56,7 +56,7 @@ else
   <!-- QUERIES -->
   <?php
   include_once('../connect_db.php');
-  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
+  $query = "SELECT logbook.id, logbook.kode_unit, unit.nama_unit, logbook.nama_program, logbook.start, logbook.end, logbook.status, logbook.last_update FROM logbook INNER JOIN unit WHERE logbook.kode_unit=unit.kode";
   //execute the query
   $result = $db->query( $query );
   if (!$result)

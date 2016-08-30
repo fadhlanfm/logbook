@@ -174,7 +174,7 @@ else
                   $date2 = date("Y-m-d");
                   if ($date1 < $date2) {
                     $status2 = ' <span class="badge bg-green">Finished</span></td>';
-                  } else if ($date3 < $date2 && $date2 < $date1) {
+                  } else if ($date3 <= $date2 && $date2 <= $date1) {
                     $status2 = ' <span class="badge bg-blue">Running</span></td>';
                   } else if ($date3 > $date2) {
                     $status2 = ' <span class="badge bg-white">Planned</span></td>';

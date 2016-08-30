@@ -90,202 +90,202 @@ else
 
           <div class="clearfix"></div>
 
-<?php
-          include('sidebar.php');
-?>
-
-</div>
-</div>
-
-<!-- top navigation -->
-<div class="top_nav">
-  <div class="nav_menu">
-    <nav>
-      <div class="nav toggle">
-        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-      </div>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="">
-          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
-            <span class=" fa fa-angle-down"></span>
-          </a>
-
-          <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <li><a href="javascript:;"> Profile</a></li>
-            <li>
-              <a href="javascript:;">
-                <span class="badge bg-red pull-right">50%</span>
-                <span>Settings</span>
-              </a>
-            </li>
-            <li><a href="javascript:;">Help</a></li>
-            <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-          </ul>
-        </li>
-
-        <li role="presentation" class="dropdown">
-          <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-envelope-o"></i>
-            <span class="badge bg-green">6</span>
-          </a>
-          <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <a>
-                <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                <span>
-                  <span>John Smith</span>
-                  <span class="time">3 mins ago</span>
-                </span>
-                <span class="message">
-                  Film festivals used to be do-or-die moments for movie makers. They were where...
-                </span>
-              </a>
-            </li>
-            <li>
-              <div class="text-center">
-                <a>
-                  <strong>See All Alerts</strong>
-                  <i class="fa fa-angle-right"></i>
-                </a>
-              </div>
-            </li>
-          </ul>
-        </li>
-
-      </ul>
-    </nav>
-  </div>
-</div>
-<!-- /top navigation -->
-
-<!-- page content -->
-<div class="right_col" role="main">
-  <div class="x_panel">
-    <div class="x_title">
-      <h2>Kelompok Aktivitas</h2>
-      <ul class="nav navbar-right panel_toolbox">
-        <li><a href="new_group_activity_form.php"><button class="btn btn-success btn-xs"><i class="fa fa-plus"></i>  Buat Kelompok Aktivitas Baru</button></a>
-        </li>
-
-      </ul>
-
-      <div class="clearfix">
-      </div>
-    </div>
-    <div class="x_content">
-      <!-- bookmark -->
-
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>
-              ID
-            </th>
-            <th>
-              Nama
-            </th>
-            <th>
-              Deskripsi
-            </th>
-            <th>
-              Ubah
-            </th>
-            <th>
-              Default
-            </th>
-          </tr>
-
           <?php
-          $i=1;
-          $defa=0;
-          while ($row = $result->fetch_object())
-          {
-            if ($row->default2 == 1) {
-              $defa=1;
-            }
-            ?>
-            <tr>
-              <td>
-                <?php echo $row->id_aktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->nama_aktivitas ?>
-              </td>
-              <td>
-                <?php echo $row->desk_akt ?>
-              </td>
-              <td>
-                <a href="ubah_aktivitas.php?id=<?php echo $row->id_aktivitas ?>"><button class="btn btn-primary btn-xs">
-                  Ubah
-                </button></a>
-              </td>
-              <td style="width: 8%;">
-                <div class="btn-group">
-                  <?php
-                  if ($defa == 1) {
-                    ?>
-                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-check"></i> </button>
-                    <button class="btn btn-default btn-xs" type="button"><a href="acc_grup_undefault.php?id=<?php echo $row->id_aktivitas ?>"><i class="fa fa-times"></i></a></button>
-                    <?php
-                  } else if ($defa == 0) {
-                    ?>
-                    <button class="btn btn-default btn-xs" type="button"><a href="acc_grup_default.php?id=<?php echo $row->id_aktivitas ?>"><i class="fa fa-check"></i></a></button>
-                    <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-times"></i></button>
-                    <?php
+          include('sidebar.php');
+          ?>
+
+        </div>
+      </div>
+
+      <!-- top navigation -->
+      <div class="top_nav">
+        <div class="nav_menu">
+          <nav>
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li class="">
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <img src="images/img.jpg" alt=""><?php echo''.$row2->username.''; ?>
+                  <span class=" fa fa-angle-down"></span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <li><a href="javascript:;"> Profile</a></li>
+                  <li>
+                    <a href="javascript:;">
+                      <span class="badge bg-red pull-right">50%</span>
+                      <span>Settings</span>
+                    </a>
+                  </li>
+                  <li><a href="javascript:;">Help</a></li>
+                  <li><a href="acc_logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                </ul>
+              </li>
+
+              <li role="presentation" class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="badge bg-green">6</span>
+                </a>
+                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                      <span>
+                        <span>John Smith</span>
+                        <span class="time">3 mins ago</span>
+                      </span>
+                      <span class="message">
+                        Film festivals used to be do-or-die moments for movie makers. They were where...
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <div class="text-center">
+                      <a>
+                        <strong>See All Alerts</strong>
+                        <i class="fa fa-angle-right"></i>
+                      </a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- /top navigation -->
+
+      <!-- page content -->
+      <div class="right_col" role="main">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Kelompok Aktivitas</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a href="new_group_activity_form.php"><button class="btn btn-success btn-xs"><i class="fa fa-plus"></i>  Buat Kelompok Aktivitas Baru</button></a>
+              </li>
+
+            </ul>
+
+            <div class="clearfix">
+            </div>
+          </div>
+          <div class="x_content">
+            <!-- bookmark -->
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    Nama
+                  </th>
+                  <th>
+                    Deskripsi
+                  </th>
+                  <th>
+                    Ubah
+                  </th>
+                  <th>
+                    Default
+                  </th>
+                </tr>
+
+                <?php
+                $i=1;
+                $defa=0;
+                while ($row = $result->fetch_object())
+                {
+                  if ($row->default2 == 1) {
+                    $defa=1;
                   }
                   ?>
-                </div>
-              </td>
+                  <tr>
+                    <td>
+                      <?php echo $row->id_aktivitas ?>
+                    </td>
+                    <td>
+                      <?php echo $row->nama_aktivitas ?>
+                    </td>
+                    <td>
+                      <?php echo $row->desk_akt ?>
+                    </td>
+                    <td>
+                      <a href="ubah_aktivitas.php?id=<?php echo $row->id_aktivitas ?>"><button class="btn btn-primary btn-xs">
+                        Ubah
+                      </button></a>
+                    </td>
+                    <td style="width: 8%;">
+                      <div class="btn-group">
+                        <?php
+                        if ($defa == 1) {
+                          ?>
+                          <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-check"></i> </button>
+                          <button class="btn btn-default btn-xs" type="button"><a href="acc_grup_undefault.php?id=<?php echo $row->id_aktivitas ?>"><i class="fa fa-times"></i></a></button>
+                          <?php
+                        } else if ($defa == 0) {
+                          ?>
+                          <button class="btn btn-default btn-xs" type="button"><a href="acc_grup_default.php?id=<?php echo $row->id_aktivitas ?>"><i class="fa fa-check"></i></a></button>
+                          <button class="btn btn-default btn-xs active" type="button"><i class="fa fa-times"></i></button>
+                          <?php
+                        }
+                        ?>
+                      </div>
+                    </td>
 
-            </tr>
-            <?php
-            $i++;
-            $defa='';
-          }
+                  </tr>
+                  <?php
+                  $i++;
+                  $defa='';
+                }
 
-          ?>
-        </thead>
-      </table>
-      <?php 
-      $sql = "SELECT * FROM aktivitas"; 
+                ?>
+              </thead>
+            </table>
+            <?php 
+            $sql = "SELECT * FROM aktivitas"; 
       $rs_result = $db->query($sql); //run the query
       $total_records = $rs_result->num_rows;  //count number of records
       $total_pages = ceil($total_records / $num_rec_per_page); 
@@ -351,7 +351,7 @@ else
 <script src="js/moment/moment.min.js"></script>
 <script src="js/datepicker/daterangepicker.js"></script>
 <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
+<script src="../build/js/custom.min.js"></script>
 
 <!-- filterplgin -->
 

@@ -14,8 +14,8 @@ if(isset($_SESSION['id'])!=null && !empty($_SESSION['id']))
   header ('Location: login.php');
   exit;
 }
-$q = mysql_query("SELECT * FROM user WHERE nopeg = '$username' ");
-$check=mysql_fetch_array($q);
+$q = mysqli_query($con,"SELECT * FROM user WHERE nopeg = '$username' ");
+$check=mysqli_fetch_array($q);
 ?>
 
 <!DOCTYPE html>

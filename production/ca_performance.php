@@ -21,8 +21,8 @@ else
 $coba = $_SESSION['id'];
 
 
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 
@@ -31,7 +31,7 @@ include('header.php');
 				<div class="">
 					<div class="page-title">
 						<div class="title_left">
-							<h3>CA Performance</h3>
+							<h3>Unit Performance</h3>
 						</div>
 
 						<div class="title_right">
@@ -51,7 +51,7 @@ include('header.php');
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Head Office<small>CA Performance</small></h2>
+									<h2>Head Office<small>Unit Performance</small></h2>
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 										</li>
@@ -78,7 +78,7 @@ include('header.php');
 						<div class="col-md-6 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Sumatera Region <small>CA Performance</small></h2>
+									<h2>Sumatera Region <small>Unit Performance</small></h2>
 									
 									<div class="clearfix"></div>
 								</div>
@@ -91,7 +91,7 @@ include('header.php');
 						<div class="col-md-6 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Jawa, Bali, Nusa Tenggara Region <small>CA Performance</small></h2>
+									<h2>Jawa, Bali, Nusa Tenggara Region <small>Unit Performance</small></h2>
 									<div class="clearfix"></div>
 								</div>
 								<div class="x_content">
@@ -103,7 +103,7 @@ include('header.php');
 						<div class="col-md-6 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Kalimantan, Sulawesi, & Papua Region<small>CA Performance</small></h2>
+									<h2>Kalimantan, Sulawesi, & Papua Region<small>Unit Performance</small></h2>
 
 									<div class="clearfix"></div>
 								</div>
@@ -116,7 +116,7 @@ include('header.php');
 						<div class="col-md-6 col-sm-12 col-xs-12">
 							<div class="x_panel">
 								<div class="x_title">
-									<h2>Jakarta Raya and International Region <small>CA Performance</small></h2>
+									<h2>Jakarta Raya and International Region <small>Unit Performance</small></h2>
 
 									<div class="clearfix"></div>
 								</div>
@@ -167,16 +167,16 @@ include('header.php');
 	 		labels: [
 	 		<?php 
 	 		$n=1;
-	 		$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='1'");
-	 		while ($row=mysql_fetch_array($queries)) {
+	 		$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='1'");
+	 		while ($row=mysqli_fetch_array($queries)) {
 	 			?>
-	 			"<?php echo $row['unit_name'];?>",
+	 			"<?php echo $row['unit_name'];?> (<?php echo $row['username'];?>)",
 	 			<?php
 	 		}
 	 		?>
 	 		],
 	 		datasets: [{
-	 			label: "CA Performance",
+	 			label: "Unit Performance",
 	 			backgroundColor: "rgba(3, 88, 106, 0.2)",
 	 			borderColor: "rgba(3, 88, 106, 0.80)",
 	 			pointBorderColor: "rgba(3, 88, 106, 0.80)",
@@ -186,8 +186,8 @@ include('header.php');
 	 			data: [
 	 			<?php 
 	 			$n=1;
-	 			$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='1'");
-	 			while ($row=mysql_fetch_array($queries)) {
+	 			$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='1'");
+	 			while ($row=mysqli_fetch_array($queries)) {
 	 				?>
 	 				"<?php echo $row['total'];?>",
 	 				<?php
@@ -207,16 +207,16 @@ include('header.php');
 	 		labels: [
 	 		<?php 
 	 		$n=1;
-	 		$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='2'");
-	 		while ($row=mysql_fetch_array($queries)) {
+	 		$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='2'");
+	 		while ($row=mysqli_fetch_array($queries)) {
 	 			?>
-	 			"<?php echo $row['unit_name'];?>",
+	 			"<?php echo $row['unit_name'];?>  (<?php echo $row['username'];?>)",
 	 			<?php
 	 		}
 	 		?>
 	 		],
 	 		datasets: [{
-	 			label: "CA Performance",
+	 			label: "Unit Performance",
 	 			backgroundColor: "rgba(3, 88, 106, 0.2)",
 	 			borderColor: "rgba(3, 88, 106, 0.80)",
 	 			pointBorderColor: "rgba(3, 88, 106, 0.80)",
@@ -226,10 +226,10 @@ include('header.php');
 	 			data: [
 	 			<?php 
 	 			$n=1;
-	 			$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='2'");
-	 			while ($row=mysql_fetch_array($queries)) {
+	 			$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='2'");
+	 			while ($row=mysqli_fetch_array($queries)) {
 	 				?>
-	 				"<?php echo $row['total'];?>",
+	 				"<?php echo $row['total'];?> ",
 	 				<?php
 	 			}
 	 			?>
@@ -247,16 +247,16 @@ include('header.php');
 	 		labels: [
 	 		<?php 
 	 		$n=1;
-	 		$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='3'");
-	 		while ($row=mysql_fetch_array($queries)) {
+	 		$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='3'");
+	 		while ($row=mysqli_fetch_array($queries)) {
 	 			?>
-	 			"<?php echo $row['unit_name'];?>",
+	 			"<?php echo $row['unit_name'];?> (<?php echo $row['username'];?>)",
 	 			<?php
 	 		}
 	 		?>
 	 		],
 	 		datasets: [{
-	 			label: "CA Performance",
+	 			label: "Unit Performance",
 	 			backgroundColor: "rgba(3, 88, 106, 0.2)",
 	 			borderColor: "rgba(3, 88, 106, 0.80)",
 	 			pointBorderColor: "rgba(3, 88, 106, 0.80)",
@@ -266,8 +266,8 @@ include('header.php');
 	 			data: [
 	 			<?php 
 	 			$n=1;
-	 			$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='3'");
-	 			while ($row=mysql_fetch_array($queries)) {
+	 			$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='3'");
+	 			while ($row=mysqli_fetch_array($queries)) {
 	 				?>
 	 				"<?php echo $row['total'];?>",
 	 				<?php
@@ -287,16 +287,16 @@ include('header.php');
 	 		labels: [
 	 		<?php 
 	 		$n=1;
-	 		$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='4'");
-	 		while ($row=mysql_fetch_array($queries)) {
+	 		$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='4'");
+	 		while ($row=mysqli_fetch_array($queries)) {
 	 			?>
-	 			"<?php echo $row['unit_name'];?>",
+	 			"<?php echo $row['unit_name'];?> (<?php echo $row['username'];?>)",
 	 			<?php
 	 		}
 	 		?>
 	 		],
 	 		datasets: [{
-	 			label: "CA Performance",
+	 			label: "Unit Performance",
 	 			backgroundColor: "rgba(3, 88, 106, 0.2)",
 	 			borderColor: "rgba(3, 88, 106, 0.80)",
 	 			pointBorderColor: "rgba(3, 88, 106, 0.80)",
@@ -306,8 +306,8 @@ include('header.php');
 	 			data: [
 	 			<?php 
 	 			$n=1;
-	 			$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='4'");
-	 			while ($row=mysql_fetch_array($queries)) {
+	 			$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='4'");
+	 			while ($row=mysqli_fetch_array($queries)) {
 	 				?>
 	 				"<?php echo $row['total'];?>",
 	 				<?php
@@ -327,16 +327,16 @@ include('header.php');
 	 		labels: [
 	 		<?php 
 	 		$n=1;
-	 		$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='5'");
-	 		while ($row=mysql_fetch_array($queries)) {
+	 		$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='5'");
+	 		while ($row=mysqli_fetch_array($queries)) {
 	 			?>
-	 			"<?php echo $row['unit_name'];?>",
+	 			"<?php echo $row['unit_name'];?> (<?php echo $row['username'];?>)",
 	 			<?php
 	 		}
 	 		?>
 	 		],
 	 		datasets: [{
-	 			label: "CA Performance",
+	 			label: "Unit Performance",
 	 			backgroundColor: "rgba(3, 88, 106, 0.2)",
 	 			borderColor: "rgba(3, 88, 106, 0.80)",
 	 			pointBorderColor: "rgba(3, 88, 106, 0.80)",
@@ -346,8 +346,8 @@ include('header.php');
 	 			data: [
 	 			<?php 
 	 			$n=1;
-	 			$queries=mysql_query("SELECT * FROM ca_performance_upload where kode='5'");
-	 			while ($row=mysql_fetch_array($queries)) {
+	 			$queries=mysqli_query($con,"SELECT * FROM ca_performance_upload where kode='5'");
+	 			while ($row=mysqli_fetch_array($queries)) {
 	 				?>
 	 				"<?php echo $row['total'];?>",
 	 				<?php

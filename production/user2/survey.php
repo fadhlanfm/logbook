@@ -22,9 +22,9 @@ else
 
 $coba = $_SESSION['id'];
 
-$query = mysql_query("SELECT * FROM Survey_list WHERE status='active'" );
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query = mysqli_query($con, "SELECT * FROM Survey_list WHERE status='active'" );
+$query2 =mysqli_query($con,  "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,46 +64,9 @@ $row2 = mysql_fetch_array($query2);
 
           
 
-          <br />
-
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="index.php">Halaman Utama</a></li>
-                    <li><a href="rank.php">Ranking Pegawai</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="aktivitas.php">Isi Aktivitas</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Survey <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="survey.php">List Survey</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="ca_performance.php">CA Performance</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="edit_username2.php">Ubah Username</a></li>
-                    <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_foto.php">Ubah Foto</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- /sidebar menu -->
-
+          <?php
+          include('sidebar.php');
+          ?>
 
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">
@@ -274,7 +237,7 @@ $row2 = mysql_fetch_array($query2);
                   <div class="table-responsive">
                     <?php
                     $a=1;
-                    $cek1=mysql_num_rows($query);
+                    $cek1=mysqli_num_rows($query);
                     if ($cek1>0){ ?>
                       <table  class="table table-hover">
                         <thead>
@@ -292,7 +255,7 @@ $row2 = mysql_fetch_array($query2);
                           </tr>
                         </thead>
                         <?php
-                        while($row = mysql_fetch_array($query)){
+                        while($row = mysqli_fetch_array($query)){
                          ?>
                          <tbody>
                           <tr class="even pointer">

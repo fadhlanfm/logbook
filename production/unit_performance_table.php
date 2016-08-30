@@ -32,7 +32,7 @@ include('header.php');
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>CA Performance Update</h3>
+				<h3>Unit Performance Update</h3>
 			</div>
 
 			<div class="title_right">
@@ -52,7 +52,7 @@ include('header.php');
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Aktivitas Terbaru<small>CA Performance</small></h2>
+						<h2>Aktivitas Terbaru<small>Unit Performance</small></h2>
 						<ul class="nav navbar-right panel_toolbox">
 							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 							</li>
@@ -73,7 +73,7 @@ include('header.php');
 					<div class="x_content">
 						<!--     background-color: #f9f9f9; -->
 						<?php 
-						$sql=mysqli_query($con,"SELECT * FROM ca_performance_activity ORDER BY id_activity DESC");
+						$sql=mysqli_query($con,"SELECT * FROM unit_performance_activity ORDER BY id_activity DESC");
 
 						$x=1;
 						if ($isi=mysqli_num_rows($sql)>0){

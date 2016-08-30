@@ -249,6 +249,166 @@ include('../connect_db.php');
                 </div>
                 <!-- CHART unit sedang berjalan-->
 
+                        <!-- TABEL -->
+        <div class="row">
+          <!-- Discipline Report -->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Discipline Report</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Unit</th>
+                      <th width="3%">Belum</th>
+                      <th width="3%">Sudah</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    $quero = "SELECT * FROM unit WHERE kode='UPGAM'";
+                    $resulto = $db->query( $quero );
+                    while ($rowo = $resulto->fetch_object()) {
+                      echo '<tr>';
+                      echo '<th scope="row" colspan="3" bgcolor="black" style="color:white">'.$rowo->kode.' - '.$rowo->nama_unit.'</th>';
+                      $cek_kodeunit=$rowo->kode;
+                      $quero1 = "SELECT * FROM branch WHERE kode_unit='$cek_kodeunit'";
+                      $resulto1 = $db->query( $quero1 );
+                      while ($rowo1 = $resulto1->fetch_object()) {
+                        echo '<tr>';
+                        echo '<td>'.$rowo1->kode.' - '.$rowo1->nama.'</td>';
+                        $cek_kodeunit=$rowo1->kode;
+                        $quero2 = "SELECT id FROM logbook WHERE kode_unit='$cek_kodeunit'";
+                        $resulto2 = $db->query( $quero2 );
+                        $rowo2 = $resulto2->fetch_object();
+                        if($rowo2=='' || empty($rowo2) || !isset($rowo2) || is_null($rowo2)){
+                          echo '<td bgcolor="red"></td>';
+                          echo '<td></td>';
+                          echo '</tr>';
+                        }else{
+                          echo '<td></td>';
+                          echo '<td bgcolor="green"></td>';
+                          echo '</tr>';
+                        }
+                      }
+                    }
+                    ?>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+          <!-- Discipline Report -->
+          <!-- execution report -->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <h2>Execution Report</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Unit</th>
+                      <th width="3%">Belum</th>
+                      <th width="3%">Berjalan</th>
+                      <th width="3%">Sudah</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    $today=date("Y-m-d");
+                    $queri = "SELECT * FROM unit WHERE kode='UPGAM'";
+                    $resulti = $db->query( $queri );
+                    while ($rowi = $resulti->fetch_object()) {  
+                      echo '<tr>';
+                      echo '<th scope="row" colspan="4" bgcolor="black" style="color:white">'.$rowi->kode.' - '.$rowi->nama_unit.'</th>';
+                      echo '</tr>';
+                      $cek1_kodeunit=$rowi->kode;
+                      $queri1 = "SELECT * FROM logbook WHERE kode_unit='$cek1_kodeunit' GROUP BY kode_branch";
+                      $resulti1 = $db->query( $queri1 );
+                      $rowcount = mysqli_num_rows($resulti1);
+                      if ($rowcount>0) {
+                        while ($rowi1 = $resulti1->fetch_object()) {
+                          $queri2 = "SELECT nama FROM branch WHERE kode='$rowi1->kode_branch'";
+                          $resulti2 = $db->query( $queri2 );
+                          $rowi2 = $resulti2->fetch_object();
+                          echo '<tr>';
+                          echo '<td>'.$rowi1->kode_branch.' - '.$rowi2->nama.'</td>';
+                          $queri3 = "SELECT start, end FROM logbook WHERE kode_branch='$rowi1->kode_branch'";
+                          $resulti3 = $db->query( $queri3 );
+                          $rowi3 = $resulti3->fetch_object();
+                          $start= $rowi3->start;
+                          $end= $rowi3->end;
+                          if ($start > $today) {
+                            echo '<td bgcolor="red"></td>';
+                            echo '<td></td>';
+                            echo '<td></td>';
+                          }elseif($start <= $today && $end >= $today){
+                            echo '<td></td>';
+                            echo '<td bgcolor="yellow"></td>';
+                            echo '<td></td>';
+                          }else{
+                            echo '<td></td>';
+                            echo '<td></td>';
+                            echo '<td bgcolor="green"></td>';
+                          }
+                          echo '</tr>';
+                        }
+                      }else{
+                        echo '<tr>';
+                        echo '<td colspan="4"> - </td>';
+                        echo '</tr>';
+                      }
+                    }
+                    ?>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+          <!-- execution report -->
+        </div>
+        <!-- TABEL -->
+
                 <!-- CHART unit sudah menyelesaikan -->
                 <div class="row">
                   <div class="col-md-12 col-sm-8 col-xs-12">
@@ -381,166 +541,6 @@ include('../connect_db.php');
           </div>
         </div>
         <!-- /page content -->
-
-        <!-- TABEL -->
-        <div class="row">
-          <!-- Discipline Report -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Discipline Report</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Unit</th>
-                      <th width="3%">Belum</th>
-                      <th width="3%">Sudah</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $quero = "SELECT * FROM unit WHERE kode='UPGAM'";
-                    $resulto = $db->query( $quero );
-                    while ($rowo = $resulto->fetch_object()) {
-                      echo '<tr>';
-                      echo '<th scope="row" colspan="3" bgcolor="black">'.$rowo->kode.' - '.$rowo->nama.'</th>';
-                      $cek_kodeunit=$rowo->kode;
-                      $quero1 = "SELECT * FROM branch WHERE kode_unit='$cek_kodeunit'";
-                      $resulto1 = $db->query( $quero1 );
-                      while ($rowo1 = $resulto1->fetch_object()) {
-                        echo '<tr>';
-                        echo '<td>'.$rowo1->kode.' - '.$rowo1->nama.'</td>';
-                        $cek_kodeunit=$rowo1->kode;
-                        $quero2 = "SELECT id FROM logbook WHERE kode_unit='$cek_kodeunit'";
-                        $resulto2 = $db->query( $quero2 );
-                        $rowo2 = $resulto2->fetch_object();
-                        if($rowo2=='' || empty($rowo2) || !isset($rowo2) || is_null($rowo2)){
-                          echo '<td bgcolor="red"></td>';
-                          echo '<td></td>';
-                          echo '</tr>';
-                        }else{
-                          echo '<td></td>';
-                          echo '<td bgcolor="green"></td>';
-                          echo '</tr>';
-                        }
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-
-              </div>
-            </div>
-          </div>
-          <!-- Discipline Report -->
-          <!-- execution report -->
-          <div class="col-md-6 col-sm-6 col-xs-12">
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Execution Report</h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Unit</th>
-                      <th width="3%">Belum</th>
-                      <th width="3%">Berjalan</th>
-                      <th width="3%">Sudah</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    $today=date("Y-m-d");
-                    $queri = "SELECT * FROM unit WHERE kode='UPGAM'";
-                    $resulti = $db->query( $queri );
-                    while ($rowi = $resulti->fetch_object()) {  
-                      echo '<tr>';
-                      echo '<th scope="row" colspan="4" bgcolor="black">'.$rowi->kode.' - '.$rowi->nama.'</th>';
-                      echo '</tr>';
-                      $cek1_kodeunit=$rowi->kode;
-                      $queri1 = "SELECT * FROM logbook WHERE kode_unit='$cek1_kodeunit' GROUP BY kode_branch";
-                      $resulti1 = $db->query( $queri1 );
-                      $rowcount = mysqli_num_rows($resulti1);
-                      if ($rowcount>0) {
-                        while ($rowi1 = $resulti1->fetch_object()) {
-                          $queri2 = "SELECT nama FROM branch WHERE kode='$rowi1->kode_branch'";
-                          $resulti2 = $db->query( $queri2 );
-                          $rowi2 = $resulti2->fetch_object();
-                          echo '<tr>';
-                          echo '<td>'.$rowi1->kode_branch.' - '.$rowi2->nama.'</td>';
-                          $queri3 = "SELECT start, end FROM logbook WHERE kode_branch='$rowi1->kode_branch'";
-                          $resulti3 = $db->query( $queri3 );
-                          $rowi3 = $resulti3->fetch_object();
-                          $start= $rowi3->start;
-                          $end= $rowi3->end;
-                          if ($start > $today) {
-                            echo '<td bgcolor="red"></td>';
-                            echo '<td></td>';
-                            echo '<td></td>';
-                          }elseif($start <= $today && $end >= $today){
-                            echo '<td></td>';
-                            echo '<td bgcolor="yellow"></td>';
-                            echo '<td></td>';
-                          }else{
-                            echo '<td></td>';
-                            echo '<td></td>';
-                            echo '<td bgcolor="green"></td>';
-                          }
-                          echo '</tr>';
-                        }
-                      }else{
-                        echo '<tr>';
-                        echo '<td colspan="4"> - </td>';
-                        echo '</tr>';
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-
-              </div>
-            </div>
-          </div>
-          <!-- execution report -->
-        </div>
-        <!-- TABEL -->
 
         <!-- footer content -->
         <footer>

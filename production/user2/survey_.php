@@ -20,12 +20,12 @@ else
 }
 $namesurvey=$_GET['title'];
 $coba = $_SESSION['id'];
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
-$sql = mysql_query("SELECT * FROM Survey_list WHERE survey_name='$namesurvey';");
-$row = mysql_fetch_array($sql);
+$query2 =mysqli_query($con,  "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
+$sql = mysqli_query($con, "SELECT * FROM Survey_list WHERE survey_name='$namesurvey';");
+$row = mysqli_fetch_array($sql);
 
-$group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' and status='Default' ");
+$group=mysqli_query($con, "SELECT * From survey_group WHERE survey_name='$namesurvey' and status='Default' ");
 
 
 
@@ -77,47 +77,9 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
           <div class="clearfix"></div>
 
-          
-
-          <br />
-
-          <!-- sidebar menu -->
-          <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-            <div class="menu_section">
-              <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Beranda <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="index.php">Halaman Utama</a></li>
-                    <li><a href="rank.php">Ranking Pegawai</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Poin <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="aktivitas.php">Isi Aktivitas</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Survey <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="survey.php">List Survey</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-edit"></i> Change Agent <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                  <li><a href="ca_performance.php">CA Performance</a></li>
-                  </ul>
-                </li>
-                <li><a><i class="fa fa-cog"></i> Pengaturan<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="edit_username2.php">Ubah Username</a></li>
-                    <li><a href="edit_password2.php">Ubah Password</a></li>
-                    <li><a href="edit_foto.php">Ubah Foto</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-          <!-- /sidebar menu -->
+          <?php
+          include('sidebar.php');
+          ?>
 
 
           <!-- /menu footer buttons -->
@@ -323,7 +285,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
           </div>
 
           <?php 
-          $grow = mysql_fetch_array($group);
+          $grow = mysqli_fetch_array($group);
 
           $grupn= "$grow[group_name]" ;
           $grupd= "$grow[group_desc]";
@@ -358,8 +320,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
             <!-- panel forced choice-->
             <?php
             $xx=1;
-            $forced=mysql_query("SELECT * FROM `q_type` WHERE `question_type`='Forced Choice' and group_name='$grupn' GROUP BY `type_1`");
-            $checkn=mysql_num_rows($forced);  
+            $forced=mysqli_query($con, "SELECT * FROM `q_type` WHERE `question_type`='Forced Choice' and group_name='$grupn' GROUP BY `type_1`");
+            $checkn=mysqli_num_rows($forced);  
             if ($checkn>0){ ?>
               <div class="row">
 
@@ -379,13 +341,13 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                           $p=1;
                           $pp=1;
                           $hey=1;
-                          while ($choice = mysql_fetch_array($forced)) {
+                          while ($choice = mysqli_fetch_array($forced)) {
                             $ids=$p++;
                             $hay=$hey++;
                             $idk=$pp++; 
                             $questi= "$choice[question_detail]" ;
                             $question_typei="$choice[question_type]";
-                            $forced_content=mysql_query("SELECT * FROM `q_type` WHERE `question_type`='Forced Choice' and group_name='$grupn' and `type_1`='$ids'");
+                            $forced_content=mysqli_query($con, "SELECT * FROM `q_type` WHERE `question_type`='Forced Choice' and group_name='$grupn' and `type_1`='$ids'");
 
                             ?>
 
@@ -397,7 +359,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                               <td style="vertical-align:middle">
                                 <?php
                                 $alpha='A' ;
-                                while ($choicex = mysql_fetch_array($forced_content)) {
+                                while ($choicex = mysqli_fetch_array($forced_content)) {
 
                                   echo "[";
                                   echo $alpha++;
@@ -441,8 +403,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
             <!-- panel likert scale-->
             <?php
-            $likert=mysql_query("SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Likert Scale' ");
-            $check0=mysql_num_rows($likert);
+            $likert=mysqli_query($con, "SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Likert Scale' ");
+            $check0=mysqli_num_rows($likert);
             if ($check0>0){ ?>
               <div class="row">
 
@@ -460,8 +422,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                             <th style="width:50%">Pertanyaan (Likert Scale)</th>
                             <?php 
 
-                            $likert_scale=mysql_query("SELECT MAX(type_1) as type_1 FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_type='Likert Scale';" );
-                            $tipe0 = mysql_fetch_array($likert_scale);
+                            $likert_scale=mysqli_query($con, "SELECT MAX(type_1) as type_1 FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_type='Likert Scale';" );
+                            $tipe0 = mysqli_fetch_array($likert_scale);
 
                             $n=1;
                             while ($n <= $tipe0['type_1']) {
@@ -479,7 +441,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
                           $r=1;
                           $mmm=1;
-                          while ($scale = mysql_fetch_array($likert)) {
+                          while ($scale = mysqli_fetch_array($likert)) {
                             $quest0= "$scale[question_detail]" ;
                             $question_type0="$scale[question_type]";
                             $m=1;
@@ -494,8 +456,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                               <input type="text" name="tipe0<?php echo $mx; ?>" style="display:none" value="<?php echo $question_type0; ?>">
                               <?php 
 
-                              $likert_scale2=mysql_query("SELECT MAX(type_1) as type_1 FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_type='Likert Scale';" );
-                              $tipe9=mysql_fetch_array($likert_scale2);
+                              $likert_scale2=mysqli_query($con, "SELECT MAX(type_1) as type_1 FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_type='Likert Scale';" );
+                              $tipe9=mysqli_fetch_array($likert_scale2);
                               while ($m <= $tipe9['type_1']) {
 
                                 ?>
@@ -524,8 +486,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
             <!-- panel free text-->
             <?php
-            $free=mysql_query("SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Free Text' ");
-            $check2=mysql_num_rows($free);
+            $free=mysqli_query($con, "SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Free Text' ");
+            $check2=mysqli_num_rows($free);
             if ($check2>0){ ?>
               <div class="row">
 
@@ -542,7 +504,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                         <tbody>
                           <?php
                           $abc=1;
-                          while($yes = mysql_fetch_array($free)){
+                          while($yes = mysqli_fetch_array($free)){
                             $abcd=$abc++;
                             $quest= "$yes[question_detail]" ;
                             $question_type="$yes[question_type]";
@@ -576,8 +538,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
             <!-- panel single choice -->
             <?php
-            $single=mysql_query("SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Single Choice' ");
-            $check3=mysql_num_rows($single);
+            $single=mysqli_query($con, "SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Single Choice' ");
+            $check3=mysqli_num_rows($single);
             if ($check3>0){
               ?>
               <div class="row">
@@ -596,7 +558,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                         <tbody>
                           <?php
                           $oo=1;
-                          while($yes = mysql_fetch_array($single)){
+                          while($yes = mysqli_fetch_array($single)){
                             $ooo=$oo++;
                             $quest2= "$yes[question_detail]" ;
                             $question_type2="$yes[question_type]";
@@ -611,9 +573,9 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                               </td>
                               <td style="vertical-align:middle;">
                                 <?php
-                                $qtipe=mysql_query("SELECT * FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_detail='$quest2';" );
+                                $qtipe=mysqli_query($con, "SELECT * FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_detail='$quest2';" );
                                 if ($check3>0){
-                                  while($tipe = mysql_fetch_array($qtipe)){
+                                  while($tipe = mysqli_fetch_array($qtipe)){
                                     ?>
                                     <div class="radio">
                                       <label>
@@ -644,8 +606,8 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
             <!-- panel multiple choice -->
             <?php
-            $multi=mysql_query("SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Multiple Choice' ");
-            $check4=mysql_num_rows($multi);
+            $multi=mysqli_query($con, "SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Multiple Choice' ");
+            $check4=mysqli_num_rows($multi);
             if ($check4>0){
               ?>
               <div class="row">
@@ -667,7 +629,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                           $mol=1;
                           $mal=1;
                           $xx=1;
-                          while($yes2 = mysql_fetch_array($multi)){
+                          while($yes2 = mysqli_fetch_array($multi)){
                             $quest3= "$yes2[question_detail]" ;
                             $question_type3="$yes2[question_type]";
                             $mols=$mol++;
@@ -683,12 +645,12 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                               </td>
                               <td style="vertical-align:middle;">
                                 <?php
-                                $qtipe2=mysql_query("SELECT * FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_detail='$quest3';" );
+                                $qtipe2=mysqli_query($con, "SELECT * FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_detail='$quest3';" );
                                 if ($check4>0){
-                                  $checks4=mysql_num_rows($qtipe2);
+                                  $checks4=mysqli_num_rows($qtipe2);
 
 
-                                  while($tipe3 = mysql_fetch_array($qtipe2)){
+                                  while($tipe3 = mysqli_fetch_array($qtipe2)){
                                     ?>
                                     <div class="col-md-9 col-sm-9 col-xs-12">
                                       <div class="checkbox">
@@ -724,9 +686,9 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
 
             <!-- panel ranking -->
             <?php
-            $rank=mysql_query("SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Ranking' ");
+            $rank=mysqli_query($con, "SELECT * From survey_question WHERE survey_name='$namesurvey' and survey_group='$grupn' and question_type='Ranking' ");
 
-            $check5=mysql_num_rows($rank);
+            $check5=mysqli_num_rows($rank);
             if ($check5>0){ ?>
               <div class="row">
 
@@ -744,7 +706,7 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                         <tbody>
                           <?php
                           $rr=1;
-                          while($yes3 = mysql_fetch_array($rank)){
+                          while($yes3 = mysqli_fetch_array($rank)){
                             $quest4= "$yes3[question_detail]" ;
                             $question_type4="$yes3[question_type]";
                             $rrr=$rr++;
@@ -757,10 +719,10 @@ $group=mysql_query("SELECT * From survey_group WHERE survey_name='$namesurvey' a
                               </td>
                               <td style="vertical-align:middle;">
                                 <?php
-                              $qtipe2=mysql_query("SELECT * FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_detail='$quest4';" );
-                              $check4=mysql_num_rows($qtipe2);
+                              $qtipe2=mysqli_query($con, "SELECT * FROM q_type WHERE survey_name='$namesurvey' and group_name='$grupn' and question_detail='$quest4';" );
+                              $check4=mysqli_num_rows($qtipe2);
                               if ($check4>0){
-                                while($tipe3 = mysql_fetch_array($qtipe2)){
+                                while($tipe3 = mysqli_fetch_array($qtipe2)){
                                   ?>
                                   <div class="col-md-12 col-sm-12 col-xs-12"  style="vertical-align:middle">
 

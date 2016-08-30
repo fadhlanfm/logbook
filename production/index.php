@@ -42,7 +42,9 @@ else
   <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
 
   <!-- Custom Theme Style -->
-  <link href="../build/css/custom.min.css" rel="stylesheet">
+  <link href="../build/css/custom.css" rel="stylesheet">
+  <script type="text/javascript" src="/leanModal.v1.1/jquery.leanModal.min.js"></script>
+  <script type="text/javascript" src="tablefilter/dist/tablefilter/tablefilter.js"></script>
 </head>
 
 <body class="nav-md" onload="setInterval('displayServerTime()', 1000);">
@@ -209,9 +211,6 @@ else
   <!-- page content -->
   <div class="right_col" role="main">
     <div class="page-title">
-
-      
-
       <!-- CHART unit submit-->
       <div class="row">
         <div class="col-md-6 col-sm-6 col-xs-14">
@@ -416,13 +415,13 @@ else
                 $resulto = $db->query( $quero );
                 while ($rowo = $resulto->fetch_object()) {
                   echo '<tr>';
-                  echo '<th scope="row" colspan="3" bgcolor="black">'.$rowo->kode.' - '.$rowo->nama.'</th>';
+                  echo '<th scope="row" colspan="3" bgcolor="black" style="color:white">'.$rowo->kode.' - '.$rowo->nama.'</th>';
                   $cek_kodedir=$rowo->kode;
                   $quero1 = "SELECT * FROM unit WHERE kode_dir='$cek_kodedir'";
                   $resulto1 = $db->query( $quero1 );
                   while ($rowo1 = $resulto1->fetch_object()) {
                     echo '<tr>';
-                    echo '<td>'.$rowo1->kode.' - '.$rowo1->nama.'</td>';
+                    echo '<td>'.$rowo1->kode.' - '.$rowo1->nama_unit.'</td>';
                     $cek_kodeunit=$rowo1->kode;
                     $quero2 = "SELECT id FROM logbook WHERE kode_unit='$cek_kodeunit'";
                     $resulto2 = $db->query( $quero2 );
@@ -486,7 +485,7 @@ else
                 $resulti = $db->query( $queri );
                 while ($rowi = $resulti->fetch_object()) {  
                   echo '<tr>';
-                  echo '<th scope="row" colspan="4" bgcolor="black">'.$rowi->kode.' - '.$rowi->nama.'</th>';
+                  echo '<th scope="row" colspan="4" bgcolor="black" style="color:white">'.$rowi->kode.' - '.$rowi->nama.'</th>';
                   echo '</tr>';
                   $cek1_kodedir=$rowi->kode;
                   $queri1 = "SELECT * FROM logbook WHERE kode_dir='$cek1_kodedir' GROUP BY kode_unit";
@@ -494,11 +493,11 @@ else
                   $rowcount = mysqli_num_rows($resulti1);
                   if ($rowcount>0) {
                     while ($rowi1 = $resulti1->fetch_object()) {
-                      $queri2 = "SELECT nama FROM unit WHERE kode='$rowi1->kode_unit'";
+                      $queri2 = "SELECT nama_unit FROM unit WHERE kode='$rowi1->kode_unit'";
                       $resulti2 = $db->query( $queri2 );
                       $rowi2 = $resulti2->fetch_object();
                       echo '<tr>';
-                      echo '<td>'.$rowi1->kode_unit.' - '.$rowi2->nama.'</td>';
+                      echo '<td>'.$rowi1->kode_unit.' - '.$rowi2->nama_unit.'</td>';
                       $queri3 = "SELECT start, end FROM logbook WHERE kode_unit='$rowi1->kode_unit'";
                       $resulti3 = $db->query( $queri3 );
                       $rowi3 = $resulti3->fetch_object();
@@ -549,13 +548,15 @@ else
     <!-- /footer content -->
     
   </div>
+  </div>
 
   <!-- jQuery -->
   <script src="../vendors/jquery/dist/jquery.min.js"></script>
   <!-- easy-pie-chart -->
+  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="../vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
   <!-- Bootstrap -->
-  <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+  
   <!-- FastClick -->
   <script src="../vendors/fastclick/lib/fastclick.js"></script>
   <!-- NProgress -->
