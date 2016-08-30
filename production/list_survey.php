@@ -2,7 +2,7 @@
 session_start();
 include_once('Connection/conn.php');
 
-$query = mysql_query("SELECT * FROM Survey_list WHERE status='active'" );
+$query = mysqli_query($con,"SELECT * FROM Survey_list WHERE status='active'" );
 
 if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 {
@@ -21,8 +21,8 @@ else
 
 }
 $coba ='admin';
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 
@@ -79,7 +79,7 @@ include('header.php');
                   <div class="table-responsive">
                     <?php
                     $a=1;
-                    $cek1=mysql_num_rows($query);
+                    $cek1=mysqli_num_rows($query);
                     if ($cek1>0){ ?>
                       <table  class="table table-hover">
                         <thead>
@@ -100,14 +100,14 @@ include('header.php');
                           </tr>
                         </thead>
                         <?php
-                        while($row = mysql_fetch_array($query)){
+                        while($row = mysqli_fetch_array($query)){
                          ?>
                          <tbody>
                           <tr class="even pointer">
                             <td class="a-center " style="vertical-align: middle;">
                               <input type="checkbox" class="flat" name="table_records">
                             </td>
-                            <td class=" " style="vertical-align: middle;" ><?php echo $a++; ?></td>
+                            <td class=" " style="vertical-align: middle;"><?php echo $a++; ?></td>
                             <td class=" " style="vertical-align: middle;"><?php echo "$row[survey_name]"; ?></td>
                             <td class=" " style="vertical-align: middle;"><?php echo "$row[first_date]"; ?></td>
                             <td class=" " style="vertical-align: middle;"><?php echo "$row[last_date]"; ?></td>

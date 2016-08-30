@@ -3,8 +3,8 @@ session_start();
 include_once('Connection/conn.php');
 
 $id=$_GET['id'];  
-$sql = mysql_query("SELECT * FROM Survey_list WHERE id_survey='$id';");
-$row = mysql_fetch_array($sql);
+$sql = mysqli_query($con,"SELECT * FROM Survey_list WHERE id_survey='$id';");
+$row = mysqli_fetch_array($sql);
 
 if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
 {
@@ -23,8 +23,8 @@ else
 
 }
 $coba = $_SESSION['id'];
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 

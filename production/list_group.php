@@ -1,8 +1,8 @@
-<?php
+  <?php
 session_start();
 include_once('Connection/conn.php');
 
-$query = mysql_query("SELECT * FROM Survey_list WHERE status='active'" );
+$query = mysqli_query($con,"SELECT * FROM Survey_list WHERE status='active'" );
 
 if (isset($_SESSION["surveyname"]) && $_SESSION["surveyname"]!=null){
   $name = $_SESSION["surveyname"]; 
@@ -27,8 +27,8 @@ else
 
 }
 $coba = $_SESSION['id'];
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 
@@ -91,9 +91,9 @@ include('header.php');
                           <?php
 
                           $a=1;
-                          $cek1=mysql_num_rows($query);
+                          $cek1=mysqli_num_rows($query);
                           if ($cek1>0){ 
-                            while($row = mysql_fetch_array($query)){
+                            while($row = mysqli_fetch_array($query)){
                               ?>
                               <option><?php echo $row['survey_name'] ?></option>
                               <?php 
@@ -141,9 +141,9 @@ include('header.php');
                 <div class="x_content" id="pilihan2">
 
                   <?php
-                  $sql = mysql_query("SELECT * FROM Survey_group WHERE survey_name='$name' and status IN('Active','Default')" );
+                  $sql = mysqli_query($con,"SELECT * FROM Survey_group WHERE survey_name='$name' and status IN('Active','Default')" );
                   $b=1;
-                  $cek2=mysql_num_rows($sql);
+                  $cek2=mysqli_num_rows($sql);
                   if ($cek2>0){ 
                     ?>
                     <form method="post" name="myForm" action="list_group_setdefault.php" id="devel-generate-content-form" accept-charset="UTF-8" >
@@ -167,7 +167,7 @@ include('header.php');
 
 
                           <tbody>
-                            <?php while($rowx = mysql_fetch_array($sql)){
+                            <?php while($rowx = mysqli_fetch_array($sql)){
                               ?>
                               <tr class="even pointer">
                                 <td class="a-center form-item form-type-checkbox form-item-node-types-forum" style="vertical-align: middle; width: 5%; text-align: center"><input type="checkbox" id="edit-node-types-forum" class="form-checkbox " name="node_types[]" value="<?php echo"$rowx[id_group]"; ?>"></td>

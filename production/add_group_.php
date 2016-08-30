@@ -13,8 +13,8 @@ if($_POST['submit']=='simpan')      {
 	$jam = date('H:i:s a');
 	$date = "$mydate[month] $mydate[mday], $mydate[year] $jam";
 
-$sql = mysql_query("INSERT INTO survey_group (id_group, group_name, group_desc, survey_name, last_modified, status) VALUES ('', '$grup', '$desc','$name', '$date', 'active')");
-if (mysql_affected_rows()>0){
+$sql = mysqli_query($con,"INSERT INTO survey_group (id_group, group_name, group_desc, survey_name, last_modified, status) VALUES ('', '$grup', '$desc','$name', '$date', 'active')");
+if (mysqli_affected_rows($con)>0){
 	$_SESSION['surveyname'] = $name;
 	echo "berhasil diedit";
 	echo "$name";

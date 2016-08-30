@@ -36,9 +36,9 @@ if($_POST['submit']=='simpan')      {
 			echo $y;
 			echo $z;
 			echo $date;
-			$sql=mysql_query("INSERT INTO survey_question (id_question, question_detail, question_type, survey_name, survey_group, status, last_modified) VALUES ('', '$x', '$y','$survey', '$grup', '$z','$date')");
+			$sql=mysqli_query($con,"INSERT INTO survey_question (id_question, question_detail, question_type, survey_name, survey_group, status, last_modified) VALUES ('', '$x', '$y','$survey', '$grup', '$z','$date')");
 
-			if (mysql_affected_rows()>0){
+			if (mysqli_affected_rows($con)>0){
 				$_SESSION['surveyname'] = $survey;
 				$_SESSION['groupname'] = $grup;
 				header('Location: list_question.php');

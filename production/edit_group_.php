@@ -14,9 +14,9 @@ if($_POST['submit']=='simpan')      {
 	$date = "$mydate[month] $mydate[mday], $mydate[year] $jam";
 	$id=$_POST['descr'];
 
-$sql = mysql_query("UPDATE Survey_group SET group_name='$grup', group_desc='$desc', survey_name='$name', last_modified='$date' WHERE id_group='$id';");
+$sql = mysqli_query($con,"UPDATE Survey_group SET group_name='$grup', group_desc='$desc', survey_name='$name', last_modified='$date' WHERE id_group='$id';");
 
-if (mysql_affected_rows()>0){
+if (mysqli_affected_rows($con)>0){
 	$_SESSION['surveyname'] = $name;
 	echo "berhasil diedit";
 	echo "$name";

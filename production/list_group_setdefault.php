@@ -11,8 +11,8 @@ if($_POST['submit']=='Jadikan Default')      {
 			echo $check;
 			echo '</br>'; 
 		
-			$sql = mysql_query("UPDATE survey_group SET status='Default' WHERE id_group='$check'");
-			if (mysql_affected_rows()>0){
+			$sql = mysqli_query($con,"UPDATE survey_group SET status='Default' WHERE id_group='$check'");
+			if (mysqli_affected_rows()>0){
 				echo "berhasil dihapus";
 
 
@@ -30,8 +30,8 @@ if($_POST['submit']=='Jadikan Default')      {
 } 
 else if($_POST['submit']=='Reset') {
 
-	$sql = mysql_query("UPDATE survey_group SET status='Active'");
-	if (mysql_affected_rows()>0){
+	$sql = mysqli_query($con,"UPDATE survey_group SET status='Active'");
+	if (mysqli_affected_rows()>0){
 		echo "berhasil dihapus";
 		header('Location:list_group.php');	
 	}

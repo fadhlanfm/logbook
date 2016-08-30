@@ -21,15 +21,15 @@ else
 
 }
 $id=$_GET['id'];  
-$sql = mysql_query("SELECT * FROM survey_question WHERE id_question='$id';");
-$row = mysql_fetch_array($sql);
+$sql = mysqli_query($con,"SELECT * FROM survey_question WHERE id_question='$id';");
+$row = mysqli_fetch_array($sql);
 $nama= $row['survey_name'];
 $grup= $row['survey_group'];
 $detail= $row['question_detail'];
-$sqls = mysql_query("SELECT * FROM q_type WHERE survey_name='$nama' and group_name='$grup' and question_detail='$detail';" );
+$sqls = mysqli_query($con,"SELECT * FROM q_type WHERE survey_name='$nama' and group_name='$grup' and question_detail='$detail';" );
 $coba = $_SESSION['id'];
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 
@@ -128,12 +128,12 @@ include('header.php');
                           <?php
                           
                           $b=1;
-                          $cek2=mysql_num_rows($sqls);
+                          $cek2=mysqli_num_rows($sqls);
                           if ($cek2>0){ 
                             ?>
                             <label class="control-label">Pilihan Jawaban</label>
                             <div></br></div>
-                            <?php  while($rows = mysql_fetch_array($sqls)){
+                            <?php  while($rows = mysqli_fetch_array($sqls)){
                               ?>
                               <div class="clone">
 
@@ -180,12 +180,12 @@ include('header.php');
                             <?php
 
                             $b=1;
-                            $cek2=mysql_num_rows($sqls);
+                            $cek2=mysqli_num_rows($sqls);
                             if ($cek2>0){ 
                               ?>
                               <label class="control-label">Pilihan Jawaban</label>
                               <div></br></div>
-                              <?php  while($rows = mysql_fetch_array($sqls)){
+                              <?php  while($rows = mysqli_fetch_array($sqls)){
                                 ?>
                                 <div class="clone">
 
@@ -231,12 +231,12 @@ include('header.php');
                               <?php
 
                               $b=1;
-                              $cek2=mysql_num_rows($sqls);
+                              $cek2=mysqli_num_rows($sqls);
                               if ($cek2>0){ 
                                 ?>
                                 <label class="control-label">Ranking</label>
                                 <div></br></div>
-                                <?php  while($rows = mysql_fetch_array($sqls)){
+                                <?php  while($rows = mysqli_fetch_array($sqls)){
                                   ?>
                                   <div class="clone">
 
@@ -311,9 +311,9 @@ include('header.php');
                                 <?php
 
                                 $b=1;
-                                $cek2=mysql_num_rows($sqls);
+                                $cek2=mysqli_num_rows($sqls);
                                 if ($cek2>0){ 
-                                  $rows = mysql_fetch_array($sqls);
+                                  $rows = mysqli_fetch_array($sqls);
                                   ?>
                                   <a class="control-label">Besar Skala</a>
                                   <div></br></div>
@@ -350,9 +350,9 @@ include('header.php');
                                 <?php
 
                                 $b=1;
-                                $cek2=mysql_num_rows($sqls);
+                                $cek2=mysqli_num_rows($sqls);
                                 if ($cek2>0){ 
-                                  $rows = mysql_fetch_array($sqls);
+                                  $rows = mysqli_fetch_array($sqls);
                                   ?>
                                   <a class="control-label">Soal Nomor</a>
                                   <div></br></div>

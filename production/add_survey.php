@@ -20,8 +20,8 @@ else
 
 }
 $coba = $_SESSION['id'];
-$query2 =mysql_query( "SELECT * FROM user WHERE username = '$coba'");
-$row2 = mysql_fetch_array($query2);
+$query2 =mysqli_query($con, "SELECT * FROM user WHERE username = '$coba'");
+$row2 = mysqli_fetch_array($query2);
 include('header.php');
 ?>
 

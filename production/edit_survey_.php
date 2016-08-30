@@ -23,11 +23,11 @@ if($_POST['submit']=='simpan'){
 	echo "$date";
 	echo "$id";
 	echo "$survey";
-	$sql = mysql_query("UPDATE Survey_list SET survey_name='$name', first_date='$f_date', last_date='$e_date', url='$url', survey_desc='$desc', last_modified='$date' WHERE id_survey='$id';"); 
-	$sql2 = mysql_query("UPDATE Survey_group SET survey_name='$name', last_modified='$date' WHERE survey_name='$survey'; ");
-	$sql3 = mysql_query("UPDATE Survey_question SET survey_name='$name', last_modified='$date' WHERE survey_name='$survey';");
+	$sql = mysqli_query($con,"UPDATE Survey_list SET survey_name='$name', first_date='$f_date', last_date='$e_date', url='$url', survey_desc='$desc', last_modified='$date' WHERE id_survey='$id';"); 
+	$sql2 = mysqli_query($con,"UPDATE Survey_group SET survey_name='$name', last_modified='$date' WHERE survey_name='$survey'; ");
+	$sql3 = mysqli_query($con,"UPDATE Survey_question SET survey_name='$name', last_modified='$date' WHERE survey_name='$survey';");
 
-	if (mysql_affected_rows()>0){
+	if (mysqli_affected_rows($con)>0){
 		echo "berhasil diedit";
 		echo "$name";
 		echo "$f_date";

@@ -2,13 +2,13 @@
 include_once('Connection/conn.php');
 session_start();
 
-$query=mysql_query("SELECT * FROM survey_group WHERE status IN('Active','Default') and survey_name='".$_POST["survey_name"]."'");
+$query=mysqli_query($con,"SELECT * FROM survey_group WHERE status IN('Active','Default') and survey_name='".$_POST["survey_name"]."'");
 $nama_survey=$_POST["survey_name"];
 
 
 
 $b=1;
-$cek2=mysql_num_rows($query);
+$cek2=mysqli_num_rows($query);
 if ($cek2>0){ 
   ?>
   <form method="post" name="myForm" action="list_group_setdefault.php" id="devel-generate-content-form" accept-charset="UTF-8" >
@@ -32,7 +32,7 @@ if ($cek2>0){
 
 
         <tbody>
-          <?php while($row = mysql_fetch_array($query)){
+          <?php while($row = mysqli_fetch_array($query)){
             ?>
             <tr class="even pointer">
               <td class="a-center form-item form-type-checkbox form-item-node-types-forum" style="vertical-align: middle; width: 5%; text-align: center"><input type="checkbox" id="edit-node-types-forum" class="form-checkbox " name="node_types[]" value="<?php echo"$row[id_group]"; ?>"></td>

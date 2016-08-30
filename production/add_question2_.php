@@ -30,9 +30,9 @@ if($_POST['submit']=='simpan')      {
 				$x=$result['x'];
 				echo $x;
 
-				$query=mysql_query("INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$x')");
+				$query=mysqli_query($con,"INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$x')");
 
-				if (mysql_affected_rows()>0){
+				if (mysqli_affected_rows($con)>0){
 					$_SESSION['surveyname'] = $survey;
 					$_SESSION['groupname'] = $grup;
 					
@@ -50,9 +50,9 @@ if($_POST['submit']=='simpan')      {
 				$x=$result['x'];
 				echo $x;
 
-				$query=mysql_query("INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$x')");
+				$query=mysqli_query($con,"INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$x')");
 
-				if (mysql_affected_rows()>0){
+				if (mysqli_affected_rows($con)>0){
 					$_SESSION['surveyname'] = $survey;
 					$_SESSION['groupname'] = $grup;
 					
@@ -69,9 +69,9 @@ if($_POST['submit']=='simpan')      {
 				$result['x']=$hobby;
 				$x=$result['x'];
 				echo $x;
-				$query=mysql_query("INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$x')");
+				$query=mysqli_query($con,"INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$x')");
 
-				if (mysql_affected_rows()>0){
+				if (mysqli_affected_rows($con)>0){
 					$_SESSION['surveyname'] = $survey;
 					$_SESSION['groupname'] = $grup;
 					
@@ -86,9 +86,9 @@ if($_POST['submit']=='simpan')      {
 			$array2='Free Text';
 			$array4='';
 			
-			$query=mysql_query("INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$array4')");
+			$query=mysqli_query($con,"INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$array4')");
 
-			if (mysql_affected_rows()>0){
+			if (mysqli_affected_rows($con)>0){
 				$_SESSION['surveyname'] = $survey;
 				$_SESSION['groupname'] = $grup;
 
@@ -102,9 +102,9 @@ if($_POST['submit']=='simpan')      {
 		} else if($array2=='5'){
 			$array2='Likert Scale';
 			$array4=$_POST['tipe'];
-			$query=mysql_query("INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$array4')");
+			$query=mysqli_query($con,"INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$array4')");
 
-			if (mysql_affected_rows()>0){
+			if (mysqli_affected_rows($con)>0){
 				$_SESSION['surveyname'] = $survey;
 				$_SESSION['groupname'] = $grup;
 
@@ -117,9 +117,9 @@ if($_POST['submit']=='simpan')      {
 		} else if($array2=='6'){
 			$array2='Forced Choice';
 			$array4=$_POST['tipe'];
-			$query=mysql_query("INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$array4')");
+			$query=mysqli_query($con,"INSERT INTO q_type (id_type, question_detail, question_type, survey_name, group_name, type_1) VALUES ('', '$array', '$array2','$survey', '$grup','$array4')");
 
-			if (mysql_affected_rows()>0){
+			if (mysqli_affected_rows($con)>0){
 				$_SESSION['surveyname'] = $survey;
 				$_SESSION['groupname'] = $grup;
 
@@ -137,9 +137,9 @@ if($_POST['submit']=='simpan')      {
 
 		} 
 
-		$sql=mysql_query("INSERT INTO survey_question (id_question, question_detail, question_type, survey_name, survey_group, status, last_modified) VALUES ('', '$array', '$array2','$survey', '$grup', '$array3','$date')");
+		$sql=mysqli_query($con,"INSERT INTO survey_question (id_question, question_detail, question_type, survey_name, survey_group, status, last_modified) VALUES ('', '$array', '$array2','$survey', '$grup', '$array3','$date')");
 
-		if (mysql_affected_rows()>0){
+		if (mysqli_affected_rows($con)>0){
 			$_SESSION['surveyname'] = $survey;
 			$_SESSION['groupname'] = $grup;
 			header('Location: list_question.php');
