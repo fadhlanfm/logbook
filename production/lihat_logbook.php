@@ -442,7 +442,7 @@ else
                                                   <td><?php echo''.$row->metode_monitoring.'';?></td>
                                                   <?php
                                                   if ($row->type_monitoring!=='' && $row->size_monitoring>=0) {
-                                                    echo '<td><a href="uploads/'.$row->file_monitoring.'"><i class="fa fa-cloud-download"></i> '.$row->file_monitoring.'</a></td>';
+                                                    echo '<td><a href="uploads/'.$row->file_monitoring.'" download><i class="fa fa-cloud-download"></i> '.$row->file_monitoring.'</a></td>';
                                                   }else{
                                                     echo '<td>-</td>';
                                                   }
@@ -453,7 +453,7 @@ else
                                                   <td><?php echo''.$row->metode_enforcement_positif.'';?></td>
                                                   <?php
                                                   if ($row->type_positif!=='' && $row->size_positif>=0) {
-                                                    echo '<td><a href="uploads/'.$row->file_positif.'"><i class="fa fa-cloud-download"></i> '.$row->file_positif.'</a></td>';
+                                                    echo '<td><a href="uploads/'.$row->file_positif.'" download><i class="fa fa-cloud-download"></i> '.$row->file_positif.'</a></td>';
                                                   }else{
                                                     echo '<td>-</td>';
                                                   }
@@ -464,7 +464,7 @@ else
                                                   <td><?php echo''.$row->metode_enforcement_negatif.'';?></td>
                                                   <?php
                                                   if ($row->type_negatif!=='' && $row->size_negatif>=0) {
-                                                    echo '<td><a href="uploads/'.$row->file_negatif.'"><i class="fa fa-cloud-download"></i> '.$row->file_negatif.'</a></td>';
+                                                    echo '<td><a href="uploads/'.$row->file_negatif.'" download><i class="fa fa-cloud-download"></i> '.$row->file_negatif.'</a></td>';
                                                   }else{
                                                     echo '<td>-</td>';
                                                   }
