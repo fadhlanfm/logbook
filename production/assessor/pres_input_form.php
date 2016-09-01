@@ -1,6 +1,18 @@
 
 <div class="x_content">
   <form method="POST" class="form-horizontal form-label-left" action="pres_input_form_.php">
+  <div class="x_panel ui-ribbon-container">
+    <div class="form-group">
+      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Office <span class="required">*</span>
+      </label>
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <select name="office" id="office" required="required" class="form-control col-md-7 col-xs-12">
+          <option value="">--pilih salah satu--</option>
+          <option>HO</option>
+          <option>BO</option>
+        </select>
+      </div>
+    </div>
     <div class="form-group">
       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Unit <span class="required">*</span>
       </label>
@@ -23,6 +35,8 @@
         <input type="text" name="asesor" id="asesor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo''.$row2->username.''; ?>" readonly>
       </div>
     </div>
+    </div>
+    <div class="x_panel ui-ribbon-container">
     <div class="form-group">
       <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
       </label>
@@ -40,6 +54,7 @@
          </tr>
        </table>
      </div>
+   </div>
    </div>
    <div class="form-group">
      <table class="table table-bordered">
@@ -364,8 +379,8 @@
    </div>
    <div class="form-group">
     <input type="submit" name="submit" class="btn btn-success pull-right" style="width:250px">
-   </div>
- </form>
+  </div>
+</form>
 </div>
 <!-- End SmartWizard Content -->
 

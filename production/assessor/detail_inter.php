@@ -30,6 +30,13 @@ if (!$result2)
 $row2 = $result2->fetch_object();
 $unit2 = $row2->unit;
 
+$unit = $_GET['id'];
+$asesor = $_GET['as'];
+
+$q3 = "SELECT * FROM inter WHERE unit = '$unit' AND asesor = '$asesor' ";
+$r3 = $db->query($q3);
+$row3 = $r3->fetch_object();
+
 ?>
 
 <?php
@@ -51,7 +58,7 @@ include ('header.php');
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>PRESENTATION FORM <small></small></h2>
+            <h2>INTERVIEW FORM <small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -72,7 +79,7 @@ include ('header.php');
 
 
           <?php
-          include('pres_input_form.php');
+          include('inter_tabel.php');
           ?>
         </div>
       </div>
@@ -103,75 +110,10 @@ include ('header.php');
 <script src="../../vendors/nprogress/nprogress.js"></script>
 <!-- iCheck -->
 <script src="../../vendors/iCheck/icheck.min.js"></script>
-<!-- Autosize -->
-<script src="../../vendors/autosize/dist/autosize.min.js"></script>
 
 <!-- Custom Theme Scripts -->
 <script src="../../build/js/custom.min.js"></script>
 
-<!-- Autosize -->
-<script>
-  $(document).ready(function() {
-    autosize($('.resizable_textarea'));
-  });
-</script>
-<!-- /Autosize -->
-
-<script>
-  var HO = [
-  <?php 
-  $qu1 = "SELECT * FROM unit LEFT JOIN pres ON unit.kode = pres.unit WHERE kode_ca = 1";
-  $ru1 = $db->query($qu1);
-  while ($rou1 = $ru1->fetch_object()) {
-    $lul = "";
-    $no = $rou1->kode;
-    if ($rou1->asesor != null && $rou1->asesor == $coba) {
-      $lul = " - [done]";
-    }
-    $no .= $lul;
-    echo '{display: "'.$no.'", value: "'.$rou1->kode.'" },';
-  }
-  ?>
-  {display: "", value: "" }];
-
-  var BO = [
-  <?php 
-  $qu2 = "SELECT * FROM unit LEFT JOIN pres ON unit.kode = pres.unit WHERE kode_ca != 1";
-  $ru2 = $db->query($qu2);
-  while ($rou2 = $ru2->fetch_object()) {
-    $lul = "";
-    $no = $rou2->kode;
-    if ($rou2->asesor != null && $rou2->asesor == $coba) {
-      $lul = " - [done]";
-    }
-    $no .= $lul;
-    echo '{display: "'.$no.'", value: "'.$rou2->kode.'" },';
-  }
-  ?>
-  {display: "", value: "" }];
-
-  $("#office").change(function() {
-   var parent = $(this).val();
-   switch(parent){
-    case 'HO':
-    list(HO);
-    break;
-    case 'BO':
-    list(BO);
-    break;              
-    default: //default child option is blank
-    $("#unit").html('');  
-    break;
-  }
-});
-  function list(array_list)
-  {
-    $("#unit").html(""); //reset child options
-    $(array_list).each(function (i) { //populate child options
-      $("#unit").append("<option value=\""+array_list[i].value+"\">"+array_list[i].display+"</option>");
-    });
-  }
-</script>
 
 </body>
 </html>

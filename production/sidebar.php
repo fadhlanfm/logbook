@@ -17,7 +17,6 @@ if ($_SESSION['role'] == 2) {
             <li><a href="fgd.php">FGD</a></li>
             <li><a href="pres.php">Presentasi</a></li>
             <li><a href="interview.php">Interview</a></li>
-            <li><a href="self.php">Self Assessment</a></li>
             <li><a href="observ.php">Observasi</a></li>
           </ul>
         </li>

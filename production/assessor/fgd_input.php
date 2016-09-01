@@ -117,5 +117,61 @@ include ('header.php');
 </script>
 <!-- /Autosize -->
 
+<script>
+  var HO = [
+  <?php 
+  $qu1 = "SELECT * FROM unit LEFT JOIN fgd ON unit.kode = fgd.unit WHERE kode_ca = 1";
+  $ru1 = $db->query($qu1);
+  while ($rou1 = $ru1->fetch_object()) {
+    $lul = "";
+    $no = $rou1->kode;
+    if ($rou1->asesor != null && $rou1->asesor == $coba) {
+      $lul = " - [done]";
+    }
+    $no .= $lul;
+    echo '{display: "'.$no.'", value: "'.$rou1->kode.'" },';
+  }
+  ?>
+  {display: "", value: "" }];
+
+  var BO = [
+  <?php 
+  $qu2 = "SELECT * FROM unit LEFT JOIN fgd ON unit.kode = fgd.unit WHERE kode_ca != 1";
+  $ru2 = $db->query($qu2);
+  while ($rou2 = $ru2->fetch_object()) {
+    $lul = "";
+    $no = $rou2->kode;
+    if ($rou2->asesor != null && $rou2->asesor == $coba) {
+      $lul = " - [done]";
+    }
+    $no .= $lul;
+    echo '{display: "'.$no.'", value: "'.$rou2->kode.'" },';
+  }
+  ?>
+  {display: "", value: "" }];
+
+  $("#office").change(function() {
+   var parent = $(this).val();
+   switch(parent){
+    case 'HO':
+    list(HO);
+    break;
+    case 'BO':
+    list(BO);
+    break;              
+    default: //default child option is blank
+    $("#unit").html('');  
+    break;
+  }
+});
+  function list(array_list)
+  {
+    $("#unit").html(""); //reset child options
+    $(array_list).each(function (i) { //populate child options
+      $("#unit").append("<option value=\""+array_list[i].value+"\">"+array_list[i].display+"</option>");
+    });
+  }
+</script>
+
 </body>
 </html>

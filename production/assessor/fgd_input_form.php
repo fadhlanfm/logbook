@@ -1,44 +1,52 @@
 
 <div class="x_content">
   <form method="POST" class="form-horizontal form-label-left" action="fgd_input_form_.php">
-    <div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Unit <span class="required">*</span>
-      </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <select name="unit" id="unit" required="required" class="form-control col-md-7 col-xs-12">
-          <?php
-          $q="select * from unit";
-          $r=$db->query($q);
-          while ($row=$r->fetch_object()) {
-            echo "<option>".$row->kode."</option>";
-          }
-          ?>
-        </select>
+    <div class="x_panel ui-ribbon-container">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Office <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <select name="office" id="office" required="required" class="form-control col-md-7 col-xs-12">
+            <option value="">--pilih salah satu--</option>
+            <option>HO</option>
+            <option>BO</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nama Unit <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <select name="unit" id="unit" required="required" class="form-control col-md-7 col-xs-12">
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Asesor <span class="required">*</span>
+        </label>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <input type="text" name="asesor" id="asesor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo''.$row2->username.''; ?>" readonly>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Asesor <span class="required">*</span>
-      </label>
-      <div class="col-md-6 col-sm-6 col-xs-12">
-        <input type="text" name="asesor" id="asesor" required="required" class="form-control col-md-7 col-xs-12" value="<?php echo''.$row2->username.''; ?>" readonly>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
-      </label>
-      <div class="col-md-7 col-sm-7 col-xs-12">
-        <b>Keterangan</b><span class="required"> <b>*</b></span>
-        <table>
-         <tr>
-           <td width="15%" valign="top"><b>40-60</b></td><td> Apabila unit kerja memenuhi sebagian dari indikator</td>
-         </tr>
-         <tr>
-           <td width="15%" valign="top"><b>61-80</b></td><td> Apabila unit kerja memenuhi seluruh indikator belum sistemik masih sporadis</td>
-         </tr>
-         <tr>
-           <td width="15%" valign="top"><b>81-100</b></td><td> Apabila unit kerja memenuhi seluruh indikator secara sistemik dan atau telah memiliki inovasi</td>
-         </tr>
-       </table>
+    <div class="x_panel ui-ribbon-container">
+      <div class="form-group">
+        <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+        </label>
+        <div class="col-md-7 col-sm-7 col-xs-12">
+          <b>Keterangan</b><span class="required"> <b>*</b></span>
+          <table>
+           <tr>
+             <td width="15%" valign="top"><b>40-60</b></td><td> Apabila unit kerja memenuhi sebagian dari indikator</td>
+           </tr>
+           <tr>
+             <td width="15%" valign="top"><b>61-80</b></td><td> Apabila unit kerja memenuhi seluruh indikator belum sistemik masih sporadis</td>
+           </tr>
+           <tr>
+             <td width="15%" valign="top"><b>81-100</b></td><td> Apabila unit kerja memenuhi seluruh indikator secara sistemik dan atau telah memiliki inovasi</td>
+           </tr>
+         </table>
+       </div>
      </div>
    </div>
    <div class="form-group">
@@ -364,8 +372,8 @@
    </div>
    <div class="form-group">
     <input type="submit" name="resizable_textarea submit" class="btn btn-success pull-right" style="width:250px">
-   </div>
- </form>
+  </div>
+</form>
 </div>
 <!-- End SmartWizard Content -->
 

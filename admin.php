@@ -16,7 +16,7 @@ if(isset($_SESSION['role']) && $_SESSION['role'] == -1)
   header("Location: production/user/index.php");
   exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-  header("Location: production/user/index.php");
+  header("Location: production/user2/index.php");
   exit;
 } else if (isset($_SESSION['role']) && $_SESSION['role'] == 2) {
   header("Location: production/asesor/index.php");

@@ -51,7 +51,7 @@ include ('header.php');
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>PRESENTATION FORM <small></small></h2>
+            <h2>INTERVIEW FORM <small></small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -72,7 +72,7 @@ include ('header.php');
 
 
           <?php
-          include('pres_input_form.php');
+          include('observ_input_form.php');
           ?>
         </div>
       </div>
@@ -120,7 +120,7 @@ include ('header.php');
 <script>
   var HO = [
   <?php 
-  $qu1 = "SELECT * FROM unit LEFT JOIN pres ON unit.kode = pres.unit WHERE kode_ca = 1";
+  $qu1 = "SELECT * FROM unit LEFT JOIN observ ON unit.kode = observ.unit WHERE kode_ca = 1";
   $ru1 = $db->query($qu1);
   while ($rou1 = $ru1->fetch_object()) {
     $lul = "";
@@ -136,7 +136,7 @@ include ('header.php');
 
   var BO = [
   <?php 
-  $qu2 = "SELECT * FROM unit LEFT JOIN pres ON unit.kode = pres.unit WHERE kode_ca != 1";
+  $qu2 = "SELECT * FROM unit LEFT JOIN inter ON unit.kode = inter.unit WHERE kode_ca != 1";
   $ru2 = $db->query($qu2);
   while ($rou2 = $ru2->fetch_object()) {
     $lul = "";

@@ -53,9 +53,9 @@ include ('header.php');
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>List Penilaian FGD </h2>  
+            <h2>List Penilaian Observasi</h2>  
             <ul class="nav navbar-right panel_toolbox">
-              <a href="fgd_input.php"><button class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Input FGD baru</button></a>
+              <a href="observ_input.php"><button class="btn btn-xs btn-primary"><i class="fa fa-plus"></i> Input penilaian observasi baru</button></a>
             </ul>
             <div class="clearfix"></div>
           </div>
@@ -74,12 +74,12 @@ include ('header.php');
               <tbody>
                 <?php 
                 $n=1;
-                $queries=mysqli_query($db,"SELECT *, (v1+v2+v3+v4+v5+v6+v7+v8+v9+v10)/10 x FROM fgd");
+                $queries=mysqli_query($db,"SELECT *, (v11+v12+v13+v14+v15+v16+v17+v18+v19+v110+v111+v21+v22+v23+v24+v25+v26+v27+v28+v29+v210)/21 x FROM observ");
                 while ($row=mysqli_fetch_array($queries)) {
                   ?>
                   <tr>
                     <td style="text-align:center; vertical-align:middle"><?php echo $n++; ?></td>
-                    <td style="vertical-align:middle"><a href="detail_fgd.php?id=<?php echo $row['unit'];?>&as=<?php echo $row['asesor'];?>"><b><?php echo $row['unit'];?></b></a> </td>
+                    <td style="vertical-align:middle"><a href="detail_pres.php?id=<?php echo $row['unit'];?>&as=<?php echo $row['asesor'];?>"><b><?php echo $row['unit'];?></b></a> </td>
                     <td style="text-align:center; vertical-align:middle"><?php echo $row['asesor']; ?></td>
                     <td style="text-align:center; vertical-align:middle" >
                       <?php echo number_format($row['x'], 0, '.', ' ');?>
